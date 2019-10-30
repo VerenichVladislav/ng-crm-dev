@@ -1,0 +1,45 @@
+<button class="btn btn-success" onclick="document.getElementById('id02').style.display='block'" style="width:auto;" >Sign Up</button>
+
+<div id="id02" class="modal" tabindex="-1">
+  <span onclick="document.getElementById('id02').style.display='none'" class="close" title="Закрыть">&times;</span>
+  <form  [formGroup]="registerForm" (ngSubmit)="submit(registerForm.value)" class="modal-content animate" action="/action_page.php">
+    <div class="container">
+      <h1>Sign Up</h1>
+      <p>Пожалуйста, заполните форму для регистрации аккаунта.</p>
+      <hr>
+      <label for="login"><b>Username</b></label>
+      <input id="login" type="text" placeholder="Введите имя пользователя" formControlName="username" required>
+
+      <label for="email"><b>Email</b></label>
+      <input id="email" type="text" placeholder="Введите Email" formControlName="email" required>
+
+      <label for="psw"><b>Password</b></label>
+      <input id="psw" type="password" placeholder="Введите пароль" formControlName="psw" required>
+
+      <label for="psw-repeat"><b>Repeat Password</b></label>
+      <input id="psw-repeat" type="password" placeholder="Повторите пароль" required>
+
+      <label>
+        <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Запомнить меня
+      </label>
+
+
+
+      <p>Создавая аккаунт вы соглашаетесь с нашими <a href="#" style="color:dodgerblue">Условиями и политикой конфиденциальности</a>.</p>
+
+      <div class="clearfix">
+        <button type="button" onclick="document.getElementById('id02').style.display='none'" class="cancelbtn">Cancel</button>
+
+        <script>
+          type="text/javascript">
+            $('#id01').modal({
+              backdrop: 'true',
+              keyboard: false
+            })
+        </script>
+      </div>
+    </div>
+
+    <button type="submit" class="signupbtn">Sign Up</button>
+  </form>
+</div>

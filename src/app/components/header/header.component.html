@@ -1,0 +1,63 @@
+<header class="header">
+  <script src="http://code.jquery.com/jquery-1.8.3.js"></script>>
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark" role="navigation">
+    <a class="navbar-brand" href="#" role="banner">Aviasales 2.0</a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsDefault" aria-controls="navbarsDefault" aria-expanded="false" aria-label="Переключить навигацию">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarsDefault">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Главная <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">О сайте</a>
+        </li>
+      </ul>
+
+      <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;" class="btn btn-success">Login</button>
+
+      <div id="id01" class="modal" tabindex="-1" data-backdrop="true">
+
+                      <form class="modal-content animate" action="/action_page.php" method="post">
+                        <div class="imgcontainer">
+                          <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Закрыть">&times;</span>
+
+                        </div>
+
+                        <div class="container">
+                          <label for="uname"><b>Username</b></label>
+                          <input type="text" placeholder="Введите Имя Пользователя" name="uname" required>
+
+                          <label for="psw"><b>Password</b></label>
+                          <input type="password" placeholder="Введите пароль" name="psw" required>
+
+                          <button type="submit">Login</button>
+                          <label>
+                            <input type="checkbox" checked="checked" name="remember"> Запомнить меня
+                          </label>
+                        </div>
+
+                        <div class="container" style="background-color:#f1f1f1">
+                          <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+                          <span class="psw">Forgot <a href="#">password?</a></span>
+                        </div>
+                      </form>
+                    </div>
+
+      <app-register></app-register>
+
+
+      <button onclick="document.getElementById('profile').style.display='block'" style="width:auto;" class="btn btn-success">Profile</button>
+
+    </div>
+  </nav>
+</header>
+
+<article id="profile" style="display: none">
+  <app-profile> <!--[user]="getUser()"--></app-profile>
+</article>
+<!-- {{LoginComponent}}
+{{RegisterComponent}} -->
