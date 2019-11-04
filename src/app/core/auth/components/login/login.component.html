@@ -1,0 +1,31 @@
+<button onclick="document.getElementById('id01').style.display='block'" style="width:auto;" class="btn btn-success">Login</button>
+
+<div id="id01" class="modal" tabindex="-1" data-backdrop="true">
+
+  <form [formGroup]="loginForm" (ngSubmit)="submit(loginForm.value)" class="modal-content animate" action="/action_page.php" method="post">
+    <div class="imgcontainer">
+      <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Закрыть">&times;</span>
+    </div>
+
+    <div class="container">
+      <label for="login-username"><b>Username</b></label>
+      <input id="login-username" type="text" placeholder="Введите Имя Пользователя" formControlName="username" name="username" required>
+
+      <label for="login-password"><b>Password</b></label>
+      <input id="login-password" type="password" placeholder="Введите пароль" formControlName="password" name="password" required>
+
+      <div>
+        <span class="psw">Forgot <a href="#">password?</a></span>
+      </div>
+      <label>
+        <input type="checkbox" checked="checked" name="remember"> Запомнить меня
+      </label>
+      <div class="clearfix">
+      <button class="signupbtn" type="submit">Login</button>
+      <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+      </div>
+
+
+    </div>
+  </form>
+</div>
