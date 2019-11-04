@@ -1,0 +1,43 @@
+<div *ngIf="done" id="profile" class="container">
+  <div id="main">
+    <div class="row" id="real-estates-detail">
+      <div class="col-lg-4 col-md-4 col-xs-12">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <div class="text-center" id="author">
+              <img class="img-thumbnail" src="https://i.stack.imgur.com/Yfj5T.png?s=328&g=1">
+              <h3>{{user.firstName}} {{user.lastName}}</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-8 col-md-8 col-xs-12">
+        <div class="panel">
+          <div class="panel-body">
+            <ul id="myTab" class="nav nav-pills">
+              <li class="active"><a href="#detail" data-toggle="tab">О пользователе</a></li>
+            </ul>
+            <div id="myTabContent" class="tab-content">
+              <hr>
+              <div class="tab-pane fade active in" id="detail">
+                <h4>История профиля</h4>
+                <table class="table table-th-block">
+                  <tbody>
+                  <tr><td class="active">Логин:</td><td>{{user.userName}}</td></tr>
+                  <tr><td class="active">Фамилия:</td><td>{{user.lastName}}</td></tr>
+                  <tr><td class="active">Имя:</td><td>{{user.firstName}}</td></tr>
+                  <tr><td class="active">Почтовый адрес:</td><td>{{user.email}}</td></tr>
+                  <tr><td class="active">Валюта:</td><td>{{user.currency}}</td></tr>
+                  <tr><td class="active">Текущая сумма:</td><td>{{user.bill}}</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /.main -->
+<!-- /.container -->
