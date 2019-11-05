@@ -9,8 +9,7 @@ import { UserService } from 'src/app/user.service';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  @Input() user: User;
-  done: boolean = false;
+  user: User;
   private subscriptions: Subscription[] = [];
 
   constructor(private userService: UserService){}
@@ -20,15 +19,7 @@ export class ProfileComponent implements OnInit {
   // }
 
   ngOnInit() {
-      this.subscriptions.push(this.userService.getUserById(1)
-        .subscribe(
-          (data: User) => {
-            this.user = new User(data);
-            this.done = true;
-          },
-          error => {
-            console.log(error)
-          }));
-    }
+    this.user = JSON.parse(localStorage.getItem('user'));
+  }
 
 }

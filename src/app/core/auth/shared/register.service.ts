@@ -15,11 +15,11 @@ export class RegisterService {
     let headers = new HttpHeaders(
       {'Content-Type': 'application/json'});
     let body = {
-      email: email,
-      role: "USER",
       userName: userName,
       firstName: "",
       lastName: "",
+      email: email,
+      role: "USER",
       hashPass: password,
       wallet: {}
     };

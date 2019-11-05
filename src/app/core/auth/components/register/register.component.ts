@@ -13,8 +13,6 @@ import {LoginService} from '../../shared/login.service';
 })
 export class RegisterComponent implements OnInit {
   private registerForm;
-  private user: User;
-  private authToken: string;
   private subscriptions: Subscription[] = [];
 
   constructor(private registerService: RegisterService,
@@ -48,12 +46,8 @@ export class RegisterComponent implements OnInit {
         error => {
           console.log(error);
         }));
-  }
 
-  getUser(): User{
-    return this.user;
   }
-
 
   ngOnInit() {
   }
