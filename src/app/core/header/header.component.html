@@ -21,7 +21,7 @@
         <app-register></app-register>
         <app-login></app-login>
         <button *ngIf="isActiveUser" routerLink="/profile" class="btn btn-success">Profile</button>
-        <app-logout></app-logout>
+        <app-logout *ngIf="isActiveUser"></app-logout>
       </div>
     </div>
   </nav>
