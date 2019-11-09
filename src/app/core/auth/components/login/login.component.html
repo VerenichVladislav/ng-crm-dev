@@ -1,11 +1,11 @@
 <button (click)="showLoginForm()" style="width:auto;" class="btn btn-success">Login</button>
 
-<div id="id01" class="modal" tabindex="-1" data-backdrop="true">
+<div id="login-form" class="modal" tabindex="-1" data-backdrop="true">
 
   <form [formGroup]="loginForm" (ngSubmit)="submit(loginForm.value)"
         class="modal-content animate" action="/action_page.php" method="post">
     <div class="imgcontainer">
-      <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Закрыть">&times;</span>
+      <span onclick="document.getElementById('login-form').style.display='none'" class="close" title="Закрыть">&times;</span>
     </div>
 
     <div class="container">

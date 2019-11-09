@@ -18,10 +18,10 @@ button {
   background-color: #4CAF50;
   color: white;
   padding: 14px 20px;
-  margin: 0px;
+  margin: 0;
   border: none;
   cursor: pointer;
-  width: 100%;
+  width: auto;
   opacity: 0.9;
 }
 .btn-success {

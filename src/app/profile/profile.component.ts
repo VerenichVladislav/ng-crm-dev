@@ -9,10 +9,9 @@ import { UserService } from 'src/app/user.service';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  user: User;
-  private subscriptions: Subscription[] = [];
+  @Input() user: User;
 
-  constructor(private userService: UserService){}
+  constructor(private userService: UserService) {}
 
   // getUserInfo(id: number) {
   //
@@ -20,6 +19,7 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     this.user = JSON.parse(localStorage.getItem('user'));
+    if(!!this.user)
+      this.userService.updateUser(this.user.userName);
   }
-
 }

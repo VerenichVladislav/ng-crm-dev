@@ -30,30 +30,30 @@ export class LoginComponent implements OnInit {
       .loginUser(userData.username, userData.password)
       .subscribe(
         (resp: Response) => {
-          localStorage.setItem("auth_token", resp.headers.get('Authorization'));
+          localStorage.setItem('auth_token', resp.headers.get('Authorization'));
+
+          this.subscriptions.push(this.userService.getByUserName(userData.username)
+            .subscribe(
+              (data: User) => {
+                localStorage.setItem('user', JSON.stringify(new User(data)));
+                this.router.navigate(['profile']);
+                this.hideLoginForm();
+              },
+              error => {
+                console.log(error)
+              }));
         },
         error => {
           console.log(error);
         }));
-
-    this.subscriptions.push(this.userService.getByUserName(userData.username)
-      .subscribe(
-        (data: User) => {
-          localStorage.setItem("user", JSON.stringify(new User(data)));
-          this.router.navigate(['profile']);
-          this.hideLoginForm();
-        },
-        error => {
-          console.log(error)
-        }));
   }
 
   showLoginForm() {
-    document.getElementById('id01').style.display='block';
+    document.getElementById('login-form').style.display='block';
   }
 
   hideLoginForm() {
-    document.getElementById('id01').style.display='none'
+    document.getElementById('login-form').style.display='none'
   }
 
 

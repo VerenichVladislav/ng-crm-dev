@@ -1,4 +1,4 @@
-<div id="profile" class="container">
+<div *ngIf="!!user" id="profile" class="container">
   <div id="main">
     <div class="row" id="real-estates-detail">
       <div class="col-lg-4 col-md-4 col-xs-12">
@@ -26,8 +26,14 @@
                   <tr><td class="active">Логин:</td><td>{{user.userName}}</td></tr>
                   <tr><td class="active">Фамилия:</td><td>{{user.lastName}}</td></tr>
                   <tr><td class="active">Имя:</td><td>{{user.firstName}}</td></tr>
-                  <tr><td class="active">Почтовый адрес:</td><td>{{user.email}}</td></tr>
-                  <tr><td class="active">Валюта:</td><td>{{user.currency}}</td></tr>
+                  <tr><td class="active">Почтовый адрес:</td>
+                    <td>{{user.email}}
+                      <p class="confirmed" *ngIf="user.state === 'Confirmed'; else unconfirmed">Подтверждён</p>
+                      <ng-template #unconfirmed>
+                        <p class="unconfirmed">Не подтверждён</p>
+                      </ng-template>
+                    </td>
+                  </tr>
                   <tr><td class="active">Текущая сумма:</td><td>{{user.bill}}</td></tr>
                   </tbody>
                 </table>

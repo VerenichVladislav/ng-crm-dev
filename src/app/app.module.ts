@@ -30,6 +30,7 @@ import {AuthModule} from './core/auth/auth.module';
     AuthModule,
     RouterModule.forRoot([
       { path: 'profile', component: ProfileComponent },
+      { path: '', redirectTo: '/', pathMatch: 'full' },
     ]),
     ],
   providers: [],

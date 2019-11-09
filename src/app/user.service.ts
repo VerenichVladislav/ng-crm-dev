@@ -12,7 +12,7 @@ export class UserService {
 
   getUserById(id: number): Observable<User>{
     let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    headers.set('Authorization', localStorage.getItem("auth_token"));
+    headers.set('Authorization', localStorage.getItem('auth_token'));
     let options = { headers: headers };
 
 
@@ -25,7 +25,12 @@ export class UserService {
 
     let options = { headers: headers };
 
-
     return this.http.get<User>('http://localhost:8090/users/?userName=' + name, options);
+  }
+
+  updateUser(userName: string) {
+    const user = JSON.stringify(this.getByUserName(userName));
+    localStorage.removeItem('user');
+    localStorage.setItem('user', user);
   }
 }

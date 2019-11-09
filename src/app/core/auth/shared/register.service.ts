@@ -11,18 +11,11 @@ export class RegisterService {
 
   constructor(private http: HttpClient) { }
 
-  registerUser(userName: string, email: string, password: string): Observable<any>{
+  registerUser(user: User): Observable<any>{
     let headers = new HttpHeaders(
       {'Content-Type': 'application/json'});
-    let body = {
-      userName: userName,
-      firstName: "",
-      lastName: "",
-      email: email,
-      role: "USER",
-      hashPass: password,
-      wallet: {}
-    };
+    let body = user;
+    body.setRole("USER");
     let options = {
       headers: headers ,
       observe: <'body'>'response'

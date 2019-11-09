@@ -17,11 +17,12 @@
         </li>
       </ul>
 
-      <app-register class="offset-md-8"></app-register>
-      <app-login></app-login>
-
-      <button routerLink="/profile" style="width:auto;" class="btn btn-success">Profile</button>
-
+      <div class="row">
+        <app-register></app-register>
+        <app-login></app-login>
+        <button *ngIf="isActiveUser" routerLink="/profile" class="btn btn-success">Profile</button>
+        <app-logout></app-logout>
+      </div>
     </div>
   </nav>
 </header>

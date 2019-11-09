@@ -34,3 +34,9 @@
 #real-estates-detail .slides li img {
   height: 450px;
 }
+.confirmed{
+  color: #4CAF50;
+}
+.unconfirmed{
+  color: #f44336;
+}

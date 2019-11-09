@@ -1,20 +1,27 @@
-<button class="btn btn-success" onclick="document.getElementById('id02').style.display='block'" style="width:auto;" >Sign Up</button>
+<button class="btn btn-success" onclick="document.getElementById('register-form').style.display='block'" style="width:auto;" >Sign Up</button>
 
-<div id="id02" class="modal" tabindex="-1">
-  <span onclick="document.getElementById('id02').style.display='none'" class="close" title="Закрыть">&times;</span>
+<div id="register-form" class="modal" tabindex="-1">
+  <span onclick="document.getElementById('register-form').style.display='none'" class="close" title="Закрыть">&times;</span>
   <form  [formGroup]="registerForm" (ngSubmit)="submit(registerForm.value)" class="modal-content animate" action="/action_page.php">
     <div class="container">
       <h1>Sign Up</h1>
       <p>Пожалуйста, заполните форму для регистрации аккаунта.</p>
       <hr>
-      <label for="register-username"><b>Username</b></label>
-      <input id="register-username" type="text" placeholder="Введите имя пользователя" formControlName="username" required>
+      <label for="register-username"><b>User name</b></label>
+      <input id="register-username" type="text" placeholder="Введите имя пользователя" formControlName="userName" required>
 
       <label for="register-email"><b>Email</b></label>
-      <input id="register-email" type="text" placeholder="Введите Email" formControlName="email" required>
+      <input id="register-email" type="email" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+             placeholder="Введите Email" formControlName="email" required>
+
+      <label for="first-name"><b>First name</b></label>
+      <input id="first-name" type="text" placeholder="Введите Имя" formControlName="firstName" required>
+
+      <label for="last-name"><b>Last name</b></label>
+      <input id="last-name" type="text" placeholder="Введите Фамилию" formControlName="lastName" required>
 
       <label for="register-password"><b>Password</b></label>
-      <input id="register-password" type="password" placeholder="Введите пароль" formControlName="password" required>
+      <input id="register-password" type="password" placeholder="Введите пароль" formControlName="hashPass" required>
 
       <label for="register-password-repeat"><b>Repeat Password</b></label>
       <input id="register-password-repeat" type="password" placeholder="Повторите пароль" required>
@@ -26,12 +33,12 @@
       <p>Создавая аккаунт вы соглашаетесь с нашими <a href="#" style="color:dodgerblue">Условиями и политикой конфиденциальности</a>.</p>
 
       <div class="clearfix">
-        <button type="button" onclick="document.getElementById('id02').style.display='none'" class="cancelbtn">Cancel</button>
+        <button type="button" onclick="document.getElementById('register-form').style.display='none'" class="cancelbtn">Cancel</button>
         <button type="submit" class="signupbtn">Sign Up</button>
 
         <script>
           type="text/javascript">
-            $('#id01').modal({
+            $('#login-form').modal({
               backdrop: 'true',
               keyboard: false
             })

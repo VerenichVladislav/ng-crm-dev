@@ -1,16 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, DoCheck, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, DoCheck {
+  private isActiveUser: boolean;
+  constructor() {}
 
-  constructor() {
-}
+  ngOnInit() {}
 
-  ngOnInit() {
+  ngDoCheck() {
+    this.isActiveUser = JSON.parse(localStorage.getItem('user')) !== null;
   }
-
 }
