@@ -7,12 +7,14 @@ import {RegisterComponent} from './components/register/register.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import { LogoutComponent } from './components/logout/logout.component';
+import {IdentityPasswordDirective} from './shared/identity-password.directive';
 
 @NgModule({
   declarations: [
     RegisterComponent,
     LoginComponent,
-    LogoutComponent
+    LogoutComponent,
+    IdentityPasswordDirective
   ],
   exports: [
     RegisterComponent,

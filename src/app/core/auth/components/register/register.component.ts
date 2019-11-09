@@ -1,12 +1,13 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {FormControl, FormGroup} from '@angular/forms';
+import {AbstractControl, FormControl, FormGroup, ValidatorFn, Validators} from '@angular/forms';
 import {User} from '../../../../user';
 import {RegisterService} from '../../shared/register.service';
 import {Subscription} from 'rxjs';
 import {Response} from 'selenium-webdriver/http';
 import {LoginService} from '../../shared/login.service';
 import {ConfirmEmailService} from '../../shared/confirm-email.service';
+import {identityPasswordValidator} from '../../shared/identity-password.directive';
 
 @Component({
   selector: 'app-register',
@@ -22,12 +23,14 @@ export class RegisterComponent implements OnInit {
               private confirmService: ConfirmEmailService,
               private router: Router) {
     this.registerForm = new FormGroup({
-      userName: new FormControl(''),
+      userName: new FormControl('', Validators.required),
       email: new FormControl(''),
       firstName: new FormControl(''),
       lastName: new FormControl(''),
-      hashPass: new FormControl('')
-    });
+      hashPass: new FormControl(''),
+      repeatPass: new FormControl(''),
+    }, {validators: identityPasswordValidator}
+    );
   }
 
   submit(userData) {

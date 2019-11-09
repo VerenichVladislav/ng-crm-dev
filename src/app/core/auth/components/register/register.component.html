@@ -8,11 +8,15 @@
       <p>Пожалуйста, заполните форму для регистрации аккаунта.</p>
       <hr>
       <label for="register-username"><b>User name</b></label>
-      <input id="register-username" type="text" placeholder="Введите имя пользователя" formControlName="userName" required>
+      <input id="register-username" type="text" class="ng-invalid"
+             placeholder="Введите имя пользователя" formControlName="userName" required>
 
       <label for="register-email"><b>Email</b></label>
       <input id="register-email" type="email" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
              placeholder="Введите Email" formControlName="email" required>
+      <!--<div [hidden]="email.valid" class="alert alert-danger">-->
+        <!--Некорректный email-->
+      <!--</div>-->
 
       <label for="first-name"><b>First name</b></label>
       <input id="first-name" type="text" placeholder="Введите Имя" formControlName="firstName" required>
@@ -24,7 +28,11 @@
       <input id="register-password" type="password" placeholder="Введите пароль" formControlName="hashPass" required>
 
       <label for="register-password-repeat"><b>Repeat Password</b></label>
-      <input id="register-password-repeat" type="password" placeholder="Повторите пароль" required>
+      <input id="register-password-repeat" type="password" placeholder="Повторите пароль" formControlName="repeatPass" required>
+      <div *ngIf="registerForm.errors?.nonIdenticalPassword"
+           class="cross-validation-error-message alert alert-danger">
+        Пароли не совпадают
+      </div>
 
       <label>
         <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Запомнить меня
@@ -34,7 +42,7 @@
 
       <div class="clearfix">
         <button type="button" onclick="document.getElementById('register-form').style.display='none'" class="cancelbtn">Cancel</button>
-        <button type="submit" class="signupbtn">Sign Up</button>
+        <button type="submit" class="signupbtn" [disabled]="!registerForm.valid">Sign Up</button>
 
         <script
           type="text/javascript">
@@ -48,3 +56,5 @@
 
   </form>
 </div>
+
+
