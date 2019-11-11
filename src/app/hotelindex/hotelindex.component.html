@@ -1,0 +1,64 @@
+<div class="index-content">
+    <div class="content">
+        <div class="header-background">
+            <div class="header-background-text">
+                <p>Hotels</p>
+            </div>
+        </div>
+        <div class="search">
+                <mat-form-field class="form-mat-child">
+                        <input matInput placeholder="Sity" >
+                </mat-form-field>
+                    
+            <mat-form-field color="accent" class="form-mat-child">
+                <input matInput [matDatepicker]="picker1" placeholder="CheckIn Date">
+                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                <mat-datepicker #picker1></mat-datepicker>
+              </mat-form-field>
+              <mat-form-field color="accent" class="form-mat-child">
+                <input matInput [matDatepicker]="picker2" placeholder="CheckOut Date">
+                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                <mat-datepicker #picker2 color="primary"></mat-datepicker>
+              </mat-form-field>
+              <mat-form-field  class="form-mat-child">
+                  <mat-select placeholder="Select">
+                      <mat-option value="option">
+                          Option
+                        </mat-option>
+                     </mat-select>
+                </mat-form-field>
+        </div>
+        <mat-button-toggle class="recomends-content">Find</mat-button-toggle>
+        <div class="recomends">
+            <div class="recomends-content">
+                Popular destinations
+            </div>
+            <div class="recomends-content">
+                <div class="recomend-hotels">
+                    <div class="recomend-hotels-image">
+                        <img src="assets/img/pexels-photo-373893.jpeg" alt="" class="recomend-hotels-image"/>
+                        <h2>A Movie in the Park:<br />Kung Fu Panda</h2>
+                    </div>
+                </div>
+                <div class="recomend-hotels">
+                    <div class="recomend-hotels-image">
+                        <img src="assets/img/pexels-photo-373893.jpeg" alt="" class="recomend-hotels-image"/>
+                        <h2>A Movie in the Park:<br />Kung Fu Panda</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="recomends-content">
+                <div class="recomend-hotels">
+                    <div class="recomend-hotels-image">
+                        <img src="assets/img/pexels-photo-373893.jpeg" alt="" class="recomend-hotels-image"/>
+                        <h2>A Movie in the Park:<br />Kung Fu Panda</h2>
+                    </div>
+                </div>
+                <div class="recomend-hotels">
+                    <div class="recomend-hotels-image">
+                        <img src="assets/img/pexels-photo-373893.jpeg" alt="" class="recomend-hotels-image"/>
+                        <h2>A Movie in the Park:<br />Kung Fu Panda</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
