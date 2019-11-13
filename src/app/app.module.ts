@@ -47,6 +47,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
+import { BuyTicketComponent } from './buy-ticket/buy-ticket.component';
 import { SearchResultComponentComponent } from './search-result-component/search-result-component.component';
 import { DetailshotelComponentComponent} from './detailshotel-component/detailshotel-component.component';
 
@@ -54,7 +55,7 @@ import { DetailshotelComponentComponent} from './detailshotel-component/detailsh
 
 @NgModule({
   declarations: [
-    
+
     AppComponent,
 
     HeaderComponent,
@@ -66,7 +67,9 @@ import { DetailshotelComponentComponent} from './detailshotel-component/detailsh
     SearchResultComponentComponent,
 
     DetailshotelComponentComponent,
-    
+
+
+    BuyTicketComponent,
   ],
   imports: [
     MatAutocompleteModule,
@@ -117,10 +120,11 @@ import { DetailshotelComponentComponent} from './detailshotel-component/detailsh
       { path:'HotelIndex', component:HotelindexComponent},
       { path:'SearchResult', component:SearchResultComponentComponent},
       { path:'SearchResult/:id', component:DetailshotelComponentComponent},
-      { path: '', redirectTo: '/', pathMatch: 'full' },
+      {path: 'trips/:userid/:tripid/buy', component: BuyTicketComponent},
+      {path: '', redirectTo: '/', pathMatch: 'full'},
     ]),
     BrowserAnimationsModule,
-    ],
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

@@ -1,0 +1,28 @@
+<h1>{{appTitle}}</h1>
+<div>
+  <h4>Город отправления: {{trip.cityFrom}}</h4>
+  <h4>Город прибытия: {{trip.cityDest}}</h4>
+  <h4>Цена за один билета: {{trip.price}}$</h4>
+  <h4>Вид транспорта: {{trip.transport}}</h4>
+  <h4>Дата отправления: {{trip.dateFrom | date:'short'}}</h4>
+
+  <h3>Введите данные о пассажирах ({{count}}):</h3>
+
+  <div class="form-group">
+    <label>Имя</label>
+    <input class="form-control" name="name" [(ngModel)]="passanger.name" />
+  </div>
+  <div class="form-group">
+    <label>Фамилия</label>
+    <input class="form-control" name="lastname" [(ngModel)]="passanger.lastname" />
+  </div>
+  <div class="form-group">
+    <button class="btn btn-default" (click)="addPassenger()">Добавить</button>
+  </div>
+
+<div><h3>Добавленные пассажиры</h3>
+  <ul *ngFor="let passanger of passangers">
+    <li>{{passanger.name}} {{passanger.lastname}}</li>
+  </ul>
+</div>
+  </div>
