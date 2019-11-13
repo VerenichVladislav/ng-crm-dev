@@ -1,0 +1,87 @@
+.example-card {
+    max-width: 400px;
+    margin:2rem;
+  }
+.Material-container{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+  /*Flex-Card*/
+.hotels-card-menu{
+    display: flex;
+    justify-content: space-between;
+}
+.hotels-card-menu-picker{
+    width:20%;
+    background: #dfdfdf;
+}
+.hotels-card{
+    display: flex;
+    justify-content: space-between;
+    width: 710px;
+    height: 21.5rem;
+    margin: 2rem;
+    border-radius: 5px;
+    border: 1px solid #dadce0;
+    box-shadow: 0 1px 2px 0 rgba(60,64,67,.30),0 2px 6px 2px rgba(60,64,67,.15);
+}
+.hotels-card-hotel-img{
+    max-width: 260px;
+    overflow: hidden;
+}
+.hotels-card-hotel-img img{
+    width:100%;
+    border-radius: 5px;
+    margin-top: 2rem;
+    margin-left: 2rem;
+    overflow: hidden; 
+}
+.hotels-card-content{
+    display: flex;
+    justify-content: space-between;
+    width: 40rem;
+}
+.hotels-card-content-info{
+    display: block;
+}
+.hotels-card-content-info-head{
+    margin-top: 2rem;
+    font-size: 28px;
+}
+.hotels-card-content-info-text{
+    margin-top: 2rem;
+}
+.hotels-card-content-moreinfo{
+    height: 15rem;
+}
+.hotels-card-content-moreinfo-price{
+    margin: 2rem;
+    padding: 1rem;
+    font-weight: bold;
+}
+.hotels-card-content-moreinfo-button{
+    padding: 1rem;
+    margin: 2rem;
+    margin-top: 2rem;
+    border-radius: 3px;
+    border: 2px solid #17bed2;
+    background: #fff;
+    color: #17bed2;
+}
+.hotels-card-content-moreinfo-button:hover{
+    animation: 0.25s button-hover;
+    background: #17bed2;
+    color: #fff;
+    cursor: pointer;
+}
+@keyframes button-hover{
+    from {
+      color: #17bed2;
+      background: #fff;
+    }
+    to {
+      color: #fff;
+      background: #17bed2;
+    }
+}

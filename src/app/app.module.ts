@@ -47,11 +47,14 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
+import { SearchResultComponentComponent } from './search-result-component/search-result-component.component';
+import { DetailshotelComponentComponent} from './detailshotel-component/detailshotel-component.component';
 
 
 
 @NgModule({
   declarations: [
+    
     AppComponent,
 
     HeaderComponent,
@@ -59,6 +62,11 @@ import {MatTreeModule} from '@angular/material/tree';
     ProfileComponent,
 
     HotelindexComponent,
+
+    SearchResultComponentComponent,
+
+    DetailshotelComponentComponent,
+    
   ],
   imports: [
     MatAutocompleteModule,
@@ -107,6 +115,8 @@ import {MatTreeModule} from '@angular/material/tree';
     RouterModule.forRoot([
       { path: 'profile', component: ProfileComponent },
       { path:'HotelIndex', component:HotelindexComponent},
+      { path:'SearchResult', component:SearchResultComponentComponent},
+      { path:'SearchResult/:id', component:DetailshotelComponentComponent},
       { path: '', redirectTo: '/', pathMatch: 'full' },
     ]),
     BrowserAnimationsModule,
