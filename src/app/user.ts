@@ -9,7 +9,6 @@ export class User {
   //currency: string;
   wallet: object;
   bill: number;
-
   constructor(user: User) {
     this.userName = user.userName;
     this.hashPass = user.hashPass;

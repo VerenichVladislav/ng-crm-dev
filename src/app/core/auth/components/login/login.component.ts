@@ -14,6 +14,8 @@ import {UserService} from '../../../../user.service';
 })
 export class LoginComponent implements OnInit {
   private loginForm;
+  private errorLogin = false;
+  private errorPassword = false;
   private subscriptions: Subscription[] = [];
 
   constructor(private loginService: LoginService,
@@ -31,7 +33,8 @@ export class LoginComponent implements OnInit {
       .subscribe(
         (resp: Response) => {
           localStorage.setItem('auth_token', resp.headers.get('Authorization'));
-
+          this.errorLogin = false;
+          this.errorPassword = false;
           this.subscriptions.push(this.userService.getByUserName(userData.username)
             .subscribe(
               (data: User) => {
@@ -44,7 +47,13 @@ export class LoginComponent implements OnInit {
               }));
         },
         error => {
-          console.log(error);
+          if(error.error.message == "Wrong userName") {
+            this.errorLogin = true;
+            this.errorPassword = false;
+          } else if(error.error.message == "Wrong password") {
+            this.errorLogin = false;
+            this.errorPassword = true;
+          }
         }));
   }
 

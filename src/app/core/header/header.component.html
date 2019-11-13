@@ -18,8 +18,8 @@
       </ul>
 
       <div class="row">
-        <app-register></app-register>
-        <app-login></app-login>
+        <app-register *ngIf="!isActiveUser"></app-register>
+        <app-login *ngIf="!isActiveUser"></app-login>
         <button *ngIf="isActiveUser" routerLink="/profile" class="btn btn-success">Profile</button>
         <app-logout *ngIf="isActiveUser"></app-logout>
       </div>
