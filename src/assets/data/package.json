@@ -1,0 +1,8 @@
+[
+  {"id": 1, "departureCity": "Bishkek", "departureTime": "04:55", "arrivalCity": "Minsk", "arrivalTime": "9:00"},
+  {"id": 2, "departureCity": "Minsk", "departureTime": "18:55", "arrivalCity": "Cologne", "arrivalTime": "20:00"},
+  {"id": 3, "departureCity": "Bishkek", "departureTime": "04:55", "arrivalCity": "Istanbul", "arrivalTime": "12:00"},
+  {"id": 4, "departureCity": "Istanbul", "departureTime": "14:55", "arrivalCity": "New York", "arrivalTime": "14:55"},
+  {"id": 5, "departureCity": "Minsk", "departureTime": "14:55", "arrivalCity": "Prague", "arrivalTime": "14:55"},
+  {"id": 5, "departureCity": "Minsk", "departureTime": "14:55", "arrivalCity": "Canada", "arrivalTime": "14:55"}
+]

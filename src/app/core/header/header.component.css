@@ -31,7 +31,9 @@ button {
 button:hover {
   opacity:1;
 }
-
+#header {
+  position: absolute;
+}
 .cancelbtn {
   width: auto;
   padding: 14px 20px;
