@@ -122,17 +122,16 @@ import { DetailshotelComponentComponent} from './detailshotel-component/detailsh
     AuthModule,
     RouterModule.forRoot([
       { path: 'profile', component: ProfileComponent },
-      { path:'HotelIndex', component:HotelindexComponent},
-      { path:'SearchResult', component:SearchResultComponentComponent},
-      { path:'SearchResult/:id', component:DetailshotelComponentComponent},
+      { path: 'HotelIndex', component: HotelindexComponent},
+      { path: 'SearchResult', component: SearchResultComponentComponent},
+      { path: 'SearchResult/:id', component: DetailshotelComponentComponent},
       {path: 'trips/:userid/:tripid/buy', component: BuyTicketComponent},
       {path: '', redirectTo: '/', pathMatch: 'full'},
     ]),
     ],
   providers: [FlightsService],
-    BrowserAnimationsModule,
-  ],
-  providers: [],
+    // [BrowserAnimationsModule],
+    // providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
