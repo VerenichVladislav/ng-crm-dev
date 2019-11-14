@@ -17,20 +17,20 @@ export class SearchResultComponentComponent implements OnInit {
 @Input()
 
   readonly ROOT_URL = 'http://localhost:8080/hotels';
-  posts:Observable<Hotel[]>;
-  rooms:Observable<room[]>;
-  constructor(private http: HttpClient,private router: Router) { 
+  posts: Observable<Hotel[]>;
+  rooms: Observable<room[]>;
+  constructor(private http: HttpClient, private router: Router) {
     this.getPosts();
   }
   selectedHotel: Hotel;
-  getPosts(){
+  getPosts() {
     this.posts = this.http.get<Hotel[]>(this.ROOT_URL);
   }
   onSelect(hotel: Hotel): void {
     this.selectedHotel = hotel;
-    this.router.navigate(['/SearchResult',hotel.hotelId]);
+    this.router.navigate(['/SearchResult', hotel.hotelId]);
     console.log(hotel.hotelId);
-    
+
   }
   ngOnInit() {
   }

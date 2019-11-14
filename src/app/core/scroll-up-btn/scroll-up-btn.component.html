@@ -1,0 +1,69 @@
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<a href="#" class="scrollup">Наверх</a>
+<script type="text/javascript">
+    $(document).ready(function(){
+
+        $(window).scroll(function(){
+            if ($(this).scrollTop() > 100) {
+                $('.scrollup').fadeIn();
+            } else {
+                $('.scrollup').fadeOut();
+            }
+        });
+
+        $('.scrollup').click(function(){
+            $("html, body").animate({ scrollTop: 0 }, 600);
+            return false;
+        });
+
+    });
+</script>
+
+
+
+
+
+
+
+
+<!--            <ul id="myUL">-->
+<!--              <li>-->
+<!--                <table id="baggage">-->
+<!--                  <th>Багаж</th>-->
+<!--                  <tr><input type="checkbox" id="baggage1">-->
+<!--                    <label for="baggage1">Все</label></tr>-->
+<!--                  <tr><input type="checkbox" id="baggage2">-->
+<!--                    <label for="baggage2">Багаж и ручная кладь</label></tr>-->
+<!--                  <tr><input type="checkbox" id="baggage3">-->
+<!--                    <label for="baggage3">Без багажа</label></tr>-->
+<!--                </table>-->
+<!--              </li>-->
+<!--              <li>-->
+<!--                <table id="transfer">-->
+<!--                  <th>Пересадка</th>-->
+<!--                  <tr><input type="checkbox" id="transfer1">-->
+<!--                    <label for="transfer1">Все</label></tr>-->
+<!--                  <tr><input type="checkbox" id="transfer2">-->
+<!--                    <label for="transfer2">1 пересадка</label></tr>-->
+<!--                  <tr><input type="checkbox" id="transfer3">-->
+<!--                    <label for="transfer3">2 пересадки</label></tr>-->
+<!--                </table>-->
+<!--              </li>-->
+<!--            </ul>-->
+<!--            <button type="submit" id="result" class="btn btn-success">Применить</button>-->
+<!--            <script>-->
+<!--                $.post(-->
+<!--                    "http://localhost:8080/flights",-->
+<!--                    {-->
+<!--                        transfer1: "param1",-->
+<!--                        transfer2: 2-->
+<!--                    },-->
+<!--                    onAjaxSuccess-->
+<!--                );-->
+
+<!--                function onAjaxSuccess(data)-->
+<!--                {-->
+<!--                    // Здесь мы получаем данные, отправленные сервером и выводим их на экран.-->
+<!--                    alert(data);-->
+<!--                }-->
+<!--            </script>-->

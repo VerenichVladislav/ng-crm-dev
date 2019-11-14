@@ -43,14 +43,14 @@ export class LoginComponent implements OnInit {
                 this.hideLoginForm();
               },
               error => {
-                console.log(error)
+                console.log(error);
               }));
         },
         error => {
-          if(error.error.message == "Wrong userName") {
+          if (error.error.message === 'Wrong userName') {
             this.errorLogin = true;
             this.errorPassword = false;
-          } else if(error.error.message == "Wrong password") {
+          } else if (error.error.message === 'Wrong password') {
             this.errorLogin = false;
             this.errorPassword = true;
           }
@@ -58,11 +58,11 @@ export class LoginComponent implements OnInit {
   }
 
   showLoginForm() {
-    document.getElementById('login-form').style.display='block';
+    document.getElementById('login-form').style.display = 'block';
   }
 
   hideLoginForm() {
-    document.getElementById('login-form').style.display='none'
+    document.getElementById('login-form').style.display = 'none';
   }
 
 

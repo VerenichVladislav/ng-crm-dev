@@ -12,8 +12,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { ProfileComponent } from './profile/profile.component';
 import {AuthModule} from './core/auth/auth.module';
 import {FilterComponent} from './core/auth/components/filter/filter.component';
-import {ParcingFlightComponent} from './core/auth/components/parcing-flight/parcing-flight.component';
-import {FlightsService} from './flights.service';
 import { HotelindexComponent } from './hotelindex/hotelindex.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
@@ -53,6 +51,11 @@ import {MatTreeModule} from '@angular/material/tree';
 import { BuyTicketComponent } from './buy-ticket/buy-ticket.component';
 import { SearchResultComponentComponent } from './search-result-component/search-result-component.component';
 import { DetailshotelComponentComponent} from './detailshotel-component/detailshotel-component.component';
+import { FlightsindexComponent } from './flightsindex/flightsindex.component';
+import { ScrollUpBtnComponent } from './core/scroll-up-btn/scroll-up-btn.component';
+import {CdkTreeModule} from '@angular/cdk/tree';
+import { SearchResultTripComponent } from './search-result-trip/search-result-trip.component';
+
 
 
 
@@ -60,23 +63,19 @@ import { DetailshotelComponentComponent} from './detailshotel-component/detailsh
   declarations: [
 
     AppComponent,
-
     HeaderComponent,
-
     ProfileComponent,
     FilterComponent,
-    ParcingFlightComponent,
-
     HotelindexComponent,
-
     SearchResultComponentComponent,
-
     DetailshotelComponentComponent,
-
-
     BuyTicketComponent,
+    FlightsindexComponent,
+    ScrollUpBtnComponent,
+    SearchResultTripComponent,
   ],
   imports: [
+    CdkTreeModule,
     MatAutocompleteModule,
     MatBadgeModule,
     MatBottomSheetModule,
@@ -129,9 +128,9 @@ import { DetailshotelComponentComponent} from './detailshotel-component/detailsh
       {path: '', redirectTo: '/', pathMatch: 'full'},
     ]),
     ],
-  providers: [FlightsService],
+  providers: [],
     // [BrowserAnimationsModule],
-    // providers: [],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }
