@@ -1,4 +1,4 @@
-<div *ngIf="!!user" id="profile" class="container">
+<div *ngIf="user" id="profile" class="container">
   <div id="main">
     <div class="row" id="real-estates-detail">
       <div class="col-lg-4 col-md-4 col-xs-12">
@@ -34,7 +34,13 @@
                       </ng-template>
                     </td>
                   </tr>
-                  <tr><td class="active">Текущая сумма:</td><td>{{user.bill}}</td></tr>
+                  <tr><td class="active">Текущая сумма:</td>
+                    <td *ngIf="user.wallet.sum == null; else has">0</td>
+                    <ng-template #has>
+                      <td>{{user.wallet.sum}}</td>
+                    </ng-template>
+                  </tr>
+
                   </tbody>
                 </table>
               </div>

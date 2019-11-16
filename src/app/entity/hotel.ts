@@ -1,4 +1,4 @@
-import { room} from 'src/app/search-result-component/room'
+import { room} from 'src/app/entity/room'
 import { Observable } from 'rxjs';
 export interface Hotel{
     hotelId:number;
@@ -9,5 +9,5 @@ export interface Hotel{
     phoneNumber:string;
     rooms:Observable<room[]>;
     comments:Array<any>;
-    city:string;    
+    city:string;
 }

@@ -3,6 +3,7 @@ import {Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {Trips} from './trips';
+import {GlobalRootURL} from '../../GlobalRootURL';
 
 @Component({
   selector: 'app-search-result-trip',
@@ -13,7 +14,7 @@ import {Trips} from './trips';
 export class SearchResultTripComponent implements OnInit {
   @Input()
 
-  readonly ROOT_URL = 'http://localhost:8080/trips';
+  readonly ROOT_URL = GlobalRootURL + 'trips';
   posts: Observable<Trips[]>;
   // rooms: Observable<room[]>;
   constructor(private http: HttpClient, private router: Router) {

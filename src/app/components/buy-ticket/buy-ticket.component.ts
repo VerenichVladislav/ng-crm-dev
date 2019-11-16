@@ -1,6 +1,6 @@
 import {Component, Injectable, Input, OnInit} from '@angular/core';
-import {TripService} from '../trip.service';
-import {Trip} from '../trip';
+import {TripService} from '../../shared/trip.service';
+import {Trip} from '../../entity/trip';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { filter } from 'rxjs/operators';
 
