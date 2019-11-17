@@ -30,6 +30,7 @@ export class LoginComponent implements OnInit {
               private walletService: WalletService,
               private ticketService: TicketService,
               private cityService: CityService,
+              private transferService: DataTransferService<Ticket[]>,
               private router: Router) {
 
     this.loginForm = new FormGroup({
@@ -39,7 +40,7 @@ export class LoginComponent implements OnInit {
   }
 
   submit(userData) {
-    let tickets = [];
+    let tickets: Ticket[] = [];
     this.subscriptions.push(this.loginService
       .loginUser(userData.username, userData.password)
       .subscribe(
@@ -58,6 +59,7 @@ export class LoginComponent implements OnInit {
                       user.setWallet(wallet);
                       localStorage.setItem('user', JSON.stringify(user));
                       this.loadTrips(tickets, data.id);
+                      this.transferService.setData(tickets);
                     }
                   ));
 
@@ -92,7 +94,7 @@ export class LoginComponent implements OnInit {
               this.cityService.getById(t.cityDest)
                 .subscribe(
                   (city: City) =>{
-                    ticket.cityDest = city;
+                    ticket.cityDest = new City(city);
                   },
                   error1 => {
                     console.log(error1);
@@ -102,13 +104,13 @@ export class LoginComponent implements OnInit {
               this.cityService.getById(t.cityFrom)
                 .subscribe(
                   (city: City) =>{
-                    ticket.cityFrom = city;
+                    ticket.cityFrom = new City(city);
                   },
                   error1 => {
                     console.log(error1);
                   }
                 );
-              tickets.push();
+              tickets.push(ticket);
             }
         )},
         error => {

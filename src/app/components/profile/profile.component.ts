@@ -2,6 +2,7 @@ import {Component, DoCheck, Input, OnInit} from '@angular/core';
 import { User } from 'src/app/entity/user';
 import {DataTransferService} from '../../shared/data-transfer.service';
 import {Trip} from '../../entity/trip';
+import {Ticket} from '../../entity/ticket';
 
 @Component({
   selector: 'app-profile',
@@ -11,7 +12,8 @@ import {Trip} from '../../entity/trip';
 export class ProfileComponent implements DoCheck{
   private user: User;
   private trips: Trip[];
-  constructor() {}
+  private tickets: Ticket[];
+  constructor(private transferService: DataTransferService<Ticket[]>) {}
 
 
   ngDoCheck() {
@@ -22,5 +24,8 @@ export class ProfileComponent implements DoCheck{
       this.user = JSON.parse(localStorage.getItem('user'));
       this.trips = JSON.parse(localStorage.getItem('trips'));
     }
+    this.transferService.data$.subscribe( value => {
+        this.tickets = value;
+    });
   }
 }
