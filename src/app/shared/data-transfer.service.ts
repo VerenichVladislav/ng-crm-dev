@@ -4,7 +4,7 @@ import {BehaviorSubject} from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class DataTransferService {
+export class DataTransferService<T> {
   private data: T;
   //This is the key the Subject to transfer
   data$ = new BehaviorSubject<T>(this.data);

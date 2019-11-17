@@ -9,6 +9,10 @@ import {UserService} from '../../../../shared/user.service';
 import {WalletService} from '../../../../shared/wallet.service';
 import {Wallet} from '../../../../entity/wallet';
 import {DataTransferService} from '../../../../shared/data-transfer.service';
+import {TicketService} from '../../../../shared/ticket.service';
+import {Ticket} from '../../../../entity/ticket';
+import {CityService} from '../../../../shared/city.service';
+import {City} from '../../../../entity/city';
 
 @Component({
   selector: 'app-login',
@@ -24,8 +28,10 @@ export class LoginComponent implements OnInit {
   constructor(private loginService: LoginService,
               private userService: UserService,
               private walletService: WalletService,
-              private router: Router,
-              private transfer: DataTransferService) {
+              private ticketService: TicketService,
+              private cityService: CityService,
+              private router: Router) {
+
     this.loginForm = new FormGroup({
       username: new FormControl(''),
       password: new FormControl('')
@@ -33,6 +39,7 @@ export class LoginComponent implements OnInit {
   }
 
   submit(userData) {
+    let tickets = [];
     this.subscriptions.push(this.loginService
       .loginUser(userData.username, userData.password)
       .subscribe(
@@ -50,6 +57,7 @@ export class LoginComponent implements OnInit {
                       let user = new User(data);
                       user.setWallet(wallet);
                       localStorage.setItem('user', JSON.stringify(user));
+                      this.loadTrips(tickets, data.id);
                     }
                   ));
 
@@ -73,6 +81,44 @@ export class LoginComponent implements OnInit {
         }));
   }
 
+  loadTrips(tickets, id) {
+    this.subscriptions.push(this.ticketService.getAllByBuyerId(id)
+      .subscribe(
+        (all: any) => {
+          all.forEach(
+            (t: any) => {
+              console.log(t);
+              let ticket = new Ticket(t);
+              this.cityService.getById(t.cityDest)
+                .subscribe(
+                  (city: City) =>{
+                    ticket.cityDest = city;
+                  },
+                  error1 => {
+                    console.log(error1);
+                  }
+                );
+
+              this.cityService.getById(t.cityFrom)
+                .subscribe(
+                  (city: City) =>{
+                    ticket.cityFrom = city;
+                  },
+                  error1 => {
+                    console.log(error1);
+                  }
+                );
+              tickets.push();
+            }
+        )},
+        error => {
+          console.log(error);
+        }
+      ));
+  }
+
+
+
   showLoginForm() {
     document.getElementById('login-form').style.display = 'block';
   }
@@ -83,5 +129,9 @@ export class LoginComponent implements OnInit {
 
 
   ngOnInit() {
+  }
+
+  ngOnDestroy() {
+
   }
 }
