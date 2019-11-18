@@ -17,15 +17,28 @@ export class ProfileComponent implements DoCheck{
 
 
   ngDoCheck() {
+
+
     if(localStorage.getItem('auth_token') === null) {
       this.user = null;
-      this.trips = null;
+      this.tickets = null;
     } else {
       this.user = JSON.parse(localStorage.getItem('user'));
-      this.trips = JSON.parse(localStorage.getItem('trips'));
+      this.tickets = JSON.parse(localStorage.getItem('tickets'));
     }
-    this.transferService.data$.subscribe( value => {
+
+    if(this.transferService.data$.value !== undefined){
+      this.transferService.data$.subscribe( value => {
         this.tickets = value;
-    });
+        localStorage.setItem('tickets', JSON.stringify(this.tickets));
+      });
+    }
+
   }
+
+  isLater(date: string): boolean{
+    return new Date(date) > new Date();
+  }
+
+
 }

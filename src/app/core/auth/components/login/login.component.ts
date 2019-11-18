@@ -59,6 +59,7 @@ export class LoginComponent implements OnInit {
                       user.setWallet(wallet);
                       localStorage.setItem('user', JSON.stringify(user));
                       this.loadTrips(tickets, data.id);
+
                       this.transferService.setData(tickets);
                     }
                   ));
@@ -89,7 +90,6 @@ export class LoginComponent implements OnInit {
         (all: any) => {
           all.forEach(
             (t: any) => {
-              console.log(t);
               let ticket = new Ticket(t);
               this.cityService.getById(t.cityDest)
                 .subscribe(

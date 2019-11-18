@@ -1,7 +1,7 @@
 import {City} from './city';
 
 export class Ticket {
-  name: string;
+  firstName: string;
   lastName: string;
   date: string;
   tripId: number;
@@ -9,10 +9,12 @@ export class Ticket {
   cityFrom: City;
   price: number;
   constructor(ticket: Ticket) {
-    this.name = ticket.name;
+    this.firstName = ticket.firstName;
     this.lastName = ticket.lastName;
-    this.date = ticket.date;
+
     this.tripId = ticket.tripId;
     this.price = ticket.price;
+
+    this.date = ticket.date.replace('T', ' ').slice(0, ticket.date.indexOf('.'));
   }
 }
