@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {AbstractControl, FormControl, FormGroup, ValidatorFn, Validators} from '@angular/forms';
-import {User} from '../../../../user';
+import {User} from '../../../../entity/user';
 import {RegisterService} from '../../shared/register.service';
 import {Subscription} from 'rxjs';
 import {Response} from 'selenium-webdriver/http';

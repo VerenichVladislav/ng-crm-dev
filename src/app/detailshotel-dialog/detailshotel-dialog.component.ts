@@ -1,10 +1,11 @@
 import {Component, OnInit,Inject, Input} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { DialogData } from '../detailshotel-component/detailshotel-component.component';
+
 import { Timestamp, Observable, from } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
+import { DialogData } from '../components/detailshotel/detailshotel.component';
 
 
 @Component({

@@ -1,0 +1,62 @@
+#profile{
+  margin-top: 10vh;
+}
+#main {
+  background-color: #f2f2f2;
+  padding: 20px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
+  border-bottom: 4px solid #ddd;
+}
+#real-estates-detail #author img {
+  -webkit-border-radius: 100%;
+  -moz-border-radius: 100%;
+  -ms-border-radius: 100%;
+  -o-border-radius: 100%;
+  border-radius: 100%;
+  border: 5px solid #ecf0f1;
+  margin-bottom: 10px;
+}
+#real-estates-detail .sosmed-author i.fa {
+  width: 30px;
+  height: 30px;
+  border: 2px solid #bdc3c7;
+  color: #bdc3c7;
+  padding-top: 6px;
+  margin-top: 10px;
+}
+.panel-default .panel-heading {
+  background-color: #fff;
+}
+#real-estates-detail .slides li img {
+  height: 450px;
+}
+.confirmed{
+  color: #4CAF50;
+}
+.unconfirmed{
+  color: #f44336;
+}
+
+.trip{
+  background-color: #f2f2f2;
+  padding: 20px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
+  border-bottom: 4px solid #ddd;
+}
+.active-trip{
+  background-color: rgba(67, 169, 82, 0.21);
+}
+.non-active-trip{
+  background-color: rgba(118, 117, 112, 0.3)
+}
+.future-trip{
+  background-color: rgba(255, 250, 35, 0.21);
+}

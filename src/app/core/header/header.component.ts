@@ -12,6 +12,6 @@ export class HeaderComponent implements OnInit, DoCheck {
   ngOnInit() {}
 
   ngDoCheck() {
-    this.isActiveUser = JSON.parse(localStorage.getItem('user')) !== null;
+    this.isActiveUser = localStorage.getItem('auth_token') !== null;
   }
 }

@@ -1,3 +1,4 @@
+
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -9,10 +10,10 @@ import { HeaderComponent } from './core/header/header.component';
 
 import {RouterModule} from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
-import { ProfileComponent } from './profile/profile.component';
+import { ProfileComponent } from './components/profile/profile.component';
 import {AuthModule} from './core/auth/auth.module';
-import { HotelindexComponent } from './hotelindex/hotelindex.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {FilterComponent} from './core/auth/components/filter/filter.component';
+import { HotelindexComponent } from './components/hotelindex/hotelindex.component';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
@@ -47,35 +48,34 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
-import { SearchResultComponentComponent } from './search-result-component/search-result-component.component';
-import { DetailshotelComponentComponent} from './detailshotel-component/detailshotel-component.component';
+import { SearchResultComponent } from './components/search-result/search-result.component';
+import { DetailshotelComponentComponent} from './components/detailshotel/detailshotel.component';
+import {CdkTreeModule} from '@angular/cdk/tree';
+import {DataTransferService} from './shared/data-transfer.service';
 import { DetailshotelDialogComponent } from './detailshotel-dialog/detailshotel-dialog.component';
+import { BuyTicketComponent } from './components/buy-ticket/buy-ticket.component';
+import { ScrollUpBtnComponent } from './core/scroll-up-btn/scroll-up-btn.component';
 
 
 
 
 @NgModule({
   declarations: [
-    
     AppComponent,
-
     HeaderComponent,
-
     ProfileComponent,
-
+    FilterComponent,
     HotelindexComponent,
-
-    SearchResultComponentComponent,
-
+    SearchResultComponent,
     DetailshotelComponentComponent,
-
     DetailshotelDialogComponent,
-
-    
+    BuyTicketComponent,
+    ScrollUpBtnComponent,
     
   ],
   entryComponents:[DetailshotelDialogComponent],
   imports: [
+    CdkTreeModule,
     MatAutocompleteModule,
     MatBadgeModule,
     MatBottomSheetModule,
@@ -121,14 +121,16 @@ import { DetailshotelDialogComponent } from './detailshotel-dialog/detailshotel-
     AuthModule,
     RouterModule.forRoot([
       { path: 'profile', component: ProfileComponent },
-      { path:'HotelIndex', component:HotelindexComponent},
-      { path:'SearchResult', component:SearchResultComponentComponent},
-      { path:'SearchResult/:id', component:DetailshotelComponentComponent},
-      { path: '', redirectTo: '/', pathMatch: 'full' },
+      { path: 'HotelIndex', component: HotelindexComponent},
+      { path: 'SearchResult', component: SearchResultComponent},
+      { path: 'SearchResult/:id', component: DetailshotelComponentComponent},
+      {path: 'trips/:userid/:tripid/buy', component: BuyTicketComponent},
+      {path: '', redirectTo: '/', pathMatch: 'full'},
     ]),
-    BrowserAnimationsModule,
     ],
-  providers: [],
+  providers: [DataTransferService],
+    // [BrowserAnimationsModule],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }

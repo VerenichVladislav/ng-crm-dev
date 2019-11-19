@@ -1,0 +1,73 @@
+<div class="index-content">
+  <div class="content">
+    <div class="header-background">
+      <div class="header-background-text">
+        <p>Flights</p>
+      </div>
+    </div>
+    <div class="search">
+      <mat-form-field class="form-mat-child">
+        <input matInput placeholder="City From" >
+      </mat-form-field>
+      <mat-form-field class="form-mat-child">
+        <input matInput placeholder="City To" >
+      </mat-form-field>
+
+      <mat-form-field color="accent" class="form-mat-child">
+        <input matInput [matDatepicker]="picker1" placeholder="There Date">
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field color="accent" class="form-mat-child">
+        <input matInput [matDatepicker]="picker2" placeholder="Here Date">
+        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+        <mat-datepicker #picker2 color="primary"></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field  class="form-mat-child">
+        <mat-select placeholder="Select">
+          <mat-option value="option">
+            Option
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <mat-button-toggle class="recomends-content">Find</mat-button-toggle>
+    <div class="recomends">
+      <div class="recomends-content">
+        Popular destinations
+      </div>
+      <div class="recomends-content">
+        <div class="recomend-flights">
+          <div class="recomend-flights-image">
+            <img src="/assets/img/flight-915675.jpg" alt="" class="recomend-hotels-image"/>
+            <h2>A Movie in the Plane:<br />Don't masturbate during the Flight</h2>
+          </div>
+        </div>
+        <div class="recomend-flights">
+          <div class="recomend-flights-image">
+            <img src="/assets/img/flight-915675.jpg" alt="" class="recomend-hotels-image"/>
+            <h2>A Movie in the Plane:<br />Don't masturbate during the Flight</h2>
+          </div>
+        </div>
+      </div>
+      <div class="recomends-content">
+        <div class="recomend-flights">
+          <div class="recomend-flights-image">
+            <img src="/assets/img/flight-915675.jpg" alt="" class="recomend-hotels-image"/>
+            <h2>A Movie in the Plane:<br />Don't masturbate during the Flight</h2>
+          </div>
+        </div>
+
+        <div class="recomends-content">
+          <div class="recomend-flights">
+            <div class="recomend-flights-image">
+              <img src="/assets/img/flight-915675.jpg" alt="" class="recomend-hotels-image"/>
+              <h2>A Movie in the Plane:<br />Don't masturbate during the Flight</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

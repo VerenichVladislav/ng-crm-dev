@@ -1,0 +1,46 @@
+<div class="buyTicket">
+  <div class="mx-auto">
+    <div class="col-xs-15" align="center" >
+      <div class="shadow p-3 mb-5 bg-white rounded">
+        <h1>{{appTitle}}</h1>
+      </div>
+      <h3>Введите данные о пассажирах:</h3>
+    </div>
+  </div>
+
+  <div class="mt-5 ml-5">
+    <div class="col-xs-4" align="center">
+      <h5>Город отправления: {{trip.cityFrom}}</h5>
+      <h5>Город прибытия: {{trip.cityDest}}</h5>
+      <h5>Цена за один билета: {{trip.price}}$</h5>
+      <h5>Вид транспорта: {{trip.transport}}</h5>
+      <h5>Дата отправления: {{trip.dateFrom | date:'short'}}</h5>
+      <div class="mt-5">
+        <h4>Общая стоимость: {{trip.price * count}}$</h4>
+      </div>
+    </div>
+
+
+    <div *ngFor="let passenger of [].constructor(count); let i = index">
+        <form>
+          <div class="row">
+            <div class="input-group-prepend">
+              <input type="text" class="form-control" id="" placeholder="Name">
+              <input type="text" class="form-control"  placeholder="Lastname">
+              <input type="text" class="form-control"  placeholder="Second name">
+            </div>
+          </div>
+        </form>
+      </div>
+
+    <div class="mt-5">
+      <div class="col-xs-4" align="center">
+        <div class="form-group">
+          <input class="btn btn-primary" type="submit" value="Submit">
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>

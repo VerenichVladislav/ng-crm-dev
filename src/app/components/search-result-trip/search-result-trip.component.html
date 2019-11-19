@@ -1,0 +1,30 @@
+
+<!-- <div *ngFor='let post of posts | async'>
+    {{post.hotelName}}
+</div>
+ <div *ngFor='let post of posts | async'>
+    <ng-container *ngFor="let item of post.rooms">
+        {{item.roomId}}
+    </ng-container>
+</div> -->
+
+<div class="trips-card-menu">
+  <div class="trips-card-menu-picker"></div>
+  <div class="trips-card-container"><div class="trips-card" *ngFor='let post of posts | async'>
+    <div class="trips-card-hotel-img">
+      <img src="assets/img/pexels-photo-374870.jpeg" alt="">
+    </div>
+    <div class="trips-card-content">
+      <div class="trips-card-content-info">
+        <div class="trips-card-content-info-head">{{post.id}}</div>
+        <div class="trips-card-content-info-text">The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
+          A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
+          bred for hunting.</div>
+      </div>
+      <div class="trips-card-content-moreinfo">
+        <div class="trips-card-content-moreinfo-price">$2000<br>pear night</div>
+        <button class="trips-card-content-moreinfo-button" (click)="onSelect(post)">Choose room ></button>
+      </div>
+    </div>
+  </div></div>
+</div>

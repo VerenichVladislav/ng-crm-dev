@@ -1,0 +1,103 @@
+<div *ngIf="user" id="profile" class="container">
+  <div id="main">
+    <div class="row" id="real-estates-detail">
+      <div class="col-lg-4 col-md-4 col-xs-12">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <div class="text-center" id="author">
+              <img class="img-thumbnail" src="https://i.stack.imgur.com/Yfj5T.png?s=328&g=1">
+              <h3>{{user.firstName}} {{user.lastName}}</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-8 col-md-8 col-xs-12">
+        <div class="panel">
+          <div class="panel-body">
+            <ul id="myTab" class="nav nav-pills">
+              <li class="active"><a href="#detail" data-toggle="tab">О пользователе</a></li>
+              <!--<li class=""><a href="#flights" data-toggle="tab">Рейсы</a></li>-->
+            </ul>
+            <div id="myTabContent" class="tab-content">
+              <hr>
+              <div class="tab-pane fade active in" id="detail">
+                <h4>История профиля</h4>
+                <table class="table table-th-block">
+                  <tbody>
+                  <tr><td class="active">Логин:</td><td>{{user.userName}}</td></tr>
+                  <tr><td class="active">Фамилия:</td><td>{{user.lastName}}</td></tr>
+                  <tr><td class="active">Имя:</td><td>{{user.firstName}}</td></tr>
+                  <tr><td class="active">Почтовый адрес:</td>
+                    <td>{{user.email}}
+                      <p class="confirmed" *ngIf="user.state === 'Confirmed'; else unconfirmed">Подтверждён</p>
+                      <ng-template #unconfirmed>
+                        <p class="unconfirmed">Не подтверждён</p>
+                      </ng-template>
+                    </td>
+                  </tr>
+                  <tr><td class="active">Текущая сумма:</td>
+                    <td *ngIf="user.wallet.sum == null; else has">0</td>
+                    <ng-template #has>
+                      <td>{{user.wallet.sum}}</td>
+                    </ng-template>
+                  </tr>
+
+                  </tbody>
+                </table>
+              </div>
+
+              <!--<div class="tab-pane fade" id="flights">-->
+                <!--<h4>Информация о рейсах</h4>-->
+                <!--<table class="table table-th-block">-->
+                  <!--<tbody>-->
+                  <!--<tr><td class="active">Логин:</td><td>{{user.userName}}</td></tr>-->
+                  <!--<tr><td class="active">Фамилия:</td><td>{{user.lastName}}</td></tr>-->
+                  <!--<tr><td class="active">Имя:</td><td>{{user.firstName}}</td></tr>-->
+                  <!--<tr><td class="active">Почтовый адрес:</td>-->
+                    <!--<td>{{user.email}}-->
+                      <!--<p class="confirmed" *ngIf="user.state === 'Confirmed'; else unconfirmed">Подтверждён</p>-->
+                      <!--<ng-template #unconfirmed>-->
+                        <!--<p class="unconfirmed">Не подтверждён</p>-->
+                      <!--</ng-template>-->
+                    <!--</td>-->
+                  <!--</tr>-->
+                  <!--<tr><td class="active">Текущая сумма:</td>-->
+                    <!--<td *ngIf="user.wallet.sum == null; else has">0</td>-->
+                    <!--<ng-template #has>-->
+                      <!--<td>{{user.wallet.sum}}</td>-->
+                    <!--</ng-template>-->
+                  <!--</tr>-->
+
+                  <!--</tbody>-->
+                <!--</table>-->
+              <!--</div>-->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="user" id="trips" class="container">
+<div *ngFor="let ticket of tickets"
+     [ngClass] = "isLater(ticket.date)? 'future-trip' : 'non-active-trip'"
+     class="mt-5 mb-5 col-md-8 trip">
+  <div class="row no-gutters border rounded">
+    <div class="col p-4 d-flex flex-column position-static">
+      <div class="row">
+        <h3>Покупатель: {{ticket.firstName}} {{ticket.lastName}}</h3>
+      </div>
+      <h4>Страна: {{ticket.cityFrom.country}}</h4>
+      <span>{{ticket.cityFrom.cityName}}<strong>  ------>  </strong> {{ticket.cityDest.cityName}}</span>
+      <h3>Дата отъезда: <br>{{ticket.date}}</h3>
+      <h3>Цена: {{ticket.price}}</h3>
+      <strong>id поездки: #{{ticket.tripId}}</strong>
+    </div>
+    <div class="col-auto d-none d-lg-block">
+      <svg class="bd-placeholder-img" width="80%" height="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><rect width="70%" height="100%" fill="#55595c"></rect></svg>
+    </div>
+  </div>
+</div>
+</div>
+<!-- /.main -->
+<!-- /.container -->
