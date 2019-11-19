@@ -6,9 +6,61 @@
         {{item.roomId}}
     </ng-container>
 </div> -->
-{{realHOtel.hotelName}}
-<div *ngFor = 'let item of getInfo | async'>
-    {{item.address}}
+<mat-grid-list cols="4" rowHeight = "150px">
+ 
+    <mat-grid-tile
+    [colspan]=3
+    [rowspan]=3>
+<img class="listimg" height=100% width=100% src="assets/img/otel.jpg">
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]=1 [rowspan]=3>
+    <mat-list role="list">
+        <!-- <mat-list-item *ngFor="let item of realHOtel.rooms">
+            {{item.roomId}}
+        </mat-list-item> -->
+       <mat-list-item>
+        <h3> {{realHOtel.hotelName}}</h3>
+        
+       </mat-list-item>
+       <mat-list-item>
+           {{realHOtel.rating}}
+           <mat-icon>star</mat-icon>
+       </mat-list-item>
+       <mat-list-item>
+            {{realHOtel.address}}
+            <mat-icon>
+                map
+            </mat-icon>
+        </mat-list-item>
+        <mat-list-item>
+            <mat-icon>phone</mat-icon>
+            {{realHOtel.phoneNumber}}
+        </mat-list-item>
+        </mat-list>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]=2 [rowspan]=5>
+    <mat-card *ngFor="let item of realHOtel.rooms">
+            <mat-card-header>
+              <div mat-card-avatar class="example-header-image"></div>
+              <mat-card-title>Room Type {{item.roomId}}</mat-card-title>
+             
+            </mat-card-header>
+            <img mat-card-image src="assets/img/roomim.jpg" >
+            <mat-card-content>
+                    <mat-list role="list">
+                        <mat-list-item>
+                            {{item.dailyCost}}
+                            <mat-icon>euro</mat-icon>
+                        </mat-list-item>
 
-</div> 
-
+                    </mat-list>
+            </mat-card-content>
+            <mat-card-actions>
+              <button  mat-raised-button (click)="openDialog(item)">Reservation</button>
+            </mat-card-actions>
+          </mat-card >
+        </mat-grid-tile>
+</mat-grid-list>
+   
+                    
+        

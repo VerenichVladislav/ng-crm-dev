@@ -49,6 +49,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
 import { SearchResultComponentComponent } from './search-result-component/search-result-component.component';
 import { DetailshotelComponentComponent} from './detailshotel-component/detailshotel-component.component';
+import { DetailshotelDialogComponent } from './detailshotel-dialog/detailshotel-dialog.component';
+
 
 
 
@@ -66,8 +68,13 @@ import { DetailshotelComponentComponent} from './detailshotel-component/detailsh
     SearchResultComponentComponent,
 
     DetailshotelComponentComponent,
+
+    DetailshotelDialogComponent,
+
+    
     
   ],
+  entryComponents:[DetailshotelDialogComponent],
   imports: [
     MatAutocompleteModule,
     MatBadgeModule,
