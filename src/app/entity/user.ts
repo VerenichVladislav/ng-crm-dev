@@ -8,7 +8,7 @@ export class User {
   email: string;
   state: string;
   role: string;
-  //currency: string;
+  currency: string;
   wallet: Wallet;
 
   constructor(user: User) {
@@ -19,7 +19,8 @@ export class User {
     this.email = user.email;
     this.role = user.role;
     this.state = user.state;
-    //this.currency = user.currency;
+    this.wallet = user.wallet;
+    this.currency = user.currency;
   }
 
   setRole(role: string) {

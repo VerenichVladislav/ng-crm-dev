@@ -78,26 +78,31 @@
     </div>
   </div>
 </div>
-<div *ngIf="user" id="trips" class="container">
-<div *ngFor="let ticket of tickets"
-     [ngClass] = "isLater(ticket.date)? 'future-trip' : 'non-active-trip'"
-     class="mt-5 mb-5 col-md-8 trip">
-  <div class="row no-gutters border rounded">
-    <div class="col p-4 d-flex flex-column position-static">
-      <div class="row">
-        <h3>Покупатель: {{ticket.firstName}} {{ticket.lastName}}</h3>
+<div *ngIf="user" id="trips" class="container bg-dark">
+  <div *ngFor="let ticket of tickets"
+       [ngClass] = "isLater(ticket.date)? 'future-trip' : 'non-active-trip'"
+       class="mt-5 mb-5 col-md-8 trip">
+    <div class="row no-gutters border rounded">
+      <div class="col p-4 d-flex flex-column position-static">
+        <div class="row">
+          <h3>Покупатель: {{ticket.firstName}} {{ticket.lastName}}</h3>
+        </div>
+        <h4>Страна: {{ticket.cityFrom.country}}</h4>
+        <span>{{ticket.cityFrom.cityName}}<strong>  ------>  </strong> {{ticket.cityDest.cityName}}</span>
+        <h3>Дата отъезда: <br>{{ticket.date}}</h3>
+        <h3>Цена: {{ticket.price}}</h3>
+        <strong>id поездки: #{{ticket.tripId}}</strong>
       </div>
-      <h4>Страна: {{ticket.cityFrom.country}}</h4>
-      <span>{{ticket.cityFrom.cityName}}<strong>  ------>  </strong> {{ticket.cityDest.cityName}}</span>
-      <h3>Дата отъезда: <br>{{ticket.date}}</h3>
-      <h3>Цена: {{ticket.price}}</h3>
-      <strong>id поездки: #{{ticket.tripId}}</strong>
-    </div>
-    <div class="col-auto d-none d-lg-block">
-      <svg class="bd-placeholder-img" width="80%" height="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><rect width="70%" height="100%" fill="#55595c"></rect></svg>
+      <div class="col-auto d-none d-lg-block">
+        <svg class="bd-placeholder-img" width="80%" height="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><rect width="70%" height="100%" fill="#55595c"></rect></svg>
+      </div>
     </div>
   </div>
 </div>
+<div *ngIf="tickets.length === 0" class="container">
+  <div class="col-md-auto jumbotron text-white rounded bg-dark">
+    <h1 class="text-center text-monospace">Вы ещё никуда не ездили </h1>
+  </div>
 </div>
 <!-- /.main -->
 <!-- /.container -->
