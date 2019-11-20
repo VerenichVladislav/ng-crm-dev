@@ -43,7 +43,7 @@ export class RegisterComponent implements OnInit {
             .subscribe(
               (loginResp: Response) => {
                 localStorage.setItem("auth_token", loginResp.headers.get('Authorization'));
-                localStorage.setItem("user", JSON.stringify(new User(resp.body)));
+                localStorage.setItem("user", JSON.stringify(new User(<User>resp.body)));
 
                 this.confirmService.confirmEmail(userData.userName);
 
