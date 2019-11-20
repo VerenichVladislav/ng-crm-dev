@@ -6,7 +6,7 @@ import {BehaviorSubject} from 'rxjs';
 })
 export class DataTransferService<T> {
   private data: T;
-  //This is the key the Subject to transfer
+
   data$ = new BehaviorSubject<T>(this.data);
   constructor() { }
 

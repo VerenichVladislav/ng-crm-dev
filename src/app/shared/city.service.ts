@@ -10,7 +10,7 @@ import {City} from '../entity/city';
 })
 export class CityService {
 
-   URL = GlobalRootURL.BASE_API_URL + 'cities/';
+  readonly URL = GlobalRootURL.BASE_API_URL + 'cities/';
 
   constructor(private http: HttpClient){ }
 

@@ -9,7 +9,7 @@ import {GlobalRootURL} from '../GlobalRootURL';
   providedIn: 'root'
 })
 export class UserService {
-  private URL = GlobalRootURL.BASE_API_URL + 'users/';
+  readonly URL = GlobalRootURL.BASE_API_URL + 'users/';
 
   constructor(private http: HttpClient){ }
 

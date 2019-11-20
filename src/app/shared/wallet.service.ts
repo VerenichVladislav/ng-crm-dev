@@ -8,7 +8,7 @@ import {GlobalRootURL} from '../GlobalRootURL';
   providedIn: 'root'
 })
 export class WalletService {
-  private URL = GlobalRootURL.BASE_API_URL + 'wallets/';
+  readonly URL = GlobalRootURL.BASE_API_URL + 'wallets/';
   constructor(private http: HttpClient){ }
 
   getWalletById(id: number): Observable<Wallet>{

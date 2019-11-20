@@ -2,12 +2,13 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpResponse} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {User} from '../../../entity/user';
+import {GlobalRootURL} from '../../../GlobalRootURL';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RegisterService {
-  private usersURL = 'http://localhost:8090/users';
+  readonly URL = GlobalRootURL.BASE_API_URL + 'users';
 
   constructor(private http: HttpClient) { }
 
@@ -21,6 +22,6 @@ export class RegisterService {
       observe: <'body'>'response'
     };
 
-    return this.http.post<any>(this.usersURL, body, options);
+    return this.http.post<any>(this.URL, body, options);
   }
 }

@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
+import {GlobalRootURL} from '../../../GlobalRootURL';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
-  private loginURL = 'http://localhost:8090/login';
+  readonly URL = GlobalRootURL.BASE_API_URL + 'login';
 
   constructor(private http: HttpClient) { }
 
@@ -20,6 +21,6 @@ export class LoginService {
       observe: <'body'>'response'
     };
 
-    return this.http.post<any>(this.loginURL, body, options);
+    return this.http.post<any>(this.URL, body, options);
   }
 }
