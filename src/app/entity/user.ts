@@ -11,7 +11,7 @@ export class User {
   currency: string;
   wallet: Wallet;
 
-  constructor(user: User) {
+  constructor(user: any) {
     this.userName = user.userName;
     this.hashPass = user.hashPass;
     this.firstName = user.firstName;

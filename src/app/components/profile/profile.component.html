@@ -99,7 +99,7 @@
     </div>
   </div>
 </div>
-<div *ngIf="tickets.length === 0" class="container">
+<div *ngIf="!tickets || tickets.length == 0" class="container">
   <div class="col-md-auto jumbotron text-white rounded bg-dark">
     <h1 class="text-center text-monospace">Вы ещё никуда не ездили </h1>
   </div>

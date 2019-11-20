@@ -24,7 +24,7 @@ export class UserService {
 
   getByUserName(name: string): Observable<User>{
     let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    headers.set('Authorization', localStorage.getItem("auth_token"));
+    headers.set('Authorization', localStorage.getItem('auth_token'));
 
     let options = { headers: headers };
 

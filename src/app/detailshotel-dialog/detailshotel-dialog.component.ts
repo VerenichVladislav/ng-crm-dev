@@ -26,17 +26,17 @@ export class DetailshotelDialogComponent implements OnInit {
 
   @Input() userId:number;
     postres:Observable<String>
-    
+
   constructor(private datePipe: DatePipe,private http: HttpClient,private _formBuilder: FormBuilder,public dialogRef: MatDialogRef<DetailshotelDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData
     ) {
       this.roomId = data.roomId;
       this.hotelId = data.hotelId;
     }
-  
-    
+
+
   Reservetion(){
-   
+
     let headers = new HttpHeaders;
     headers.append('Content-Type','application/json');
     headers.append('Accept', 'application/json');
@@ -46,12 +46,12 @@ export class DetailshotelDialogComponent implements OnInit {
     let CkDate:string = this.datePipe.transform(this.checkIn, 'yyyy-MM-dd ');
     let CoDate:string = this.datePipe.transform(this.checkOut,'yyyy-MM-dd ');
     CkDate +="06:55:40.11";
-    CoDate +="06:55:40.11"
+    CoDate +="06:55:40.11";
     let Url = "http://localhost:8080/hotels/"+this.userId+"/"+this.hotelId+"/"+CkDate+"/"+CoDate+"/"+this.roomId;
     console.log(Url);
      this.http.post(Url,{headers:headers}).subscribe(
       (data: any) => {
-      
+
       },
       error => {
         console.log(error)
@@ -59,7 +59,7 @@ export class DetailshotelDialogComponent implements OnInit {
     )
   }
 
- 
+
   ngOnInit() {
     this.firstFormGroup = this._formBuilder.group({
       firstCtrl: ['', Validators.required]
