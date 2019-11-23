@@ -125,10 +125,11 @@
         <div class="col-md-8">
           <div class="card-body">
             <h4 class="card-title">Отель</h4>
-            <p class="card-text">{{reservation.hotel.hotelName}}</p>
-            <p class="card-text">{{hotel.country}}</p>
-            <p class="card-text">{{hotel.city.cityName}}</p>
-            <p class="card-text">{{hotel.rating}}</p>
+            <p class="card-text">Отель: {{reservation.hotel.hotelName}}</p>
+            <p class="card-text">Город: {{reservation.hotel.city}}</p>
+            <p class="card-text">Дата заселения: {{reservation.checkIn}}</p>
+            <p class="card-text">Дата отъезда: {{reservation.checkOut}}</p>
+            <p class="card-text">id бронирования: #{{reservation.reservationId}}</p>
           </div>
         </div>
       </div>
