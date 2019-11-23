@@ -30,6 +30,10 @@ button {
 .ng-invalid:not(form)  {
   border-left: 5px solid #a94442;
 }
+.btn{
+  background-color: #fafffb;
+  color: #20222c;
+}
 .btn-success {
   margin-right: 2px;
 }

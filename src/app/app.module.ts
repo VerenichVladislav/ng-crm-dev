@@ -55,6 +55,9 @@ import {DataTransferService} from './shared/data-transfer.service';
 import { DetailshotelDialogComponent } from './detailshotel-dialog/detailshotel-dialog.component';
 import { BuyTicketComponent } from './components/buy-ticket/buy-ticket.component';
 import { ScrollUpBtnComponent } from './core/scroll-up-btn/scroll-up-btn.component';
+import {LoginComponent} from './core/auth/components/login/login.component';
+import {AuthGuardService} from './core/auth/shared/auth-guard.service';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 
 
@@ -71,7 +74,7 @@ import { ScrollUpBtnComponent } from './core/scroll-up-btn/scroll-up-btn.compone
     DetailshotelDialogComponent,
     BuyTicketComponent,
     ScrollUpBtnComponent,
-    
+
   ],
   entryComponents:[DetailshotelDialogComponent],
   imports: [
@@ -117,19 +120,26 @@ import { ScrollUpBtnComponent } from './core/scroll-up-btn/scroll-up-btn.compone
     HttpClientModule,
     MatSliderModule,
     ReactiveFormsModule,
+    BrowserAnimationsModule,
 
     AuthModule,
     RouterModule.forRoot([
-      { path: 'profile', component: ProfileComponent },
+      { path: 'login', component: LoginComponent},
+      {
+        path: 'profile',
+        component: ProfileComponent,
+        canActivate: [AuthGuardService]
+      },
       { path: 'HotelIndex', component: HotelindexComponent},
       { path: 'SearchResult', component: SearchResultComponent},
       { path: 'SearchResult/:id', component: DetailshotelComponentComponent},
       {path: 'trips/:userid/:tripid/buy', component: BuyTicketComponent},
-      {path: '', redirectTo: '/', pathMatch: 'full'},
+      {path: '', redirectTo: '/', pathMatch: 'full'}
     ]),
     ],
-  providers: [DataTransferService],
-    // [BrowserAnimationsModule],
+  providers: [
+    DataTransferService
+  ],
 
   bootstrap: [AppComponent]
 })
