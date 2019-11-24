@@ -58,6 +58,8 @@ import { ScrollUpBtnComponent } from './core/scroll-up-btn/scroll-up-btn.compone
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { GoogleServiceComponent } from './google-service/google-service.component';
 import { GapiSession } from './google-service/GapiSession';
+import {LoginComponent} from './core/auth/components/login/login.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 export function initGapi(gapiSession: GapiSession) {
   return () => gapiSession.initClient();
@@ -122,15 +124,21 @@ export function initGapi(gapiSession: GapiSession) {
     HttpClientModule,
     MatSliderModule,
     ReactiveFormsModule,
+    BrowserAnimationsModule,
 
     AuthModule,
     RouterModule.forRoot([
-      { path: 'profile', component: ProfileComponent },
+      { path: 'login', component: LoginComponent},
+      {
+        path: 'profile',
+        component: ProfileComponent,
+        canActivate: [AuthGuardService]
+      },
       { path: 'HotelIndex', component: HotelindexComponent},
       { path: 'SearchResult', component: SearchResultComponent},
       { path: 'SearchResult/:id', component: DetailshotelComponentComponent},
       {path: 'trips/:userid/:tripid/buy', component: BuyTicketComponent},
-      {path: '', redirectTo: '/', pathMatch: 'full'},
+      {path: '', redirectTo: '/', pathMatch: 'full'}
     ]),
     NoopAnimationsModule,
     ],

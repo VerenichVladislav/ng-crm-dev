@@ -15,8 +15,6 @@ import {GlobalRootURL} from '../../GlobalRootURL';
 })
 @Injectable()
 export class SearchResultComponent implements OnInit {
-@Input()
-
   readonly ROOT_URL = GlobalRootURL.BASE_API_URL + 'hotels';
   posts: Observable<Hotel[]>;
   rooms: Observable<room[]>;

@@ -13,6 +13,10 @@ import {TicketService} from '../../../../shared/ticket.service';
 import {Ticket} from '../../../../entity/ticket';
 import {CityService} from '../../../../shared/city.service';
 import {City} from '../../../../entity/city';
+import {Hotel} from '../../../../entity/hotel';
+import {Reservation} from '../../../../entity/reservation';
+import {ReservationService} from '../../../../shared/reservation.service';
+import {HotelService} from '../../../../shared/hotel.service';
 
 @Component({
   selector: 'app-login',
@@ -30,7 +34,9 @@ export class LoginComponent implements OnInit {
               private walletService: WalletService,
               private ticketService: TicketService,
               private cityService: CityService,
-              private transferService: DataTransferService<Ticket[]>,
+              private hotelService: HotelService,
+              private reservationService: ReservationService,
+              private transfer: DataTransferService,
               private router: Router) {
 
     this.loginForm = new FormGroup({
@@ -41,6 +47,7 @@ export class LoginComponent implements OnInit {
 
   submit(userData) {
     let tickets: Ticket[] = [];
+    let reservations: Reservation[] = [];
     this.subscriptions.push(this.loginService
       .loginUser(userData.username, userData.password)
       .subscribe(
@@ -58,9 +65,12 @@ export class LoginComponent implements OnInit {
                       let user = new User(data);
                       user.setWallet(wallet);
                       localStorage.setItem('user', JSON.stringify(user));
-                      this.loadTrips(tickets, data.id);
+                      this.loadTickets(tickets, data.userId);
+                      reservations = this.loadReservations(data.userId);
+                      console.log(tickets);
 
-                      this.transferService.setData(tickets);
+                      this.transfer.setTickets(tickets);
+                      this.transfer.setReservations(reservations);
                     }
                   ));
 
@@ -84,7 +94,7 @@ export class LoginComponent implements OnInit {
         }));
   }
 
-  loadTrips(tickets, id) {
+  loadTickets(tickets, id){
     this.subscriptions.push(this.ticketService.getAllByBuyerId(id)
       .subscribe(
         (all: any) => {
@@ -112,14 +122,41 @@ export class LoginComponent implements OnInit {
                 );
               tickets.push(ticket);
             }
-        )},
+        );
+        },
         error => {
           console.log(error);
         }
       ));
   }
 
+  loadReservations(id): Reservation[]{
+    let reservations: Reservation[] = [];
+    this.subscriptions.push(this.reservationService.getAllByBuyerId(id)
+      .subscribe(
+        (all: any) => {
+          all.forEach(
+            (r: any) => {
+              let reservation = new Reservation(r);
+              this.hotelService.getById(r.hotel)
+                .subscribe(
+                  (hotel: Hotel) => {
+                    reservation.hotel = new Hotel(hotel);
+                  },
+                  error1 => {
+                    console.log(error1);
+                  }
+                );
 
+              reservations.push(reservation);
+            }
+          )},
+        error => {
+          console.log(error);
+        }
+      ));
+    return reservations;
+  }
 
   showLoginForm() {
     document.getElementById('login-form').style.display = 'block';

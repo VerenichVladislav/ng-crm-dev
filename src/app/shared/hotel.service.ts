@@ -1,25 +1,22 @@
 import { Injectable } from '@angular/core';
-import {GlobalRootURL} from '../GlobalRootURL';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Ticket} from '../entity/ticket';
 import {Observable} from 'rxjs';
-import {City} from '../entity/city';
+import {GlobalRootURL} from '../GlobalRootURL';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Hotel} from '../entity/hotel';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CityService {
-
-  readonly URL = GlobalRootURL.BASE_API_URL + 'cities/';
+export class HotelService {
+  readonly URL = GlobalRootURL.BASE_API_URL + 'hotels/';
 
   constructor(private http: HttpClient){ }
 
-  getById(id: number): Observable<City>{
+  getById(id: number): Observable<Hotel>{
     let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     //headers.set('Authorization', localStorage.getItem('auth_token'));
     let options = { headers: headers };
-
-
-    return this.http.get<City>(this.URL + id, options);
+    return this.http.get<Hotel>(this.URL + id, options);
   }
 }

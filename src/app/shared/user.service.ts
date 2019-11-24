@@ -9,7 +9,7 @@ import {GlobalRootURL} from '../GlobalRootURL';
   providedIn: 'root'
 })
 export class UserService {
-  private URL = GlobalRootURL.BASE_API_URL + 'users/';
+  readonly URL = GlobalRootURL.BASE_API_URL + 'users/';
 
   constructor(private http: HttpClient){ }
 
@@ -24,7 +24,7 @@ export class UserService {
 
   getByUserName(name: string): Observable<User>{
     let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    headers.set('Authorization', localStorage.getItem("auth_token"));
+    headers.set('Authorization', localStorage.getItem('auth_token'));
 
     let options = { headers: headers };
 

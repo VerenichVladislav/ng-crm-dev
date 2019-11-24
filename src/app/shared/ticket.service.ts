@@ -9,7 +9,7 @@ import {Ticket} from '../entity/ticket';
   providedIn: 'root'
 })
 export class TicketService {
-  private URL = GlobalRootURL.BASE_API_URL + 'tickets/buyer/';
+  readonly URL = GlobalRootURL.BASE_API_URL + 'tickets/buyer/';
 
   constructor(private http: HttpClient){ }
 

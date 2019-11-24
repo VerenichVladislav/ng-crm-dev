@@ -25,6 +25,10 @@ button {
   width: auto;
   opacity: 0.9;
 }
+.btn{
+  background-color: #fafffb;
+  color: #20222c;
+}
 .btn-success {
   margin-right: 2px;
 }

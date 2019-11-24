@@ -15,8 +15,8 @@
         <div class="panel">
           <div class="panel-body">
             <ul id="myTab" class="nav nav-pills">
-              <li class="active"><a href="#detail" data-toggle="tab">О пользователе</a></li>
-              <!--<li class=""><a href="#flights" data-toggle="tab">Рейсы</a></li>-->
+              <li class="active bg-dark"><a class="bg-dark" href="#detail" data-toggle="tab">О пользователе</a></li>
+              <li class="bg-dark"><a class="bg-dark" href="#expenses" data-toggle="tab">История расходов</a></li>
             </ul>
             <div id="myTabContent" class="tab-content">
               <hr>
@@ -46,63 +46,107 @@
                 </table>
               </div>
 
-              <!--<div class="tab-pane fade" id="flights">-->
-                <!--<h4>Информация о рейсах</h4>-->
-                <!--<table class="table table-th-block">-->
-                  <!--<tbody>-->
-                  <!--<tr><td class="active">Логин:</td><td>{{user.userName}}</td></tr>-->
-                  <!--<tr><td class="active">Фамилия:</td><td>{{user.lastName}}</td></tr>-->
-                  <!--<tr><td class="active">Имя:</td><td>{{user.firstName}}</td></tr>-->
-                  <!--<tr><td class="active">Почтовый адрес:</td>-->
-                    <!--<td>{{user.email}}-->
-                      <!--<p class="confirmed" *ngIf="user.state === 'Confirmed'; else unconfirmed">Подтверждён</p>-->
-                      <!--<ng-template #unconfirmed>-->
-                        <!--<p class="unconfirmed">Не подтверждён</p>-->
-                      <!--</ng-template>-->
-                    <!--</td>-->
-                  <!--</tr>-->
-                  <!--<tr><td class="active">Текущая сумма:</td>-->
-                    <!--<td *ngIf="user.wallet.sum == null; else has">0</td>-->
-                    <!--<ng-template #has>-->
-                      <!--<td>{{user.wallet.sum}}</td>-->
-                    <!--</ng-template>-->
-                  <!--</tr>-->
+              <div class="tab-pane fade" id="expenses">
 
-                  <!--</tbody>-->
-                <!--</table>-->
-              <!--</div>-->
+                <mat-form-field>
+                  <mat-label>Период</mat-label>
+                  <mat-select>
+                    <mat-option>За последний месяц</mat-option>
+                    <mat-option>За последний год</mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <table class="table table-th-block">
+                  <tbody>
+                  <tr><td class="active">Логин:</td><td>{{user.userName}}</td></tr>
+                  <tr><td class="active">Фамилия:</td><td>{{user.lastName}}</td></tr>
+                  <tr><td class="active">Имя:</td><td>{{user.firstName}}</td></tr>
+                  <tr><td class="active">Почтовый адрес:</td>
+                    <td>{{user.email}}
+                      <p class="confirmed" *ngIf="user.state === 'Confirmed'; else unconfirmed">Подтверждён</p>
+                      <ng-template #unconfirmed>
+                        <p class="unconfirmed">Не подтверждён</p>
+                      </ng-template>
+                    </td>
+                  </tr>
+                  <tr><td class="active">Текущая сумма:</td>
+                    <td *ngIf="user.wallet.sum == null; else has">0</td>
+                    <ng-template #has>
+                      <td>{{user.wallet.sum}}</td>
+                    </ng-template>
+                  </tr>
+
+                  </tbody>
+                </table>
+              </div>
             </div>
+
+
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-<div *ngIf="user" id="trips" class="container bg-dark">
-  <div *ngFor="let ticket of tickets"
-       [ngClass] = "isLater(ticket.date)? 'future-trip' : 'non-active-trip'"
-       class="mt-5 mb-5 col-md-8 trip">
-    <div class="row no-gutters border rounded">
-      <div class="col p-4 d-flex flex-column position-static">
-        <div class="row">
-          <h3>Покупатель: {{ticket.firstName}} {{ticket.lastName}}</h3>
+
+<mat-tab-group mat-align-tabs="center" animationDuration="1500ms">
+  <mat-tab label="Билеты">
+    <div *ngFor="let ticket of tickets"
+         class="tickets card col-lg-4 bg-dark text-light">
+      <div class="row no-gutters ml-2">
+        <div class="col-md-4" [ngClass] = "isLater(ticket.date)? 'future-trip' : 'non-active-trip'">
         </div>
-        <h4>Страна: {{ticket.cityFrom.country}}</h4>
-        <span>{{ticket.cityFrom.cityName}}<strong>  ------>  </strong> {{ticket.cityDest.cityName}}</span>
-        <h3>Дата отъезда: <br>{{ticket.date}}</h3>
-        <h3>Цена: {{ticket.price}}</h3>
-        <strong>id поездки: #{{ticket.tripId}}</strong>
-      </div>
-      <div class="col-auto d-none d-lg-block">
-        <svg class="bd-placeholder-img" width="80%" height="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><rect width="70%" height="100%" fill="#55595c"></rect></svg>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h4 class="card-title">Билет</h4>
+            <p class="card-text">Покупатель: {{ticket.firstName}}</p>
+            <p class="card-text">Страна: {{ticket.cityFrom.country}}</p>
+            <p class="card-text">Дата отъезда: <br>{{ticket.date}}</p>
+            <p class="card-text">{{ticket.cityFrom.cityName}}<strong> ---> </strong>{{ticket.cityDest.cityName}}</p>
+            <p class="card-text">Цена: {{ticket.price}}</p>
+            <p class="card-text">id поездки: #{{ticket.tripId}}</p>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
-<div *ngIf="tickets.length === 0" class="container">
-  <div class="col-md-auto jumbotron text-white rounded bg-dark">
-    <h1 class="text-center text-monospace">Вы ещё никуда не ездили </h1>
-  </div>
-</div>
-<!-- /.main -->
-<!-- /.container -->
+    <div *ngIf="!tickets || tickets.length == 0" class="mx-auto container">
+      <h3 class="text-center text-monospace">У вас пока нет истории поездок. Съездим?)</h3>
+      <div class="col text-center">
+        <button type="button" routerLink="/" class="btn btn-lg btn-info">На страницу поездок</button>
+      </div>
+    </div>
+  </mat-tab>
+  <mat-tab label="Отели">
+    <div *ngFor="let reservation of reservations"
+         class="tickets card col-lg-4 bg-dark text-light">
+      <div class="row no-gutters ml-2">
+        <div class="col-md-4">
+          <img src="assets/img/pexels-photo-373893.jpeg" alt="" class="recomend-hotels-image"/>
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h4 class="card-title">Отель</h4>
+            <p class="card-text">Отель: {{reservation.hotel.hotelName}}</p>
+            <p class="card-text">Город: {{reservation.hotel.city}}</p>
+            <p class="card-text">Дата заселения: {{reservation.checkIn}}</p>
+            <p class="card-text">Дата отъезда: {{reservation.checkOut}}</p>
+            <p class="card-text">id бронирования: #{{reservation.reservationId}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="!reservations || reservations.length == 0" class="container mx-auto ">
+      <h3 class="text-center text-monospace">У вас пока нет истории отелей. Закажем?)</h3>
+      <div class="col text-center">
+        <button type="button" routerLink="/HotelIndex" class="btn btn-lg btn-info">На страницу Отелей</button>
+      </div>
+    </div>
+  </mat-tab>
+  <mat-tab label="Туры">
+    <div *ngIf="!tours || tour.length == 0" class="container mx-auto ">
+      <h3 class="text-center text-monospace">У вас пока нет истории туров. Отдохнём?)</h3>
+      <div class="col text-center">
+        <button type="button" routerLink="/HotelIndex" class="btn btn-lg btn-info">На страницу Туров</button>
+      </div>
+    </div>
+  </mat-tab>
+</mat-tab-group>
