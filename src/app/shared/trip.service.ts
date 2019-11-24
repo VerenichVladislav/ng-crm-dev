@@ -7,10 +7,8 @@ import {GlobalRootURL} from '../GlobalRootURL';
   providedIn: 'root'
 })
 export class TripService {
-
-  readonly ROOT_URL = GlobalRootURL.BASE_API_URL + 'trips/';
+ readonly ROOT_URL = GlobalRootURL.BASE_API_URL + 'trips/';
   constructor(private activateRoute: ActivatedRoute, private router: Router, private http: HttpClient) {}
-
   getTrip(id): any {
     return this.http.get(this.ROOT_URL + id);
   }

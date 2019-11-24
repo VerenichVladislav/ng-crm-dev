@@ -1,22 +1,16 @@
 <div class="index-content">
     <div class="content">
-        <div class="header-background">
-            <div class="header-background-text">
-                <p>Hotels</p>
-            </div>
-        </div>
         <div class="search">
                 <mat-form-field class="form-mat-child">
-                        <input matInput placeholder="City" >
+                        <input matInput placeholder="City" [(ngModel)]="city" >
                 </mat-form-field>
-
             <mat-form-field color="accent" class="form-mat-child">
-                <input matInput [matDatepicker]="picker1" placeholder="CheckIn Date">
+                <input matInput [matDatepicker]="picker1" placeholder="CheckIn Date"  [(ngModel)]="checkIn">
                 <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                 <mat-datepicker #picker1></mat-datepicker>
               </mat-form-field>
               <mat-form-field color="accent" class="form-mat-child">
-                <input matInput [matDatepicker]="picker2" placeholder="CheckOut Date">
+                <input matInput [matDatepicker]="picker2" placeholder="CheckOut Date" [(ngModel)]="checkOut">
                 <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
                 <mat-datepicker #picker2 color="primary"></mat-datepicker>
               </mat-form-field>
@@ -28,7 +22,7 @@
                      </mat-select>
                 </mat-form-field>
         </div>
-        <mat-button-toggle  class="recomends-content">Find</mat-button-toggle>
+        <mat-button-toggle  class="recomends-content" (click)='find()'>Find</mat-button-toggle>
         <div class="recomends">
             <div class="recomends-content">
                 Popular destinations
@@ -36,31 +30,13 @@
             <div class="recomends-content">
                 <div class="recomend-hotels">
                     <div class="recomend-hotels-image">
-                        <img src="assets/img/pexels-photo-373893.jpeg" alt="" class="recomend-hotels-image"/>
+                        <img src="https://drive.google.com/uc?export=view&id=1WAeGvJxt0Z5ZhUrfzAHf_eEwvcWplWxm" alt="" class="recomend-hotels-image"/>
                         <h2>A Movie in the Park:<br />Kung Fu Panda</h2>
                     </div>
                 </div>
-                <div class="recomend-hotels">
-                    <div class="recomend-hotels-image">
-                        <img src="assets/img/pexels-photo-373893.jpeg" alt="" class="recomend-hotels-image"/>
-                        <h2>A Movie in the Park:<br />Kung Fu Panda</h2>
-                    </div>
-                </div>
+               
             </div>
-            <div class="recomends-content">
-                <div class="recomend-hotels">
-                    <div class="recomend-hotels-image">
-                        <img src="assets/img/pexels-photo-373893.jpeg" alt="" class="recomend-hotels-image"/>
-                        <h2>A Movie in the Park:<br />Kung Fu Panda</h2>
-                    </div>
-                </div>
-                <div class="recomend-hotels">
-                    <div class="recomend-hotels-image">
-                        <img src="assets/img/pexels-photo-373893.jpeg" alt="" class="recomend-hotels-image"/>
-                        <h2>A Movie in the Park:<br />Kung Fu Panda</h2>
-                    </div>
-                </div>
-            </div>
+           
         </div>
     </div>
 </div>
