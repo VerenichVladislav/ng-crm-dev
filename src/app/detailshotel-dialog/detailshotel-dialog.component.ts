@@ -6,6 +6,8 @@ import { Timestamp, Observable, from } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
 import { DialogData } from '../components/detailshotel/detailshotel.component';
+import {GlobalRootURL} from '../GlobalRootURL';
+import {SnackBarComponent} from '../components/snack-bar/snack-bar.component';
 
 
 @Component({
@@ -27,7 +29,11 @@ export class DetailshotelDialogComponent implements OnInit {
   @Input() userId:number;
     postres:Observable<String>
 
-  constructor(private datePipe: DatePipe,private http: HttpClient,private _formBuilder: FormBuilder,public dialogRef: MatDialogRef<DetailshotelDialogComponent>,
+  constructor(private datePipe: DatePipe,
+              private http: HttpClient,
+              private _formBuilder: FormBuilder,
+              private errorConnection: SnackBarComponent,
+              public dialogRef: MatDialogRef<DetailshotelDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData
     ) {
       this.roomId = data.roomId;
@@ -47,14 +53,17 @@ export class DetailshotelDialogComponent implements OnInit {
     let CoDate:string = this.datePipe.transform(this.checkOut,'yyyy-MM-dd ');
     CkDate +="06:55:40.11";
     CoDate +="06:55:40.11";
-    let Url = "http://localhost:8080/hotels/"+this.userId+"/"+this.hotelId+"/"+CkDate+"/"+CoDate+"/"+this.roomId;
+    let Url = GlobalRootURL.BASE_API_URL + "hotels/"+this.userId+"/"+this.hotelId+"/"+CkDate+"/"+CoDate+"/"+this.roomId;
     console.log(Url);
      this.http.post(Url,{headers:headers}).subscribe(
       (data: any) => {
 
       },
       error => {
-        console.log(error)
+        console.log(error);
+        if(error.status === 0) {
+          this.errorConnection.openSnackBar();
+        }
       }
     )
   }

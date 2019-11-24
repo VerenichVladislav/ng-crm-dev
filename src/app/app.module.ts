@@ -58,6 +58,8 @@ import { ScrollUpBtnComponent } from './core/scroll-up-btn/scroll-up-btn.compone
 import {LoginComponent} from './core/auth/components/login/login.component';
 import {AuthGuardService} from './core/auth/shared/auth-guard.service';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { ConnectionErrorComponent } from './components/snack-bar/connection-error/connection-error.component';
+import { SnackBarComponent } from './components/snack-bar/snack-bar.component';
 
 
 
@@ -74,9 +76,14 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     DetailshotelDialogComponent,
     BuyTicketComponent,
     ScrollUpBtnComponent,
+    ConnectionErrorComponent,
+    SnackBarComponent,
 
   ],
-  entryComponents:[DetailshotelDialogComponent],
+  entryComponents: [
+    DetailshotelDialogComponent,
+    ConnectionErrorComponent
+  ],
   imports: [
     CdkTreeModule,
     MatAutocompleteModule,
@@ -138,7 +145,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     ]),
     ],
   providers: [
-    DataTransferService
+    DataTransferService,
+    SnackBarComponent
   ],
 
   bootstrap: [AppComponent]

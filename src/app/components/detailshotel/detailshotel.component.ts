@@ -10,6 +10,7 @@ import { Injectable } from '@angular/core';
 import { room } from 'src/app/entity/room';
 import { DetailshotelDialogComponent } from 'src/app/detailshotel-dialog/detailshotel-dialog.component';
 import {GlobalRootURL} from '../../GlobalRootURL';
+import {SnackBarComponent} from '../snack-bar/snack-bar.component';
 
 
 
@@ -32,7 +33,10 @@ export class DetailshotelComponentComponent implements OnInit {
   getInfo:Observable<Hotel>;
   realHOtel: Hotel;
 
-  constructor(private route:ActivatedRoute,private http:HttpClient,public dialog: MatDialog) { }
+  constructor(private route: ActivatedRoute,
+              private http: HttpClient,
+              private errorConnection: SnackBarComponent,
+              public dialog: MatDialog) { }
 
 
   openDialog(room:room): void {
@@ -51,7 +55,10 @@ export class DetailshotelComponentComponent implements OnInit {
        this.realHOtel = data;
        },
      error => {
-       console.log(error)
+       console.log(error);
+       if(error.status === 0) {
+         this.errorConnection.openSnackBar();
+       }
      }
    )}
 }

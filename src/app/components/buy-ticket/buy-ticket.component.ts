@@ -6,6 +6,7 @@ import { FormGroup, FormControl, Validators, FormArray, FormBuilder} from '@angu
 import {HttpClient, HttpErrorResponse, HttpResponse} from '@angular/common/http';
 import {TicketService} from '../../shared/ticket.service';
 import { parseHttpResponse } from 'selenium-webdriver/http';
+import {SnackBarComponent} from '../snack-bar/snack-bar.component';
 @Component({
   selector: 'app-buy-ticket',
   templateUrl: './buy-ticket.component.html',
@@ -28,6 +29,7 @@ export class BuyTicketComponent implements OnInit {
               private router: Router,
               private fb: FormBuilder,
               private ticketService: TicketService,
+              private errorConnection: SnackBarComponent,
               private http: HttpClient){}
 
     ngOnInit() {
@@ -39,9 +41,9 @@ export class BuyTicketComponent implements OnInit {
         data => this.trip = data
        );
     this.route.queryParams.subscribe(params => {
-        this.count = parseInt(params.count);  
+        this.count = parseInt(params.count);
       });
-  
+
     this.usersForm = this.fb.group({
       users: this.fb.array([
         this.fb.group({
@@ -74,11 +76,14 @@ export class BuyTicketComponent implements OnInit {
   submit(){
     this.ticketService.submitForm(this.usersForm.controls.users.value, this.count, this.idT, this.idU)
                 .subscribe(
-                    (log: HttpErrorResponse) => {      
-                        this.message = log;     
+                    (log: HttpErrorResponse) => {
+                        this.message = log;
                     },
                     (error) => {
                       this.message = error.error;
+                      if(error.status === 0) {
+                        this.errorConnection.openSnackBar();
+                      }
                     }
                 );
         }

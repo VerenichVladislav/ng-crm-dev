@@ -33,9 +33,8 @@ button {
 .btn{
   background-color: #fafffb;
   color: #20222c;
-}
-.btn-success {
-  margin-right: 2px;
+  opacity: 0.9;
+  margin-right: 0.5vw;
 }
 
 button:hover {

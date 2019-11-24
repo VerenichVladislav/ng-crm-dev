@@ -8,6 +8,7 @@ import {Response} from 'selenium-webdriver/http';
 import {LoginService} from '../../shared/login.service';
 import {ConfirmEmailService} from '../../shared/confirm-email.service';
 import {identityPasswordValidator} from '../../shared/identity-password.directive';
+import {SnackBarComponent} from '../../../../components/snack-bar/snack-bar.component';
 
 @Component({
   selector: 'app-register',
@@ -21,6 +22,7 @@ export class RegisterComponent implements OnInit {
   constructor(private registerService: RegisterService,
               private loginService: LoginService,
               private confirmService: ConfirmEmailService,
+              private errorConnection: SnackBarComponent,
               private router: Router) {
     this.registerForm = new FormGroup({
       userName: new FormControl('', Validators.required),
@@ -52,10 +54,16 @@ export class RegisterComponent implements OnInit {
               },
               error => {
                 console.log(error);
+                if(error.status === 0) {
+                  this.errorConnection.openSnackBar();
+                }
               }));
         },
         error => {
-          console.log(error)
+          console.log(error);
+          if(error.status === 0) {
+            this.errorConnection.openSnackBar();
+          }
         }));
   }
 

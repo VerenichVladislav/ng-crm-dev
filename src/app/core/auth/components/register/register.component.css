@@ -17,6 +17,8 @@ input[type=text]:focus, input[type=password]:focus, input[type=email]:focus {
 .btn{
   background-color: #fafffb;
   color: #20222c;
+  opacity: 0.9;
+  margin-right: 0.5vw;
 }
 button {
   background-color: #4CAF50;

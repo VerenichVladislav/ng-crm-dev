@@ -17,6 +17,7 @@ import {Hotel} from '../../../../entity/hotel';
 import {Reservation} from '../../../../entity/reservation';
 import {ReservationService} from '../../../../shared/reservation.service';
 import {HotelService} from '../../../../shared/hotel.service';
+import {SnackBarComponent} from '../../../../components/snack-bar/snack-bar.component';
 
 @Component({
   selector: 'app-login',
@@ -37,6 +38,7 @@ export class LoginComponent implements OnInit {
               private hotelService: HotelService,
               private reservationService: ReservationService,
               private transfer: DataTransferService,
+              private errorConnection: SnackBarComponent,
               private router: Router) {
 
     this.loginForm = new FormGroup({
@@ -82,6 +84,7 @@ export class LoginComponent implements OnInit {
               }));
         },
         error => {
+          console.log(error);
           if (error.error.message === 'Wrong userName') {
             this.errorLogin = true;
             this.errorPassword = false;
@@ -90,6 +93,8 @@ export class LoginComponent implements OnInit {
             error.error.message === 'NonUnique userName') {
             this.errorLogin = false;
             this.errorPassword = true;
+          } else if(error.status === 0) {
+            this.errorConnection.openSnackBar();
           }
         }));
   }
