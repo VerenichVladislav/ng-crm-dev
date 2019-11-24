@@ -10,4 +10,5 @@ export interface Hotel{
     rooms:Observable<room[]>;
     comments:Array<any>;
     city:string;
+    description:string;
 }

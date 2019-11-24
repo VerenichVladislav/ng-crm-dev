@@ -7,7 +7,7 @@ import {User} from '../../../entity/user';
   providedIn: 'root'
 })
 export class RegisterService {
-  private usersURL = 'http://localhost:8090/users';
+  private usersURL = 'http://localhost:8080/users';
 
   constructor(private http: HttpClient) { }
 

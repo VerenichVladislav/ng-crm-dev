@@ -7,7 +7,7 @@ import {Injectable} from '@angular/core';
 })
 export class TripService {
 
-  readonly ROOT_URL = 'http://localhost:8090/trips/';
+  readonly ROOT_URL = 'http://localhost:8080/trips/';
   constructor(private activateRoute: ActivatedRoute, private router: Router, private http: HttpClient) {}
 
   getTrip(id): any {

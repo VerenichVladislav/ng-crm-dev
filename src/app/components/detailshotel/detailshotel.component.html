@@ -6,11 +6,9 @@
         {{item.roomId}}
     </ng-container>
 </div> -->
-<mat-grid-list cols="4" rowHeight = "150px">
- 
-    <mat-grid-tile
-    [colspan]=3
-    [rowspan]=3>
+<mat-grid-list cols="5" rowHeight = "150px">
+    <mat-grid-tile [colspan]=1></mat-grid-tile>
+    <mat-grid-tile [colspan]=3 [rowspan]=3>
 <img class="listimg" height=100% width=100% src="assets/img/otel.jpg">
     </mat-grid-tile>
     <mat-grid-tile [colspan]=1 [rowspan]=3>
@@ -38,8 +36,9 @@
         </mat-list-item>
         </mat-list>
     </mat-grid-tile>
-    <mat-grid-tile [colspan]=2 [rowspan]=5>
-    <mat-card *ngFor="let item of realHOtel.rooms">
+    <mat-grid-tile [colspan]=1 [rowspan]=3></mat-grid-tile>
+    <mat-grid-tile [colspan]=1 [rowspan]=4 *ngFor="let item of realHOtel.rooms">
+    <mat-card >
             <mat-card-header>
               <div mat-card-avatar class="example-header-image"></div>
               <mat-card-title>Room Type {{item.roomId}}</mat-card-title>
@@ -53,6 +52,7 @@
                             <mat-icon>euro</mat-icon>
                         </mat-list-item>
 
+                        
                     </mat-list>
             </mat-card-content>
             <mat-card-actions>
@@ -61,6 +61,7 @@
           </mat-card >
         </mat-grid-tile>
 </mat-grid-list>
+
    
                     
         
