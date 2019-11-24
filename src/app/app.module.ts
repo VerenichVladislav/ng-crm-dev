@@ -1,6 +1,6 @@
 
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
 
 import { AppComponent } from './app.component';
 
@@ -55,13 +55,17 @@ import {DataTransferService} from './shared/data-transfer.service';
 import { DetailshotelDialogComponent } from './detailshotel-dialog/detailshotel-dialog.component';
 import { BuyTicketComponent } from './components/buy-ticket/buy-ticket.component';
 import { ScrollUpBtnComponent } from './core/scroll-up-btn/scroll-up-btn.component';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { GoogleServiceComponent } from './google-service/google-service.component';
+import { GapiSession } from './google-service/GapiSession';
 import {LoginComponent} from './core/auth/components/login/login.component';
-import {AuthGuardService} from './core/auth/shared/auth-guard.service';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { ConnectionErrorComponent } from './components/snack-bar/connection-error/connection-error.component';
 import { SnackBarComponent } from './components/snack-bar/snack-bar.component';
 
-
+export function initGapi(gapiSession: GapiSession) {
+  return () => gapiSession.initClient();
+}
 
 
 @NgModule({
@@ -79,6 +83,7 @@ import { SnackBarComponent } from './components/snack-bar/snack-bar.component';
     ConnectionErrorComponent,
     SnackBarComponent,
 
+    GoogleServiceComponent,
   ],
   entryComponents: [
     DetailshotelDialogComponent,
@@ -143,8 +148,11 @@ import { SnackBarComponent } from './components/snack-bar/snack-bar.component';
       {path: 'trips/:userid/:tripid/buy', component: BuyTicketComponent},
       {path: '', redirectTo: '/', pathMatch: 'full'}
     ]),
+    NoopAnimationsModule,
     ],
   providers: [
+    { provide: APP_INITIALIZER, useFactory: initGapi, deps: [GapiSession], multi: true },
+    GapiSession,
     DataTransferService,
     SnackBarComponent
   ],

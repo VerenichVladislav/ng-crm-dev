@@ -1,7 +1,7 @@
 import { room} from 'src/app/entity/room'
 import { Observable } from 'rxjs';
-import {City} from './city';
 
+import {City} from './city';
 export class Hotel{
   hotelId: number;
   country: string;

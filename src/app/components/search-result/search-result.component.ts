@@ -18,12 +18,22 @@ export class SearchResultComponent implements OnInit {
   readonly ROOT_URL = GlobalRootURL.BASE_API_URL + 'hotels';
   posts: Observable<Hotel[]>;
   rooms: Observable<room[]>;
+  ratingFilter: number;
+  city:String;
   constructor(private http: HttpClient, private router: Router) {
     this.getPosts();
   }
   selectedHotel: Hotel;
   getPosts() {
-    this.posts = this.http.get<Hotel[]>(this.ROOT_URL);
+    let body = {
+      city:this.city,
+      rating:this.ratingFilter
+    };
+
+    let options = {
+      observe: <'body'>'response'
+    };
+    this.posts = this.http.post<Hotel[]>(this.ROOT_URL,options);
   }
   onSelect(hotel: Hotel): void {
     this.selectedHotel = hotel;

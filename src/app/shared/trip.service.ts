@@ -15,4 +15,3 @@ export class TripService {
     return this.http.get(this.ROOT_URL + id);
   }
 }
-
