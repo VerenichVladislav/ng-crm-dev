@@ -133,14 +133,13 @@ export function initGapi(gapiSession: GapiSession) {
     MatSliderModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-
     AuthModule,
     RouterModule.forRoot([
       { path: 'login', component: LoginComponent},
       {
         path: 'profile',
         component: ProfileComponent,
-        canActivate: [AuthGuardService]
+        canActivate: []
       },
       { path: 'HotelIndex', component: HotelindexComponent},
       { path: 'SearchResult', component: SearchResultComponent},

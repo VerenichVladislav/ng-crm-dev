@@ -12,6 +12,7 @@ export class Hotel{
   rooms:Observable<room[]>;
   comments:Array<any>;
   city: City;
+  image:string;
 
   constructor(hotelResponse: any) {
     this.hotelId = hotelResponse.hotelId;
@@ -23,5 +24,6 @@ export class Hotel{
     this.rooms = hotelResponse.rooms;
     this.comments = hotelResponse.comments;
     this.city = hotelResponse.city;
+    this.image ="https://drive.google.com/uc?export=view&id="+hotelResponse.image;
   }
 }
