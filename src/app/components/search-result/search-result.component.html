@@ -9,10 +9,26 @@
 </div> -->
 
 <div class="hotels-card-menu">
-    <div class="hotels-card-menu-picker"></div>
+    <div class="hotels-card-menu-picker">
+        <mat-list>
+            <mat-form-field appearance="outline">
+                <input matInput placeholder="City">
+              </mat-form-field>
+              <mat-form-field appearance="outline" color="accent" class="form-mat-child">
+                <input matInput [matDatepicker]="picker1" placeholder="CheckIn Date">
+                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                <mat-datepicker #picker1></mat-datepicker>
+              </mat-form-field>
+              <mat-form-field appearance="outline" color="accent" class="form-mat-child">
+                <input matInput [matDatepicker]="picker2" placeholder="CheckOut Date">
+                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                <mat-datepicker #picker2></mat-datepicker>
+              </mat-form-field>
+        </mat-list>
+    </div>
     <div class="hotels-card-container"><div class="hotels-card" *ngFor='let post of posts | async'>
             <div class="hotels-card-hotel-img">
-                <img src="assets/img/pexels-photo-374870.jpeg" alt="">
+                <img src="{{'https://drive.google.com/uc?export=view&id='+post.image}}" alt="">
             </div>
             <div class="hotels-card-content">
                 <div class="hotels-card-content-info">
