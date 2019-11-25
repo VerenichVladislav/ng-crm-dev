@@ -144,10 +144,9 @@ export function initGapi(gapiSession: GapiSession) {
       { path: 'HotelIndex', component: HotelindexComponent},
       { path: 'SearchResult', component: SearchResultComponent},
       { path: 'SearchResult/:id', component: DetailshotelComponentComponent},
-      {path: 'trips/:userid/:tripid/buy', component: BuyTicketComponent},
-      {path: '', redirectTo: '/', pathMatch: 'full'}
+      { path: 'trips/:userid/:tripid/buy', component: BuyTicketComponent},
+      { path: '', redirectTo: '/', pathMatch: 'full'}
     ]),
-    NoopAnimationsModule,
     ],
   providers: [
     { provide: APP_INITIALIZER, useFactory: initGapi, deps: [GapiSession], multi: true },

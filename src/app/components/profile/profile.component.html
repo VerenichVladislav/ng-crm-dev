@@ -108,7 +108,7 @@
         </div>
       </div>
     </div>
-    <div *ngIf="!tickets || tickets.length == 0" class="mx-auto container">
+    <div *ngIf="!tickets || tickets.length == 0" class="redirect mx-auto container">
       <h3 class="text-center text-monospace">У вас пока нет истории поездок. Съездим?)</h3>
       <div class="col text-center">
         <button type="button" routerLink="/" class="btn btn-lg btn-info">На страницу поездок</button>
@@ -134,7 +134,7 @@
         </div>
       </div>
     </div>
-    <div *ngIf="!reservations || reservations.length == 0" class="container mx-auto ">
+    <div *ngIf="!reservations || reservations.length == 0" class="redirect container mx-auto ">
       <h3 class="text-center text-monospace">У вас пока нет истории отелей. Закажем?)</h3>
       <div class="col text-center">
         <button type="button" routerLink="/HotelIndex" class="btn btn-lg btn-info">На страницу Отелей</button>
@@ -142,7 +142,7 @@
     </div>
   </mat-tab>
   <mat-tab label="Туры">
-    <div *ngIf="!tours || tour.length == 0" class="container mx-auto ">
+    <div *ngIf="!tours || tour.length == 0" class="redirect container mx-auto ">
       <h3 class="text-center text-monospace">У вас пока нет истории туров. Отдохнём?)</h3>
       <div class="col text-center">
         <button type="button" routerLink="/HotelIndex" class="btn btn-lg btn-info">На страницу Туров</button>

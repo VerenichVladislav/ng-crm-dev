@@ -32,6 +32,9 @@
 .unconfirmed{
   color: #f44336;
 }
+.redirect{
+  margin-bottom: 5vh;
+}
 .tickets{
   margin: 3vh auto 3vh 10%;
 }
