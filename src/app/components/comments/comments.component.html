@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8"> 
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>  
+  </head>
+  <body>
+    <div class="container">
+    <h1 align="center">Comments</h1>
+    <hr/>
+    <form>
+      <div>
+        <form *ngFor="let comment of comments; let i = index" style="border:2px solid #555; box-shadow:3px 3px 5px #999;   margin:20px; padding:20px;">
+          <h4>{{comment.user}}</h4>
+              {{comment.text}}
+        </form>
+      </div>
+        <h2>Leave a Replay</h2>
+        <form [formGroup]="newComment" (ngSubmit)="submit()">
+          <textarea class="form-control" rows="5" type="text" formControlName="text" placeholder="Your Comment"></textarea>
+          <br/>
+          <button class="btn btn-success btn-md pull-right" type="submit">Comment</button>
+        </form>
+        <br/>
+        <hr/>
+    </form>
+    </div>
+  </body>
+</html>

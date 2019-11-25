@@ -1,9 +1,9 @@
 import {Component, Injectable, Input, OnInit} from '@angular/core';
 import {TripService} from '../../shared/trip.service';
 import {Trip} from '../../entity/trip';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl, Validators, FormArray, FormBuilder} from '@angular/forms';
-import {HttpClient, HttpErrorResponse, HttpResponse} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {TicketService} from '../../shared/ticket.service';
 import { parseHttpResponse } from 'selenium-webdriver/http';
 import {SnackBarComponent} from '../snack-bar/snack-bar.component';
@@ -38,8 +38,10 @@ export class BuyTicketComponent implements OnInit {
     const userid = this.route.snapshot.paramMap.get('userid');
     this.idU = parseInt(userid);
     this.trip = this.tripService.getTrip(tripid).subscribe(
-        data => this.trip = data
-       );
+      data => this.trip = data
+     );
+
+
     this.route.queryParams.subscribe(params => {
         this.count = parseInt(params.count);
       });
@@ -86,5 +88,6 @@ export class BuyTicketComponent implements OnInit {
                       }
                     }
                 );
-        }
+  }
  }
+

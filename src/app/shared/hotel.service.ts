@@ -14,9 +14,7 @@ export  class HotelService {
 
   constructor(private http: HttpClient){ }
   hotelFilter:HotelFilters
- public setHotelFilter(hotelFilter:HotelFilters){
-   
-   
+  public setHotelFilter(hotelFilter:HotelFilters){
     this.hotelFilter = hotelFilter;
     console.log(hotelFilter.city);
     

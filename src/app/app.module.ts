@@ -55,6 +55,7 @@ import {DataTransferService} from './shared/data-transfer.service';
 import { DetailshotelDialogComponent } from './detailshotel-dialog/detailshotel-dialog.component';
 import { BuyTicketComponent } from './components/buy-ticket/buy-ticket.component';
 import { ScrollUpBtnComponent } from './core/scroll-up-btn/scroll-up-btn.component';
+import { CommentsComponent } from './components/comments/comments.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { GoogleServiceComponent } from './google-service/google-service.component';
 import { GapiSession } from './google-service/GapiSession';
@@ -80,6 +81,8 @@ export function initGapi(gapiSession: GapiSession) {
     DetailshotelDialogComponent,
     BuyTicketComponent,
     ScrollUpBtnComponent,
+    CommentsComponent,
+
     ConnectionErrorComponent,
     SnackBarComponent,
 
@@ -144,8 +147,9 @@ export function initGapi(gapiSession: GapiSession) {
       { path: 'HotelIndex', component: HotelindexComponent},
       { path: 'SearchResult', component: SearchResultComponent},
       { path: 'SearchResult/:id', component: DetailshotelComponentComponent},
-      { path: 'trips/:userid/:tripid/buy', component: BuyTicketComponent},
-      { path: '', redirectTo: '/', pathMatch: 'full'}
+      {path: 'trips/:userid/:tripid/buy', component: BuyTicketComponent},
+      {path: 'comments', component: BuyTicketComponent},
+      {path: '', redirectTo: '/', pathMatch: 'full'}
     ]),
     ],
   providers: [
