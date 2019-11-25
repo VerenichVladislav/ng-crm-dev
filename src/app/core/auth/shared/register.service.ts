@@ -10,12 +10,13 @@ import {GlobalRootURL} from '../../../GlobalRootURL';
 export class RegisterService {
   readonly URL = GlobalRootURL.BASE_API_URL + 'users';
   constructor(private http: HttpClient) { }
-  registerUser(user: User): Observable<any>{
+  registerUser(user: User, hashPass: string): Observable<any>{
     let headers = new HttpHeaders(
 
       {'Content-Type': 'application/json'});
-    let body = user;
-    body.setRole("USER");
+    let body: any = user;
+    body.role = 'USER';
+    body.hashPass = hashPass;
     let options = {
       headers: headers ,
       observe: <'body'>'response'
