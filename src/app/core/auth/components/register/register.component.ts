@@ -17,6 +17,7 @@ import {SnackBarComponent} from '../../../../components/snack-bar/snack-bar.comp
 })
 export class RegisterComponent implements OnInit {
   private registerForm;
+  private errorLogin = false;
   private subscriptions: Subscription[] = [];
 
   constructor(private registerService: RegisterService,
@@ -37,9 +38,11 @@ export class RegisterComponent implements OnInit {
 
   submit(userData) {
     this.subscriptions.push(this.registerService
-      .registerUser(new User(userData))
+      .registerUser(new User(userData), userData.hashPass)
       .subscribe(
         (resp: Response) => {
+          this.errorLogin = false;
+
           this.subscriptions.push(this.loginService
             .loginUser(userData.userName, userData.hashPass)
             .subscribe(
@@ -55,6 +58,8 @@ export class RegisterComponent implements OnInit {
                 console.log(error);
                 if(error.status === 0) {
                   this.errorConnection.openSnackBar();
+                } else if (error.error.message === 'NonUnique userName') {
+                  this.errorLogin = true;
                 }
               }));
         },
