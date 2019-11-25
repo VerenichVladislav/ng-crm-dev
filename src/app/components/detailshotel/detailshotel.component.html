@@ -18,7 +18,7 @@
         </mat-list-item> -->
        <mat-list-item>
         <h3> {{realHOtel.hotelName}}</h3>
-        
+
        </mat-list-item>
        <mat-list-item>
            {{realHOtel.rating}}
@@ -42,7 +42,7 @@
             <mat-card-header>
               <div mat-card-avatar class="example-header-image"></div>
               <mat-card-title>Room Type {{item.roomId}}</mat-card-title>
-             
+
             </mat-card-header>
             <img mat-card-image src="assets/img/roomim.jpg" >
             <mat-card-content>
@@ -52,7 +52,7 @@
                             <mat-icon>euro</mat-icon>
                         </mat-list-item>
 
-                        
+
                     </mat-list>
             </mat-card-content>
             <mat-card-actions>
@@ -62,5 +62,5 @@
         </mat-grid-tile>
 </mat-grid-list>
 <div class="comments">
-    <app-comments [userId]="userId", type="hotel", hotelId="EntityId"></app-comments>
+    <app-comments [userId]="userId", [type]="hotel", [hotelId]="EntityId"></app-comments>
 </div>
