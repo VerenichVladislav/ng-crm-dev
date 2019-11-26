@@ -65,6 +65,7 @@ import { ConnectionErrorComponent } from './components/snack-bar/connection-erro
 import { SnackBarComponent } from './components/snack-bar/snack-bar.component';
 import { IndexComponent } from './index/index.component';
 import { TourIndexComponent } from './tour-index/tour-index.component';
+import { ChatDialogComponent } from './components/chat-dialog/chat-dialog.component';
 import { Page404Component } from './core/page404/page404.component';
 
 export function initGapi(gapiSession: GapiSession) {
@@ -95,6 +96,8 @@ export function initGapi(gapiSession: GapiSession) {
     IndexComponent,
 
     TourIndexComponent,
+
+    ChatDialogComponent,
   ],
   entryComponents: [
     DetailshotelDialogComponent,

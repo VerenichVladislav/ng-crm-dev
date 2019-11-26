@@ -23,20 +23,31 @@
                 </mat-form-field>
         </div>
         <mat-button-toggle  class="recomends-content" (click)='find()'>Find</mat-button-toggle>
-        <div class="recomends">
+        
             <div class="recomends-content">
                 Popular destinations
             </div>
-            <div class="recomends-content">
+            <mat-grid-list cols="6" rowHeight = "400px">
+               
+            <ng-container *ngFor="let item of cityCollection|async">
+                   
+                <mat-grid-tile [colspan]=2 [rowspan]=1>  
+                
+            <div class="recomends-content" (click)="findbyCity(item.cityName)">
                 <div class="recomend-hotels">
                     <div class="recomend-hotels-image">
-                        <img src="https://drive.google.com/uc?export=view&id=1WAeGvJxt0Z5ZhUrfzAHf_eEwvcWplWxm" alt="" class="recomend-hotels-image"/>
-                        <h2>A Movie in the Park:<br />Kung Fu Panda</h2>
+                        <img src="{{'https://drive.google.com/uc?export=view&id='+item.image}}" alt="" class="recomend-hotels-image"/>
+                        <h2>{{item.cityName}}:<br />{{item.country}}</h2>
                     </div>
                 </div>
                
             </div>
-           
+            </mat-grid-tile>
+            
+        </ng-container>
+            
+    </mat-grid-list> 
         </div>
-    </div>
+        
+    
 </div>
