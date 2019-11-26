@@ -65,6 +65,7 @@ import { ConnectionErrorComponent } from './components/snack-bar/connection-erro
 import { SnackBarComponent } from './components/snack-bar/snack-bar.component';
 import { IndexComponent } from './index/index.component';
 import { TourIndexComponent } from './tour-index/tour-index.component';
+import { Page404Component } from './core/page404/page404.component';
 
 export function initGapi(gapiSession: GapiSession) {
   return () => gapiSession.initClient();
@@ -75,6 +76,7 @@ export function initGapi(gapiSession: GapiSession) {
   declarations: [
     AppComponent,
     HeaderComponent,
+    Page404Component,
     ProfileComponent,
     FilterComponent,
     HotelindexComponent,
@@ -157,7 +159,8 @@ export function initGapi(gapiSession: GapiSession) {
       { path: 'SearchResult/:id', component: DetailshotelComponentComponent},
       {path: 'trips/:userid/:tripid/buy', component: BuyTicketComponent},
       {path: 'comments', component: BuyTicketComponent},
-      {path: '', component:IndexComponent}
+      {path: '', component:IndexComponent},
+      { path: '**', component: Page404Component},
     ]),
     ],
   providers: [
