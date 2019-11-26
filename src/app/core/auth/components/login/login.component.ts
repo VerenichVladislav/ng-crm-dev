@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
+import {NavigationEnd, Router} from '@angular/router';
 import {Subscription} from 'rxjs';
 import {User} from '../../../../entity/user';
 import {FormControl, FormGroup} from '@angular/forms';
@@ -73,10 +73,11 @@ export class LoginComponent implements OnInit {
 
                       this.transfer.setTickets(tickets);
                       this.transfer.setReservations(reservations);
+
+                      this.router.navigate(['profile']);
                     }
                   ));
 
-                this.router.navigate(['profile']);
                 this.hideLoginForm();
               },
               error => {
