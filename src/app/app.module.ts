@@ -63,6 +63,8 @@ import {LoginComponent} from './core/auth/components/login/login.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { ConnectionErrorComponent } from './components/snack-bar/connection-error/connection-error.component';
 import { SnackBarComponent } from './components/snack-bar/snack-bar.component';
+import { IndexComponent } from './index/index.component';
+import { TourIndexComponent } from './tour-index/tour-index.component';
 
 export function initGapi(gapiSession: GapiSession) {
   return () => gapiSession.initClient();
@@ -87,6 +89,10 @@ export function initGapi(gapiSession: GapiSession) {
     SnackBarComponent,
 
     GoogleServiceComponent,
+
+    IndexComponent,
+
+    TourIndexComponent,
   ],
   entryComponents: [
     DetailshotelDialogComponent,
@@ -113,6 +119,7 @@ export function initGapi(gapiSession: GapiSession) {
     MatListModule,
     MatMenuModule,
     MatNativeDateModule,
+    MatGridListModule,
     MatPaginatorModule,
     MatProgressBarModule,
     MatProgressSpinnerModule,
@@ -145,11 +152,12 @@ export function initGapi(gapiSession: GapiSession) {
         canActivate: []
       },
       { path: 'HotelIndex', component: HotelindexComponent},
+      { path:'Index',component:IndexComponent},
       { path: 'SearchResult', component: SearchResultComponent},
       { path: 'SearchResult/:id', component: DetailshotelComponentComponent},
       {path: 'trips/:userid/:tripid/buy', component: BuyTicketComponent},
       {path: 'comments', component: BuyTicketComponent},
-      {path: '', redirectTo: '/', pathMatch: 'full'}
+      {path: '', component:IndexComponent}
     ]),
     ],
   providers: [

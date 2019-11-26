@@ -1,0 +1,15 @@
+
+    <mat-grid-list cols='4' rowHeight='150px'>
+        <mat-grid-tile [colspan]="1"[rowspan]=1></mat-grid-tile>
+        <mat-grid-tile [colspan]="2"[rowspan]=1>
+            <mat-button-toggle-group>
+                <mat-button-toggle (click)="selectHotel()">Отели</mat-button-toggle>
+                <mat-button-toggle (click)="selectTicket()">Авиабилеты</mat-button-toggle>
+                <mat-button-toggle (click)="selectTour()">Туры</mat-button-toggle>
+            </mat-button-toggle-group>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="1" [rowspan]=1></mat-grid-tile>
+    </mat-grid-list>
+
+<app-hotelindex [status]="hotelStatus"></app-hotelindex>
+<app-tour-index [status]="TourStatus"></app-tour-index>

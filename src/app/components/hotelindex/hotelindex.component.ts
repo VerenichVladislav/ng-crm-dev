@@ -15,6 +15,7 @@ export class HotelindexComponent implements OnInit {
   constructor(private router: Router,public service:HotelService) {
 
   }
+  @Input() status:boolean;
   @Input() checkIn:string
   @Input() checkOut:string
   @Input() city:String;

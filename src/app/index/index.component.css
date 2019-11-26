@@ -1,0 +1,10 @@
+mat-button-toggle-group{
+    width: 50%;
+    
+    
+}
+mat-button-toggle{
+width: 100%;
+} mat-button-toggle:hover{
+    background: darkturquoise;
+}

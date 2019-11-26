@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
+
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Hotel } from '../../entity/hotel';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+
 import { Injectable } from '@angular/core';
 import { room } from 'src/app/entity/room';
 import { DetailshotelDialogComponent } from 'src/app/detailshotel-dialog/detailshotel-dialog.component';
 import {GlobalRootURL} from '../../GlobalRootURL';
-import {SnackBarComponent} from '../snack-bar/snack-bar.component';
 
 
 
@@ -30,12 +31,8 @@ export class DetailshotelComponentComponent implements OnInit {
   hotelid:number;
   getInfo:Observable<Hotel>;
   realHOtel: Hotel;
-  userId:number;
 
-  constructor(private route: ActivatedRoute,
-              private http: HttpClient,
-              private errorConnection: SnackBarComponent,
-              public dialog: MatDialog) { }
+  constructor(private route:ActivatedRoute,private http:HttpClient,public dialog: MatDialog) { }
 
 
   openDialog(room:room): void {
@@ -47,18 +44,12 @@ export class DetailshotelComponentComponent implements OnInit {
   ngOnInit() {
     let id = parseInt(this.route.snapshot.paramMap.get('id'));
     this.hotelid = id;
-
-    this.userId = JSON.parse(localStorage.getItem('user')).userId;
-
     this.http.get<Hotel>(this.ROOT_URL+"/"+id).subscribe(
      (data: Hotel) => {
        this.realHOtel = data;
        },
      error => {
-       console.log(error);
-       if(error.status === 0) {
-         this.errorConnection.openSnackBar();
-       }
+       console.log(error)
      }
    )}
 }
