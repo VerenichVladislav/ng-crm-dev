@@ -28,22 +28,21 @@ export class DetailshotelComponentComponent implements OnInit {
 
   hotel:Hotel;
   readonly ROOT_URL = GlobalRootURL.BASE_API_URL + 'hotels';
-  hotelid:number;
+  hotelId:number;
   getInfo:Observable<Hotel>;
   realHOtel: Hotel;
-
   constructor(private route:ActivatedRoute,private http:HttpClient,public dialog: MatDialog) { }
 
 
   openDialog(room:room): void {
      this.dialog.open(DetailshotelDialogComponent, {
-      data:{roomId:room.roomId,hotelId:this.hotelid}
+      data:{roomId:room.roomId,hotelId:this.hotelId}
     });
   }
 
   ngOnInit() {
     let id = parseInt(this.route.snapshot.paramMap.get('id'));
-    this.hotelid = id;
+    this.hotelId = id;
     this.http.get<Hotel>(this.ROOT_URL+"/"+id).subscribe(
      (data: Hotel) => {
        this.realHOtel = data;
@@ -51,5 +50,6 @@ export class DetailshotelComponentComponent implements OnInit {
      error => {
        console.log(error)
      }
-   )}
+   )
+    }
 }

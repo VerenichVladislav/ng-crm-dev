@@ -31,22 +31,22 @@ export class CommentsService {
     return this.http.get(this.URL + 'tour/' + id);
   }
 
-  submitForm(text: any, entityId: number, userId:number, type: string): Observable<any> {    
-    if(type='hotel'){
+  submitForm(text: any, entityId: number, userId:number, type: number): Observable<any> {    
+    if(type=1){
       this.newComment = new FormGroup({
         text,
         user: new FormControl({'userId' : userId }),
         hotel: new FormControl({'hotelId' : entityId })
       });
     }
-       else if(type='tour'){
+       else if(type=2){
         this.newComment = new FormGroup({
           text,
           user: new FormControl({'userId' : userId }),
           tour: new FormControl({'tourId' : entityId })
         });
        } 
-       else if(type='company'){
+       else if(type=3){
         this.newComment = new FormGroup({
           text,
           user: new FormControl({'userId' : userId }),
@@ -56,6 +56,7 @@ export class CommentsService {
     let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     headers.set('Authorization', localStorage.getItem('auth_token'));
     let options = { headers: headers, responseType:'text' as 'json'};
+    console.log(JSON.stringify(this.newComment.value));
     return this.http.post<any>(this.URL, this.newComment.value, options);
 
   }

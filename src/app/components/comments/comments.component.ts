@@ -13,8 +13,10 @@ import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
   styleUrls: ['./comments.component.css']
 })
 export class CommentsComponent implements OnInit {
-  @Input() userId: number;
-  @Input() type: string;
+  @Input() type: number;
+  //hotel = 1
+  //tour = 2
+  //company =3
   @Input() EntityId: number;
   comments = [];
   message: any;
@@ -24,6 +26,7 @@ export class CommentsComponent implements OnInit {
   newCommentHotel: FormGroup;
   text: FormControl;
   hotelId:number;
+  userId:number = JSON.parse(localStorage.getItem('user')).userId;
   asyncResult:any;
   constructor(
     private route: ActivatedRoute,
@@ -31,15 +34,18 @@ export class CommentsComponent implements OnInit {
     private commentsService: CommentsService){}
 
   ngOnInit() {
-    if(this.type='hotel'){
+    console.log('userid: ' , this.userId);
+    console.log('hotelid: ' , this.EntityId);
+    console.log('type: ' , this.type);
+    if(this.type=1){
     this.comments = this.commentsService.getHotelComments(this.EntityId).subscribe(
       data => this.comments = data
      ) }
-     else if(this.type='tour'){
+     else if(this.type=2){
       this.comments = this.commentsService.getTourComments(this.EntityId).subscribe(
         data => this.comments = data
        )
-     } else if(this.type='company'){
+     } else if(this.type=3){
       this.comments = this.commentsService.getCompanyComments(this.EntityId).subscribe(
         data => this.comments = data
        )
@@ -61,19 +67,19 @@ export class CommentsComponent implements OnInit {
                         this.message = error.error;
                       }
                   );
-                  if(this.type='hotel'){
+                  if(this.type=1){
                     this.comments = this.commentsService.getHotelComments(this.EntityId).subscribe(
                       data => this.comments = data
                      );
                      this.asyncResult = await this.commentsService.getHotelComments(this.EntityId).toPromise();
                      }
-                     else if(this.type='tour'){
+                     else if(this.type=2){
                       this.comments = this.commentsService.getTourComments(this.EntityId).subscribe(
                         data => this.comments = data
                        );
                        this.asyncResult = await this.commentsService.getTourComments(this.EntityId).toPromise();
                      } 
-                     else if(this.type='company'){
+                     else if(this.type=3){
                       this.comments = this.commentsService.getCompanyComments(this.EntityId).subscribe(
                         data => this.comments = data
                        );
