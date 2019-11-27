@@ -7,10 +7,10 @@
     </div>
     <div class="search">
       <mat-form-field class="form-mat-child">
-        <input matInput placeholder="City From" >
+        <input matInput placeholder="City From" [(ngModel)]="cityFrom">
       </mat-form-field>
       <mat-form-field class="form-mat-child">
-        <input matInput placeholder="City To" >
+        <input matInput placeholder="City To" [(ngModel)]="cityDest">
       </mat-form-field>
 
       <mat-form-field color="accent" class="form-mat-child">
@@ -31,43 +31,43 @@
         </mat-select>
       </mat-form-field>
     </div>
-    <mat-button-toggle class="recomends-content">Find</mat-button-toggle>
-    <div class="recomends">
-      <div class="recomends-content">
-        Popular destinations
-      </div>
-      <div class="recomends-content">
-        <div class="recomend-flights">
-          <div class="recomend-flights-image">
-            <img src="/assets/img/flight-915675.jpg" alt="" class="recomend-hotels-image"/>
-            <h2>A Movie in the Plane:<br />Don't masturbate during the Flight</h2>
-          </div>
-        </div>
-        <div class="recomend-flights">
-          <div class="recomend-flights-image">
-            <img src="/assets/img/flight-915675.jpg" alt="" class="recomend-hotels-image"/>
-            <h2>A Movie in the Plane:<br />Don't masturbate during the Flight</h2>
-          </div>
-        </div>
-      </div>
-      <div class="recomends-content">
-        <div class="recomend-flights">
-          <div class="recomend-flights-image">
-            <img src="/assets/img/flight-915675.jpg" alt="" class="recomend-hotels-image"/>
-            <h2>A Movie in the Plane:<br />Don't masturbate during the Flight</h2>
-          </div>
-        </div>
+    <mat-button-toggle class="recomends-content" (click)="find()">Find</mat-button-toggle>
+    <!--<div class="recomends">-->
+      <!--<div class="recomends-content">-->
+        <!--Popular destinations-->
+      <!--</div>-->
+      <!--<div class="recomends-content">-->
+        <!--<div class="recomend-flights">-->
+          <!--<div class="recomend-flights-image">-->
+            <!--<img src="/assets/img/flight-915675.jpg" alt="" class="recomend-hotels-image"/>-->
+            <!--<h2>A Movie in the Plane:<br />Don't masturbate during the Flight</h2>-->
+          <!--</div>-->
+        <!--</div>-->
+        <!--<div class="recomend-flights">-->
+          <!--<div class="recomend-flights-image">-->
+            <!--<img src="/assets/img/flight-915675.jpg" alt="" class="recomend-hotels-image"/>-->
+            <!--<h2>A Movie in the Plane:<br />Don't masturbate during the Flight</h2>-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</div>-->
+      <!--<div class="recomends-content">-->
+        <!--<div class="recomend-flights">-->
+          <!--<div class="recomend-flights-image">-->
+            <!--<img src="/assets/img/flight-915675.jpg" alt="" class="recomend-hotels-image"/>-->
+            <!--<h2>A Movie in the Plane:<br />Don't masturbate during the Flight</h2>-->
+          <!--</div>-->
+        <!--</div>-->
 
-        <div class="recomends-content">
-          <div class="recomend-flights">
-            <div class="recomend-flights-image">
-              <img src="/assets/img/flight-915675.jpg" alt="" class="recomend-hotels-image"/>
-              <h2>A Movie in the Plane:<br />Don't masturbate during the Flight</h2>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+        <!--<div class="recomends-content">-->
+          <!--<div class="recomend-flights">-->
+            <!--<div class="recomend-flights-image">-->
+              <!--<img src="/assets/img/flight-915675.jpg" alt="" class="recomend-hotels-image"/>-->
+              <!--<h2>A Movie in the Plane:<br />Don't masturbate during the Flight</h2>-->
+            <!--</div>-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
 
   </div>
 </div>

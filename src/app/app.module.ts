@@ -163,6 +163,8 @@ export function initGapi(gapiSession: GapiSession) {
       {path: 'trips/:userid/:tripid/buy', component: BuyTicketComponent},
       {path: 'comments', component: BuyTicketComponent},
       {path: '', component:IndexComponent},
+      {path: 'trips', component:FlightsindexComponent},
+
       { path: '**', component: Page404Component},
     ]),
     ],
