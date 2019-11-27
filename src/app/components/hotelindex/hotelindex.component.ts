@@ -17,7 +17,7 @@ import { GlobalRootURL } from 'src/app/GlobalRootURL';
 export class HotelindexComponent implements OnInit {
 
   constructor(private router: Router,public service:HotelService,private http:HttpClient) {
-
+    this.cityCollection = this.http.get<City>(GlobalRootURL.BASE_API_URL+"cities");
   }
   @Input() status:boolean;
   @Input() checkIn:string
@@ -44,7 +44,7 @@ export class HotelindexComponent implements OnInit {
   }
   cityCollection:Observable<City>
   ngOnInit() {
-    this.cityCollection = this.http.get<City>(GlobalRootURL.BASE_API_URL+"cities");
+   
   }
 
 }

@@ -24,6 +24,6 @@ export class Hotel{
     this.rooms = hotelResponse.rooms;
     this.comments = hotelResponse.comments;
     this.city = hotelResponse.city;
-    this.image ="https://drive.google.com/uc?export=view&id="+hotelResponse.image;
+    this.image =hotelResponse.image;
   }
 }

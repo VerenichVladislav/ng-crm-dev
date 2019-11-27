@@ -1,0 +1,31 @@
+<mat-grid-list cols="5" rowHeight = "150px">
+    <mat-grid-tile [colspan]=1></mat-grid-tile>
+    <mat-grid-tile [colspan]=3 [rowspan]=3>
+<img class="listimg" height=100% width=100% src="assets/img/otel.jpg">
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]=1 [rowspan]=3>
+    <mat-list role="list">
+        <!-- <mat-list-item *ngFor="let item of realHOtel.rooms">
+            {{item.roomId}}
+        </mat-list-item> -->
+       <mat-list-item>
+        <h3> {{tour.city_destination}}</h3>
+
+       </mat-list-item>
+       <mat-list-item>
+           {{tour.rating}}
+           <mat-icon>star</mat-icon>
+       </mat-list-item>
+       <mat-list-item>
+            {{tour.price}}
+            <mat-icon>
+                map
+            </mat-icon>
+        </mat-list-item>
+        <mat-list-item>
+            <mat-icon>phone</mat-icon>
+            {{tour.duration}}
+        </mat-list-item>
+        </mat-list>
+    </mat-grid-tile>
+    

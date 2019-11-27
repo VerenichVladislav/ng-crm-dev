@@ -1,6 +1,6 @@
 
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, APP_INITIALIZER } from '@angular/core';
+import { NgModule, APP_INITIALIZER, Component } from '@angular/core';
 
 import { AppComponent } from './app.component';
 
@@ -65,6 +65,8 @@ import { ConnectionErrorComponent } from './components/snack-bar/connection-erro
 import { SnackBarComponent } from './components/snack-bar/snack-bar.component';
 import { IndexComponent } from './index/index.component';
 import { TourIndexComponent } from './tour-index/tour-index.component';
+import { TourSearchResComponent } from './tour-search-res/tour-search-res.component';
+import { TourDetailsComponent } from './tour-details/tour-details.component';
 
 export function initGapi(gapiSession: GapiSession) {
   return () => gapiSession.initClient();
@@ -93,6 +95,10 @@ export function initGapi(gapiSession: GapiSession) {
     IndexComponent,
 
     TourIndexComponent,
+
+    TourSearchResComponent,
+
+    TourDetailsComponent,
   ],
   entryComponents: [
     DetailshotelDialogComponent,
@@ -144,6 +150,7 @@ export function initGapi(gapiSession: GapiSession) {
     ReactiveFormsModule,
     BrowserAnimationsModule,
     AuthModule,
+   
     RouterModule.forRoot([
       { path: 'login', component: LoginComponent},
       {
@@ -157,6 +164,8 @@ export function initGapi(gapiSession: GapiSession) {
       { path: 'SearchResult/:id', component: DetailshotelComponentComponent},
       {path: 'trips/:userid/:tripid/buy', component: BuyTicketComponent},
       {path: 'comments', component: BuyTicketComponent},
+      {path:'tourResult',component:TourSearchResComponent},
+      {path:'tourResult/:id', component:TourDetailsComponent},
       {path: '', component:IndexComponent}
     ]),
     ],
