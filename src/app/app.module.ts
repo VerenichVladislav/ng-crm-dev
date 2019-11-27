@@ -67,6 +67,7 @@ import { IndexComponent } from './index/index.component';
 import { TourIndexComponent } from './tour-index/tour-index.component';
 import { TourSearchResComponent } from './tour-search-res/tour-search-res.component';
 import { TourDetailsComponent } from './tour-details/tour-details.component';
+import { ChatDialogComponent } from './components/chat-dialog/chat-dialog.component';
 
 export function initGapi(gapiSession: GapiSession) {
   return () => gapiSession.initClient();
@@ -99,6 +100,7 @@ export function initGapi(gapiSession: GapiSession) {
     TourSearchResComponent,
 
     TourDetailsComponent,
+    ChatDialogComponent,
   ],
   entryComponents: [
     DetailshotelDialogComponent,
