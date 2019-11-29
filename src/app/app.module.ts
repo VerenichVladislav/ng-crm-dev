@@ -1,13 +1,13 @@
 
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, APP_INITIALIZER, Component } from '@angular/core';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
 
 import { AppComponent } from './app.component';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { HeaderComponent } from './core/header/header.component';
-
+import { StompService } from 'ng2-stomp-service';
 import {RouterModule} from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { ProfileComponent } from './components/profile/profile.component';
@@ -65,9 +65,11 @@ import { ConnectionErrorComponent } from './components/snack-bar/connection-erro
 import { SnackBarComponent } from './components/snack-bar/snack-bar.component';
 import { IndexComponent } from './index/index.component';
 import { TourIndexComponent } from './tour-index/tour-index.component';
-import { TourSearchResComponent } from './tour-search-res/tour-search-res.component';
-import { TourDetailsComponent } from './tour-details/tour-details.component';
-import { ChatDialogComponent } from './components/chat-dialog/chat-dialog.component';
+// import { ChatDialogComponent } from './components/chat-dialog/chat-dialog.component';
+import {SearchResultTripComponent} from './components/search-result-trip/search-result-trip.component';
+import {FlightsindexComponent} from './components/flightsindex/flightsindex.component';
+import { SideFiltersComponent } from './components/side-filters/side-filters.component';
+import { Page404Component } from './core/page404/page404.component';
 
 export function initGapi(gapiSession: GapiSession) {
   return () => gapiSession.initClient();
@@ -78,10 +80,13 @@ export function initGapi(gapiSession: GapiSession) {
   declarations: [
     AppComponent,
     HeaderComponent,
+    Page404Component,
     ProfileComponent,
     FilterComponent,
     HotelindexComponent,
+    FlightsindexComponent,
     SearchResultComponent,
+    SearchResultTripComponent,
     DetailshotelComponentComponent,
     DetailshotelDialogComponent,
     BuyTicketComponent,
@@ -97,10 +102,9 @@ export function initGapi(gapiSession: GapiSession) {
 
     TourIndexComponent,
 
-    TourSearchResComponent,
+    // ChatDialogComponent,
 
-    TourDetailsComponent,
-    ChatDialogComponent,
+    SideFiltersComponent,
   ],
   entryComponents: [
     DetailshotelDialogComponent,
@@ -152,7 +156,6 @@ export function initGapi(gapiSession: GapiSession) {
     ReactiveFormsModule,
     BrowserAnimationsModule,
     AuthModule,
-   
     RouterModule.forRoot([
       { path: 'login', component: LoginComponent},
       {
@@ -161,21 +164,23 @@ export function initGapi(gapiSession: GapiSession) {
         canActivate: []
       },
       { path: 'HotelIndex', component: HotelindexComponent},
-      { path:'Index',component:IndexComponent},
+      { path: 'Index', component: IndexComponent},
       { path: 'SearchResult', component: SearchResultComponent},
       { path: 'SearchResult/:id', component: DetailshotelComponentComponent},
       {path: 'trips/:userid/:tripid/buy', component: BuyTicketComponent},
       {path: 'comments', component: BuyTicketComponent},
-      {path:'tourResult',component:TourSearchResComponent},
-      {path:'tourResult/:id', component:TourDetailsComponent},
-      {path: '', component:IndexComponent}
+      {path: '', component: IndexComponent},
+      {path: 'trips', component: FlightsindexComponent},
+
+      { path: '**', component: Page404Component},
     ]),
-    ],
+  ],
   providers: [
     { provide: APP_INITIALIZER, useFactory: initGapi, deps: [GapiSession], multi: true },
     GapiSession,
     DataTransferService,
-    SnackBarComponent
+    SnackBarComponent,
+    // StompService
   ],
 
   bootstrap: [AppComponent]

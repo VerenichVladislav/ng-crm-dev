@@ -97,7 +97,10 @@
         </div>
         <div class="col-md-8">
           <div class="card-body">
-            <h4 class="card-title">Билет</h4>
+            <div class="input-group-prepend">
+              <h4 class="card-title">Билет</h4>
+              <button type="button" class="btn btn-primary btn-ticket" routerLink="/">Погнали ещё раз</button>
+            </div>
             <p class="card-text">Покупатель: {{ticket.firstName}}</p>
             <p class="card-text">Страна: {{ticket.cityFrom.country}}</p>
             <p class="card-text">Дата отъезда: <br>{{ticket.date}}</p>
@@ -120,7 +123,8 @@
          class="tickets card col-lg-4 bg-dark text-light">
       <div class="row no-gutters ml-2">
         <div class="col-md-4">
-          <img src="assets/img/pexels-photo-373893.jpeg" alt="" class="recomend-hotels-image"/>
+          <img src="assets/img/pexels-photo-373893.jpeg" alt="" class="img-fluid"/>
+          <button type="button" class="btn btn-success btn-reservation" routerLink="/SearchResult/{{reservation.hotel.hotelId}}">Хочю отель</button>
         </div>
         <div class="col-md-8">
           <div class="card-body">
