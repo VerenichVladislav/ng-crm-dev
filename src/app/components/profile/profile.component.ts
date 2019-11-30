@@ -4,7 +4,7 @@ import {DataTransferService} from '../../shared/data-transfer.service';
 import {Trip} from '../../entity/trip';
 import {Ticket} from '../../entity/ticket';
 import {Reservation} from '../../entity/reservation';
-import {NavigationEnd, NavigationStart, RouteConfigLoadEnd, Router, RoutesRecognized} from '@angular/router';
+import {NavigationEnd, Router} from '@angular/router';
 import {filter} from 'rxjs/operators';
 
 @Component({
@@ -14,31 +14,32 @@ import {filter} from 'rxjs/operators';
 })
 export class ProfileComponent {
   private user: User;
-  private reservations: Reservation[];
+  private reservations: Reservation[] = [];
   private tours;
-  private tickets: Ticket[];
+  private tickets: Ticket[] = [];
   constructor(private transfer: DataTransferService,
               private router: Router) {
     this.router.events
       .pipe(filter(e => e instanceof NavigationEnd))
       .subscribe((e: NavigationEnd) => {
-
         this.user = JSON.parse(localStorage.getItem('user'));
-        //this.transfer.tickets$.value.length !== 0
-        if(this.transfer.tickets$.value !== undefined ){
+        if (this.transfer.tickets$.getValue() !== undefined) {
           this.transfer.tickets$.subscribe( value => {
             this.tickets = value;
-            localStorage.setItem('tickets', JSON.stringify(this.tickets));
+            if (this.tickets.length > 0) {
+              localStorage.setItem('tickets', JSON.stringify(this.tickets));
+            }
           });
         } else {
           this.tickets = JSON.parse(localStorage.getItem('tickets'));
         }
 
-        // this.transfer.reservations$.value.length !== 0
-        if(this.transfer.reservations$.value !== undefined ){
-          this.transfer.reservations$.subscribe( value => {
+        if (this.transfer.reservations$.getValue() !== undefined) {
+          this.transfer.reservations$.subscribe(value => {
             this.reservations = value;
-            localStorage.setItem('reservations', JSON.stringify(this.reservations));
+            if (this.reservations.length > 0) {
+              localStorage.setItem('reservations', JSON.stringify(this.reservations));
+            }
           });
         } else {
           this.reservations = JSON.parse(localStorage.getItem('reservations'));
@@ -47,7 +48,7 @@ export class ProfileComponent {
   }
 
 
-  isLater(date: string): boolean{
+  isLater(date: string): boolean {
     return new Date(date) > new Date();
   }
 

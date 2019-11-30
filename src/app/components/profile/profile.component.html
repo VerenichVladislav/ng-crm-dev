@@ -55,28 +55,6 @@
                     <mat-option>За последний год</mat-option>
                   </mat-select>
                 </mat-form-field>
-                <table class="table table-th-block">
-                  <tbody>
-                  <tr><td class="active">Логин:</td><td>{{user.userName}}</td></tr>
-                  <tr><td class="active">Фамилия:</td><td>{{user.lastName}}</td></tr>
-                  <tr><td class="active">Имя:</td><td>{{user.firstName}}</td></tr>
-                  <tr><td class="active">Почтовый адрес:</td>
-                    <td>{{user.email}}
-                      <p class="confirmed" *ngIf="user.state === 'Confirmed'; else unconfirmed">Подтверждён</p>
-                      <ng-template #unconfirmed>
-                        <p class="unconfirmed">Не подтверждён</p>
-                      </ng-template>
-                    </td>
-                  </tr>
-                  <tr><td class="active">Текущая сумма:</td>
-                    <td *ngIf="user.wallet.sum == null; else has">0</td>
-                    <ng-template #has>
-                      <td>{{user.wallet.sum}}</td>
-                    </ng-template>
-                  </tr>
-
-                  </tbody>
-                </table>
               </div>
             </div>
 
