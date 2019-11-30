@@ -2,29 +2,59 @@
 <html>
   <head>
     <meta charset="UTF-8"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>  
   </head>
   <body>
     <div class="container">
-    <h1 align="center">Comments</h1>
+        {{result}} resultat
+        <div>{{comments.length}} dlina</div>
+        <h1 align="center">Comments</h1>
     <hr/>
-    <form>
       <div>
         <form *ngFor="let comment of comments; let i = index" style="border:2px solid #555; box-shadow:3px 3px 5px #999;   margin:20px; padding:20px;">
-          <h4>{{comment.user}}</h4>
-              {{comment.text}}
+          <h4><b>
+                
+                {{comment.user}}
+              </b>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <b>{{comment.rate}}</b>
+              <span class="fa fa-star checked"></span>
+              </h4>
+              <div><i>
+                {{comment.date | date:'short'}}
+              </i>
+            </div> 
+              <h4>{{comment.text}}</h4>
         </form>
       </div>
         <h2>Leave a Replay</h2>
+
         <form [formGroup]="newComment" (ngSubmit)="submit()">
+        <h4>Rate: <b>{{rating}}</b><span class="fa fa-star checked"></span></h4>
+        <fieldset class="rating">
+          <input class type="radio" value="5" name="rate" [checked]="rating===5" />
+          <label title="Rocks!" (click)='onClick(5)'>5 stars</label>
+        
+          <input type="radio" value="4" [checked]="rating===4"/>
+          <label title="Pretty good" (click)='onClick(4)'>4 stars</label>
+        
+          <input type="radio" value="3" [checked]="rating===3"/>
+          <label title="Not Bad" (click)='onClick(3)'>3 stars</label>
+        
+          <input type="radio" value="2" [checked]="rating===2"/>
+          <label title="Bad" (click)='onClick(2)'>2 stars</label>
+        
+          <input type="radio" value="1" [checked]="rating===1"/>
+          <label title="Very Bad" (click)='onClick(1)'>1 star</label>
+        </fieldset>
           <textarea class="form-control" rows="5" type="text" formControlName="text" placeholder="Your Comment"></textarea>
           <br/>
           <button class="btn btn-success btn-md pull-right" type="submit">Comment</button>
         </form>
         <br/>
         <hr/>
-    </form>
     </div>
   </body>
 </html>
