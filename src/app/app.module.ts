@@ -68,6 +68,7 @@ import { TourIndexComponent } from './tour-index/tour-index.component';
 import { TourSearchResComponent } from './tour-search-res/tour-search-res.component';
 import { TourDetailsComponent } from './tour-details/tour-details.component';
 import { ChatDialogComponent } from './components/chat-dialog/chat-dialog.component';
+import { MapFindHotelComponent } from './map-find-hotel/map-find-hotel.component';
 
 export function initGapi(gapiSession: GapiSession) {
   return () => gapiSession.initClient();
@@ -101,6 +102,7 @@ export function initGapi(gapiSession: GapiSession) {
 
     TourDetailsComponent,
     ChatDialogComponent,
+    MapFindHotelComponent,
   ],
   entryComponents: [
     DetailshotelDialogComponent,
@@ -168,6 +170,7 @@ export function initGapi(gapiSession: GapiSession) {
       {path: 'comments', component: BuyTicketComponent},
       {path:'tourResult',component:TourSearchResComponent},
       {path:'tourResult/:id', component:TourDetailsComponent},
+      {path:'Mapfind',component:MapFindHotelComponent},
       {path: '', component:IndexComponent}
     ]),
     ],

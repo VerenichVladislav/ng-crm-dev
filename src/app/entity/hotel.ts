@@ -13,6 +13,8 @@ export class Hotel{
   comments:Array<any>;
   city: City;
   image:string;
+  lat:number;
+  lng:number;
 
   constructor(hotelResponse: any) {
     this.hotelId = hotelResponse.hotelId;
@@ -25,5 +27,7 @@ export class Hotel{
     this.comments = hotelResponse.comments;
     this.city = hotelResponse.city;
     this.image =hotelResponse.image;
+    this.lat = hotelResponse.lat;
+    this.lng = hotelResponse.lng;
   }
 }

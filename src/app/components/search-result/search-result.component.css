@@ -29,14 +29,15 @@
 }
 .hotels-card-hotel-img{
     max-width: 260px;
-    overflow: hidden;
-}
-.hotels-card-hotel-img img{
-    width:100%;
+    
     border-radius: 5px;
     margin-top: 2rem;
     margin-left: 2rem;
-    overflow: hidden; 
+    margin: 2rem;
+    overflow: hidden;
+}
+.hotels-card-hotel-img img{
+    width:120%;
 }
 .hotels-card-content{
     display: flex;
