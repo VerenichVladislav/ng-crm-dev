@@ -15,10 +15,10 @@ export class DataTransferService {
   constructor() { }
 
   setTickets(data: Ticket[]) {
-    this.tickets$.next(data)
+    this.tickets$.next(data);
   }
 
   setReservations(data: Reservation[]) {
-    this.reservations$.next(data)
+    this.reservations$.next(data);
   }
 }

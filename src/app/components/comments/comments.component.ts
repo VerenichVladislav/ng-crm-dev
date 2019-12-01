@@ -1,9 +1,14 @@
-import { Component, OnInit, Injectable, Input } from '@angular/core';
+import { Component, OnInit, Injectable, Input, NgModule, Output, EventEmitter } from '@angular/core';
 import { CommentsService } from '../../shared/comments.service';
 import { ActivatedRoute } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
+@NgModule({
+  imports: [BrowserModule, NgbModule]
+})
 @Injectable({
   providedIn: 'root'
 })
@@ -18,25 +23,23 @@ export class CommentsComponent implements OnInit {
   //tour = 2
   //company =3
   @Input() EntityId: number;
+  @Input() rating: number;
+  @Output() ratingClick: EventEmitter<any> = new EventEmitter<any>();
   comments = [];
   message: any;
   newComment: FormGroup;
-  newCommentCompany: FormGroup;
-  newCommentTour: FormGroup;
-  newCommentHotel: FormGroup;
   text: FormControl;
   hotelId:number;
+  commentId: number;
   userId:number = JSON.parse(localStorage.getItem('user')).userId;
   asyncResult:any;
+  result:number=0;
   constructor(
     private route: ActivatedRoute,
     private fb: FormBuilder,
     private commentsService: CommentsService){}
 
   ngOnInit() {
-    console.log('userid: ' , this.userId);
-    console.log('hotelid: ' , this.EntityId);
-    console.log('type: ' , this.type);
     if(this.type=1){
     this.comments = this.commentsService.getHotelComments(this.EntityId).subscribe(
       data => this.comments = data
@@ -52,13 +55,20 @@ export class CommentsComponent implements OnInit {
      }
     this.newComment = new FormGroup({
       text: new FormControl()
-   });
-
-    this.newComment.valueChanges.subscribe((value)=>console.log(JSON.stringify(value)));
+    });
+    //this.newComment.valueChanges.subscribe((value)=>console.log(JSON.stringify(value)));
   }
 
+  onClick(rating: number): void {
+    this.rating = rating;
+    this.ratingClick.emit({
+      rating: rating
+  });
+  console.log(rating);
+}
+
   async submit(){
-      this.commentsService.submitForm(this.newComment.controls.text,this.EntityId, this.userId, this.type)
+      this.commentsService.submitForm(this.newComment.controls.text, this.rating, this.EntityId, this.userId, this.type)
                   .subscribe(
                       (log: HttpErrorResponse) => {      
                           this.message = log;     
@@ -85,5 +95,6 @@ export class CommentsComponent implements OnInit {
                        );
                        this.asyncResult = await this.commentsService.getCompanyComments(this.EntityId).toPromise();
                      }
+                     window.location.reload();
       }
 }

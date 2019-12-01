@@ -73,10 +73,11 @@ export class LoginComponent implements OnInit {
 
                       this.transfer.setTickets(tickets);
                       this.transfer.setReservations(reservations);
+
+                      this.router.navigate(['profile']);
                     }
                   ));
 
-                this.router.navigate(['profile']);
                 this.hideLoginForm();
               },
               error => {
@@ -93,22 +94,22 @@ export class LoginComponent implements OnInit {
             error.error.message === 'NonUnique userName') {
             this.errorLogin = false;
             this.errorPassword = true;
-          } else if(error.status === 0) {
+          } else if (error.status === 0) {
             this.errorConnection.openSnackBar();
           }
         }));
   }
 
-  loadTickets(tickets, id){
+  loadTickets(tickets, id) {
     this.subscriptions.push(this.ticketService.getAllByBuyerId(id)
       .subscribe(
         (all: any) => {
           all.forEach(
             (t: any) => {
-              let ticket = new Ticket(t);
+              const ticket = new Ticket(t);
               this.cityService.getById(t.cityDest)
                 .subscribe(
-                  (city: City) =>{
+                  (city: City) => {
                     ticket.cityDest = new City(city);
                   },
                   error1 => {
@@ -118,7 +119,7 @@ export class LoginComponent implements OnInit {
 
               this.cityService.getById(t.cityFrom)
                 .subscribe(
-                  (city: City) =>{
+                  (city: City) => {
                     ticket.cityFrom = new City(city);
                   },
                   error1 => {
@@ -127,7 +128,7 @@ export class LoginComponent implements OnInit {
                 );
               tickets.push(ticket);
             }
-        );
+          );
         },
         error => {
           console.log(error);
@@ -135,14 +136,14 @@ export class LoginComponent implements OnInit {
       ));
   }
 
-  loadReservations(id): Reservation[]{
+  loadReservations(id): Reservation[] {
     let reservations: Reservation[] = [];
     this.subscriptions.push(this.reservationService.getAllByBuyerId(id)
       .subscribe(
         (all: any) => {
           all.forEach(
             (r: any) => {
-              let reservation = new Reservation(r);
+              const reservation = new Reservation(r);
               this.hotelService.getById(r.hotel)
                 .subscribe(
                   (hotel: Hotel) => {
@@ -173,9 +174,5 @@ export class LoginComponent implements OnInit {
 
 
   ngOnInit() {
-  }
-
-  ngOnDestroy() {
-
   }
 }

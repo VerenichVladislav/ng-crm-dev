@@ -30,7 +30,7 @@ button:hover {
   opacity:1;
 }
 #header {
- 
+
 }
 .cancelbtn {
   width: auto;
@@ -106,4 +106,18 @@ hr {
 @keyframes animatezoom {
   from {transform: scale(0)}
   to {transform: scale(1)}
+}
+.eng, .rus {
+  outline: 0;
+  height: 5vh;
+  width: 5vw;
+  border: 0;
+  padding: 0;
+  background-size: contain;
+}
+.eng {
+  background: url(src/england.svg) no-repeat;
+}
+.rus {
+  background: url(src/russia.svg) no-repeat;
 }

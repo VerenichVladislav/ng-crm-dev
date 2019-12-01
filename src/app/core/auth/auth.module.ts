@@ -8,6 +8,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import { LogoutComponent } from './components/logout/logout.component';
 import {IdentityPasswordDirective} from './shared/identity-password.directive';
+import {translate_v2} from 'googleapis';
+import {TranslateModule} from '@ngx-translate/core';
 
 @NgModule({
   declarations: [
@@ -19,11 +21,11 @@ import {IdentityPasswordDirective} from './shared/identity-password.directive';
   exports: [
     RegisterComponent,
     LoginComponent,
-    LogoutComponent
+    LogoutComponent,
   ],
   imports: [
     CommonModule,
-
+    TranslateModule,
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,

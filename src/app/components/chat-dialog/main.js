@@ -24,7 +24,7 @@ function connect(event) {
         usernamePage.classList.add('hidden');
         chatPage.classList.remove('hidden');
 
-        var socket = new SockJS(GlobalRootURL + '/ws');
+        var socket = new SockJS(GlobalRootURL.BASE_API_URL + '/ws');
         stompClient = Stomp.over(socket);
 
         stompClient.connect({}, onConnected, onError);
@@ -35,13 +35,13 @@ function connect(event) {
 
 function onConnected() {
     // Subscribe to the Public Topic
-    stompClient.subscribe(GlobalRootURL + '/topic/public', onMessageReceived);
+    stompClient.subscribe(GlobalRootURL.BASE_API_URL + '/topic/public', onMessageReceived);
 
     // Tell your username to the server
-    stompClient.send(GlobalRootURL + "/app/chat.addUser",
+    stompClient.send(GlobalRootURL.BASE_API_URL + "/app/chat.addUser",
         {},
         JSON.stringify({sender: username, type: 'JOIN'})
-    )
+    );
 
     connectingElement.classList.add('hidden');
 }
@@ -63,7 +63,7 @@ function sendMessage(event) {
             type: 'CHAT'
         };
 
-        stompClient.send(GlobalRootURL + "/app/chat.sendMessage", {}, JSON.stringify(chatMessage));
+        stompClient.send(GlobalRootURL.BASE_API_URL + "/app/chat.sendMessage", {}, JSON.stringify(chatMessage));
         messageInput.value = '';
     }
     event.preventDefault();
@@ -118,5 +118,5 @@ function getAvatarColor(messageSender) {
     return colors[index];
 }
 
-usernameForm.addEventListener('submit', connect, true)
-messageForm.addEventListener('submit', sendMessage, true)
+usernameForm.addEventListener('submit', connect, true);
+messageForm.addEventListener('submit', sendMessage, true);
