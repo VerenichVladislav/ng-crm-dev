@@ -31,16 +31,20 @@ export class CommentsService {
     return this.http.get(this.URL + 'tour/' + id);
   }
 
-  submitForm(text: any, entityId: number, userId:number, type: number): Observable<any> {    
+  submitForm(text: any, rating:number, entityId: number, userId:number, type: number): Observable<any> {   
+    console.log(rating); 
     if(type=1){
       this.newComment = new FormGroup({
+        commentId: new FormControl(9999999),
         text,
+        rate: new FormControl(rating),
         user: new FormControl({'userId' : userId }),
         hotel: new FormControl({'hotelId' : entityId })
       });
     }
        else if(type=2){
         this.newComment = new FormGroup({
+          commentId: new FormControl(9999999),
           text,
           user: new FormControl({'userId' : userId }),
           tour: new FormControl({'tourId' : entityId })
