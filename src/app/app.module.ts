@@ -7,9 +7,10 @@ import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { HeaderComponent } from './core/header/header.component';
-import { StompService } from 'ng2-stomp-service';
+// import { StompService } from 'ng2-stomp-service';
+import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
 import {RouterModule} from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
 import { ProfileComponent } from './components/profile/profile.component';
 import {AuthModule} from './core/auth/auth.module';
 import {FilterComponent} from './core/auth/components/filter/filter.component';
@@ -56,7 +57,6 @@ import { DetailshotelDialogComponent } from './detailshotel-dialog/detailshotel-
 import { BuyTicketComponent } from './components/buy-ticket/buy-ticket.component';
 import { ScrollUpBtnComponent } from './core/scroll-up-btn/scroll-up-btn.component';
 import { CommentsComponent } from './components/comments/comments.component';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { GoogleServiceComponent } from './google-service/google-service.component';
 import { GapiSession } from './google-service/GapiSession';
 import {LoginComponent} from './core/auth/components/login/login.component';
@@ -70,11 +70,17 @@ import {SearchResultTripComponent} from './components/search-result-trip/search-
 import {FlightsindexComponent} from './components/flightsindex/flightsindex.component';
 import { SideFiltersComponent } from './components/side-filters/side-filters.component';
 import { Page404Component } from './core/page404/page404.component';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import {GlobalRootURL} from './GlobalRootURL';
 
 export function initGapi(gapiSession: GapiSession) {
   return () => gapiSession.initClient();
 }
 
+export function createTranslateLoader(http: HttpClient) {
+  const URL = GlobalRootURL.BASE_API_URL + 'international?lang=';
+  return new TranslateHttpLoader(http, URL, '.json');
+}
 
 @NgModule({
   declarations: [
@@ -156,6 +162,15 @@ export function initGapi(gapiSession: GapiSession) {
     ReactiveFormsModule,
     BrowserAnimationsModule,
     AuthModule,
+
+    TranslateModule.forRoot( {
+      loader: {
+        provide: TranslateLoader,
+        useFactory: createTranslateLoader,
+        deps: [HttpClient],
+      }
+    }),
+
     RouterModule.forRoot([
       { path: 'login', component: LoginComponent},
       {
@@ -180,6 +195,7 @@ export function initGapi(gapiSession: GapiSession) {
     GapiSession,
     DataTransferService,
     SnackBarComponent,
+    TranslateService
     // StompService
   ],
 

@@ -15,7 +15,7 @@
 //   usernamePage = $('#username-page');
 //   chatPage = $('#chat-page');
 //   usernameForm = $('#this.usernameForm');
-//   me ssageForm = $('#this.messageForm');
+//   messageForm = $('#this.messageForm');
 //   messageInput = $('#message');
 //   messageArea = $('#this.messageArea');
 //   connectingElement = $('.connecting');

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {TranslateService} from '@ngx-translate/core';
 // import { StompService } from 'ng2-stomp-service';
 
 
@@ -14,7 +15,10 @@ export class AppComponent {
   //   queue: ''
   // };
 
-  constructor() {
+  constructor(translate: TranslateService) {
+    translate.addLangs(['en', 'ru'])
+    translate.setDefaultLang('en');
+    translate.use('en');
 
     // stomp.configure(this.wsConf);
     //

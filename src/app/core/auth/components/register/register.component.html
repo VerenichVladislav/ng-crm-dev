@@ -42,7 +42,7 @@
       <p>Создавая аккаунт вы соглашаетесь с нашими <a href="#" style="color:dodgerblue">Условиями и политикой конфиденциальности</a>.</p>
 
       <div class="clearfix">
-        <button type="submit" class="signupbtn" [disabled]="!registerForm.valid">Sign Up</button>
+        <button type="submit" class="signupbtn" [disabled]="!registerForm.valid">{{ 'signup' | translate }}</button>
         <button type="button" (click)="hideRegisterForm()" class="cancelbtn">Cancel</button>
 
         <script
