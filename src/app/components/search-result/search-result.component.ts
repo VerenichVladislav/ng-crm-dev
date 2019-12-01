@@ -37,6 +37,7 @@ export class SearchResultComponent implements OnInit {
      body:body
     };
     this.posts = this.http.post<Hotel[]>(this.ROOT_URL,body);
+    
   }
   onSelect(hotel: Hotel): void {
     this.selectedHotel = hotel;
