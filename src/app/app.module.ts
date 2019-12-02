@@ -66,6 +66,10 @@ import { ConnectionErrorComponent } from './components/snack-bar/connection-erro
 import { SnackBarComponent } from './components/snack-bar/snack-bar.component';
 import { IndexComponent } from './index/index.component';
 import { TourIndexComponent } from './tour-index/tour-index.component';
+import { TourSearchResComponent } from './tour-search-res/tour-search-res.component';
+import { TourDetailsComponent } from './tour-details/tour-details.component';
+import { ChatDialogComponent } from './components/chat-dialog/chat-dialog.component';
+import { MapFindHotelComponent } from './map-find-hotel/map-find-hotel.component';
 // import { ChatDialogComponent } from './components/chat-dialog/chat-dialog.component';
 import {SearchResultTripComponent} from './components/search-result-trip/search-result-trip.component';
 import {FlightsindexComponent} from './components/flightsindex/flightsindex.component';
@@ -112,6 +116,9 @@ export function createTranslateLoader(http: HttpClient) {
 
     // ChatDialogComponent,
 
+    TourDetailsComponent,
+    ChatDialogComponent,
+    MapFindHotelComponent,
     SideFiltersComponent,
   ],
   entryComponents: [
@@ -189,6 +196,9 @@ export function createTranslateLoader(http: HttpClient) {
       { path: 'SearchResult/:id', component: DetailshotelComponentComponent},
       {path: 'trips/:userid/:tripid/buy', component: BuyTicketComponent},
       {path: 'comments', component: BuyTicketComponent},
+      {path:'tourResult',component:TourSearchResComponent},
+      {path:'tourResult/:id', component:TourDetailsComponent},
+      {path:'Mapfind',component:MapFindHotelComponent},
       {path: '', component: IndexComponent},
       {path: 'trips', component: FlightsindexComponent},
 

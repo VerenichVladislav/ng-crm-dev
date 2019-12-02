@@ -5,6 +5,7 @@ import {GlobalRootURL} from '../GlobalRootURL';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Hotel} from '../entity/hotel';
 import { HotelFilters } from '../entity/HotelFilters';
+import { isObject } from 'util';
 
 @Injectable({
   providedIn: 'root'
@@ -15,8 +16,9 @@ export  class HotelService {
   constructor(private http: HttpClient){ }
   hotelFilter:HotelFilters
   public setHotelFilter(hotelFilter:HotelFilters){
-    this.hotelFilter = hotelFilter;
     console.log(hotelFilter.city);
+    this.hotelFilter = hotelFilter;
+  
     
   }
   getById(id: number): Observable<Hotel>{

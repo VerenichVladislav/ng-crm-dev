@@ -42,6 +42,11 @@ export class HotelindexComponent implements OnInit {
    this.service.setHotelFilter(hotelFilter);
    this.router.navigate(['/SearchResult']);
   }
+  GoMap(){
+    var filter = {} as HotelFilters
+    this.service.setHotelFilter(filter);
+ this.router.navigate(['/Mapfind']);
+}
   findbyCity(city:string){
     console.log(city);
    this.city = city;

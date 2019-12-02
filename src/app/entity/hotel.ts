@@ -13,6 +13,8 @@ export class Hotel{
   comments:Array<any>;
   city?: City;
   image:string;
+  lat:number;
+  lng:number;
 
   constructor(hotelResponse: any = {} as any) {
     let {
@@ -28,6 +30,10 @@ export class Hotel{
     this.phoneNumber = hotelResponse.phoneNumber;
     this.rooms = hotelResponse.rooms;
     this.comments = hotelResponse.comments;
+    this.city = hotelResponse.city;
+    this.image =hotelResponse.image;
+    this.lat = hotelResponse.lat;
+    this.lng = hotelResponse.lng;
     this.city = city;
     this.image = hotelResponse.image;
   }

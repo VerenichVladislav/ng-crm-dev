@@ -402,3 +402,7 @@ transform: scale(1.2); /* Увеличиваем масштаб */
     color: #fff;
     cursor: pointer;
 }
+.map{
+    width: 100%;
+    height: 100%;
+}

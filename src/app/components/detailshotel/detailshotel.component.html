@@ -40,7 +40,6 @@
     <mat-grid-tile [colspan]=1 [rowspan]=4 *ngFor="let item of realHOtel.rooms">
     <mat-card >
             <mat-card-header>
-              <div mat-card-avatar class="example-header-image"></div>
               <mat-card-title>Room Type {{item.roomId}}</mat-card-title>
 
             </mat-card-header>
@@ -58,7 +57,8 @@
             <mat-card-actions>
               <button  mat-raised-button (click)="openDialog(item)">Reservation</button>
             </mat-card-actions>
-          </mat-card >
+          </mat-card >          <div mat-card-avatar class="example-header-image"></div>
+    
         </mat-grid-tile>
 </mat-grid-list>
 <app-comments [type]="1" [EntityId]="hotelId"></app-comments>

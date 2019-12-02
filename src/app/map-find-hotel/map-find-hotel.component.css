@@ -1,0 +1,26 @@
+.map{
+    width: 100%;
+    height: 100%;
+}
+.marker {
+    background:brown;
+    background-size: cover;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  .mapboxgl-popup {
+    max-width: 100px;
+    
+    border-radius: 5px;
+    margin-top: 2rem;
+    margin-left: 2rem;
+    margin: 2rem;
+    overflow: hidden;
+  }
+  
+  .mapboxgl-popup-content {
+    text-align: center;
+    font-family: 'Open Sans', sans-serif;
+  }
