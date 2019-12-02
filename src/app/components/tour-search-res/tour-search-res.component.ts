@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Tour } from '../entity/Tour';
-import { GlobalRootURL } from '../GlobalRootURL';
+import { Tour } from '../../entity/Tour';
+import { GlobalRootURL } from '../../GlobalRootURL';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
-import { TourService } from '../shared/TourService';
+import { TourService } from '../../shared/TourService';
 
 @Component({
   selector: 'app-tour-search-res',
@@ -16,7 +16,7 @@ export class TourSearchResComponent implements OnInit {
   constructor(private http: HttpClient, private router:Router,private address :ActivatedRoute,private service:TourService) { }
   readonly ROOT_URL = GlobalRootURL.BASE_API_URL + 'tours';
   posts: Observable<Tour[]>;
-  
+
   ngOnInit() {
     this.getPosts();
   }
@@ -28,7 +28,7 @@ export class TourSearchResComponent implements OnInit {
      body:body
     };
     this.posts = this.http.post<Tour[]>(this.ROOT_URL,body);
-    
+
   }
   onSelect(Tour: Tour): void {
     this.selectedTour = Tour;

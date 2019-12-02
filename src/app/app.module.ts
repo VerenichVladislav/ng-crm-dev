@@ -54,7 +54,7 @@ import { SearchResultComponent } from './components/search-result/search-result.
 import { DetailshotelComponentComponent} from './components/detailshotel/detailshotel.component';
 import {CdkTreeModule} from '@angular/cdk/tree';
 import {DataTransferService} from './shared/data-transfer.service';
-import { DetailshotelDialogComponent } from './detailshotel-dialog/detailshotel-dialog.component';
+import { DetailshotelDialogComponent } from './components/detailshotel-dialog/detailshotel-dialog.component';
 import { BuyTicketComponent } from './components/buy-ticket/buy-ticket.component';
 import { ScrollUpBtnComponent } from './core/scroll-up-btn/scroll-up-btn.component';
 import { CommentsComponent } from './components/comments/comments.component';
@@ -64,11 +64,10 @@ import {LoginComponent} from './core/auth/components/login/login.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { ConnectionErrorComponent } from './components/snack-bar/connection-error/connection-error.component';
 import { SnackBarComponent } from './components/snack-bar/snack-bar.component';
-import { IndexComponent } from './index/index.component';
-import { TourIndexComponent } from './tour-index/tour-index.component';
-import { TourSearchResComponent } from './tour-search-res/tour-search-res.component';
-import { TourDetailsComponent } from './tour-details/tour-details.component';
-import { ChatDialogComponent } from './components/chat-dialog/chat-dialog.component';
+import { IndexComponent } from './components/index/index.component';
+import { TourIndexComponent } from './components/tour-index/tour-index.component';
+import { TourSearchResComponent } from './components/tour-search-res/tour-search-res.component';
+import { TourDetailsComponent } from './components/tour-details/tour-details.component';
 import { MapFindHotelComponent } from './map-find-hotel/map-find-hotel.component';
 // import { ChatDialogComponent } from './components/chat-dialog/chat-dialog.component';
 import {SearchResultTripComponent} from './components/search-result-trip/search-result-trip.component';
@@ -78,6 +77,7 @@ import { Page404Component } from './core/page404/page404.component';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {GlobalRootURL} from './GlobalRootURL';
 import {Ng4LoadingSpinnerModule} from "ng4-loading-spinner";
+import {LoginGuard} from "./shared/login-guard.service";
 
 export function initGapi(gapiSession: GapiSession) {
   return () => gapiSession.initClient();
@@ -115,9 +115,8 @@ export function createTranslateLoader(http: HttpClient) {
     TourIndexComponent,
 
     // ChatDialogComponent,
-
+    TourSearchResComponent,
     TourDetailsComponent,
-    ChatDialogComponent,
     MapFindHotelComponent,
     SideFiltersComponent,
   ],
@@ -188,7 +187,7 @@ export function createTranslateLoader(http: HttpClient) {
       {
         path: 'profile',
         component: ProfileComponent,
-        canActivate: []
+        canActivate: [LoginGuard]
       },
       { path: 'HotelIndex', component: HotelindexComponent},
       { path: 'Index', component: IndexComponent},

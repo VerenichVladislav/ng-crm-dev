@@ -54,9 +54,6 @@ export class LoginComponent implements OnInit {
   submit(userData) {
     this.spinnerService.show();
 
-    let tickets: Ticket[] = [];
-    let reservations: Reservation[] = [];
-
     this.subscriptions.push(this.loginService
       .loginUser(userData.username, userData.password)
       .subscribe(

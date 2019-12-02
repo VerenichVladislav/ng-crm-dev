@@ -8,7 +8,7 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog
 
 import { Injectable } from '@angular/core';
 import { room } from 'src/app/entity/room';
-import { DetailshotelDialogComponent } from 'src/app/detailshotel-dialog/detailshotel-dialog.component';
+import { DetailshotelDialogComponent } from 'src/app/components/detailshotel-dialog/detailshotel-dialog.component';
 import {GlobalRootURL} from '../../GlobalRootURL';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 

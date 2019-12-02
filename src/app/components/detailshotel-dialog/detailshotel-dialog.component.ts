@@ -5,9 +5,9 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog
 import { Timestamp, Observable, from } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
-import { DialogData } from '../components/detailshotel/detailshotel.component';
-import {GlobalRootURL} from '../GlobalRootURL';
-import {SnackBarComponent} from '../components/snack-bar/snack-bar.component';
+import { DialogData } from '../detailshotel/detailshotel.component';
+import {GlobalRootURL} from '../../GlobalRootURL';
+import {SnackBarComponent} from '../snack-bar/snack-bar.component';
 
 
 @Component({
