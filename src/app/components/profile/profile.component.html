@@ -79,7 +79,7 @@
               <h4 class="card-title">Билет</h4>
               <button type="button" class="btn btn-primary btn-ticket" routerLink="/">Погнали ещё раз</button>
             </div>
-            <p class="card-text">Покупатель: {{ticket.firstName}}</p>
+            <p class="card-text">Покупатель: {{ticket.name}} {{ticket.lastName}}</p>
             <p class="card-text">Страна: {{ticket.cityFrom.country}}</p>
             <p class="card-text">Дата отъезда: <br>{{ticket.date}}</p>
             <p class="card-text">{{ticket.cityFrom.cityName}}<strong> ---> </strong>{{ticket.cityDest.cityName}}</p>
@@ -108,7 +108,8 @@
           <div class="card-body">
             <h4 class="card-title">Отель</h4>
             <p class="card-text">Отель: {{reservation.hotel.hotelName}}</p>
-            <p class="card-text">Город: {{reservation.hotel.city}}</p>
+            <p class="card-text">Страна: {{reservation.hotel.country}}</p>
+            <p class="card-text">Адрес: {{reservation.hotel.address}}</p>
             <p class="card-text">Дата заселения: {{reservation.checkIn}}</p>
             <p class="card-text">Дата отъезда: {{reservation.checkOut}}</p>
             <p class="card-text">id бронирования: #{{reservation.reservationId}}</p>

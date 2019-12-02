@@ -11,11 +11,16 @@ export class Hotel{
   phoneNumber:string;
   rooms:Observable<room[]>;
   comments:Array<any>;
-  city: City;
+  city?: City;
   image:string;
 
-  constructor(hotelResponse: any) {
-    this.hotelId = hotelResponse.hotelId;
+  constructor(hotelResponse: any = {} as any) {
+    let {
+      hotelId = -1,
+      city = new City()
+    } = hotelResponse;
+
+    this.hotelId = hotelId;
     this.country = hotelResponse.country;
     this.address = hotelResponse.address;
     this.rating = hotelResponse.rating;
@@ -23,7 +28,7 @@ export class Hotel{
     this.phoneNumber = hotelResponse.phoneNumber;
     this.rooms = hotelResponse.rooms;
     this.comments = hotelResponse.comments;
-    this.city = hotelResponse.city;
-    this.image =hotelResponse.image;
+    this.city = city;
+    this.image = hotelResponse.image;
   }
 }

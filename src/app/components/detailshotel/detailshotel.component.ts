@@ -10,7 +10,7 @@ import { Injectable } from '@angular/core';
 import { room } from 'src/app/entity/room';
 import { DetailshotelDialogComponent } from 'src/app/detailshotel-dialog/detailshotel-dialog.component';
 import {GlobalRootURL} from '../../GlobalRootURL';
-
+import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 
 
 export interface DialogData {
@@ -31,7 +31,10 @@ export class DetailshotelComponentComponent implements OnInit {
   hotelId:number;
   getInfo:Observable<Hotel>;
   realHOtel: Hotel;
-  constructor(private route:ActivatedRoute,private http:HttpClient,public dialog: MatDialog) { }
+  constructor(private route:ActivatedRoute,
+              private http:HttpClient,
+              public dialog: MatDialog,
+              private spinnerService: Ng4LoadingSpinnerService) { }
 
 
   openDialog(room:room): void {
@@ -41,10 +44,12 @@ export class DetailshotelComponentComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.spinnerService.show();
     let id = parseInt(this.route.snapshot.paramMap.get('id'));
     this.hotelId = id;
     this.http.get<Hotel>(this.ROOT_URL+"/"+id).subscribe(
      (data: Hotel) => {
+       this.spinnerService.hide();
        this.realHOtel = data;
        },
      error => {

@@ -10,6 +10,7 @@ import { LogoutComponent } from './components/logout/logout.component';
 import {IdentityPasswordDirective} from './shared/identity-password.directive';
 import {translate_v2} from 'googleapis';
 import {TranslateModule} from '@ngx-translate/core';
+import {Ng4LoadingSpinnerModule} from "ng4-loading-spinner";
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import {TranslateModule} from '@ngx-translate/core';
   imports: [
     CommonModule,
     TranslateModule,
+    Ng4LoadingSpinnerModule,
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,

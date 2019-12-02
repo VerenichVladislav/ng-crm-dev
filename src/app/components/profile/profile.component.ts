@@ -6,6 +6,7 @@ import {Ticket} from '../../entity/ticket';
 import {Reservation} from '../../entity/reservation';
 import {NavigationEnd, Router} from '@angular/router';
 import {filter} from 'rxjs/operators';
+import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 
 @Component({
   selector: 'app-profile',
@@ -18,32 +19,40 @@ export class ProfileComponent {
   private tours;
   private tickets: Ticket[] = [];
   constructor(private transfer: DataTransferService,
-              private router: Router) {
+              private router: Router,
+              private spinnerService: Ng4LoadingSpinnerService) {
+    this.spinnerService.show();
+
     this.router.events
       .pipe(filter(e => e instanceof NavigationEnd))
       .subscribe((e: NavigationEnd) => {
-        this.user = JSON.parse(localStorage.getItem('user'));
-        if (this.transfer.tickets$.getValue() !== undefined) {
-          this.transfer.tickets$.subscribe( value => {
-            this.tickets = value;
-            if (this.tickets.length > 0) {
-              localStorage.setItem('tickets', JSON.stringify(this.tickets));
-            }
-          });
-        } else {
-          this.tickets = JSON.parse(localStorage.getItem('tickets'));
-        }
 
-        if (this.transfer.reservations$.getValue() !== undefined) {
-          this.transfer.reservations$.subscribe(value => {
-            this.reservations = value;
-            if (this.reservations.length > 0) {
-              localStorage.setItem('reservations', JSON.stringify(this.reservations));
+        this.user = JSON.parse(localStorage.getItem('user'));
+
+        if (this.transfer.user$.getValue() !== undefined) {
+          this.transfer.user$.subscribe( value => {
+            this.user = value;
+            if (!!this.user) {
+              localStorage.setItem('user', JSON.stringify(this.user));
             }
           });
         } else {
-          this.reservations = JSON.parse(localStorage.getItem('reservations'));
+          this.user = JSON.parse(localStorage.getItem('user'));
         }
+        this.reservations = this.user.reservations;
+        this.tickets = this.user.tickets;
+
+        this.spinnerService.hide();
+        // if (this.transfer.reservations$.getValue() !== undefined) {
+        //   this.transfer.reservations$.subscribe(value => {
+        //     this.reservations = value;
+        //     if (this.reservations.length > 0) {
+        //       localStorage.setItem('reservations', JSON.stringify(this.reservations));
+        //     }
+        //   });
+        // } else {
+        //   this.reservations = JSON.parse(localStorage.getItem('reservations'));
+        // }
       });
   }
 

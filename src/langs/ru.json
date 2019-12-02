@@ -1,6 +1,0 @@
-{
-  "welcomeMessage": "Thanks for joining, {{ firstName }}! It's great to have you!",
-  "login": "Вход",
-  "signup": "Регистрация"
-
-}

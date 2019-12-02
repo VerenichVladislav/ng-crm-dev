@@ -7,6 +7,9 @@ import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {TicketService} from '../../shared/ticket.service';
 import { parseHttpResponse } from 'selenium-webdriver/http';
 import {SnackBarComponent} from '../snack-bar/snack-bar.component';
+import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
+
+
 @Component({
   selector: 'app-buy-ticket',
   templateUrl: './buy-ticket.component.html',
@@ -30,15 +33,21 @@ export class BuyTicketComponent implements OnInit {
               private fb: FormBuilder,
               private ticketService: TicketService,
               private errorConnection: SnackBarComponent,
-              private http: HttpClient){}
+              private http: HttpClient,
+              private spinnerService: Ng4LoadingSpinnerService){}
 
     ngOnInit() {
+    this.spinnerService.show();
+
     const tripid = this.route.snapshot.paramMap.get('tripid');
     this.idT = parseInt(tripid);
     const userid = this.route.snapshot.paramMap.get('userid');
     this.idU = parseInt(userid);
     this.trip = this.tripService.getTrip(tripid).subscribe(
-      data => this.trip = data
+      data => {
+        this.spinnerService.hide();
+        this.trip = data
+      }
      );
 
 

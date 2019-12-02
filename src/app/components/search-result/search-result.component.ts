@@ -10,6 +10,9 @@ import { Router, ActivatedRoute } from '@angular/router';
 import {GlobalRootURL} from '../../GlobalRootURL';
 import { HotelFilters } from 'src/app/entity/HotelFilters';
 import { HotelService } from 'src/app/shared/hotel.service';
+import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
+
+
 @Component({
   selector: 'app-search-result-component',
   templateUrl: './search-result.component.html',
@@ -22,21 +25,26 @@ export class SearchResultComponent implements OnInit {
   rooms: Observable<room[]>;
   ratingFilter: number;
   city:String;
-  constructor(private http: HttpClient, private router: Router,private address :ActivatedRoute,private service:HotelService) {
-    
+  constructor(private http: HttpClient, private router: Router,
+              private address :ActivatedRoute,
+              private service:HotelService,
+              private spinnerService: Ng4LoadingSpinnerService) {
     this.city = service.hotelFilter.city;
     console.log(this.city);
-    
+
     this.getPosts();
   }
   selectedHotel: Hotel;
   getPosts() {
+    this.spinnerService.show();
+
     let body = this.service.hotelFilter;
 
     let options = {
      body:body
     };
     this.posts = this.http.post<Hotel[]>(this.ROOT_URL,body);
+    this.spinnerService.hide();
   }
   onSelect(hotel: Hotel): void {
     this.selectedHotel = hotel;

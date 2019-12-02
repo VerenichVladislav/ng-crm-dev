@@ -1,15 +1,23 @@
 export class City {
-  cityName: string;
-  country: string;
-  foundationDate: number;
-  population: number;
-  image:string;
+  cityId: number;
+  cityName?: string;
+  country?: string;
+  population?: number;
+  image?: string;
 
-  constructor(city: City) {
-    this.cityName = city.cityName;
-    this.country = city.country;
-    this.foundationDate = city.foundationDate;
-    this.population = city.population;
-    this.image=this.image;
+  constructor(city: City = {} as City) {
+    let {
+      cityId = -1,
+      cityName = '',
+      country = '',
+      population = -1,
+      image = ''
+    } = city;
+
+    this.cityId = cityId;
+    this.cityName = cityName;
+    this.country = country;
+    this.population = population;
+    this.image = image;
   }
 }

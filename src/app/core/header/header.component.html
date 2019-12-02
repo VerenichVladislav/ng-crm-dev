@@ -1,23 +1,18 @@
-<script type="text/javascript">
-  $(document).ready(function() {
-    $("#locales").change(function () {
-      var selectedOption = $('#locales').val();
-      if (selectedOption !== ''){
-        window.location.replace('international?lang=' + selectedOption);
-      }
-    });
-  });
-</script>
 <header class="header">
   <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
   <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark" role="navigation" id="header">
-    <a class="navbar-brand" href="#" role="banner">Aviasales 2.0</a>
+    <img routerLink="/" src="https://inta.pro/small/area/ru/icon-24-samoletostroenie-1.png" class="logo"/>
+    <a class="navbar-brand" routerLink="/" role="banner">
+
+      Aviasales 2.0
+    </a>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsDefault" aria-controls="navbarsDefault" aria-expanded="false" aria-label="Переключить навигацию">
       <span class="navbar-toggler-icon"></span>
     </button>
 
     <div class="collapse navbar-collapse" id="navbarsDefault">
+
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
           <a class="nav-link" href="#">Главная <span class="sr-only">(current)</span></a>

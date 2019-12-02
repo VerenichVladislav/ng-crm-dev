@@ -49,6 +49,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { SearchResultComponent } from './components/search-result/search-result.component';
 import { DetailshotelComponentComponent} from './components/detailshotel/detailshotel.component';
 import {CdkTreeModule} from '@angular/cdk/tree';
@@ -72,6 +73,7 @@ import { SideFiltersComponent } from './components/side-filters/side-filters.com
 import { Page404Component } from './core/page404/page404.component';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {GlobalRootURL} from './GlobalRootURL';
+import {Ng4LoadingSpinnerModule} from "ng4-loading-spinner";
 
 export function initGapi(gapiSession: GapiSession) {
   return () => gapiSession.initClient();
@@ -162,6 +164,7 @@ export function createTranslateLoader(http: HttpClient) {
     ReactiveFormsModule,
     BrowserAnimationsModule,
     AuthModule,
+    NgbModule,
 
     TranslateModule.forRoot( {
       loader: {
@@ -170,6 +173,8 @@ export function createTranslateLoader(http: HttpClient) {
         deps: [HttpClient],
       }
     }),
+
+    Ng4LoadingSpinnerModule.forRoot(),
 
     RouterModule.forRoot([
       { path: 'login', component: LoginComponent},
