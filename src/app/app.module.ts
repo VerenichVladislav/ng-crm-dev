@@ -192,6 +192,7 @@ export function createTranslateLoader(http: HttpClient) {
       { path: 'HotelIndex', component: HotelindexComponent},
       { path: 'Index', component: IndexComponent},
       { path: 'SearchResult', component: SearchResultComponent},
+      { path: 'SearchResultTrip', component: SearchResultTripComponent},
       { path: 'SearchResult/:id', component: DetailshotelComponentComponent},
       {path: 'trips/:userid/:tripid/buy', component: BuyTicketComponent},
       {path: 'comments', component: BuyTicketComponent},

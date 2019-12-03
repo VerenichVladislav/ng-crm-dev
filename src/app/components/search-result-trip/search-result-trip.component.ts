@@ -1,43 +1,36 @@
-import {Component, Injectable, Input, OnInit} from '@angular/core';
-import {Observable} from 'rxjs';
-import {HttpClient} from '@angular/common/http';
-import {Router} from '@angular/router';
-import {Trips} from './trips';
+import { Component, OnInit } from '@angular/core';
+import { TripService } from 'src/app/shared/trip.service';
 import {GlobalRootURL} from '../../GlobalRootURL';
-import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
-
-
+import { Observable } from 'rxjs';
+import { Trip } from 'src/app/entity/trip';
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
+``
 @Component({
-  selector: 'app-search-result-trip',
+  selector: 'app-search-result-trip-component',
   templateUrl: './search-result-trip.component.html',
   styleUrls: ['./search-result-trip.component.css']
 })
-@Injectable()
 export class SearchResultTripComponent implements OnInit {
-  @Input()
+  readonly URL = GlobalRootURL.BASE_API_URL + 'trips';
+  posts:Observable<Trip[]>;
 
-  readonly ROOT_URL = GlobalRootURL + 'trips';
-  posts: Observable<Trips[]>;
-  // rooms: Observable<room[]>;
-  constructor(private http: HttpClient, private router: Router,
-              private spinnerService: Ng4LoadingSpinnerService,) {
+  constructor(public service: TripService,
+    private http: HttpClient,
+    private router: Router) 
+    {
+      this.getPosts();
+     }
 
-    this.getPosts();
-  }
-  selectedTrip: Trips;
-  getPosts() {
-    this.spinnerService.show();
-    this.posts = this.http.get<Trips[]>(this.ROOT_URL);
-    this.spinnerService.hide();
-  }
-  onSelect(trips: Trips): void {
-    this.selectedTrip = trips;
-    this.router.navigate(['/SearchResult', trips.id]);
-    console.log(trips.id);
-
-  }
   ngOnInit() {
   }
+  getPosts(){
+    let body = this.service.tripFilter;
+
+    let options = {
+     body:body
+    };
+    this.posts = this.http.post<Trip[]>(this.URL,body);
+  }
+
 }
-
-
