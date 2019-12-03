@@ -15,6 +15,7 @@ export class Hotel{
   image:string;
   lat:number;
   lng:number;
+  commentRating:number;
 
   constructor(hotelResponse: any = {} as any) {
     let {
@@ -36,5 +37,6 @@ export class Hotel{
     this.lng = hotelResponse.lng;
     this.city = city;
     this.image = hotelResponse.image;
+    this.commentRating = hotelResponse.commentRating;
   }
 }

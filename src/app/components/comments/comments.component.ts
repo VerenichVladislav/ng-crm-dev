@@ -20,6 +20,7 @@ export class CommentsComponent implements OnInit {
   //company =3
   @Input() EntityId: number;
   @Input() rating: number;
+  @Input() commentRating: number;
   @Output() ratingClick: EventEmitter<any> = new EventEmitter<any>();
   comments = [];
   message: any;
@@ -29,7 +30,6 @@ export class CommentsComponent implements OnInit {
   commentId: number;
   userId:number = JSON.parse(localStorage.getItem('user')).userId;
   asyncResult:any;
-  result:number=0;
   constructor(
     private route: ActivatedRoute,
     private fb: FormBuilder,
@@ -60,7 +60,7 @@ export class CommentsComponent implements OnInit {
     this.ratingClick.emit({
       rating: rating
   });
-  console.log(rating);
+  //console.log(rating);
 }
 
   async submit(){

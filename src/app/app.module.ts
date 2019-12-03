@@ -72,7 +72,7 @@ import { MapFindHotelComponent } from './map-find-hotel/map-find-hotel.component
 // import { ChatDialogComponent } from './components/chat-dialog/chat-dialog.component';
 import {SearchResultTripComponent} from './components/search-result-trip/search-result-trip.component';
 import {FlightsindexComponent} from './components/flightsindex/flightsindex.component';
-import { SideFiltersComponent } from './components/side-filters/side-filters.component';
+//import { SideFiltersComponent } from './components/side-filters/side-filters.component';
 import { Page404Component } from './core/page404/page404.component';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {GlobalRootURL} from './GlobalRootURL';
@@ -118,7 +118,7 @@ export function createTranslateLoader(http: HttpClient) {
     TourSearchResComponent,
     TourDetailsComponent,
     MapFindHotelComponent,
-    SideFiltersComponent,
+    //SideFiltersComponent,
   ],
   entryComponents: [
     DetailshotelDialogComponent,
