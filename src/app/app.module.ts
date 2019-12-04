@@ -64,6 +64,7 @@ import {LoginComponent} from './core/auth/components/login/login.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { ConnectionErrorComponent } from './components/snack-bar/connection-error/connection-error.component';
 import { SnackBarComponent } from './components/snack-bar/snack-bar.component';
+// import { ChatDialogComponent } from './components/chat-dialog/chat-dialog.component';
 import { IndexComponent } from './components/index/index.component';
 import { TourIndexComponent } from './components/tour-index/tour-index.component';
 import { TourSearchResComponent } from './components/tour-search-res/tour-search-res.component';
@@ -72,6 +73,7 @@ import { MapFindHotelComponent } from './map-find-hotel/map-find-hotel.component
 // import { ChatDialogComponent } from './components/chat-dialog/chat-dialog.component';
 import {SearchResultTripComponent} from './components/search-result-trip/search-result-trip.component';
 import {FlightsindexComponent} from './components/flightsindex/flightsindex.component';
+// import { SideFiltersComponent } from './components/side-filters/side-filters.component';
 //import { SideFiltersComponent } from './components/side-filters/side-filters.component';
 import { Page404Component } from './core/page404/page404.component';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
@@ -79,6 +81,8 @@ import {GlobalRootURL} from './GlobalRootURL';
 import {Ng4LoadingSpinnerModule} from "ng4-loading-spinner";
 import {LoginGuard} from "./shared/login-guard.service";
 import { ReplenishWalletComponent } from './components/replenish-wallet/replenish-wallet.component';
+import { NewsComponent } from './news/news.component';
+import { TicketMapComponent } from './ticket-map/ticket-map.component';
 
 export function initGapi(gapiSession: GapiSession) {
   return () => gapiSession.initClient();
@@ -118,9 +122,18 @@ export function createTranslateLoader(http: HttpClient) {
     // ChatDialogComponent,
     TourSearchResComponent,
     TourDetailsComponent,
+    TourSearchResComponent,
+    // ChatDialogComponent,
+    MapFindHotelComponent,
+    NewsComponent,
+    // SideFiltersComponent,
     MapFindHotelComponent,
     ReplenishWalletComponent,
+<<<<<<< HEAD
     SearchResultTripComponent,
+=======
+    TicketMapComponent,
+>>>>>>> 72a8bb7dff5df2eba56eaa584a32b1a80c95bd22
     //SideFiltersComponent,
   ],
   entryComponents: [
@@ -193,6 +206,7 @@ export function createTranslateLoader(http: HttpClient) {
         canActivate: [LoginGuard]
       },
       { path: 'HotelIndex', component: HotelindexComponent},
+      {path:'News',component:NewsComponent},
       { path: 'Index', component: IndexComponent},
       { path: 'SearchResult', component: SearchResultComponent},
       { path: 'SearchResultTrip', component: SearchResultTripComponent},

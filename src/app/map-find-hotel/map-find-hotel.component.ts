@@ -62,7 +62,7 @@ export class MapFindHotelComponent implements OnInit {
       var marker = new mapboxgl.Marker()
       .setLngLat([hotel.lat,hotel.lng])
       .setPopup(new mapboxgl.Popup({ offset: 15 }) // add popups
-    .setHTML("<mat-card><mat-card-header><mat-card-title><a href='SearchResult/"+hotel.hotelId+"'>"+hotel.hotelName+"<mat-card-title></mat-card-header><image style=' max-width: px;overflow: hidden;' src='https://drive.google.com/uc?export=view&id="+hotel.image+"'><mat-card-actions><button (click)='select()' style='border-radius: 3px;border: 2px solid #17bed2;background: #fff;color: #17bed2;'>Select</button></mat-card-actions></mat-card></a>"))
+    .setHTML("<mat-card><mat-card-header><mat-card-title><a href='SearchResult/"+hotel.hotelId+"'>"+hotel.hotelName+"<mat-card-title></mat-card-header><image style=' max-width: 150px;overflow: hidden;' src='https://drive.google.com/uc?export=view&id="+hotel.image+"'><mat-card-actions><button (click)='select()' style='border-radius: 3px;border: 2px solid #17bed2;background: #fff;color: #17bed2;'>Select</button></mat-card-actions></mat-card></a>"))
       .addTo(map);
         
       });

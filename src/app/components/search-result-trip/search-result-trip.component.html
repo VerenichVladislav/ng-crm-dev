@@ -1,4 +1,17 @@
+<<<<<<< HEAD
 
     <div *ngFor="let post of posts | async">
             <mat-card>City from: {{post.cityFrom}}; City destination: {{post.cityDest}}; Date: {{post.dateFrom | date: 'yyyy-MM-dd'}};</mat-card>
     </div>
+=======
+<ul>
+    <li *ngFor="let post of posts | async">
+        {{post.cityFrom}}
+        {{post.cityDest}}
+        {{post.dateFrom}}
+    </li>
+</ul>
+<div *ngFor="let item of Hotels|async">
+    {{item.hotelName}}
+</div>
+>>>>>>> 72a8bb7dff5df2eba56eaa584a32b1a80c95bd22
