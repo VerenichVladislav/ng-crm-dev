@@ -120,6 +120,7 @@ export function createTranslateLoader(http: HttpClient) {
     TourDetailsComponent,
     MapFindHotelComponent,
     ReplenishWalletComponent,
+    SearchResultTripComponent,
     //SideFiltersComponent,
   ],
   entryComponents: [
