@@ -46,7 +46,7 @@
   margin-right: 0.5rem;
   padding: 0.5rem;
   border-radius: 3px;
-  /* border: 2px solid #17bed2;*/
+ /* border: 2px solid #17bed2;*/
   background: #fff;
   color: #17bed2;
 }
@@ -57,12 +57,12 @@
   cursor: pointer;
 }
 .header-container-button-img{
-  margin: 0rem;
-  padding: 1rem;
-  text-align: center;
-  background: transparent;
-  display: flex;
-  align-items: center;
+ margin: 0rem;
+ padding: 1rem;
+ text-align: center;
+ background: transparent;
+ display: flex;
+ align-items: center;
 }
 .header-container-button-img img{
   width: 2.5rem;
@@ -113,46 +113,45 @@
 
 
 
-
 a
 {
-  text-decoration: none;
-  color: #232323;
+text-decoration: none;
+color: #232323;
 
-  transition: color 0.3s ease;
+transition: color 0.3s ease;
 }
 
 a:hover
 {
-  color: #17bed2;
+color: #17bed2;
 }
 
 #menuToggle
 {
-  display: block;
-  position: relative;
+display: block;
+position: relative;
 
-  z-index: 1;
+z-index: 1;
 
-  -webkit-user-select: none;
-  user-select: none;
+-webkit-user-select: none;
+user-select: none;
 }
 
 #menuToggle input
 {
-  display: block;
-  width: 40px;
-  height: 32px;
-  position: absolute;
-  top: -7px;
-  left: -5px;
+display: block;
+width: 40px;
+height: 32px;
+position: absolute;
+top: -7px;
+left: -5px;
 
-  cursor: pointer;
+cursor: pointer;
 
-  opacity: 0;
-  z-index: 2;
+opacity: 0; 
+z-index: 2; 
 
-  -webkit-touch-callout: none;
+-webkit-touch-callout: none;
 }
 
 #menuToggle span
@@ -166,68 +165,68 @@ a:hover
   border-radius: 3px;
   z-index: 1;
 
-  transform-origin: 4px 0px;
+transform-origin: 4px 0px;
 
-  transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
-  background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
-  opacity 0.55s ease;
+transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+            background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+            opacity 0.55s ease;
 }
 
 #menuToggle span:first-child
 {
-  transform-origin: 0% 0%;
+transform-origin: 0% 0%;
 }
 
 #menuToggle span:nth-last-child(2)
 {
-  transform-origin: 0% 100%;
+transform-origin: 0% 100%;
 }
 
 #menuToggle input:checked ~ span
 {
-  opacity: 1;
-  transform: rotate(45deg) translate(-2px, -1px);
-  background: #232323;
+opacity: 1;
+transform: rotate(45deg) translate(-2px, -1px);
+background: #232323;
 }
 
 #menuToggle input:checked ~ span:nth-last-child(3)
 {
-  opacity: 0;
-  transform: rotate(0deg) scale(0.2, 0.2);
+opacity: 0;
+transform: rotate(0deg) scale(0.2, 0.2);
 }
 
 #menuToggle input:checked ~ span:nth-last-child(2)
 {
-  transform: rotate(-45deg) translate(0, -1px);
+transform: rotate(-45deg) translate(0, -1px);
 }
 
 #menu
 {
-  position: absolute;
-  width: 300px;
-  margin: -100px 0 0 -50px;
-  padding: 50px;
-  padding-top: 125px;
-  height:400rem;
-  background: #fff;
-  list-style-type: none;
-  -webkit-font-smoothing: antialiased;
+position: absolute;
+width: 300px;
+margin: -100px 0 0 -50px;
+padding: 50px;
+padding-top: 125px;
+height:400rem;
+background: #fff;
+list-style-type: none;
+-webkit-font-smoothing: antialiased;
 
-  transform-origin: 0% 0%;
-  transform: translate(-100%, 0);
+transform-origin: 0% 0%;
+transform: translate(-100%, 0);
 
-  transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
 }
 
 #menu li
 {
-  padding: 10px 0;
-  font-size: 22px;
+padding: 10px 0;
+font-size: 22px;
 }
 
 #menuToggle input:checked ~ ul
 {
-  transform: none;
+transform: none;
 }
 
 
@@ -240,7 +239,7 @@ a:hover
   height:400px;
   background-position: center;
   background-position-y: -300px;
-
+  
 }
 .form-mat-child{
   margin: 10px ;
@@ -295,26 +294,23 @@ a:hover
 }
 .search{
   display:flex;
-  height:56px;
-  width: 95%;
+  height:80px;
   justify-content: center;
   border-radius: 28px;
-  border: 1px solid
-  #dadce0;
+  
+border: 1px solid
+#dadce0;
   box-shadow: 0 1px 2px 0 rgba(60,64,67,.30),0 2px 6px 2px rgba(60,64,67,.15);
-  margin:5%;
+  
   margin-top: 0;
 }
-
-
-
 .search-input input{
   height:4rem;
-  width: 80%;
+  width: 90%;
 }
 /*Recomend*/
 .recomends-center{
-  text-align: center;
+  text-align: center;   
 }
 .recomends{
   margin-left: 10%;
@@ -329,41 +325,43 @@ a:hover
 }
 
 
-.recomend-flights-image {
-  position: relative;
-  width: 95%;
+.recomend-hotels-image {
+
+position: relative;
+  width: 95%; 
+  height: 160px;
   display: inline-block; /* Строчно-блочный элемент */
   overflow: hidden;
 }
-.recomend-flights-image img{
-  width: 100%;
+.recomend-hotels-image img{
+  width: 100%; 
   transition: 1s; /* Время эффекта */
-  display: block;
+display: block;
 }
-.recomend-flights-image h2 {
-  position: absolute;
-  top	: 50%;
-  left: 0;
+.recomend-hotels-image h2 {
+position: absolute;
+top	: 50%;
+left: 0;
   width: 95%;
   color: #fff;
 }
-.recomend-flights-image img:hover {
-  transform: scale(1.2); /* Увеличиваем масштаб */
-  cursor: pointer;
+.recomend-hotels-image img:hover {
+transform: scale(1.2); /* Увеличиваем масштаб */
+cursor: pointer;
 }
 
 
 
 .scale {
-  display: inline-block; /* Строчно-блочный элемент */
-  overflow: hidden; /* Скрываем всё за контуром */
+display: inline-block; /* Строчно-блочный элемент */
+overflow: hidden; /* Скрываем всё за контуром */
 }
 .scale img {
-  transition: 1s; /* Время эффекта */
-  display: block; /* Убираем небольшой отступ снизу */
+transition: 1s; /* Время эффекта */
+display: block; /* Убираем небольшой отступ снизу */
 }
 .scale img:hover {
-  transform: scale(1.2); /* Увеличиваем масштаб */
+transform: scale(1.2); /* Увеличиваем масштаб */
 }
 
 
@@ -403,4 +401,8 @@ a:hover
   background: #17bed2;
   color: #fff;
   cursor: pointer;
+}
+.map{
+  width: 100%;
+  height: 100%;
 }

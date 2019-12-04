@@ -1,3 +1,5 @@
     <div *ngFor="let post of posts | async">
-            <mat-card>City from: {{post.cityFrom}}; City destination: {{post.cityDest}}; Date: {{post.dateFrom | date: 'yyyy-MM-dd'}};</mat-card>
+            <mat-card>City from: {{post.cityFrom}}; City destination: {{post.cityDest}}; Date: {{post.dateFrom | date: 'yyyy-MM-dd'}};
+                <button (onclick)="Buy()" class="btn btn-outline-success">Buy</button>
+            </mat-card>
     </div>
