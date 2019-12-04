@@ -7,6 +7,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { City } from 'src/app/entity/city';
 import { GlobalRootURL } from 'src/app/GlobalRootURL';
+import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
+
 
 @Component({
   selector: 'app-hotelindex',
@@ -16,8 +18,13 @@ import { GlobalRootURL } from 'src/app/GlobalRootURL';
 @Injectable()
 export class HotelindexComponent implements OnInit {
 
-  constructor(private router: Router,public service:HotelService,private http:HttpClient) {
+  constructor(private router: Router,
+              public service:HotelService,
+              private http:HttpClient,
+              private spinnerService: Ng4LoadingSpinnerService) {
+    this.spinnerService.show();
     this.cityCollection = this.http.get<City>(GlobalRootURL.BASE_API_URL+"cities");
+    this.spinnerService.hide();
   }
   @Input() status:boolean;
   @Input() checkIn:string
@@ -29,6 +36,9 @@ export class HotelindexComponent implements OnInit {
     CheckIn:this.checkIn,
     CheckOut:this.checkOut
    }
+
+
+
    this.service.setHotelFilter(hotelFilter);
    this.router.navigate(['/SearchResult']);
   }
@@ -40,13 +50,13 @@ export class HotelindexComponent implements OnInit {
   findbyCity(city:string){
     console.log(city);
    this.city = city;
-  
-   
+
+
     this.find();
   }
   cityCollection:Observable<City>
   ngOnInit() {
-   
+
   }
 
 }

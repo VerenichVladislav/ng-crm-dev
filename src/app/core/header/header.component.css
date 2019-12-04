@@ -32,6 +32,10 @@ button:hover {
 #header {
 
 }
+.logo{
+  max-height: 50px;
+  outline: none;
+}
 .cancelbtn {
   width: auto;
   padding: 14px 20px;

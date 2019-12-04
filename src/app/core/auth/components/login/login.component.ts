@@ -18,6 +18,9 @@ import {Reservation} from '../../../../entity/reservation';
 import {ReservationService} from '../../../../shared/reservation.service';
 import {HotelService} from '../../../../shared/hotel.service';
 import {SnackBarComponent} from '../../../../components/snack-bar/snack-bar.component';
+import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
+import {map} from "rxjs/operators";
+import {Observable} from "rxjs/internal/Observable";
 
 @Component({
   selector: 'app-login',
@@ -39,6 +42,7 @@ export class LoginComponent implements OnInit {
               private reservationService: ReservationService,
               private transfer: DataTransferService,
               private errorConnection: SnackBarComponent,
+              private spinnerService: Ng4LoadingSpinnerService,
               private router: Router) {
 
     this.loginForm = new FormGroup({
@@ -48,12 +52,14 @@ export class LoginComponent implements OnInit {
   }
 
   submit(userData) {
-    let tickets: Ticket[] = [];
-    let reservations: Reservation[] = [];
+    this.spinnerService.show();
+
     this.subscriptions.push(this.loginService
       .loginUser(userData.username, userData.password)
       .subscribe(
         (resp: Response) => {
+          this.spinnerService.hide();
+
           localStorage.setItem('auth_token', resp.headers.get('Authorization'));
           this.errorLogin = false;
           this.errorPassword = false;
@@ -61,23 +67,33 @@ export class LoginComponent implements OnInit {
           this.subscriptions.push(this.userService.getByUserName(userData.username)
             .subscribe(
               (data: any) => {
-                this.subscriptions.push(this.walletService.getWalletById(data.wallet)
-                  .subscribe(
-                    (wallet: Wallet) => {
-                      let user = new User(data);
-                      user.setWallet(wallet);
-                      localStorage.setItem('user', JSON.stringify(user));
-                      this.loadTickets(tickets, data.userId);
-                      reservations = this.loadReservations(data.userId);
-                      console.log(tickets);
+                let user = new User(data);
+                this.loadWallet(data.wallet).subscribe( wallet => {
+                    user.setWallet(wallet);
+                  }
+                );
+                user.tickets.forEach(ticket => {
 
-                      this.transfer.setTickets(tickets);
-                      this.transfer.setReservations(reservations);
-
-                      this.router.navigate(['profile']);
+                  this.loadCity(ticket.cityFrom.cityId).subscribe( city => {
+                      ticket.setCityFrom(city);
                     }
-                  ));
+                  );
 
+                  this.loadCity(ticket.cityDest.cityId).subscribe( city => {
+                    ticket.setCityDest(city);
+                    }
+                  );
+                });
+
+                user.reservations.forEach(reserv => {
+                  this.loadHotel(reserv.hotel.hotelId).subscribe( hotel => {
+                      reserv.setHotel(hotel);
+                    }
+                  );
+
+                });
+                this.transfer.setUser(user);
+                this.router.navigate(['profile']);
                 this.hideLoginForm();
               },
               error => {
@@ -99,69 +115,31 @@ export class LoginComponent implements OnInit {
           }
         }));
   }
-
-  loadTickets(tickets, id) {
-    this.subscriptions.push(this.ticketService.getAllByBuyerId(id)
-      .subscribe(
-        (all: any) => {
-          all.forEach(
-            (t: any) => {
-              const ticket = new Ticket(t);
-              this.cityService.getById(t.cityDest)
-                .subscribe(
-                  (city: City) => {
-                    ticket.cityDest = new City(city);
-                  },
-                  error1 => {
-                    console.log(error1);
-                  }
-                );
-
-              this.cityService.getById(t.cityFrom)
-                .subscribe(
-                  (city: City) => {
-                    ticket.cityFrom = new City(city);
-                  },
-                  error1 => {
-                    console.log(error1);
-                  }
-                );
-              tickets.push(ticket);
-            }
-          );
-        },
-        error => {
-          console.log(error);
+  loadWallet(id: number): Observable<Wallet> {
+    return this.walletService.getWalletById(id).pipe(
+      map((wallet: Wallet) => {
+          return new Wallet(wallet);
         }
-      ));
+      )
+    );
   }
 
-  loadReservations(id): Reservation[] {
-    let reservations: Reservation[] = [];
-    this.subscriptions.push(this.reservationService.getAllByBuyerId(id)
-      .subscribe(
-        (all: any) => {
-          all.forEach(
-            (r: any) => {
-              const reservation = new Reservation(r);
-              this.hotelService.getById(r.hotel)
-                .subscribe(
-                  (hotel: Hotel) => {
-                    reservation.hotel = new Hotel(hotel);
-                  },
-                  error1 => {
-                    console.log(error1);
-                  }
-                );
-
-              reservations.push(reservation);
-            }
-          )},
-        error => {
-          console.log(error);
+  loadCity(id: number): Observable<City> {
+    return this.cityService.getById(id).pipe(
+      map((city: City) => {
+          return new City(city);
         }
-      ));
-    return reservations;
+      )
+    );
+  }
+
+  loadHotel(id: number): Observable<Hotel> {
+    return this.hotelService.getById(id).pipe(
+      map((hotel: Hotel) => {
+          return new Hotel(hotel);
+        }
+      )
+    );
   }
 
   showLoginForm() {

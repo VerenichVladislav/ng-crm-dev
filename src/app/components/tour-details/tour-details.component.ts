@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { MatDialog } from '@angular/material';
-import { Tour } from '../entity/Tour';
-import { GlobalRootURL } from '../GlobalRootURL';
+import { Tour } from '../../entity/Tour';
+import { GlobalRootURL } from '../../GlobalRootURL';
 
 @Component({
   selector: 'app-tour-details',

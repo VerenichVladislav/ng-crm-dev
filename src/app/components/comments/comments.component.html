@@ -8,9 +8,8 @@
   </head>
   <body>
     <div class="container">
-        {{result}} resultat
-        <div>{{comments.length}} dlina</div>
         <h1 align="center">Comments</h1>
+        <h3 align="center">Comments rating: {{commentRating}}<span class="fa fa-star checked"></span></h3>
     <hr/>
       <div>
         <form *ngFor="let comment of comments; let i = index" style="border:2px solid #555; box-shadow:3px 3px 5px #999;   margin:20px; padding:20px;">

@@ -18,7 +18,6 @@
         </mat-list-item> -->
        <mat-list-item>
         <h3> {{realHOtel.hotelName}}</h3>
-
        </mat-list-item>
        <mat-list-item>
            {{realHOtel.rating}}
@@ -50,8 +49,6 @@
                             {{item.dailyCost}}
                             <mat-icon>euro</mat-icon>
                         </mat-list-item>
-
-
                     </mat-list>
             </mat-card-content>
             <mat-card-actions>
@@ -61,4 +58,4 @@
     
         </mat-grid-tile>
 </mat-grid-list>
-<app-comments [type]="1" [EntityId]="hotelId"></app-comments>
+<app-comments [type]="1" [EntityId]="hotelId" [commentRating]="realHOtel.commentRating"></app-comments>

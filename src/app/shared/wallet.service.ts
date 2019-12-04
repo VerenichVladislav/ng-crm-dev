@@ -17,4 +17,12 @@ export class WalletService {
 
     return this.http.get<Wallet>(this.URL + id, options);
   }
+
+  replenishWallet(sum:any, userId:number): Observable<any> {
+    let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    headers.set('Authorization', localStorage.getItem('auth_token'));
+    let options = { headers: headers, responseType:'text' as 'json'};
+    console.log(JSON.stringify(this.URL+userId+'/sendConfirm?sum='+sum.value));
+    return this.http.get<any>(this.URL+userId+'/sendConfirm?sum='+sum.value, options);
+  }
 }

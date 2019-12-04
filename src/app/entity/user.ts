@@ -1,4 +1,6 @@
 import {Wallet} from './wallet';
+import {Ticket} from "./ticket";
+import {Reservation} from "./reservation";
 
 export class User {
   userId: number;
@@ -7,9 +9,16 @@ export class User {
   lastName: string;
   email: string;
   state: string;
-  wallet: Wallet;
+  wallet?: Wallet;
+  tickets?: Ticket[] = [];
+  reservations?: Reservation[] = [];
 
-  constructor(user: any) {
+  constructor(user: any = {} as any) {
+    let {
+      tickets = [],
+      reservations = []
+    } = user;
+
     this.userId = user.userId;
     this.userName = user.userName;
     this.firstName = user.firstName;
@@ -17,6 +26,12 @@ export class User {
     this.email = user.email;
     this.state = user.state;
     this.wallet = user.wallet;
+    tickets.forEach(ticket => {
+      this.tickets.push(new Ticket(ticket));
+    });
+    reservations.forEach(reserv => {
+      this.reservations.push(new Reservation(reserv));
+    });
   }
 
   public setWallet(wallet: Wallet) {

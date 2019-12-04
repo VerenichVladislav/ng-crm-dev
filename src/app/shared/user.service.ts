@@ -9,13 +9,14 @@ import {GlobalRootURL} from '../GlobalRootURL';
   providedIn: 'root'
 })
 export class UserService {
-  readonly URL = GlobalRootURL.BASE_API_URL + 'users/?userName=';
+  readonly URL = GlobalRootURL.BASE_API_URL + 'users/';
 
   constructor(private http: HttpClient) { }
 
   getUserById(id: number): Observable<User> {
-    let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    headers.set('Authorization', localStorage.getItem('auth_token'));
+    let headers = new HttpHeaders(
+      { 'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem('auth_token')});
     let options = { headers: headers };
 
 
@@ -23,17 +24,20 @@ export class UserService {
   }
 
   getByUserName(name: string): Observable<User>{
-    let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    headers.set('Authorization', localStorage.getItem('auth_token'));
-
+    let headers = new HttpHeaders(
+      { 'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem('auth_token')});
     let options = { headers: headers };
 
-    return this.http.get<User>(this.URL + name, options);
+    return this.http.get<User>(this.URL + '?userName=' + name, options);
   }
 
-  updateUser(userName: string) {
-    const user = JSON.stringify(this.getByUserName(userName));
-    localStorage.removeItem('user');
-    localStorage.setItem('user', user);
+  isAuthenticated(): Observable<any> {
+    let headers = new HttpHeaders(
+      { 'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem('auth_token')});
+    let options = { headers: headers };
+
+    return this.http.get<any>(this.URL + 'isAuthenticated' , options);
   }
 }

@@ -1,9 +1,9 @@
 import { Component, OnInit, Input, Injectable } from '@angular/core';
 import { Timestamp } from 'rxjs';
-import { TourFilter } from '../entity/TourFilter';
+import { TourFilter } from '../../entity/TourFilter';
 import { HttpClient } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
-import { TourService } from '../shared/TourService';
+import { TourService } from '../../shared/TourService';
 
 @Component({
   selector: 'app-tour-index',

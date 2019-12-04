@@ -49,11 +49,12 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { SearchResultComponent } from './components/search-result/search-result.component';
 import { DetailshotelComponentComponent} from './components/detailshotel/detailshotel.component';
 import {CdkTreeModule} from '@angular/cdk/tree';
 import {DataTransferService} from './shared/data-transfer.service';
-import { DetailshotelDialogComponent } from './detailshotel-dialog/detailshotel-dialog.component';
+import { DetailshotelDialogComponent } from './components/detailshotel-dialog/detailshotel-dialog.component';
 import { BuyTicketComponent } from './components/buy-ticket/buy-ticket.component';
 import { ScrollUpBtnComponent } from './core/scroll-up-btn/scroll-up-btn.component';
 import { CommentsComponent } from './components/comments/comments.component';
@@ -63,19 +64,23 @@ import {LoginComponent} from './core/auth/components/login/login.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { ConnectionErrorComponent } from './components/snack-bar/connection-error/connection-error.component';
 import { SnackBarComponent } from './components/snack-bar/snack-bar.component';
-import { IndexComponent } from './index/index.component';
-import { TourIndexComponent } from './tour-index/tour-index.component';
-import { TourSearchResComponent } from './tour-search-res/tour-search-res.component';
-import { TourDetailsComponent } from './tour-details/tour-details.component';
 // import { ChatDialogComponent } from './components/chat-dialog/chat-dialog.component';
+import { IndexComponent } from './components/index/index.component';
+import { TourIndexComponent } from './components/tour-index/tour-index.component';
+import { TourSearchResComponent } from './components/tour-search-res/tour-search-res.component';
+import { TourDetailsComponent } from './components/tour-details/tour-details.component';
 import { MapFindHotelComponent } from './map-find-hotel/map-find-hotel.component';
 // import { ChatDialogComponent } from './components/chat-dialog/chat-dialog.component';
 import {SearchResultTripComponent} from './components/search-result-trip/search-result-trip.component';
 import {FlightsindexComponent} from './components/flightsindex/flightsindex.component';
 // import { SideFiltersComponent } from './components/side-filters/side-filters.component';
+//import { SideFiltersComponent } from './components/side-filters/side-filters.component';
 import { Page404Component } from './core/page404/page404.component';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {GlobalRootURL} from './GlobalRootURL';
+import {Ng4LoadingSpinnerModule} from "ng4-loading-spinner";
+import {LoginGuard} from "./shared/login-guard.service";
+import { ReplenishWalletComponent } from './components/replenish-wallet/replenish-wallet.component';
 import { NewsComponent } from './news/news.component';
 
 export function initGapi(gapiSession: GapiSession) {
@@ -114,13 +119,16 @@ export function createTranslateLoader(http: HttpClient) {
     TourIndexComponent,
 
     // ChatDialogComponent,
-
+    TourSearchResComponent,
     TourDetailsComponent,
     TourSearchResComponent,
     // ChatDialogComponent,
     MapFindHotelComponent,
     NewsComponent,
     // SideFiltersComponent,
+    MapFindHotelComponent,
+    ReplenishWalletComponent,
+    //SideFiltersComponent,
   ],
   entryComponents: [
     DetailshotelDialogComponent,
@@ -172,6 +180,7 @@ export function createTranslateLoader(http: HttpClient) {
     ReactiveFormsModule,
     BrowserAnimationsModule,
     AuthModule,
+    NgbModule,
 
     TranslateModule.forRoot( {
       loader: {
@@ -181,17 +190,20 @@ export function createTranslateLoader(http: HttpClient) {
       }
     }),
 
+    Ng4LoadingSpinnerModule.forRoot(),
+
     RouterModule.forRoot([
       { path: 'login', component: LoginComponent},
       {
         path: 'profile',
         component: ProfileComponent,
-        canActivate: []
+        canActivate: [LoginGuard]
       },
       { path: 'HotelIndex', component: HotelindexComponent},
       {path:'News',component:NewsComponent},
       { path: 'Index', component: IndexComponent},
       { path: 'SearchResult', component: SearchResultComponent},
+      { path: 'SearchResultTrip', component: SearchResultTripComponent},
       { path: 'SearchResult/:id', component: DetailshotelComponentComponent},
       {path: 'trips/:userid/:tripid/buy', component: BuyTicketComponent},
       {path: 'comments', component: BuyTicketComponent},

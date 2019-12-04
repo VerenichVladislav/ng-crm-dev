@@ -3,12 +3,8 @@ import { CommentsService } from '../../shared/comments.service';
 import { ActivatedRoute } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-@NgModule({
-  imports: [BrowserModule, NgbModule]
-})
+
 @Injectable({
   providedIn: 'root'
 })
@@ -24,6 +20,7 @@ export class CommentsComponent implements OnInit {
   //company =3
   @Input() EntityId: number;
   @Input() rating: number;
+  @Input() commentRating: number;
   @Output() ratingClick: EventEmitter<any> = new EventEmitter<any>();
   comments = [];
   message: any;
@@ -33,7 +30,6 @@ export class CommentsComponent implements OnInit {
   commentId: number;
   userId:number = JSON.parse(localStorage.getItem('user')).userId;
   asyncResult:any;
-  result:number=0;
   constructor(
     private route: ActivatedRoute,
     private fb: FormBuilder,
@@ -64,14 +60,14 @@ export class CommentsComponent implements OnInit {
     this.ratingClick.emit({
       rating: rating
   });
-  console.log(rating);
+  //console.log(rating);
 }
 
   async submit(){
       this.commentsService.submitForm(this.newComment.controls.text, this.rating, this.EntityId, this.userId, this.type)
                   .subscribe(
-                      (log: HttpErrorResponse) => {      
-                          this.message = log;     
+                      (log: HttpErrorResponse) => {
+                          this.message = log;
                       },
                       (error) => {
                         this.message = error.error;
@@ -88,7 +84,7 @@ export class CommentsComponent implements OnInit {
                         data => this.comments = data
                        );
                        this.asyncResult = await this.commentsService.getTourComments(this.EntityId).toPromise();
-                     } 
+                     }
                      else if(this.type=3){
                       this.comments = this.commentsService.getCompanyComments(this.EntityId).subscribe(
                         data => this.comments = data
