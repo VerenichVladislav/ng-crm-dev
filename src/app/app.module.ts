@@ -81,6 +81,9 @@ import {LoginGuard} from "./shared/login-guard.service";
 import {AdminModule} from "./core/admin/admin.module";
 import {MainComponent} from "./core/admin/components/main/main.component";
 import {UsersComponent} from "./core/admin/components/users/users.component";
+import { ReplenishWalletComponent } from './components/replenish-wallet/replenish-wallet.component';
+import { NewsComponent } from './news/news.component';
+import { TicketMapComponent } from './ticket-map/ticket-map.component';
 
 export function initGapi(gapiSession: GapiSession) {
   return () => gapiSession.initClient();
@@ -120,7 +123,16 @@ export function createTranslateLoader(http: HttpClient) {
     // ChatDialogComponent,
     TourSearchResComponent,
     TourDetailsComponent,
+    TourSearchResComponent,
+    // ChatDialogComponent,
     MapFindHotelComponent,
+    NewsComponent,
+    // SideFiltersComponent,
+    MapFindHotelComponent,
+    ReplenishWalletComponent,
+    SearchResultTripComponent,
+    TicketMapComponent,
+
     //SideFiltersComponent,
   ],
   entryComponents: [
@@ -196,8 +208,10 @@ export function createTranslateLoader(http: HttpClient) {
       },
 
       { path: 'HotelIndex', component: HotelindexComponent},
+      {path:'News',component:NewsComponent},
       { path: 'Index', component: IndexComponent},
       { path: 'SearchResult', component: SearchResultComponent},
+      { path: 'SearchResultTrip', component: SearchResultTripComponent},
       { path: 'SearchResult/:id', component: DetailshotelComponentComponent},
       {path: 'trips/:userid/:tripid/buy', component: BuyTicketComponent},
       {path: 'comments', component: BuyTicketComponent},

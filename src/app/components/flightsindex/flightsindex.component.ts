@@ -1,13 +1,38 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Injectable } from '@angular/core';
+import { TripFilters } from 'src/app/entity/TripFilters';
+import { TripService } from 'src/app/shared/trip.service';
+import {Router} from '@angular/router'
+import { Timestamp } from 'rxjs/internal/operators/timestamp';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-flightsindex',
   templateUrl: './flightsindex.component.html',
-  styleUrls: ['./flightsindex.component.css']
+  styleUrls: ['./flightsindex.component.css'],
+  providers: [DatePipe],
 })
+@Injectable()
 export class FlightsindexComponent implements OnInit {
+ 
 
-  constructor() { }
+  constructor(private router: Router,
+    public service: TripService,
+    public datePipe: DatePipe) { }
+  @Input() status:boolean;
+  @Input() cityFrom:string;
+  @Input() cityDest:string;
+  @Input() dateFrom:Timestamp<Date>;
+  tripFilter: TripFilters;
+
+  find(){
+      this.tripFilter = {
+      cityDest:this.cityDest,
+      cityFrom:this.cityFrom,
+      dateFrom:this.datePipe.transform(this.dateFrom, 'yyyy-MM-dd')
+    }
+    this.service.setTripFilter(this.tripFilter);
+   this.router.navigate(['/SearchResultTrip']);
+  }
 
   ngOnInit() {
   }
