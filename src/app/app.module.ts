@@ -9,7 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from './core/header/header.component';
 // import { StompService } from 'ng2-stomp-service';
 import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
-import {RouterModule} from '@angular/router';
+import {RouterModule, Routes} from '@angular/router';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import { ProfileComponent } from './components/profile/profile.component';
 import {AuthModule} from './core/auth/auth.module';
@@ -78,6 +78,9 @@ import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {GlobalRootURL} from './GlobalRootURL';
 import {Ng4LoadingSpinnerModule} from "ng4-loading-spinner";
 import {LoginGuard} from "./shared/login-guard.service";
+import {AdminModule} from "./core/admin/admin.module";
+import {MainComponent} from "./core/admin/components/main/main.component";
+import {UsersComponent} from "./core/admin/components/users/users.component";
 
 export function initGapi(gapiSession: GapiSession) {
   return () => gapiSession.initClient();
@@ -169,8 +172,10 @@ export function createTranslateLoader(http: HttpClient) {
     MatSliderModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    AuthModule,
     NgbModule,
+
+    AuthModule,
+    AdminModule,
 
     TranslateModule.forRoot( {
       loader: {
@@ -189,6 +194,7 @@ export function createTranslateLoader(http: HttpClient) {
         component: ProfileComponent,
         canActivate: [LoginGuard]
       },
+
       { path: 'HotelIndex', component: HotelindexComponent},
       { path: 'Index', component: IndexComponent},
       { path: 'SearchResult', component: SearchResultComponent},

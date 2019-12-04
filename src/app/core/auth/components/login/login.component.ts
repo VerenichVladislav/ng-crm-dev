@@ -31,6 +31,7 @@ export class LoginComponent implements OnInit {
   private loginForm;
   private errorLogin = false;
   private errorPassword = false;
+  private errorLocked = false;
   private subscriptions: Subscription[] = [];
 
   constructor(private loginService: LoginService,
@@ -63,6 +64,7 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('auth_token', resp.headers.get('Authorization'));
           this.errorLogin = false;
           this.errorPassword = false;
+          this.errorLocked = false;
 
           this.subscriptions.push(this.userService.getByUserName(userData.username)
             .subscribe(
@@ -110,6 +112,9 @@ export class LoginComponent implements OnInit {
             error.error.message === 'NonUnique userName') {
             this.errorLogin = false;
             this.errorPassword = true;
+          }
+          else if (error.error.message === 'Locked') {
+            this.errorLocked = true;
           } else if (error.status === 0) {
             this.errorConnection.openSnackBar();
           }

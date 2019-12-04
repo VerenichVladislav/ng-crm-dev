@@ -1,0 +1,23 @@
+<button type="button" (click)="showAll()" class="btn btn-lg btn-primary">{{'all' | translate}} {{'users' | translate}}</button>
+<mat-form-field appearance="outline">
+  <mat-label>{{'search' | translate}}</mat-label>
+  <input matInput placeholder="{{'type the login' | translate}}">
+</mat-form-field>
+<button type="button" class="btn btn-lg btn-info">{{'search' | translate}}</button>
+<div class="container" *ngIf="users">
+  <div *ngFor="let user of users" class="m-auto user-container col-lg-6">
+    <h3 class="card-text">{{'login' | translate}}: {{user.userName}}</h3>
+    <button type="button" (click)="lockUser(user)" class="btn btn-lg btn-danger pull-right"
+      *ngIf="!user.isLocked; else unban">{{'Ban' | translate}}
+    </button>
+    <ng-template #unban>
+      <button type="button" (click)="unlockUser(user)" class="btn btn-lg btn-warning pull-right">
+        {{'Unban' | translate}}
+      </button>
+    </ng-template>
+    <h3 class="card-text">{{'first-name' | translate}}: {{user.firstName}}</h3>
+    <h3 class="card-text">{{'last-name' | translate}}: {{user.lastName}}</h3>
+    <h3 class="card-text">{{'email' | translate}}: {{user.email}}</h3>
+    <h3 class="card-text">{{'state' | translate}}: {{user.state}}</h3>
+  </div>
+</div>
