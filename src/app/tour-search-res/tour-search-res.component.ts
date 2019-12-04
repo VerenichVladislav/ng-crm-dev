@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Injectable } from '@angular/core';
 import { Tour } from '../entity/Tour';
 import { GlobalRootURL } from '../GlobalRootURL';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { TourService } from '../shared/TourService';
-
+@Injectable()
 @Component({
   selector: 'app-tour-search-res',
   templateUrl: './tour-search-res.component.html',

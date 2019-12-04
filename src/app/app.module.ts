@@ -67,15 +67,16 @@ import { IndexComponent } from './index/index.component';
 import { TourIndexComponent } from './tour-index/tour-index.component';
 import { TourSearchResComponent } from './tour-search-res/tour-search-res.component';
 import { TourDetailsComponent } from './tour-details/tour-details.component';
-import { ChatDialogComponent } from './components/chat-dialog/chat-dialog.component';
+// import { ChatDialogComponent } from './components/chat-dialog/chat-dialog.component';
 import { MapFindHotelComponent } from './map-find-hotel/map-find-hotel.component';
 // import { ChatDialogComponent } from './components/chat-dialog/chat-dialog.component';
 import {SearchResultTripComponent} from './components/search-result-trip/search-result-trip.component';
 import {FlightsindexComponent} from './components/flightsindex/flightsindex.component';
-import { SideFiltersComponent } from './components/side-filters/side-filters.component';
+// import { SideFiltersComponent } from './components/side-filters/side-filters.component';
 import { Page404Component } from './core/page404/page404.component';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {GlobalRootURL} from './GlobalRootURL';
+import { NewsComponent } from './news/news.component';
 
 export function initGapi(gapiSession: GapiSession) {
   return () => gapiSession.initClient();
@@ -115,9 +116,11 @@ export function createTranslateLoader(http: HttpClient) {
     // ChatDialogComponent,
 
     TourDetailsComponent,
-    ChatDialogComponent,
+    TourSearchResComponent,
+    // ChatDialogComponent,
     MapFindHotelComponent,
-    SideFiltersComponent,
+    NewsComponent,
+    // SideFiltersComponent,
   ],
   entryComponents: [
     DetailshotelDialogComponent,
@@ -186,6 +189,7 @@ export function createTranslateLoader(http: HttpClient) {
         canActivate: []
       },
       { path: 'HotelIndex', component: HotelindexComponent},
+      {path:'News',component:NewsComponent},
       { path: 'Index', component: IndexComponent},
       { path: 'SearchResult', component: SearchResultComponent},
       { path: 'SearchResult/:id', component: DetailshotelComponentComponent},
