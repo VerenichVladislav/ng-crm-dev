@@ -1,5 +1,7 @@
 <ul>
-    <li *ngFor="let item of posts">
-        {{item.transport}}
+    <li *ngFor="let post of posts | async">
+        {{post.cityFrom}}
+        {{post.cityDest}}
+        {{post.dateFrom}}
     </li>
 </ul>

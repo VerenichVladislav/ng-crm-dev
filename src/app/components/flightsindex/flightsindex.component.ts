@@ -2,6 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { TripFilters } from 'src/app/entity/TripFilters';
 import { TripService } from 'src/app/shared/trip.service';
 import {Router} from '@angular/router'
+import { Timestamp } from 'rxjs/internal/operators/timestamp';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-flightsindex',
@@ -16,7 +18,7 @@ export class FlightsindexComponent implements OnInit {
   @Input() status:boolean;
   @Input() cityFrom:string;
   @Input() cityDest:string;
-  @Input() dateFrom:String;
+  @Input() dateFrom:string;
   
 
   find(){
