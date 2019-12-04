@@ -129,11 +129,9 @@ export function createTranslateLoader(http: HttpClient) {
     // SideFiltersComponent,
     MapFindHotelComponent,
     ReplenishWalletComponent,
-<<<<<<< HEAD
     SearchResultTripComponent,
-=======
     TicketMapComponent,
->>>>>>> 72a8bb7dff5df2eba56eaa584a32b1a80c95bd22
+
     //SideFiltersComponent,
   ],
   entryComponents: [
