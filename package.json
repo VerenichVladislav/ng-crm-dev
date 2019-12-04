@@ -32,10 +32,7 @@
     "fs": "0.0.1-security",
     "googleapis": "^39.2.0",
     "hammerjs": "^2.0.8",
-<<<<<<< HEAD
-=======
     "jquery": "^3.4.1",
->>>>>>> ce9e9715eadfbeadd81895bfe58296e1b384e68d
     "mapbox-gl": "^1.5.1",
     "ng-bootstrap": "^1.6.3",
     "ng4-loading-spinner": "^1.2.3",

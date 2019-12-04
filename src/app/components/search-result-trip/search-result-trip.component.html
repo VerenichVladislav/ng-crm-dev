@@ -5,3 +5,6 @@
         {{post.dateFrom}}
     </li>
 </ul>
+<div *ngFor="let item of Hotels|async">
+    {{item.hotelName}}
+</div>

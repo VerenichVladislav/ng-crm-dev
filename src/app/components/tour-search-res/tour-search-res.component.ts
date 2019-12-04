@@ -1,13 +1,3 @@
-<<<<<<< HEAD:src/app/tour-search-res/tour-search-res.component.ts
-import { Component, OnInit, Injectable } from '@angular/core';
-import { Tour } from '../entity/Tour';
-import { GlobalRootURL } from '../GlobalRootURL';
-import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
-import { Router, ActivatedRoute } from '@angular/router';
-import { TourService } from '../shared/TourService';
-@Injectable()
-=======
 import { Component, OnInit } from '@angular/core';
 import { Tour } from '../../entity/Tour';
 import { GlobalRootURL } from '../../GlobalRootURL';
@@ -16,7 +6,6 @@ import { HttpClient } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { TourService } from '../../shared/TourService';
 
->>>>>>> ce9e9715eadfbeadd81895bfe58296e1b384e68d:src/app/components/tour-search-res/tour-search-res.component.ts
 @Component({
   selector: 'app-tour-search-res',
   templateUrl: './tour-search-res.component.html',
