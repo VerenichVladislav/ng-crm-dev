@@ -78,6 +78,7 @@ import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {GlobalRootURL} from './GlobalRootURL';
 import {Ng4LoadingSpinnerModule} from "ng4-loading-spinner";
 import {LoginGuard} from "./shared/login-guard.service";
+import { ReplenishWalletComponent } from './components/replenish-wallet/replenish-wallet.component';
 
 export function initGapi(gapiSession: GapiSession) {
   return () => gapiSession.initClient();
@@ -118,6 +119,7 @@ export function createTranslateLoader(http: HttpClient) {
     TourSearchResComponent,
     TourDetailsComponent,
     MapFindHotelComponent,
+    ReplenishWalletComponent,
     //SideFiltersComponent,
   ],
   entryComponents: [
