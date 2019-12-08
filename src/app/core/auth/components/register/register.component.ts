@@ -49,7 +49,12 @@ export class RegisterComponent implements OnInit {
               (loginResp: Response) => {
                 localStorage.setItem("auth_token", loginResp.headers.get('Authorization'));
                 localStorage.setItem("user", JSON.stringify(new User(resp.body)));
-                this.confirmService.confirmEmail(userData.userName);
+                this.confirmService.confirmEmail(userData.userName).subscribe(
+                  ()=> {},
+                  error1 => {
+                    console.log(error1);
+                  }
+                );
 
                 this.router.navigate(['profile']);
                 this.hideRegisterForm();
