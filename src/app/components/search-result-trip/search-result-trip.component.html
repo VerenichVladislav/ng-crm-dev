@@ -3,3 +3,7 @@
                 <button (onclick)="Buy()" class="btn btn-outline-success">Buy</button>
             </mat-card>
     </div>
+    <div *ngFor="let post of Hotels | async">
+        <p>{{post.hotelName}}</p>
+    </div>
+    

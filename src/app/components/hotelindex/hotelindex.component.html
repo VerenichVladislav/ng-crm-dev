@@ -22,6 +22,8 @@
                      </mat-select>
                 </mat-form-field>
         </div>
+        <mat-button-toggle (click)="GoMap()">map</mat-button-toggle>
+
         <mat-button-toggle  class="recomends-content" (click)='find()'>{{'searching' | translate}}</mat-button-toggle>
 
             <div class="recomends-content">
@@ -52,4 +54,3 @@
     
 
 </div>
-<mat-button-toggle (click)="GoMap()">map</mat-button-toggle>

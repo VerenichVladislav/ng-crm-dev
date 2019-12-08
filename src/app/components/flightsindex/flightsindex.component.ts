@@ -21,6 +21,7 @@ export class FlightsindexComponent implements OnInit {
   @Input() status:boolean;
   @Input() cityFrom:string;
   @Input() cityDest:string;
+  mindate  = new Date();
   @Input() dateFrom:Timestamp<Date>;
   tripFilter: TripFilters;
 
