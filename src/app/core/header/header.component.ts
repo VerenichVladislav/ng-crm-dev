@@ -16,7 +16,6 @@ import {AdminService} from "../admin/shared/admin.service";
 export class HeaderComponent implements OnInit, DoCheck {
   private isActiveUser: boolean;
   private isActiveAdmin: boolean;
-  private page;
   constructor(private http: HttpClient,
               private translate: TranslateService,
               private userService: UserService,

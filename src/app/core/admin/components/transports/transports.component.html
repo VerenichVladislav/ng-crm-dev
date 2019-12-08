@@ -1,6 +1,62 @@
-<button type="button" class="btn btn-lg btn-primary">{{'all' | translate}} {{'transport' | translate}}</button>
+<div class="container navigation">
+<button type="button" (click)="showAll()" class="btn btn-lg btn-primary">{{'all' | translate}} {{'transport' | translate}}</button>
 <mat-form-field appearance="outline">
   <mat-label>{{'search' | translate}}</mat-label>
   <input matInput placeholder="{{'type the login' | translate}}">
 </mat-form-field>
 <button type="button" class="btn btn-lg btn-info">{{'search' | translate}}</button>
+</div>
+
+<div class="container">
+  <mat-accordion>
+    <mat-expansion-panel class="add-transport">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{'add' | translate}} {{'transport' | translate}}
+        </mat-panel-title>
+        <mat-panel-description>
+          ...
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <form [formGroup]="addTransportForm" (ngSubmit)="addTransport(addTransportForm.value)"
+            class="form">
+        <mat-form-field>
+          <mat-label>{{'transport-name' | translate}}</mat-label>
+          <input matInput placeholder="{{'add' | translate}} {{'transport-name' | translate}}" formControlName="name" required>
+          <mat-error *ngIf="!addTransportForm.controls['name'].valid
+         && addTransportForm.controls['name'].touched">
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>{{'count of' | translate}}</mat-label>
+          <input matInput placeholder="{{'add' | translate}} {{'count of' | translate}} {{'passengers' | translate}}" formControlName="passengerCapacity" required>
+        </mat-form-field>
+        <mat-error *ngIf="!addTransportForm.controls['passengerCapacity'].valid
+         && addTransportForm.controls['passengerCapacity'].touched">
+        </mat-error>
+
+        <mat-form-field (click)="loadCompanies()">
+          <mat-label>Company</mat-label>
+          <mat-select formControlName="company">
+            <mat-option *ngFor="let company of companies"  [value]="company.companyId">{{company.companyName}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <button mat-button type="submit" [disabled]="!addTransportForm.valid">{{ 'add' | translate }}</button>
+      </form>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+
+</div>
+
+<div class="container" *ngIf="transports">
+  <div *ngFor="let transport of transports" class="container mb-2 mt-2 mr-2 transport-container col-lg-4">
+
+    <h3 class="card-text">{{'transport' | translate}}: {{transport.name}}
+      <button class="btn btn-warning pull-right" >{{'edit' | translate}}</button>
+    </h3>
+    <button (click)="delete(transport.transportId)" class="btn btn-danger pull-right" >{{'delete' | translate}}</button>
+    <h3 class="card-text">{{'passengers' | translate}}: {{transport.passengerCapacity}}</h3>
+  </div>
+</div>

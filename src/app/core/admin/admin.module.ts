@@ -49,7 +49,7 @@ import { TripsComponent } from './components/trips/trips.component';
 import { CompaniesComponent } from './components/companies/companies.component';
 import {TransportsComponent} from "./components/transports/transports.component";
 import {LoginGuard} from "../../shared/login-guard.service";
-import {AdminGuard} from "../../shared/admin-guard.service";
+import {AdminGuardService} from "../../shared/admin-guard.service";
 
 const adminRoutes: Routes = [
   { path: 'users', component: UsersComponent},
@@ -135,7 +135,7 @@ const adminRoutes: Routes = [
       {
         path: 'admin',
         component: MainComponent,
-        canActivate: [AdminGuard],
+        canActivate: [AdminGuardService],
         children: adminRoutes
       },
       ]),

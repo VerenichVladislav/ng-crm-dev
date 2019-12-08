@@ -28,12 +28,17 @@ export class CommentsComponent implements OnInit {
   text: FormControl;
   hotelId:number;
   commentId: number;
-  userId:number = JSON.parse(localStorage.getItem('user')).userId;
+  userId:number;
   asyncResult:any;
   constructor(
     private route: ActivatedRoute,
     private fb: FormBuilder,
-    private commentsService: CommentsService){}
+    private commentsService: CommentsService){
+    const user = JSON.parse(localStorage.getItem('user'));
+    if(user != undefined) {
+      this.userId = user.userId;
+    }
+  }
 
   ngOnInit() {
     if(this.type=1){

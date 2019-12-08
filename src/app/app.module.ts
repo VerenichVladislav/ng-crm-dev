@@ -79,8 +79,6 @@ import {GlobalRootURL} from './GlobalRootURL';
 import {Ng4LoadingSpinnerModule} from "ng4-loading-spinner";
 import {LoginGuard} from "./shared/login-guard.service";
 import {AdminModule} from "./core/admin/admin.module";
-import {MainComponent} from "./core/admin/components/main/main.component";
-import {UsersComponent} from "./core/admin/components/users/users.component";
 import { ReplenishWalletComponent } from './components/replenish-wallet/replenish-wallet.component';
 import { NewsComponent } from './news/news.component';
 import { TicketMapComponent } from './ticket-map/ticket-map.component';
@@ -132,7 +130,6 @@ export function createTranslateLoader(http: HttpClient) {
     ReplenishWalletComponent,
     SearchResultTripComponent,
     TicketMapComponent,
-
     //SideFiltersComponent,
   ],
   entryComponents: [

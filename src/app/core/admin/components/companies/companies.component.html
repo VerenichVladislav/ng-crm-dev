@@ -1,39 +1,55 @@
-<div class="container">
-  <button type="button" class="btn btn-lg btn-primary">{{'all' | translate}} {{'companies' | translate}}</button>
+<div class="container navigation">
+  <button (click)="showAll()" type="button" class="btn btn-lg btn-primary">{{'all' | translate}} {{'companies' | translate}}</button>
   <mat-form-field appearance="outline">
     <mat-label>{{'search' | translate}}</mat-label>
     <input matInput placeholder="{{'type the login' | translate}}">
   </mat-form-field>
   <button type="button" class="btn btn-lg btn-info">{{'search' | translate}}</button>
+  <button type="button" class="btn btn-lg btn-info">{{'search' | translate}}</button>
 </div>
-<mat-accordion>
-  <mat-expansion-panel class="add-company">
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        {{'add' | translate}} {{'company' | translate}}
-      </mat-panel-title>
-      <mat-panel-description>
-        ...
-      </mat-panel-description>
-    </mat-expansion-panel-header>
+<div class="container">
+  <mat-accordion>
+    <mat-expansion-panel class="add-company">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{'add' | translate}} {{'company' | translate}}
+        </mat-panel-title>
+        <mat-panel-description>
+          ...
+        </mat-panel-description>
+      </mat-expansion-panel-header>
 
-    <form [formGroup]="addCompanyForm" (ngSubmit)="addCompany(addCompanyForm.value)"
-          class="form">
-      <mat-form-field>
-        <mat-label>{{'company-name' | translate}}</mat-label>
-        <input matInput placeholder="{{'add' | translate}} {{'company-name' | translate}}" formControlName="companyName" name="username" required>
-        <mat-error *ngIf="!addCompanyForm.controls['companyName'].valid
+      <form [formGroup]="addCompanyForm" (ngSubmit)="addCompany(addCompanyForm.value)"
+            class="form">
+        <mat-form-field>
+          <mat-label>{{'company-name' | translate}}</mat-label>
+          <input matInput placeholder="{{'add' | translate}} {{'company-name' | translate}}" formControlName="companyName" required>
+          <mat-error *ngIf="!addCompanyForm.controls['companyName'].valid
          && addCompanyForm.controls['companyName'].touched">
-        </mat-error>
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>{{'count of' | translate}}</mat-label>
-        <input matInput placeholder="{{'add' | translate}} {{'count of' | translate}} {{'transport' | translate}}" formControlName="transportCount" required>
-      </mat-form-field>
-      <mat-error *ngIf="!addCompanyForm.controls['transportCount'].valid
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>{{'count of' | translate}}</mat-label>
+          <input matInput placeholder="{{'add' | translate}} {{'count of' | translate}} {{'transport' | translate}}" formControlName="transportCount" required>
+        </mat-form-field>
+        <mat-error *ngIf="!addCompanyForm.controls['transportCount'].valid
          && addCompanyForm.controls['transportCount'].touched">
-      </mat-error>
-      <button mat-button type="submit" [disabled]="!addCompanyForm.valid">{{ 'add' | translate }}</button>
-    </form>
-  </mat-expansion-panel>
-</mat-accordion>
+        </mat-error>
+        <button mat-button type="submit" [disabled]="!addCompanyForm.valid">{{ 'add' | translate }}</button>
+      </form>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+</div>
+
+<div class="container" *ngIf="companies">
+  <div *ngFor="let company of companies" class="container mb-2 mt-2 company-container col-lg-6">
+    <h3 class="card-text">{{'company' | translate}}: {{company.companyName}}
+      <button class="btn btn-warning pull-right" >{{'edit' | translate}}</button>
+    </h3>
+    <h3 class="card-text">{{'rating' | translate}}: {{company.rating}}
+      <button (click)="delete(company.companyName)" class="btn btn-danger pull-right" >{{'delete' | translate}}</button>
+    </h3>
+    <h3 class="card-text">{{'count of ' | translate}} {{'transport' | translate}}: {{company.transportCount}}</h3>
+  </div>
+</div>

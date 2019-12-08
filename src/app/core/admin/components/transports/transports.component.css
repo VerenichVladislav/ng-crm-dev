@@ -1,6 +1,13 @@
 .btn{
   margin: -1vh 1vw 0 1vw;
 }
+.navigation{
+  margin-left: 20%;
+}
 .transport-container{
-  border: 2px dashed #474e5d;
+  border: 2px solid #474e5d;
+}
+.add-transport {
+  margin-left: 13%;
+  width: 30%;
 }
