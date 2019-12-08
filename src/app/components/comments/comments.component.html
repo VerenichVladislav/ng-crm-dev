@@ -14,8 +14,11 @@
       <div>
         <form *ngFor="let comment of comments; let i = index" style="border:2px solid #555; box-shadow:3px 3px 5px #999;   margin:20px; padding:20px;">
           <h4><b>
-                
+            <div *ngIf="comment.user==userName">
+              <button id="deleteComment" (click)="deleteComment(comment.commentId);" class="close-btn pull-right" >x</button>
+            </div>
                 {{comment.user}}
+                
               </b>
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               <b>{{comment.rate}}</b>
@@ -48,7 +51,7 @@
           <input type="radio" value="1" [checked]="rating===1"/>
           <label title="Very Bad" (click)='onClick(1)'>1 star</label>
         </fieldset>
-          <textarea class="form-control" rows="5" type="text" formControlName="text" placeholder="Your Comment"></textarea>
+          <textarea id="comment" class="form-control" rows="5" type="text" formControlName="text" minlength="10" placeholder="Your Comment"></textarea>
           <br/>
           <button class="btn btn-success btn-md pull-right" type="submit">Comment</button>
         </form>

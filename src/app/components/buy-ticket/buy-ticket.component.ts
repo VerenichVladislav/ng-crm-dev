@@ -27,13 +27,12 @@ export class BuyTicketComponent implements OnInit {
   idT:number;
   idU:number;
   message: any;
+  userId:number = JSON.parse(localStorage.getItem('user')).userId;
   constructor(private tripService: TripService,
               private route: ActivatedRoute,
-              private router: Router,
               private fb: FormBuilder,
               private ticketService: TicketService,
               private errorConnection: SnackBarComponent,
-              private http: HttpClient,
               private spinnerService: Ng4LoadingSpinnerService){}
 
     ngOnInit() {
@@ -41,8 +40,6 @@ export class BuyTicketComponent implements OnInit {
 
     const tripid = this.route.snapshot.paramMap.get('tripid');
     this.idT = parseInt(tripid);
-    const userid = this.route.snapshot.paramMap.get('userid');
-    this.idU = parseInt(userid);
     this.trip = this.tripService.getTrip(tripid).subscribe(
       data => {
         this.spinnerService.hide();
@@ -85,7 +82,7 @@ export class BuyTicketComponent implements OnInit {
   }
 
   submit(){
-    this.ticketService.submitForm(this.usersForm.controls.users.value, this.count, this.idT, this.idU)
+    this.ticketService.submitForm(this.usersForm.controls.users.value, this.count, this.idT, this.userId)
                 .subscribe(
                     (log: HttpErrorResponse) => {
                         this.message = log;
