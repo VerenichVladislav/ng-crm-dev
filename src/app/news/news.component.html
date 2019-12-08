@@ -1,5 +1,6 @@
 
 {{posts.totalResults}}
 <div *ngFor='let post of posts.articles'>
-   <p>{{post.title}}</p>
+   <p>{{post}}</p>
 </div>
+<mat-button-toggle (click)="sig()">signInGOogle</mat-button-toggle>

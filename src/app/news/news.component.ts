@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { News } from '../entity/News';
 
+import { GapiSession } from '../google-service/GapiSession';
+
 @Component({
   selector: 'app-news',
   templateUrl: './news.component.html',
@@ -10,9 +12,12 @@ import { News } from '../entity/News';
 })
 export class NewsComponent implements OnInit {
 
-  constructor(private http:HttpClient) { 
+  constructor(private http:HttpClient,public session:GapiSession) { 
     this.http.get<News>("https://newsapi.org/v2/everything?q=bitcoin&from=2019-11-03&sortBy=publishedAt&apiKey=1e5a72d0fdc146f7a9b9727884df13ed")
     .subscribe(res=>this.posts=res);;
+  }
+  sig(){
+    this.session.signIn();
   }
   posts:News;
   ngOnInit() {

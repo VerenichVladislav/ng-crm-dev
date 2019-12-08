@@ -2,16 +2,16 @@
     <div class="content">
         <div class="search">
                 <mat-form-field class="form-mat-child">
-                        <input matInput placeholder="{{'city' | translate}}" [(ngModel)]="city" >
+                        <input matInput placeholder="{{'city' | translate}}" [(ngModel)]="city">
                 </mat-form-field>
             <mat-form-field color="accent" class="form-mat-child">
-                <input matInput [matDatepicker]="picker1" placeholder="{{'checkIn' | translate}}" [(ngModel)]="checkIn">
+                <input matInput [matDatepicker]="picker1" [min]="minDate" placeholder="{{'checkIn' | translate}}" [(ngModel)]="checkIn">
                 <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                 <mat-datepicker #picker1></mat-datepicker>
               </mat-form-field>
               <mat-form-field color="accent" class="form-mat-child">
-                <input matInput [matDatepicker]="picker2" placeholder="{{'checkOut' | translate}}" [(ngModel)]="checkOut">
-                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                <input matInput [matDatepicker]="picker2" [min]="checkIn" placeholder="{{'checkOut' | translate}}" [(ngModel)]="checkOut">
+                <mat-datepicker-toggle matSuffix  [for]="picker2"></mat-datepicker-toggle>
                 <mat-datepicker #picker2 color="primary"></mat-datepicker>
               </mat-form-field>
               <mat-form-field  class="form-mat-child">
@@ -27,17 +27,17 @@
             <div class="recomends-content">
               {{'popularDest' | translate}}
             </div>
-            <mat-grid-list cols="6" rowHeight = "400px">
+            <mat-grid-list cols="6" rowHeight = "200px">
 
-            <ng-container *ngFor="let item of cityCollection|async">
+            <ng-container *ngFor="let post of cityCollection|async">
 
                 <mat-grid-tile [colspan]=2 [rowspan]=1>
 
-            <div class="recomends-content" (click)="findbyCity(item.cityName)">
+            <div class="recomends-content" (click)="findbyCity(post.cityName)">
                 <div class="recomend-hotels">
                     <div class="recomend-hotels-image">
-                        <img src="{{'https://drive.google.com/uc?export=view&id='+item.image}}" alt="" class="recomend-hotels-image"/>
-                        <h2>{{item.cityName}}:<br />{{item.country}}</h2>
+                        <img src="{{post.image ?'https://drive.google.com/uc?export=view&id='+post.image : 'https://drive.google.com/uc?export=view&id=1jC7zuqnV23XH-AEVlrA9BrQ9RXt_ft_8'}}" alt="">
+                        <h2>{{post.cityName}}:<br />{{post.country}}</h2>
                     </div>
                 </div>
 
