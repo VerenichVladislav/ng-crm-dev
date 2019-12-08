@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {GlobalRootURL} from '../../../GlobalRootURL';
 
@@ -11,6 +11,10 @@ export class ConfirmEmailService {
   constructor(private http: HttpClient) { }
 
   confirmEmail(userName: string): Observable<any> {
-    return this.http.get<any>(this.URL + userName);
+    let headers = new HttpHeaders({'Content-Type': 'application/json'});
+    let options = {
+      headers: headers ,
+    };
+    return this.http.get<any>(this.URL + userName, options);
   }
 }

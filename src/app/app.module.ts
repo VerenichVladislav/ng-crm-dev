@@ -9,7 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from './core/header/header.component';
 // import { StompService } from 'ng2-stomp-service';
 import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
-import {RouterModule} from '@angular/router';
+import {RouterModule, Routes} from '@angular/router';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import { ProfileComponent } from './components/profile/profile.component';
 import {AuthModule} from './core/auth/auth.module';
@@ -64,7 +64,6 @@ import {LoginComponent} from './core/auth/components/login/login.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { ConnectionErrorComponent } from './components/snack-bar/connection-error/connection-error.component';
 import { SnackBarComponent } from './components/snack-bar/snack-bar.component';
-// import { ChatDialogComponent } from './components/chat-dialog/chat-dialog.component';
 import { IndexComponent } from './components/index/index.component';
 import { TourIndexComponent } from './components/tour-index/tour-index.component';
 import { TourSearchResComponent } from './components/tour-search-res/tour-search-res.component';
@@ -73,13 +72,13 @@ import { MapFindHotelComponent } from './map-find-hotel/map-find-hotel.component
 // import { ChatDialogComponent } from './components/chat-dialog/chat-dialog.component';
 import {SearchResultTripComponent} from './components/search-result-trip/search-result-trip.component';
 import {FlightsindexComponent} from './components/flightsindex/flightsindex.component';
-// import { SideFiltersComponent } from './components/side-filters/side-filters.component';
 //import { SideFiltersComponent } from './components/side-filters/side-filters.component';
 import { Page404Component } from './core/page404/page404.component';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {GlobalRootURL} from './GlobalRootURL';
 import {Ng4LoadingSpinnerModule} from "ng4-loading-spinner";
 import {LoginGuard} from "./shared/login-guard.service";
+import {AdminModule} from "./core/admin/admin.module";
 import { ReplenishWalletComponent } from './components/replenish-wallet/replenish-wallet.component';
 import { NewsComponent } from './news/news.component';
 import { TicketMapComponent } from './ticket-map/ticket-map.component';
@@ -131,7 +130,6 @@ export function createTranslateLoader(http: HttpClient) {
     ReplenishWalletComponent,
     SearchResultTripComponent,
     TicketMapComponent,
-
     //SideFiltersComponent,
   ],
   entryComponents: [
@@ -183,8 +181,10 @@ export function createTranslateLoader(http: HttpClient) {
     MatSliderModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    AuthModule,
     NgbModule,
+
+    AuthModule,
+    AdminModule,
 
     TranslateModule.forRoot( {
       loader: {
@@ -203,14 +203,14 @@ export function createTranslateLoader(http: HttpClient) {
         component: ProfileComponent,
         canActivate: [LoginGuard]
       },
+
       { path: 'HotelIndex', component: HotelindexComponent},
       {path:'News',component:NewsComponent},
       { path: 'Index', component: IndexComponent},
       { path: 'SearchResult', component: SearchResultComponent},
       { path: 'SearchResultTrip', component: SearchResultTripComponent},
       { path: 'SearchResult/:id', component: DetailshotelComponentComponent},
-      {path: 'trips/:userid/:tripid/buy', component: BuyTicketComponent},
-      {path: 'comments', component: BuyTicketComponent},
+      {path: 'trips/:tripid/buy', component: BuyTicketComponent},
       {path:'tourResult',component:TourSearchResComponent},
       {path:'tourResult/:id', component:TourDetailsComponent},
       {path:'Mapfind',component:MapFindHotelComponent},

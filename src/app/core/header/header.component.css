@@ -119,6 +119,10 @@ hr {
   padding: 0;
   background-size: contain;
 }
+.admin{
+  margin-left: 50%;
+  width: 5vw;
+}
 .eng {
   background: url(src/england.svg) no-repeat;
 }

@@ -12,16 +12,16 @@ import { GapiSession } from '../google-service/GapiSession';
 })
 export class NewsComponent implements OnInit {
 
-  constructor(private http:HttpClient,public session:GapiSession) { 
+  constructor(private http:HttpClient) {
     this.http.get<News>("https://newsapi.org/v2/everything?q=bitcoin&from=2019-11-03&sortBy=publishedAt&apiKey=1e5a72d0fdc146f7a9b9727884df13ed")
-    .subscribe(res=>this.posts=res);;
+    .subscribe(res=>this.posts=res);
   }
   sig(){
-    this.session.signIn();
+   
   }
   posts:News;
   ngOnInit() {
-    
+
   }
 
 }

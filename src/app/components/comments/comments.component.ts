@@ -4,7 +4,6 @@ import { ActivatedRoute } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -27,24 +26,25 @@ export class CommentsComponent implements OnInit {
   newComment: FormGroup;
   text: FormControl;
   hotelId:number;
-  commentId: number;
   userId:number = JSON.parse(localStorage.getItem('user')).userId;
+  userName:string = JSON.parse(localStorage.getItem('user')).userName;
   asyncResult:any;
+  comment:string;
   constructor(
     private route: ActivatedRoute,
     private fb: FormBuilder,
     private commentsService: CommentsService){}
 
   ngOnInit() {
-    if(this.type=1){
+    if(this.type==1){
     this.comments = this.commentsService.getHotelComments(this.EntityId).subscribe(
       data => this.comments = data
      ) }
-     else if(this.type=2){
+     else if(this.type==2){
       this.comments = this.commentsService.getTourComments(this.EntityId).subscribe(
         data => this.comments = data
        )
-     } else if(this.type=3){
+     } else if(this.type==3){
       this.comments = this.commentsService.getCompanyComments(this.EntityId).subscribe(
         data => this.comments = data
        )
@@ -52,7 +52,32 @@ export class CommentsComponent implements OnInit {
     this.newComment = new FormGroup({
       text: new FormControl()
     });
-    //this.newComment.valueChanges.subscribe((value)=>console.log(JSON.stringify(value)));
+  }
+  deleteComment(commentId:number){
+    this.commentsService.delete(commentId, this.EntityId, this.type).subscribe(
+      data => this.comments = data
+    );
+    setTimeout(() => {
+      if(this.type=1){
+        this.comments = this.commentsService.getHotelComments(this.EntityId).subscribe(
+          data => this.comments = data
+         );
+         this.asyncResult = this.commentsService.getHotelComments(this.EntityId).toPromise();
+         }
+         else if(this.type=2){
+          this.comments = this.commentsService.getTourComments(this.EntityId).subscribe(
+            data => this.comments = data
+           );
+           this.asyncResult = this.commentsService.getTourComments(this.EntityId).toPromise();
+         }
+         else if(this.type=3){
+          this.comments = this.commentsService.getCompanyComments(this.EntityId).subscribe(
+            data => this.comments = data
+           );
+           this.asyncResult = this.commentsService.getCompanyComments(this.EntityId).toPromise();
+         }
+        },
+        500);
   }
 
   onClick(rating: number): void {
@@ -60,10 +85,14 @@ export class CommentsComponent implements OnInit {
     this.ratingClick.emit({
       rating: rating
   });
-  //console.log(rating);
 }
 
   async submit(){
+    if (($('#comment').val() as any).trim().length<1)
+      {
+          alert("Please, enter your comment...");
+          return;
+      }
       this.commentsService.submitForm(this.newComment.controls.text, this.rating, this.EntityId, this.userId, this.type)
                   .subscribe(
                       (log: HttpErrorResponse) => {
@@ -73,24 +102,27 @@ export class CommentsComponent implements OnInit {
                         this.message = error.error;
                       }
                   );
+                  setTimeout(() => {
                   if(this.type=1){
                     this.comments = this.commentsService.getHotelComments(this.EntityId).subscribe(
                       data => this.comments = data
                      );
-                     this.asyncResult = await this.commentsService.getHotelComments(this.EntityId).toPromise();
+                     this.asyncResult = this.commentsService.getHotelComments(this.EntityId).toPromise();
                      }
                      else if(this.type=2){
                       this.comments = this.commentsService.getTourComments(this.EntityId).subscribe(
                         data => this.comments = data
                        );
-                       this.asyncResult = await this.commentsService.getTourComments(this.EntityId).toPromise();
+                       this.asyncResult = this.commentsService.getTourComments(this.EntityId).toPromise();
                      }
                      else if(this.type=3){
                       this.comments = this.commentsService.getCompanyComments(this.EntityId).subscribe(
                         data => this.comments = data
                        );
-                       this.asyncResult = await this.commentsService.getCompanyComments(this.EntityId).toPromise();
+                       this.asyncResult = this.commentsService.getCompanyComments(this.EntityId).toPromise();
                      }
-                     window.location.reload();
+                    },
+                    500);
+                     //window.location.reload();
       }
 }

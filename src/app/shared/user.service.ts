@@ -13,6 +13,16 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
+  getAllUsers() : Observable<User[]> {
+    let headers = new HttpHeaders({ 'Content-Type': 'application/json'});
+    let body: any = {
+      role: "USER"
+    };
+    let options = { headers: headers };
+
+    return this.http.post<User[]>(this.URL + 'filter', body, options);
+  }
+
   getUserById(id: number): Observable<User> {
     let headers = new HttpHeaders(
       { 'Content-Type': 'application/json',
