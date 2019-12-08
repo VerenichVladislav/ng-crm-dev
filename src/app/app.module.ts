@@ -82,6 +82,8 @@ import {AdminModule} from "./core/admin/admin.module";
 import { ReplenishWalletComponent } from './components/replenish-wallet/replenish-wallet.component';
 import { NewsComponent } from './news/news.component';
 import { TicketMapComponent } from './ticket-map/ticket-map.component';
+import {Register} from "ts-node";
+import {RegisterComponent} from "./core/auth/components/register/register.component";
 
 export function initGapi(gapiSession: GapiSession) {
   return () => gapiSession.initClient();
@@ -197,6 +199,7 @@ export function createTranslateLoader(http: HttpClient) {
     Ng4LoadingSpinnerModule.forRoot(),
 
     RouterModule.forRoot([
+      { path: 'register', component: RegisterComponent},
       { path: 'login', component: LoginComponent},
       {
         path: 'profile',

@@ -84,6 +84,11 @@ export class RegisterComponent implements OnInit {
     document.getElementById('register-form').style.display='none';
   }
 
+  go(){
+    console.log('wow');
+    this.router.navigate(['']);
+  }
+
   ngOnInit() {
   }
 
