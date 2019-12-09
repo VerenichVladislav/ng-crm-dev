@@ -9,13 +9,13 @@
   </div>
   <div class="mt-5">
     <div class="col-xs-4" align="center">
-      <h4>From: {{trip.cityFrom}}</h4>
-      <h4>To: {{trip.cityDest}}</h4>
-      <h4>By: {{trip.transport}}</h4>
-      <h4>Date: {{trip.dateFrom | date:'short'}}</h4>
-      <h4>Price For One: {{trip.price}}$</h4>
+      <h4>From: {{cityFrom}}</h4>
+      <h4>To: {{cityDest}}</h4>
+      <h4>By: {{transport}}</h4>
+      <h4>Date: {{trip?.dateFrom | date:'short'}}</h4>
+      <h4>Price For One: {{trip?.price}}$</h4>
       <div class="mt-5">
-        <h4>Total Cost: {{trip.price * count}}$</h4>
+        <h4>Total Cost: {{trip?.price * count}}$</h4>
       </div>
     </div>
     <div class="mt-5">
@@ -32,7 +32,7 @@
                     </label>
                   </div>
                 </ng-container>            
-                  <button type="submit" [disabled] ="!usersForm.valid" class="btn btn-success" data-toggle="modal" data-target="#myModal"> Buy({{trip.price * count}}$) </button> 
+                  <button type="submit" [disabled] ="!usersForm.valid" class="btn btn-success" data-toggle="modal" data-target="#myModal"> Buy({{trip?.price * count}}$) </button> 
                       <div id="myModal" class="modal fade">
                         <div class="modal-dialog">
                           <div class="modal-content">
