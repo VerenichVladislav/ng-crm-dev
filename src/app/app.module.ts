@@ -82,6 +82,7 @@ import {AdminModule} from "./core/admin/admin.module";
 import { ReplenishWalletComponent } from './components/replenish-wallet/replenish-wallet.component';
 import { NewsComponent } from './news/news.component';
 import { TicketMapComponent } from './ticket-map/ticket-map.component';
+import { ConfirmationDialog } from './components/confirmation-dialog/confirmation-dialog.component';
 
 export function initGapi(gapiSession: GapiSession) {
   return () => gapiSession.initClient();
@@ -130,11 +131,13 @@ export function createTranslateLoader(http: HttpClient) {
     ReplenishWalletComponent,
     SearchResultTripComponent,
     TicketMapComponent,
+    ConfirmationDialog,
     //SideFiltersComponent,
   ],
   entryComponents: [
     DetailshotelDialogComponent,
-    ConnectionErrorComponent
+    ConnectionErrorComponent,
+    ConfirmationDialog
   ],
   imports: [
     CdkTreeModule,

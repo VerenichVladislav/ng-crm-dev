@@ -27,6 +27,7 @@
     "@ngu/carousel": "^1.5.5",
     "@ngx-translate/core": "^11.0.1",
     "@ngx-translate/http-loader": "^4.0.0",
+    "@react-md/dialog": "^2.0.0-alpha.1",
     "@types/gapi.auth2": "0.0.50",
     "@types/gapi.client.drive": "^3.0.3",
     "@types/jquery": "^3.3.31",

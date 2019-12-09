@@ -1,0 +1,11 @@
+<h1 mat-dialog-title cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle>
+        <h4>Confirm your action</h4>
+      </h1>
+<div md-dialog-content>
+    <p>{{confirmMessage}}</p>
+</div>
+<div md-dialog-actions align="center">
+    <button mat-raised-button color="primary" (click)="dialogRef.close(true)">Confirm</button>
+    <button md-button class="btn btn-light pull-left" (click)="dialogRef.close(false)">Cancel</button>
+</div>
+
