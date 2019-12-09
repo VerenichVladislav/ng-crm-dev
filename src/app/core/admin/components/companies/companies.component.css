@@ -5,7 +5,26 @@
   margin-left: 20%;
 }
 .company-container{
-  border: 2px solid #474e5d;
+  min-height: 20vh;
+  margin: 2vh 10vw 2vh auto;
+  background: -webkit-linear-gradient(top left, #95B2C6, #1D1A8A);
+  background: -moz-linear-gradient(top left, #95B2C6, #1D1A8A);
+  background: linear-gradient(to bottom right, #95B2C6, #1D1A8A);
+  box-shadow: 9px 4px 30px 5px #1b1866;
+}
+.company-container h3, .company-container button{
+  color: rgba(255,255,255,1);
+  font-size: 18px;
+  font-family: "Trebuchet MS", serif;
+}
+input[type=text] {
+  width: 50%;
+  padding: 10px;
+  margin: 1vh 0 1vh 0;
+  border: 2px solid black;
+  border-radius: 2px;
+  background: #f1f1f1;
+  display: flex;
 }
 .add-company {
   margin-left: 13%;

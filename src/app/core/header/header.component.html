@@ -29,11 +29,12 @@
         <button *ngIf="isActiveUser" routerLink="/profile" class="btn">{{'profile' | translate}}</button>
         <app-logout *ngIf="isActiveUser"></app-logout>
         <button *ngIf="isActiveUser" routerLink="/admin" class="btn-danger admin">{{'admin' | translate}}</button>
+
+        <div class="pull-right">
+          <button (click)="en()" class="eng"></button>
+          <button (click)="ru()" class="rus"></button>
+        </div>
       </div>
-    </div>
-    <div class="lang">
-      <button (click)="en()" class="eng"></button>
-      <button (click)="ru()" class="rus"></button>
     </div>
   </nav>
 </header>
