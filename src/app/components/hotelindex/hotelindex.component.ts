@@ -11,6 +11,7 @@ import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { DatePipe } from '@angular/common';
 import { Hotel } from 'src/app/entity/hotel';
 import {FormControl} from '@angular/forms';
+import { GapiSession } from 'src/app/google-service/GapiSession';
 
 @Component({
   selector: 'app-hotelindex',
@@ -40,8 +41,6 @@ export class HotelindexComponent implements OnInit {
   @Input() checkOut:Timestamp<Date>;
   @Input() city:String;
   find(){
-    
-   
       var hotelFilter:HotelFilters = {
     city:this.city,
     CheckIn:this.datePipe.transform(this.checkIn, 'yyyy-MM-dd'),
