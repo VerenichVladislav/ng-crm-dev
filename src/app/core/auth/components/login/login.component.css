@@ -89,6 +89,10 @@ hr {
   margin-bottom: 25px;
 }
 
+.error{
+  width: 80%;
+}
+
 .close {
   position: absolute;
   right: 25px;

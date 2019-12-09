@@ -37,6 +37,10 @@ button {
   margin-right: 2px;
 }
 
+.error{
+  width: 80%;
+}
+
 button:hover {
   opacity:1;
 }

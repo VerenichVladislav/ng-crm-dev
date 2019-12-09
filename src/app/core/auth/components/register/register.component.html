@@ -7,7 +7,7 @@
       <input id="register-username" type="text" class="ng-invalid"
              placeholder="Введите имя пользователя" formControlName="userName" required>
       <div *ngIf="errorLogin"
-           class="cross-validation-error-message alert alert-danger">
+           class="error cross-validation-error-message alert alert-danger">
         Пользователь с таким логином уже существует
       </div>
 
@@ -27,7 +27,7 @@
       <label for="register-password-repeat"><b>Repeat Password</b></label>
       <input id="register-password-repeat" type="password" placeholder="Повторите пароль" formControlName="repeatPass" required>
       <div *ngIf="registerForm.errors?.nonIdenticalPassword"
-           class="cross-validation-error-message alert alert-danger">
+           class="error cross-validation-error-message alert alert-danger">
         Пароли не совпадают
       </div>
 
@@ -36,7 +36,7 @@
       </label>
       <div class="row">
         <button type="submit" class="signupbtn" [disabled]="!registerForm.valid">{{ 'signup' | translate }}</button>
-        <button type="button" class="cancelbtn" routerLink="/" >Cancel</button>
+        <button type="button" class="cancelbtn" routerLink="/" (click)="go()">Cancel</button>
       </div>
     </div>
   </form>
