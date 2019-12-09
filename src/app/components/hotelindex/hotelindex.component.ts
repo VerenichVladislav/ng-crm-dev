@@ -4,16 +4,19 @@ import { Router } from '@angular/router';
 import { HotelFilters } from 'src/app/entity/HotelFilters';
 import { HotelService } from 'src/app/shared/hotel.service';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, Timestamp } from 'rxjs';
 import { City } from 'src/app/entity/city';
 import { GlobalRootURL } from 'src/app/GlobalRootURL';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
+import { DatePipe } from '@angular/common';
+import { Hotel } from 'src/app/entity/hotel';
 
 
 @Component({
   selector: 'app-hotelindex',
   templateUrl: './hotelindex.component.html',
-  styleUrls: ['./hotelindex.component.css']
+  styleUrls: ['./hotelindex.component.css'],
+  providers: [DatePipe],
 })
 @Injectable()
 export class HotelindexComponent implements OnInit {
@@ -21,20 +24,23 @@ export class HotelindexComponent implements OnInit {
   constructor(private router: Router,
               public service:HotelService,
               private http:HttpClient,
-              private spinnerService: Ng4LoadingSpinnerService) {
+              private spinnerService: Ng4LoadingSpinnerService,
+              private datePipe:DatePipe) {
     this.spinnerService.show();
     this.cityCollection = this.http.get<City>(GlobalRootURL.BASE_API_URL+"cities");
     this.spinnerService.hide();
   }
+  minDate = new Date();
+  
   @Input() status:boolean;
-  @Input() checkIn:string
-  @Input() checkOut:string
+  @Input() checkIn:Timestamp<Date>;
+  @Input() checkOut:Timestamp<Date>;
   @Input() city:String;
   find(){
       var hotelFilter:HotelFilters = {
     city:this.city,
-    CheckIn:this.checkIn,
-    CheckOut:this.checkOut
+    CheckIn:this.datePipe.transform(this.checkIn, 'yyyy-MM-dd'),
+    CheckOut:this.datePipe.transform(this.checkOut, 'yyyy-MM-dd')
    }
 
 
