@@ -31,13 +31,17 @@ export class HotelindexComponent implements OnInit {
     this.spinnerService.hide();
   }
   minDate = new Date();
-  
+  displayFn(city?: City): string | undefined {
+    return city.cityName ? city.cityName : undefined;
+  }
   serializedDate = new FormControl((new Date()).toISOString());
   @Input() status:boolean;
   @Input() checkIn:Timestamp<Date>;
   @Input() checkOut:Timestamp<Date>;
   @Input() city:String;
   find(){
+    
+   
       var hotelFilter:HotelFilters = {
     city:this.city,
     CheckIn:this.datePipe.transform(this.checkIn, 'yyyy-MM-dd'),

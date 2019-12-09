@@ -82,8 +82,6 @@ import {AdminModule} from "./core/admin/admin.module";
 import { ReplenishWalletComponent } from './components/replenish-wallet/replenish-wallet.component';
 import { NewsComponent } from './news/news.component';
 import { TicketMapComponent } from './ticket-map/ticket-map.component';
-import {RegisterComponent} from "./core/auth/components/register/register.component";
-import { ConfirmationDialog } from './components/confirmation-dialog/confirmation-dialog.component';
 
 export function initGapi(gapiSession: GapiSession) {
   return () => gapiSession.initClient();
@@ -132,13 +130,11 @@ export function createTranslateLoader(http: HttpClient) {
     ReplenishWalletComponent,
     SearchResultTripComponent,
     TicketMapComponent,
-    ConfirmationDialog,
     //SideFiltersComponent,
   ],
   entryComponents: [
     DetailshotelDialogComponent,
-    ConnectionErrorComponent,
-    ConfirmationDialog
+    ConnectionErrorComponent
   ],
   imports: [
     CdkTreeModule,
@@ -201,7 +197,6 @@ export function createTranslateLoader(http: HttpClient) {
     Ng4LoadingSpinnerModule.forRoot(),
 
     RouterModule.forRoot([
-      { path: 'register', component: RegisterComponent},
       { path: 'login', component: LoginComponent},
       {
         path: 'profile',
