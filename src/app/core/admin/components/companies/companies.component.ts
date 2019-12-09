@@ -1,11 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
 import {CompanyService} from "../../../../shared/company.service";
 import {Transport} from "../../../../entity/transport";
 import {map} from "rxjs/operators";
 import {TransportService} from "../../../../shared/transport.service";
 import { Observable } from 'rxjs';
-import {Wallet} from "../../../../entity/wallet";
 import {Company} from "../../../../entity/company";
 import {LocaleStorageService} from "../../../../shared/locale-storage.service";
 
@@ -23,6 +22,9 @@ export class CompaniesComponent implements OnInit {
 
   private addTransportBtn: boolean = false;
   private transportSelect: boolean = false;
+
+  // @ViewChild("edit", {static: false}) input1ElementRef;
+  private editField: boolean = false;
 
   constructor(private companyService: CompanyService,
               private transportService: TransportService,
@@ -93,6 +95,15 @@ export class CompaniesComponent implements OnInit {
         )
       }
     }
+  }
+
+  showEdit() {
+    this.editField = true;
+  }
+
+  save() {
+    console.log('Отправить');
+    this.editField = false;
   }
 
   delete(companyName: string) {

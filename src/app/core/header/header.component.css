@@ -21,6 +21,7 @@ input[type=text]:focus, input[type=password]:focus {
   color: #20222c;
   opacity: 0.9;
   margin-right: 0.5vw;
+  padding: 14px 20px;
 }
 .btn-success {
   margin-right: 2px;
@@ -49,19 +50,6 @@ button:hover {
 
 .container {
   padding: 16px;
-}
-
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 1;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: #474e5d;
-  padding-top: 50px;
 }
 
 .modal-content {
@@ -110,6 +98,9 @@ hr {
 @keyframes animatezoom {
   from {transform: scale(0)}
   to {transform: scale(1)}
+}
+.lang{
+  margin-left: 30%;
 }
 .eng, .rus {
   outline: 0;

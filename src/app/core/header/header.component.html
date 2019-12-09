@@ -23,14 +23,18 @@
       </ul>
 
       <div class="row">
-        <app-register *ngIf="!isActiveUser"></app-register>
-        <app-login *ngIf="!isActiveUser"></app-login>
+        <button *ngIf="!isActiveUser" routerLink="/register" class="btn" >{{'signup' | translate}}</button>
+        <button *ngIf="!isActiveUser" routerLink="/login" class="btn">{{'login' | translate}}</button>
+
         <button *ngIf="isActiveUser" routerLink="/profile" class="btn">{{'profile' | translate}}</button>
         <app-logout *ngIf="isActiveUser"></app-logout>
         <button *ngIf="isActiveUser" routerLink="/admin" class="btn-danger admin">{{'admin' | translate}}</button>
+
+        <div class="pull-right">
+          <button (click)="en()" class="eng"></button>
+          <button (click)="ru()" class="rus"></button>
+        </div>
       </div>
     </div>
-    <button (click)="en()" class="eng"></button>
-    <button (click)="ru()" class="rus"></button>
   </nav>
 </header>
