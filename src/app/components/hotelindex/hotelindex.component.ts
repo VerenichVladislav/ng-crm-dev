@@ -10,7 +10,7 @@ import { GlobalRootURL } from 'src/app/GlobalRootURL';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { DatePipe } from '@angular/common';
 import { Hotel } from 'src/app/entity/hotel';
-
+import {FormControl} from '@angular/forms';
 
 @Component({
   selector: 'app-hotelindex',
@@ -32,6 +32,7 @@ export class HotelindexComponent implements OnInit {
   }
   minDate = new Date();
   
+  serializedDate = new FormControl((new Date()).toISOString());
   @Input() status:boolean;
   @Input() checkIn:Timestamp<Date>;
   @Input() checkOut:Timestamp<Date>;

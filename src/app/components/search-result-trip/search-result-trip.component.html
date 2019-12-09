@@ -1,9 +1,21 @@
-    <div *ngFor="let post of posts | async">
+    <div class="center" *ngFor="let post of posts | async">
             <mat-card>City from: {{post.cityFrom}}; City destination: {{post.cityDest}}; Date: {{post.dateFrom | date: 'yyyy-MM-dd'}};
                 <button (onclick)="Buy()" class="btn btn-outline-success">Buy</button>
             </mat-card>
     </div>
-    <div *ngFor="let post of Hotels | async">
-        <p>{{post.hotelName}}</p>
-    </div>
     
+   
+    <mat-grid-list cols="6">
+            <mat-grid-tile  *ngFor="let post of Hotels | async|  slice:0:6">
+                    <mat-card class="example-card">
+                            <mat-card-header>
+                              {{post.hotelName}}
+                             
+                            </mat-card-header>
+                            <img src="{{post.image ?' https://drive.google.com/uc?export=view&id='+post.image :'https://drive.google.com/uc?export=view&id=1jC7zuqnV23XH-AEVlrA9BrQ9RXt_ft_8'}}" alt="">
+                            
+                            
+                          </mat-card>
+            </mat-grid-tile>
+            
+          </mat-grid-list>
