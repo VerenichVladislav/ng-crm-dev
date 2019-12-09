@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Injectable, Input } from '@angular/core';
 import { TripService } from 'src/app/shared/trip.service';
 import {GlobalRootURL} from '../../GlobalRootURL';
 import { Observable } from 'rxjs';
@@ -8,29 +8,34 @@ import { Router } from '@angular/router';
 import { Hotel } from 'src/app/entity/hotel';
 import { HotelService } from 'src/app/shared/hotel.service';
 import { HotelFilters } from 'src/app/entity/HotelFilters';
+import { post } from 'selenium-webdriver/http';
+import { element } from 'protractor';
 ``
+
 @Component({
   selector: 'app-search-result-trip-component',
   templateUrl: './search-result-trip.component.html',
   styleUrls: ['./search-result-trip.component.css']
 })
+@Injectable()
 export class SearchResultTripComponent implements OnInit {
   readonly URL = GlobalRootURL.BASE_API_URL + 'trips';
   readonly URL2 = GlobalRootURL.BASE_API_URL + 'hotels';
   posts:Observable<Trip[]>;
   Hotels:Observable<Hotel[]>;
-
-
+  object:Trip;
   constructor(public service: TripService,
     private http: HttpClient,
     private router: Router) 
     {
       this.getPosts();
       this.getHotelByCity();
+      
      }
 
   ngOnInit() {
   }
+  
   getPosts(){
     let body = this.service.tripFilter;
 
@@ -38,9 +43,11 @@ export class SearchResultTripComponent implements OnInit {
      body:body
     };
     this.posts = this.http.post<Trip[]>(this.URL,body);
-   
-     
-   
+  }
+  Buy(trip:Trip){
+    this.object = trip;
+    this.service.setTrip(this.object);
+    // this.router.navigate(['BuyTicketComponent']);
   }
   filterHotel:HotelFilters;
   getHotelByCity(){

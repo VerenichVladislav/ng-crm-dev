@@ -9,6 +9,7 @@ export class Trip {
     transport: string;
     dateFrom: string;
     dateDest: string;
+    count:number;
 
 
   constructor() {
