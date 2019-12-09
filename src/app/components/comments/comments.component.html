@@ -15,7 +15,7 @@
         <form *ngFor="let comment of comments; let i = index" style="border:2px solid #555; box-shadow:3px 3px 5px #999;   margin:20px; padding:20px;">
           <h4><b>
             <div *ngIf="comment.user==userName">
-              <button id="deleteComment" (click)="deleteComment(comment.commentId);" class="close-btn pull-right" >x</button>
+              <button id="deleteComment" (click)="openConfirmationDialog(comment.commentId)" class="btn btn-danger pull-right" >x</button>
             </div>
                 {{comment.user}}
                 
