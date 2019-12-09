@@ -11,10 +11,11 @@ export class ConfirmEmailService {
   constructor(private http: HttpClient) { }
 
   confirmEmail(userName: string): Observable<any> {
-    let headers = new HttpHeaders({'Content-Type': 'application/json'});
-    let options = {
-      headers: headers ,
-    };
+    let headers = new HttpHeaders(
+      { 'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem('auth_token')});
+    let options = { headers: headers };
+
     return this.http.get<any>(this.URL + userName, options);
   }
 }

@@ -1,8 +1,9 @@
 import { Component, OnInit, Injectable, Input, NgModule, Output, EventEmitter } from '@angular/core';
 import { CommentsService } from '../../shared/comments.service';
-import { ActivatedRoute } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
-import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
+import { FormGroup, FormControl } from '@angular/forms';
+import { MatDialog, MatDialogRef } from '@angular/material';
+import { ConfirmationDialog } from '../confirmation-dialog/confirmation-dialog.component'
 
 @Injectable({
   providedIn: 'root'
@@ -30,10 +31,11 @@ export class CommentsComponent implements OnInit {
   userName:string = JSON.parse(localStorage.getItem('user')).userName;
   asyncResult:any;
   comment:string;
+  dialogRef: MatDialogRef<ConfirmationDialog>;
+
   constructor(
-    private route: ActivatedRoute,
-    private fb: FormBuilder,
-    private commentsService: CommentsService){}
+    private commentsService: CommentsService,
+    public dialog: MatDialog){}
 
   ngOnInit() {
     if(this.type==1){
@@ -51,6 +53,19 @@ export class CommentsComponent implements OnInit {
      }
     this.newComment = new FormGroup({
       text: new FormControl()
+    });
+  }
+  openConfirmationDialog(commentId:number) {
+    this.dialogRef = this.dialog.open(ConfirmationDialog, {
+      disableClose: false
+    });
+    this.dialogRef.componentInstance.confirmMessage = "Are you sure you to delete?"
+
+    this.dialogRef.afterClosed().subscribe(result => {
+      if(result) {
+        this.deleteComment(commentId);
+      }
+      this.dialogRef = null;
     });
   }
   deleteComment(commentId:number){

@@ -1,17 +1,13 @@
-<button class="btn" (click)="showRegisterForm()"  style="width:auto;" >{{'signup' | translate}}</button>
-
-<div id="register-form" class="modal" tabindex="-1">
-  <span (click)="hideRegisterForm()"  class="close" title="Закрыть">&times;</span>
-  <form  [formGroup]="registerForm" (ngSubmit)="submit(registerForm.value)" class="modal-content animate" action="/action_page.php">
-    <div class="container">
+<div id="register-form" class="container">
+  <form  [formGroup]="registerForm" (ngSubmit)="submit(registerForm.value)" class="modal-content animate" >
+    <div class="container-form">
       <h1>Sign Up</h1>
       <p>Пожалуйста, заполните форму для регистрации аккаунта.</p>
-      <hr>
       <label for="register-username"><b>User name</b></label>
       <input id="register-username" type="text" class="ng-invalid"
              placeholder="Введите имя пользователя" formControlName="userName" required>
       <div *ngIf="errorLogin"
-           class="cross-validation-error-message alert alert-danger">
+           class="error cross-validation-error-message alert alert-danger">
         Пользователь с таким логином уже существует
       </div>
 
@@ -31,30 +27,18 @@
       <label for="register-password-repeat"><b>Repeat Password</b></label>
       <input id="register-password-repeat" type="password" placeholder="Повторите пароль" formControlName="repeatPass" required>
       <div *ngIf="registerForm.errors?.nonIdenticalPassword"
-           class="cross-validation-error-message alert alert-danger">
+           class="error cross-validation-error-message alert alert-danger">
         Пароли не совпадают
       </div>
 
       <label>
         <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Запомнить меня
       </label>
-
-      <p>Создавая аккаунт вы соглашаетесь с нашими <a href="#" style="color:dodgerblue">Условиями и политикой конфиденциальности</a>.</p>
-
-      <div class="clearfix">
+      <div class="row">
         <button type="submit" class="signupbtn" [disabled]="!registerForm.valid">{{ 'signup' | translate }}</button>
-        <button type="button" (click)="hideRegisterForm()" class="cancelbtn">Cancel</button>
-
-        <script
-          type="text/javascript">
-            $('#login-form').modal({
-              backdrop: 'true',
-              keyboard: false
-            })
-        </script>
+        <button type="button" class="cancelbtn" routerLink="/">Cancel</button>
       </div>
     </div>
-
   </form>
 </div>
 

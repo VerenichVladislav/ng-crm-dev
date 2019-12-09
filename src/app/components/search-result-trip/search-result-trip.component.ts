@@ -34,6 +34,7 @@ export class SearchResultTripComponent implements OnInit {
      }
 
   ngOnInit() {
+ 
   }
   
   getPosts(){
@@ -54,15 +55,11 @@ export class SearchResultTripComponent implements OnInit {
       this.filterHotel 
        =  {
       city: this.service.tripFilter.cityDest,
-      CheckIn: null,
+      CheckIn: this.service.tripFilter.dateFrom,
       CheckOut: null
      }
     
     let body = this.filterHotel;
-
-    let options = {
-     body:body
-    };
     this.Hotels = this.http.post<Hotel[]>(this.URL2,body);
   }
 

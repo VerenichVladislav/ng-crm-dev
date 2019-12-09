@@ -11,6 +11,7 @@ import {IdentityPasswordDirective} from './shared/identity-password.directive';
 import {translate_v2} from 'googleapis';
 import {TranslateModule} from '@ngx-translate/core';
 import {Ng4LoadingSpinnerModule} from "ng4-loading-spinner";
+import {RouterModule} from "@angular/router";
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import {Ng4LoadingSpinnerModule} from "ng4-loading-spinner";
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
+    RouterModule,
   ],
   providers: [
     RegisterService,

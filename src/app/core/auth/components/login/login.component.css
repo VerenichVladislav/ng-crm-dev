@@ -1,13 +1,17 @@
-body {font-family: Arial, Helvetica, sans-serif;}
-* {box-sizing: border-box;}
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+* {
+  box-sizing: border-box;
+}
 
 input[type=text], input[type=password] {
-  width: 100%;
+  width: 80%;
   padding: 15px;
-  margin: 5px 0 22px 0;
-  display: inline-block;
+  margin: 1vh 0 3vh 0;
   border: none;
   background: #f1f1f1;
+  display: flex;
 }
 
 input[type=text]:focus, input[type=password]:focus {
@@ -23,6 +27,9 @@ button {
   cursor: pointer;
   width: 100%;
   opacity: 0.9;
+}
+.container-form{
+  margin-left: 10%;
 }
 .ng-valid[required], .ng-valid.required {
   border-left: 5px solid #12a937;
@@ -48,8 +55,9 @@ button:hover {
 }
 
 .cancelbtn, .signupbtn {
+  margin-bottom: 2vh;
+  width: 40%;
   float: left;
-  width: 50%;
 }
 
 .container {
@@ -81,6 +89,10 @@ hr {
   margin-bottom: 25px;
 }
 
+.error{
+  width: 80%;
+}
+
 .close {
   position: absolute;
   right: 25px;
@@ -103,8 +115,8 @@ hr {
   display: table;
 }
 .animate {
-  -webkit-animation: animatezoom 0.6s;
-  animation: animatezoom 0.6s
+  -webkit-animation: animatezoom 1s;
+  animation: animatezoom 1s
 }
 
 @-webkit-keyframes animatezoom {

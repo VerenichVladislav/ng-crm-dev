@@ -51,12 +51,13 @@
 </div>
 
 <div class="container" *ngIf="transports">
-  <div *ngFor="let transport of transports" class="container mb-2 mt-2 mr-2 transport-container col-lg-4">
+  <div *ngFor="let transport of transports" class="container transport-container col-lg-4">
 
     <h3 class="card-text">{{'transport' | translate}}: {{transport.name}}
       <button class="btn btn-warning pull-right" >{{'edit' | translate}}</button>
     </h3>
-    <button (click)="delete(transport.transportId)" class="btn btn-danger pull-right" >{{'delete' | translate}}</button>
-    <h3 class="card-text">{{'passengers' | translate}}: {{transport.passengerCapacity}}</h3>
+    <h3 class="card-text">{{'passengers' | translate}}: {{transport.passengerCapacity}}
+      <button (click)="delete(transport.transportId)" class="btn btn-danger pull-right" >{{'delete' | translate}}</button>
+    </h3>
   </div>
 </div>

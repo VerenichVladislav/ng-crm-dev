@@ -28,7 +28,7 @@
     </div>
     <div class="hotels-card-container"><div class="hotels-card" *ngFor='let post of posts | async'>
             <div class="hotels-card-hotel-img">
-                <img src="{{'https://drive.google.com/uc?export=view&id='+post.image}}" alt="">
+                <img src="{{post.image ?' https://drive.google.com/uc?export=view&id='+post.image :'https://drive.google.com/uc?export=view&id=1jC7zuqnV23XH-AEVlrA9BrQ9RXt_ft_8'}}" alt="">
             </div>
             <div class="hotels-card-content">
                 <div class="hotels-card-content-info">
