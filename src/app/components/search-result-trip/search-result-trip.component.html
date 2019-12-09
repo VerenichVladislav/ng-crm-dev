@@ -3,7 +3,7 @@
                 <button (click)="Buy(post)" routerLink="/trips/{{post.tripId}}/buy" class="btn btn-outline-success">Buy</button>
                 <div class="input-group bs-number-incrementer">
                     <span class="input-group-btn">
-                        <button type="button" class="btn btn-default" (click)="post.count = post.count - 1">
+                        <button *ngIf="post.count>1" type="button" class="btn btn-default" (click)="post.count = post.count - 1">
                             <span class="glyphicon glyphicon-minus"></span>
                         </button>
                     </span>
