@@ -1,6 +1,6 @@
 <div class="index-content" *ngIf="status">
     <div class="content">
-        <form class="search">
+        <div class="search">
                 <mat-form-field class="form-mat-child">
                         <input matInput placeholder="{{'city' | translate}}" [(ngModel)]="city">
                 </mat-form-field>
@@ -21,7 +21,7 @@
                         </mat-option>
                      </mat-select>
                 </mat-form-field>
-        </form>
+            </div>
         <mat-button-toggle (click)="GoMap()">map</mat-button-toggle>
 
         <mat-button-toggle  class="recomends-content" (click)='find()'>{{'searching' | translate}}</mat-button-toggle>
