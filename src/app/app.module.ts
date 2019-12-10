@@ -82,6 +82,8 @@ import {AdminModule} from "./core/admin/admin.module";
 import { ReplenishWalletComponent } from './components/replenish-wallet/replenish-wallet.component';
 import { NewsComponent } from './news/news.component';
 import { TicketMapComponent } from './ticket-map/ticket-map.component';
+import { ConfirmationDialog } from './components/confirmation-dialog/confirmation-dialog.component';
+import { SuccesfulReplenishingComponent } from './core/succesful-replenishing/succesful-replenishing.component';
 
 export function initGapi(gapiSession: GapiSession) {
   return () => gapiSession.initClient();
@@ -130,11 +132,14 @@ export function createTranslateLoader(http: HttpClient) {
     ReplenishWalletComponent,
     SearchResultTripComponent,
     TicketMapComponent,
+    ConfirmationDialog,
+    SuccesfulReplenishingComponent,
     //SideFiltersComponent,
   ],
   entryComponents: [
     DetailshotelDialogComponent,
-    ConnectionErrorComponent
+    ConnectionErrorComponent,
+    ConfirmationDialog
   ],
   imports: [
     CdkTreeModule,
@@ -216,7 +221,7 @@ export function createTranslateLoader(http: HttpClient) {
       {path:'Mapfind',component:MapFindHotelComponent},
       {path: '', component: IndexComponent},
       {path: 'trips', component: FlightsindexComponent},
-
+      {path: 'wallets/:id/confirm/:confirmCache', component: SuccesfulReplenishingComponent},
       { path: '**', component: Page404Component},
     ]),
   ],
