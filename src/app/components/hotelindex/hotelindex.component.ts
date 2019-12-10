@@ -12,6 +12,7 @@ import { DatePipe } from '@angular/common';
 import { Hotel } from 'src/app/entity/hotel';
 import {FormControl} from '@angular/forms';
 import { GapiSession } from 'src/app/google-service/GapiSession';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-hotelindex',
@@ -26,7 +27,8 @@ export class HotelindexComponent implements OnInit {
               public service:HotelService,
               private http:HttpClient,
               private spinnerService: Ng4LoadingSpinnerService,
-              private datePipe:DatePipe) {
+              private datePipe:DatePipe,
+              private _formBuilder: FormBuilder) {
     this.spinnerService.show();
     this.cityCollection = this.http.get<City>(GlobalRootURL.BASE_API_URL+"cities");
     this.spinnerService.hide();
@@ -35,7 +37,7 @@ export class HotelindexComponent implements OnInit {
   displayFn(city?: City): string | undefined {
     return city.cityName ? city.cityName : undefined;
   }
-  serializedDate = new FormControl((new Date()).toISOString());
+  
   @Input() status:boolean;
   @Input() checkIn:Timestamp<Date>;
   @Input() checkOut:Timestamp<Date>;
@@ -65,8 +67,13 @@ export class HotelindexComponent implements OnInit {
     this.find();
   }
   cityCollection:Observable<City>
+  firstFormGroup: FormGroup;
+  secondFormGroup: FormGroup;
+  
   ngOnInit() {
-
+    this.firstFormGroup = this._formBuilder.group({
+      firstCtrl: new FormControl((new Date()).toISOString()),
+    });
   }
 
 }

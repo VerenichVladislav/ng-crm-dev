@@ -1,9 +1,9 @@
 <div class="index-content" *ngIf="status">
     <div class="content">
-        
-        <div class="search">
+   
+        <form class="search" [formGroup]="firstFormGroup">
                 <mat-form-field class="form-mat-child">
-                        <input type="text" [matAutocomplete]="auto"  matInput placeholder="{{'city' | translate}}" [(ngModel)]="city">
+                        <input type="text" [matAutocomplete]="auto"  formControlName="firstCtrl" matInput placeholder="{{'city' | translate}}" [(ngModel)]="city" >
                         <mat-autocomplete #auto="matAutocomplete">
                             <div *ngFor="let option of cityCollection | async" >
                                 <mat-option [value]="option.cityName">
@@ -12,29 +12,23 @@
                                 </div>
                               </mat-autocomplete>
                 </mat-form-field>
-            <mat-form-field color="accent" class="form-mat-child">
-                <input matInput [matDatepicker]="picker1" [min]="minDate" placeholder="{{'checkIn' | translate}}" [(ngModel)]="checkIn" [formControl]="serializedDate">
-                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-                <mat-datepicker #picker1></mat-datepicker>
+            <mat-form-field  color="accent" class="form-mat-child">
+                <input matInput   [matDatepicker]="picker1" [min]="minDate" placeholder="{{'checkIn' | translate}}" [(ngModel)]="checkIn" formControlName="firstCtrl" required>
+                <mat-datepicker-toggle  matSuffix [for]="picker1"></mat-datepicker-toggle>
+                <mat-datepicker  #picker1></mat-datepicker>
               </mat-form-field>
               <mat-form-field color="accent" class="form-mat-child">
                 <input                          
-                matInput [matDatepicker]="picker2" [min]="checkIn" placeholder="{{'checkOut' | translate}}" [(ngModel)]="checkOut" [formControl]="serializedDate" ng-disabled="disabled">
+                matInput [matDatepicker]="picker2"  [min]="checkIn ? checkIn : minDate" placeholder="{{'checkOut' | translate}}" [(ngModel)]="checkOut" formControlName="firstCtrl" required>
                 <mat-datepicker-toggle matSuffix  [for]="picker2"></mat-datepicker-toggle>
-                <mat-datepicker #picker2 color="primary" #picker2 disabled="false"></mat-datepicker>
+                <mat-datepicker #picker2 color="primary" #picker2></mat-datepicker>
               </mat-form-field>
-              <mat-form-field  class="form-mat-child">
-                  <mat-select placeholder="Select">
-                      <mat-option value="option">
-                          Option
-                        </mat-option>
-                     </mat-select>
-                </mat-form-field>
-            </div>
-        <mat-button-toggle (click)="GoMap()">map</mat-button-toggle>
+           
+        
 
-        <mat-button-toggle  class="recomends-content"  (click)='find()'>{{'searching' | translate}}</mat-button-toggle>
-
+        <button mat-button  class="recomends-content"  [disabled]="firstFormGroup.invalid" (click)='find()' >{{'searching' | translate}}</button>
+        <button mat-button class="recomends-content" (click)="GoMap()">map</button>
+        </form>
             <div class="recomends-content">
               {{'popularDest' | translate}}
             </div>
