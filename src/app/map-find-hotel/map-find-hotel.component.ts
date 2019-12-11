@@ -8,6 +8,7 @@ import { HotelService } from '../shared/hotel.service';
 import { Hotel } from '../entity/hotel';
 import { prototype } from 'events';
 
+
 @Component({
   selector: 'app-map-find-hotel',
   templateUrl: './map-find-hotel.component.html',

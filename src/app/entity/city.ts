@@ -5,7 +5,7 @@ export class City {
   population?: number;
   image?: string;
   lat?:number;
-  lon?:number;
+  lng?:number;
 
   constructor(city: City = {} as City) {
     let {
@@ -15,7 +15,7 @@ export class City {
       population = -1,
       image = '',
       lat = 0,
-      lon = 0,
+      lng = 0,
     } = city;
 
     this.cityId = cityId;
@@ -24,6 +24,6 @@ export class City {
     this.population = population;
     this.image = image;
     this.lat = lat;
-    this.lon = lon;
+    this.lng = lng;
   }
 }
