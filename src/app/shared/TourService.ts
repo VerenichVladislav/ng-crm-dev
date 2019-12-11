@@ -4,11 +4,15 @@ import {GlobalRootURL} from '../GlobalRootURL';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { TourFilter } from '../entity/TourFilter';
 import { Tour } from '../entity/Tour';
+import { MarkerComponent } from '../marker/marker.component';
 
 @Injectable({
   providedIn: 'root'
 })
 export  class TourService {
+  injectComponent(MyCustomMapboxPopup: MarkerComponent, arg1: (x: any) => any) {
+    throw new Error("Method not implemented.");
+  }
   readonly URL = GlobalRootURL.BASE_API_URL + 'hotels/';
 
   constructor(private http: HttpClient){ }
