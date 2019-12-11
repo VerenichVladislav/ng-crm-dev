@@ -10,6 +10,10 @@ import { HotelService } from 'src/app/shared/hotel.service';
 import { HotelFilters } from 'src/app/entity/HotelFilters';
 import { post } from 'selenium-webdriver/http';
 import { element } from 'protractor';
+import { City } from 'src/app/entity/city';
+import { CityService } from 'src/app/shared/city.service';
+import {map} from "rxjs/operators";
+
 ``
 
 @Component({
@@ -21,15 +25,20 @@ import { element } from 'protractor';
 export class SearchResultTripComponent implements OnInit {
   readonly URL = GlobalRootURL.BASE_API_URL + 'trips';
   readonly URL2 = GlobalRootURL.BASE_API_URL + 'hotels';
-  posts:Observable<Trip[]>;
+  posts:Trip[] = [];
   Hotels:Observable<Hotel[]>;
+  cityFrom: City[] = [];
+  cityDest: City[] = [];
   object:Trip;
+  length: number;
   constructor(public service: TripService,
     private http: HttpClient,
+    private cityService:CityService,
     private router: Router) 
     {
       this.getPosts();
       this.getHotelByCity();
+
       
      }
 
@@ -43,7 +52,21 @@ export class SearchResultTripComponent implements OnInit {
     let options = {
      body:body
     };
-    this.posts = this.http.post<Trip[]>(this.URL,body);
+    this.http.post<Trip[]>(this.URL,body).subscribe(
+      post=>{
+        this.posts = post;
+      }
+    );
+    
+  }
+  
+  loadCity(trip : Trip): any {
+    return this.cityService.getById(trip.cityFrom).pipe(
+      map((city: City) => {
+          return new City(city).cityName;
+        }
+      )
+    );
   }
   Buy(trip:Trip){
     this.object = trip;

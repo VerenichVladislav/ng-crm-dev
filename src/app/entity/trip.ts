@@ -2,8 +2,8 @@
 
 export class Trip {
     tripId: number;
-    cityFrom: string;
-    cityDest: string;
+    cityFrom: number;
+    cityDest: number;
     price: string;
     fullCountSeats: string;
     transport: string;
