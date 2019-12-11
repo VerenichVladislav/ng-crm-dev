@@ -14,18 +14,9 @@ import { TourService } from '../../shared/TourService';
 export class TourIndexComponent implements OnInit {
   @Input() status:boolean;
   constructor(private http: HttpClient, private router: Router,private address :ActivatedRoute,private service:TourService) { }
-  cityFrom:string;
-  cityTo:string;
-  DateOut:string;
   ngOnInit() {
   }
   find(){
-    var tourFilter:TourFilter = {
-      cityFrom:this.cityFrom,
-      cityTo:this.cityTo,
-      DateOut:this.DateOut
- }
- this.service.setTourFilter(tourFilter);
  this.router.navigate(['/tourResult']);
 }
 

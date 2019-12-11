@@ -84,6 +84,8 @@ import { NewsComponent } from './news/news.component';
 import { TicketMapComponent } from './ticket-map/ticket-map.component';
 import { ConfirmationDialog } from './components/confirmation-dialog/confirmation-dialog.component';
 import { SuccesfulReplenishingComponent } from './core/succesful-replenishing/succesful-replenishing.component';
+import { MarkerComponent } from './marker/marker.component';
+
 
 export function initGapi(gapiSession: GapiSession) {
   return () => gapiSession.initClient();
@@ -134,6 +136,7 @@ export function createTranslateLoader(http: HttpClient) {
     TicketMapComponent,
     ConfirmationDialog,
     SuccesfulReplenishingComponent,
+    MarkerComponent,
     //SideFiltersComponent,
   ],
   entryComponents: [
