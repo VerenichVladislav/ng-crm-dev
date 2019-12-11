@@ -19,34 +19,8 @@
                       </mat-option>
                    </mat-select>
               </mat-form-field>
-      </div>
+ 
       <mat-button-toggle  class="recomends-content" (click)='find()'>{{'searching' | translate}}</mat-button-toggle>
-
-          <div class="recomends-content">
-            {{'popularDest' | translate}}
-          </div>
-          <mat-grid-list cols="6" rowHeight = "400px">
-
-          <ng-container *ngFor="let item of cityCollection|async">
-
-              <mat-grid-tile [colspan]=2 [rowspan]=1>
-
-          <div class="recomends-content" (click)="findbyCity(item.cityName)">
-              <div class="recomend-hotels">
-                  <div class="recomend-hotels-image">
-                      <img src="{{'https://drive.google.com/uc?export=view&id='+item.image}}" alt="" class="recomend-hotels-image"/>
-                      <h2>{{item.cityName}}:<br />{{item.country}}</h2>
-                  </div>
-              </div>
-
-          </div>
-          </mat-grid-tile>
-
-      </ng-container>
-
-  </mat-grid-list>
-      </div>
-
-</div>
-<mat-button-toggle (click)="GoMap()">map</mat-button-toggle>
-
+    </div>
+    </div>
+    </div>
