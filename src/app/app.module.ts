@@ -84,12 +84,9 @@ import { NewsComponent } from './news/news.component';
 import { TicketMapComponent } from './ticket-map/ticket-map.component';
 import { ConfirmationDialog } from './components/confirmation-dialog/confirmation-dialog.component';
 import { SuccesfulReplenishingComponent } from './core/succesful-replenishing/succesful-replenishing.component';
-<<<<<<< HEAD
 import { MarkerComponent } from './marker/marker.component';
 
-=======
 import {RegisterComponent} from "./core/auth/components/register/register.component";
->>>>>>> 0727dff953cc7e6d988e63246d27d6c14a1c2f33
 
 export function initGapi(gapiSession: GapiSession) {
   return () => gapiSession.initClient();
