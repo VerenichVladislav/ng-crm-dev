@@ -13,6 +13,7 @@ import { element } from 'protractor';
 import { City } from 'src/app/entity/city';
 import { CityService } from 'src/app/shared/city.service';
 import {map} from "rxjs/operators";
+import { TripDTO } from 'src/app/entity/TripDTO';
 
 ``
 
@@ -25,10 +26,8 @@ import {map} from "rxjs/operators";
 export class SearchResultTripComponent implements OnInit {
   readonly URL = GlobalRootURL.BASE_API_URL + 'trips';
   readonly URL2 = GlobalRootURL.BASE_API_URL + 'hotels';
-  posts:Trip[] = [];
+  posts:TripDTO[] = [];
   Hotels:Observable<Hotel[]>;
-  cityFromArr: string[] = [];
-  cityDestArr: string[] = [];
   cityFrom: any;
   cityDest: any;
   object:Trip;
@@ -50,25 +49,25 @@ export class SearchResultTripComponent implements OnInit {
     let options = {
      body:body
     };
-    this.http.post<Trip[]>(this.URL,body).subscribe(
+    this.http.post<TripDTO[]>(this.URL + "/dto",body).subscribe(
       post=>{
         this.posts = post;
         // let post1 = post;
-        post.forEach(data => {
+        // post.forEach(data => {
           
-          this.service.getCityName(data.cityFrom).subscribe(
-            (log: string) => {
-              data.cityFromName = log;
-              }
-            );
-            this.service.getCityName(data.cityDest).subscribe(
-              (log: string) => {
-                data.cityDestName = log;
-                }
-              );
+        //   this.service.getCityName(data.cityFrom).subscribe(
+        //     (log: string) => {
+        //       data.cityFromName = log;
+        //       }
+        //     );
+        //     this.service.getCityName(data.cityDest).subscribe(
+        //       (log: string) => {
+        //         data.cityDestName = log;
+        //         }
+        //       );
             
             
-        });
+        // });
       }
     );
     
