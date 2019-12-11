@@ -84,6 +84,7 @@ import { NewsComponent } from './news/news.component';
 import { TicketMapComponent } from './ticket-map/ticket-map.component';
 import { ConfirmationDialog } from './components/confirmation-dialog/confirmation-dialog.component';
 import { SuccesfulReplenishingComponent } from './core/succesful-replenishing/succesful-replenishing.component';
+import {RegisterComponent} from "./core/auth/components/register/register.component";
 
 export function initGapi(gapiSession: GapiSession) {
   return () => gapiSession.initClient();
@@ -203,6 +204,7 @@ export function createTranslateLoader(http: HttpClient) {
 
     RouterModule.forRoot([
       { path: 'login', component: LoginComponent},
+      { path: 'register', component: RegisterComponent},
       {
         path: 'profile',
         component: ProfileComponent,
