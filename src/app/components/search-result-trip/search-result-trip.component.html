@@ -1,9 +1,24 @@
-    <div class="center" *ngFor="let post of posts | async">
-            <mat-card>City from: {{post.cityFrom}}; City destination: {{post.cityDest}}; Date: {{post.dateFrom | date: 'yyyy-MM-dd'}};
-                <button (onclick)="Buy()" class="btn btn-outline-success">Buy</button>
+    <div class="center" *ngFor="let post of posts">
+            <mat-card>From: {{post.cityFromName}}; To: {{post.cityDestName}}; Date: {{post.dateFrom | date: 'yyyy-MM-dd'}};
+                <button (click)="Buy(post)" routerLink="/trips/{{post.tripId}}/buy" [queryParams]="{count: post.count }" class="btn btn-outline-success">Buy</button>
+                <div class="input-group bs-number-incrementer">
+                    <span class="input-group-btn">
+                        <button *ngIf="post.count>1" type="button" class="btn btn-default" (click)="post.count = post.count - 1">
+                            <span class="glyphicon glyphicon-minus"></span>
+                        </button>
+                    </span>
+                
+                    <input type="text" class="form-control input-number" value="{{post.count}}" >
+                
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" (click)="post.count = post.count + 1">
+                            <span class="glyphicon glyphicon-plus"></span>
+                        </button>
+                    </span>
+                </div>
             </mat-card>
     </div>
-    
+    <h1>{{length}}</h1>
    
     <mat-grid-list cols="6">
             <mat-grid-tile  *ngFor="let post of Hotels | async|  slice:0:6">

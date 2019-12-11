@@ -9,6 +9,9 @@ export class Trip {
     transport: string;
     dateFrom: string;
     dateDest: string;
+    count:number;
+    cityFromName: string;
+    cityDestName: string;
 
 
   constructor(trip:any) {
@@ -20,6 +23,8 @@ export class Trip {
     this.transport = trip.transport;
     this.dateFrom = trip.dateFrom;
     this.dateDest = trip.dateDest;
+    this.cityFromName = trip.cityFromName;
+    this.cityDestName = trip.cityDestName;
   }
   
 }

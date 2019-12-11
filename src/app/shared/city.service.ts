@@ -9,6 +9,7 @@ import {City} from '../entity/city';
   providedIn: 'root'
 })
 export class CityService {
+  city: Observable<City[]>;
 
   readonly URL = GlobalRootURL.BASE_API_URL + 'cities/';
 
