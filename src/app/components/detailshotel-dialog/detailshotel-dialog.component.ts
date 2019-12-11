@@ -43,19 +43,17 @@ export class DetailshotelDialogComponent implements OnInit {
 
   Reservetion(){
 
-    let headers = new HttpHeaders;
-    headers.append('Content-Type','application/json');
-    headers.append('Accept', 'application/json');
-    headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, DELETE, PUT');
-    headers.append('Access-Control-Allow-Origin', '*');
-    headers.append('Access-Control-Allow-Headers', "X-Requested-With, Content-Type, Origin, Authorization, Accept, Client-Security-Token, Accept-Encoding");
+    let headers = new HttpHeaders(
+      { 'Content-Type': 'application/json'});
+
     let CkDate:string = this.datePipe.transform(this.checkIn, 'yyyy-MM-dd ');
     let CoDate:string = this.datePipe.transform(this.checkOut,'yyyy-MM-dd ');
     CkDate +="06:55:40.11";
     CoDate +="06:55:40.11";
+    this.userId = JSON.parse(localStorage.getItem('user')).userId;
     let Url = GlobalRootURL.BASE_API_URL + "hotels/"+this.userId+"/"+this.hotelId+"/"+CkDate+"/"+CoDate+"/"+this.roomId;
     console.log(Url);
-     this.http.post(Url,{headers:headers}).subscribe(
+     this.http.post(Url,{},{headers: headers}).subscribe(
       (data: any) => {
 
       },

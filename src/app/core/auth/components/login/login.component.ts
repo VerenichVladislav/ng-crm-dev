@@ -52,13 +52,10 @@ export class LoginComponent implements OnInit {
 
   submit(userData) {
     this.spinnerService.show();
-
     this.subscriptions.push(this.loginService
       .loginUser(userData.username, userData.password)
       .subscribe(
         (resp: Response) => {
-          this.spinnerService.hide();
-
           localStorage.setItem('auth_token', resp.headers.get('Authorization'));
           this.errorLogin = false;
           this.errorPassword = false;
@@ -88,6 +85,7 @@ export class LoginComponent implements OnInit {
                 user.reservations.forEach(reserv => {
                   this.loadHotel(reserv.hotel.hotelId).subscribe( hotel => {
                       reserv.setHotel(hotel);
+                      this.spinnerService.hide();
                     }
                   );
 

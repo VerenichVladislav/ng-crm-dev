@@ -23,7 +23,7 @@ export class CompaniesComponent implements OnInit {
   private addTransportBtn: boolean = false;
   private transportSelect: boolean = false;
 
-  // @ViewChild("edit", {static: false}) input1ElementRef;
+  @ViewChild("edit", {static: false}) input1ElementRef;
   private editField: boolean = false;
 
   constructor(private companyService: CompanyService,
