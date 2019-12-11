@@ -219,7 +219,10 @@ export function createTranslateLoader(http: HttpClient) {
       { path: 'Index', component: IndexComponent},
       { path: 'SearchResult', component: SearchResultComponent},
       { path: 'SearchResultTrip', component: SearchResultTripComponent},
-      { path: 'SearchResult/:id', component: DetailshotelComponentComponent},
+      { path: 'SearchResult/:id',
+        component: DetailshotelComponentComponent,
+        canActivate: [LoginGuard]
+      },
       {path: 'trips/:tripid/buy', component: BuyTicketComponent},
       {path:'tourResult',component:TourSearchResComponent},
       {path:'tourResult/:id', component:TourDetailsComponent},
