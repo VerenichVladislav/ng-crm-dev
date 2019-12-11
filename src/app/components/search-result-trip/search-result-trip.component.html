@@ -1,5 +1,5 @@
     <div class="center" *ngFor="let post of posts">
-            <mat-card>From: {{post.cityFrom}}; To: {{loadCity(post)}}; Date: {{post.dateFrom | date: 'yyyy-MM-dd'}};
+            <mat-card>From: {{post.cityFromName}}; To: {{post.cityDestName}}; Date: {{post.dateFrom | date: 'yyyy-MM-dd'}};
                 <button (click)="Buy(post)" routerLink="/trips/{{post.tripId}}/buy" [queryParams]="{count: post.count }" class="btn btn-outline-success">Buy</button>
                 <div class="input-group bs-number-incrementer">
                     <span class="input-group-btn">

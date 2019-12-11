@@ -3,7 +3,7 @@ import { TripService } from 'src/app/shared/trip.service';
 import {GlobalRootURL} from '../../GlobalRootURL';
 import { Observable } from 'rxjs';
 import { Trip } from 'src/app/entity/trip';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Hotel } from 'src/app/entity/hotel';
 import { HotelService } from 'src/app/shared/hotel.service';
@@ -27,23 +27,21 @@ export class SearchResultTripComponent implements OnInit {
   readonly URL2 = GlobalRootURL.BASE_API_URL + 'hotels';
   posts:Trip[] = [];
   Hotels:Observable<Hotel[]>;
-  cityFrom: City[] = [];
-  cityDest: City[] = [];
+  cityFromArr: string[] = [];
+  cityDestArr: string[] = [];
+  cityFrom: any;
+  cityDest: any;
   object:Trip;
-  length: number;
+  i: number;
   constructor(public service: TripService,
     private http: HttpClient,
     private cityService:CityService,
     private router: Router) 
-    {
-      this.getPosts();
-      this.getHotelByCity();
-
-      
-     }
+    {}
 
   ngOnInit() {
- 
+    this.getPosts();
+    this.getHotelByCity();
   }
   
   getPosts(){
@@ -55,19 +53,44 @@ export class SearchResultTripComponent implements OnInit {
     this.http.post<Trip[]>(this.URL,body).subscribe(
       post=>{
         this.posts = post;
+        // let post1 = post;
+        post.forEach(data => {
+          
+          this.service.getCityName(data.cityFrom).subscribe(
+            (log: string) => {
+              data.cityFromName = log;
+              }
+            );
+            this.service.getCityName(data.cityDest).subscribe(
+              (log: string) => {
+                data.cityDestName = log;
+                }
+              );
+            
+            
+        });
       }
     );
     
+    
   }
   
-  loadCity(trip : Trip): any {
+  loadCity(trip : Trip): Observable<City> {
     return this.cityService.getById(trip.cityFrom).pipe(
       map((city: City) => {
-          return new City(city).cityName;
+          return new City(city);
         }
       )
     );
   }
+
+  // getCities(): Observable<City[]>{
+  //   for (this.i=0; this.i>post.length; this.i++){
+  //       return this.cityFrom.push(this.loadCity(this.posts[this.i]))
+  //   }
+  //}
+
+
   Buy(trip:Trip){
     this.object = trip;
     this.service.setTrip(this.object);
