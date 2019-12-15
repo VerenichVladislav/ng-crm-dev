@@ -11,10 +11,12 @@ export class DataTransferService {
   private tickets: Ticket[];
   private reservations: Reservation[];
   private user: User;
+  private role: string;
 
   tickets$ = new BehaviorSubject<Ticket[]>(this.tickets);
   reservations$ = new BehaviorSubject<Reservation[]>(this.reservations);
   user$ = new BehaviorSubject<User>(this.user);
+  role$ = new BehaviorSubject<string>(this.role);
   constructor() { }
 
   setTickets(data: Ticket[]) {
@@ -27,5 +29,9 @@ export class DataTransferService {
 
   setUser(data: User) {
     this.user$.next(data);
+  }
+
+  setRole(data: string) {
+    this.role$.next(data);
   }
 }

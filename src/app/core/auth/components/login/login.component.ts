@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {Subscription} from 'rxjs';
 import {User} from '../../../../entity/user';
@@ -25,7 +25,7 @@ import {Observable} from "rxjs/internal/Observable";
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
   private loginForm;
   private errorLogin = false;
   private errorPassword = false;
@@ -57,14 +57,13 @@ export class LoginComponent implements OnInit {
       .subscribe(
         (resp: Response) => {
           localStorage.setItem('auth_token', resp.headers.get('Authorization'));
-          this.errorLogin = false;
-          this.errorPassword = false;
-          this.errorLocked = false;
-
+          this.reset();
           this.subscriptions.push(this.userService.getByUserName(userData.username)
             .subscribe(
               (data: any) => {
                 let user = new User(data);
+                this.transfer.setRole(data.role);
+
                 this.loadWallet(data.wallet).subscribe( wallet => {
                     user.setWallet(wallet);
                   }
@@ -92,7 +91,6 @@ export class LoginComponent implements OnInit {
                 });
                 this.transfer.setUser(user);
                 this.router.navigate(['profile']);
-                this.hideLoginForm();
               },
               error => {
                 console.log(error);
@@ -100,20 +98,7 @@ export class LoginComponent implements OnInit {
         },
         error => {
           console.log(error);
-          if (error.error.message === 'Wrong userName') {
-            this.errorLogin = true;
-            this.errorPassword = false;
-
-          } else if (error.error.message === 'Wrong password' ||
-            error.error.message === 'NonUnique userName') {
-            this.errorLogin = false;
-            this.errorPassword = true;
-          }
-          else if (error.error.message === 'Locked') {
-            this.errorLocked = true;
-          } else if (error.status === 0) {
-            this.errorConnection.openSnackBar();
-          }
+          this.handleErrors(error);
         }));
   }
   loadWallet(id: number): Observable<Wallet> {
@@ -143,15 +128,38 @@ export class LoginComponent implements OnInit {
     );
   }
 
-  showLoginForm() {
-    document.getElementById('login-form').style.display = 'block';
+  reset() {
+    this.errorLogin = false;
+    this.errorPassword = false;
+    this.errorLocked = false;
   }
-
-  hideLoginForm() {
-    document.getElementById('login-form').style.display = 'none';
-  }
-
 
   ngOnInit() {
+  }
+
+  ngOnDestroy(){
+    this.subscriptions.forEach((sub: Subscription) => {
+      sub.unsubscribe();
+    });
+  }
+
+  handleErrors(error) {
+    switch (error.error.message) {
+      case 'Wrong userName': {
+        this.errorLogin = true;
+        break;
+      }
+      case 'Wrong password' || 'NonUnique userName': {
+        this.errorPassword = true;
+        break;
+      }
+      case 'Locked': {
+        this.errorLocked = true;
+        break;
+      }
+    }
+    if(error.status === 0) {
+      this.errorConnection.openSnackBar();
+    }
   }
 }

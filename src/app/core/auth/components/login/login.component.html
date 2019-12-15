@@ -7,18 +7,18 @@
       <label for="login-username"><b>Username</b></label>
       <input id="login-username" type="text" placeholder="Введите Имя Пользователя" formControlName="username" name="username" required>
       <div *ngIf="errorLogin"
-           class="error cross-validation-error-message alert alert-danger">
-        Неверный логин
+           class="animate error cross-validation-error-message alert alert-danger">
+        {{'bad login' | translate}}
       </div>
 
       <label for="login-password"><b>Password</b></label>
       <input id="login-password" type="password" placeholder="Введите пароль" formControlName="password" name="password" required>
       <div *ngIf="errorPassword"
-           class="error cross-validation-error-message alert alert-danger">
-        Неверный пароль
+           class="animate error cross-validation-error-message alert alert-danger">
+        {{'bad password' | translate}}
       </div>
       <div *ngIf="errorLocked"
-           class="error cross-validation-error-message alert alert-danger">
+           class="animate error cross-validation-error-message alert alert-danger">
         You're Locked
       </div>
 

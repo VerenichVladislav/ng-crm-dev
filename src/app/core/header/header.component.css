@@ -111,6 +111,8 @@ hr {
   background-size: contain;
 }
 .admin{
+  background-color: #ff4334;
+  color: #f8fff7;
   margin-left: 50%;
   width: 5vw;
 }
