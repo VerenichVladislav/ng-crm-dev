@@ -7,27 +7,87 @@
       <input id="register-username" type="text" class="ng-invalid"
              placeholder="Введите имя пользователя" formControlName="userName" required>
       <div *ngIf="errorLogin"
-           class="error cross-validation-error-message alert alert-danger">
+           class="animate error cross-validation-error-message alert alert-danger">
         Пользователь с таким логином уже существует
+      </div>
+      <div *ngIf="errorLoginUnique"
+           class="animate error cross-validation-error-message alert alert-danger">
+        {{'user with such username already exists' | translate}}
+      </div>
+      <div *ngIf="errorLoginLength"
+           class="animate error cross-validation-error-message alert alert-danger">
+        {{'user name length should be min: 4, max: 15' | translate}}
+      </div>
+      <div *ngIf="errorLoginNull"
+           class="animate error cross-validation-error-message alert alert-danger">
+        {{'enter your user name!' | translate}}
       </div>
 
       <label for="register-email"><b>Email</b></label>
       <input id="register-email" type="email" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
              placeholder="Введите Email" formControlName="email" required>
+      <div *ngIf="errorEmail"
+           class="animate error cross-validation-error-message alert alert-danger">
+        {{'bad email' | translate}}
+      </div>
+      <div *ngIf="errorEmailNull"
+           class="animate error cross-validation-error-message alert alert-danger">
+        {{'email should be not null' | translate}}
+      </div>
+      <div *ngIf="errorEmailUnique"
+           class="animate error cross-validation-error-message alert alert-danger">
+        {{'user with such email already exists' | translate}}
+      </div>
 
       <label for="first-name"><b>First name</b></label>
       <input id="first-name" type="text" placeholder="Введите Имя" formControlName="firstName" required>
+      <div *ngIf="errorFirstName"
+           class="animate error cross-validation-error-message alert alert-danger">
+        {{'bad first name' | translate}}
+      </div>
+      <div *ngIf="errorFirstNameNull"
+           class="animate error cross-validation-error-message alert alert-danger">
+        {{'first name should be not null' | translate}}
+      </div>
+      <div *ngIf="errorFirstNameLength"
+           class="animate error cross-validation-error-message alert alert-danger">
+        {{'first name length should be max: 15' | translate}}
+      </div>
 
       <label for="last-name"><b>Last name</b></label>
       <input id="last-name" type="text" placeholder="Введите Фамилию" formControlName="lastName" required>
+      <div *ngIf="errorLastName"
+           class="animate error cross-validation-error-message alert alert-danger">
+        {{'bad last name' | translate}}
+      </div>
+      <div *ngIf="errorLastNameNull"
+           class="animate error cross-validation-error-message alert alert-danger">
+        {{'last name should be not null' | translate}}
+      </div>
+      <div *ngIf="errorLastNameLength"
+           class="animate error cross-validation-error-message alert alert-danger">
+        {{'last name length should be max: 15' | translate}}
+      </div>
 
       <label for="register-password"><b>Password</b></label>
       <input id="register-password" type="password" placeholder="Введите пароль" formControlName="hashPass" required>
+      <div *ngIf="errorPassword"
+           class="animate error cross-validation-error-message alert alert-danger">
+        {{'bad password' | translate}}
+      </div>
+      <div *ngIf="errorPasswordNull"
+           class="animate error cross-validation-error-message alert alert-danger">
+        {{'last name should be not null' | translate}}
+      </div>
+      <div *ngIf="errorPasswordLength"
+           class="animate error cross-validation-error-message alert alert-danger">
+        {{'password length should be min: 4, max: 30' | translate}}
+      </div>
 
       <label for="register-password-repeat"><b>Repeat Password</b></label>
       <input id="register-password-repeat" type="password" placeholder="Повторите пароль" formControlName="repeatPass" required>
       <div *ngIf="registerForm.errors?.nonIdenticalPassword"
-           class="error cross-validation-error-message alert alert-danger">
+           class="animate error cross-validation-error-message alert alert-danger">
         Пароли не совпадают
       </div>
 
