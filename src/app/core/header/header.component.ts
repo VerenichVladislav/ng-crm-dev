@@ -1,9 +1,5 @@
 import {Component, DoCheck, OnInit} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Observable} from 'rxjs';
-import {City} from '../../entity/city';
-import {GlobalRootURL} from '../../GlobalRootURL';
-import {translate_v2} from 'googleapis';
 import {TranslateService} from '@ngx-translate/core';
 import {UserService} from "../../shared/user.service";
 import {AdminService} from "../admin/shared/admin.service";
@@ -24,11 +20,22 @@ export class HeaderComponent implements OnInit, DoCheck {
               private adminService: AdminService) {}
 
   ngOnInit() {
+    this.adminService.isAuthenticated().subscribe(
+      () => {
+        this.isActiveAdmin = true;
+        this.isActiveUser = true;
+      }
+    );
+
+    this.userService.isAuthenticated().subscribe(
+      () => {
+        this.isActiveAdmin = false;
+        this.isActiveUser = true;
+      }
+    );
   }
 
   ngDoCheck() {
-    console.log('DoCheck');
-    // this.isActiveUser = localStorage.getItem('auth_token') !== null; // Пофиксить!
     if (this.transfer.role$.getValue() !== undefined) {
       this.transfer.role$.subscribe(value => {
         if (value == 'ADMIN') {
@@ -44,23 +51,6 @@ export class HeaderComponent implements OnInit, DoCheck {
         }
       });
     }
-    // if(!this.isActiveAdmin) {
-    //   this.adminService.isAuthenticated().subscribe(
-    //     () => {
-    //       this.isActiveUser = true;
-    //       this.isActiveAdmin = true;
-    //     },
-    //     () => {
-    //       if(!this.isActiveUser) {
-    //         this.userService.isAuthenticated().subscribe(
-    //           () => {
-    //             this.isActiveUser = true;
-    //           }
-    //         )
-    //       }
-    //     }
-    //   )
-    // }
   }
 
   ru() {
