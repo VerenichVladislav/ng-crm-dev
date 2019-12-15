@@ -12,15 +12,11 @@
                     <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
                     <mat-datepicker #picker4></mat-datepicker>
                   </mat-form-field>
-            <mat-form-field  class="form-mat-child">
-                <mat-select placeholder="Select">
-                    <mat-option value="option">
-                        Option
-                      </mat-option>
-                   </mat-select>
-              </mat-form-field>
+           
  
-      <mat-button-toggle  class="recomends-content" (click)='find()'>{{'searching' | translate}}</mat-button-toggle>
+      <button mat-button class="recomends-content" (click)='find()'>{{'searching' | translate}}</button>
+      <button mat-button class="recomends-content" (click)="chat()">Chat</button>
     </div>
     </div>
     </div>
+    

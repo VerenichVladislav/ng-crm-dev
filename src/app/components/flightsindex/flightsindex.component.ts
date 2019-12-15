@@ -13,7 +13,6 @@ import { DatePipe } from '@angular/common';
 })
 @Injectable()
 export class FlightsindexComponent implements OnInit {
- 
 
   constructor(private router: Router,
     public service: TripService,
@@ -21,9 +20,9 @@ export class FlightsindexComponent implements OnInit {
   @Input() status:boolean;
   @Input() cityFrom:string;
   @Input() cityDest:string;
-  mindate  = new Date();
   @Input() dateFrom:Timestamp<Date>;
   tripFilter: TripFilters;
+  isChat:boolean = false;
 
   find(){
       this.tripFilter = {
@@ -34,8 +33,12 @@ export class FlightsindexComponent implements OnInit {
     this.service.setTripFilter(this.tripFilter);
    this.router.navigate(['/SearchResultTrip']);
   }
+ 
 
   ngOnInit() {
+  }
+  chat(){
+  this.router.navigate(['/chat']);
   }
 
 }
