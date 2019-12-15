@@ -1,10 +1,4 @@
-
-
-<div class="map" id="map">
-    <div class="choiseTicket">
-
-    </div>
-    
+<div class="map" id="map">    
 </div>
 <div class="search">
         <mat-form-field class="form-mat-child">
@@ -17,6 +11,19 @@
                         </div>
                       </mat-autocomplete>
         </mat-form-field>
+        <mat-form-field color="accent" class="form-mat-child">
+          <input matInput [matDatepicker]="picker4" [min]="mindate" placeholder="{{'dateFrom' | translate}}" [(ngModel)]="dateFrom">
+          <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
+          <mat-datepicker #picker4></mat-datepicker>
+        </mat-form-field>
         <button mat-button (click)="createTout()">Start</button>
+        <mat-card *ngIf="currentCity">
+          Tour start in {{StartCity}}
+        </mat-card>
+        <mat-card *ngFor="let post of TripChoise">
+         <mat-card-header> From: {{post.cityFrom}} ----> To:{{post.cityDest}}</mat-card-header>
+         <mat-card-subtitle>Price: {{post.price}}</mat-card-subtitle>
+        </mat-card>
 </div>
-<button mat-button id="marker"  (click)='fn()'>Kill Me</button>
+<button id="marker"></button>
+

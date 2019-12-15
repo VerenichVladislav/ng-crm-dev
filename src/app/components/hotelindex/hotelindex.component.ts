@@ -70,7 +70,7 @@ export class HotelindexComponent implements OnInit {
   cityCollection:Observable<City>
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
-  filteredOptions: Observable<City>;
+  filteredOptions: Observable<City[]>;
   options : City[];
   ngOnInit() {
     this.firstFormGroup = this._formBuilder.group({

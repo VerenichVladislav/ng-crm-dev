@@ -24,8 +24,8 @@ import { TripDTO } from 'src/app/entity/TripDTO';
 })
 @Injectable()
 export class SearchResultTripComponent implements OnInit {
-  readonly URL = GlobalRootURL.BASE_API_URL + 'trips';
-  readonly URL2 = GlobalRootURL.BASE_API_URL + 'hotels';
+  readonly URLTRIP = GlobalRootURL.BASE_API_URL + 'trips';
+  readonly URLHOTEL = GlobalRootURL.BASE_API_URL + 'hotels';
   posts:TripDTO[] = [];
   Hotels:Observable<Hotel[]>;
   cityFrom: any;
@@ -49,25 +49,9 @@ export class SearchResultTripComponent implements OnInit {
     let options = {
      body:body
     };
-    this.http.post<TripDTO[]>(this.URL + "/dto",body).subscribe(
+    this.http.post<TripDTO[]>(this.URLTRIP + "/dto",body).subscribe(
       post=>{
         this.posts = post;
-        // let post1 = post;
-        // post.forEach(data => {
-          
-        //   this.service.getCityName(data.cityFrom).subscribe(
-        //     (log: string) => {
-        //       data.cityFromName = log;
-        //       }
-        //     );
-        //     this.service.getCityName(data.cityDest).subscribe(
-        //       (log: string) => {
-        //         data.cityDestName = log;
-        //         }
-        //       );
-            
-            
-        // });
       }
     );
     
@@ -82,14 +66,10 @@ export class SearchResultTripComponent implements OnInit {
       )
     );
   }
-
-  // getCities(): Observable<City[]>{
-  //   for (this.i=0; this.i>post.length; this.i++){
-  //       return this.cityFrom.push(this.loadCity(this.posts[this.i]))
-  //   }
-  //}
-
-
+  findbyCity(hotel:Hotel){
+    this.router.navigate(['/SearchResult', hotel.hotelId]);
+    console.log(hotel.hotelId);
+  }
   Buy(trip:Trip){
     this.object = trip;
     this.service.setTrip(this.object);
@@ -105,7 +85,7 @@ export class SearchResultTripComponent implements OnInit {
      }
     
     let body = this.filterHotel;
-    this.Hotels = this.http.post<Hotel[]>(this.URL2,body);
+    this.Hotels = this.http.post<Hotel[]>(this.URLHOTEL,body);
   }
 
 }

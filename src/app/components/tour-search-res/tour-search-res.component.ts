@@ -11,6 +11,9 @@ import { TourFilter } from 'src/app/entity/TourFilter';
 import { Ticket } from 'src/app/entity/ticket';
 import { Trip } from 'src/app/entity/trip';
 import { TripFilters } from 'src/app/entity/TripFilters';
+import { TripDTO } from 'src/app/entity/TripDTO';
+import { element } from 'protractor';
+import { Timestamp } from 'rxjs/internal/operators/timestamp';
 
 @Component({
   selector: 'app-tour-search-res',
@@ -29,59 +32,114 @@ export class TourSearchResComponent implements OnInit {
         this.CityResponse= this.http.get<City[]>(GlobalRootURL.BASE_API_URL+"cities")
 
        }
+       readonly URL = GlobalRootURL.BASE_API_URL + 'trips';
     currentCityMarker:any;
     ToCityMarker = [];
-    currentCity:City;
+    StartCity:string;
+    currentCity:String;
     CityResponse:Observable<City[]>;
-    TourResponse:Observable<Trip>;
-    SelectTicket:Observable<Trip>;
+    TripChoise:TripDTO[] = [];
+    TourResponse:TripDTO[] = [];
+    @Input() dateFrom:Timestamp<Date>;
+    mindate = new Date();
     filter:TripFilters;
     @Input() city:string;
     map:any;
      mapboxgl = require('mapbox-gl/dist/mapbox-gl.js');
      MapboxGeocoder = require('@mapbox/mapbox-gl-geocoder');
+    
      
      createTout(){
-      
+      this.TripChoise = [];
+       this.StartCity = null;
       this.CityResponse.forEach(element => {
-        var index:number = 1;
-        var el = document.getElementById('marker');
-          
         element.forEach(ele=>{
-          
-          
-         
-         this.CityResponse.forEach(element => {
-           console.log(ele.lng);
-           var item =  el.cloneNode(true);
-           
-           item.addEventListener("click", ()=>this.NewPoint(ele.cityId))
+          var el = document.getElementById('marker');
+           var item =  el.cloneNode(true);  
+           item.addEventListener("click", ()=>this.NewPoint(ele.cityName))
            var marker = new this.mapboxgl.Marker(item)
            .setLngLat([ele.lng,ele.lat])
              .addTo(this.map);
-             this.ToCityMarker.push(marker);
-             
-             
-        })
-      
+             this.ToCityMarker.push(marker);    
       })
     })
-      
      }
-     
-     NewPoint(id:number){
-       alert(id);
-       
+     NewPoint(cityName:string){
+      
+        if(this.StartCity == undefined){
+          this.StartCity = cityName;      
+        }
+        else{
+          var ToDisplayFilter:TripFilters ={
+            cityFrom:this.currentCity,
+            cityDest:cityName,
+            dateFrom:null
+          }
+          this.AddTrip(ToDisplayFilter);
+          
+        }
+        this.currentCity = cityName;
+        for (var i = this.ToCityMarker.length - 1; i >= 0; i--) {
+          this.ToCityMarker[i].remove();}
+   
+    this.ToCityMarker = [];
+       var filter:TripFilters ={
+         cityFrom:cityName,
+         cityDest:null,
+         dateFrom:null
+       }
+        this.LoadTrip(filter)
      }
      LoadTrip(filter:TripFilters)
      {
-
+      
+      let body = filter;
+      let options = {
+       body:body
+      };
+      this.http.post<TripDTO[]>(this.URL + "/dto",body).subscribe(item=>{
+       
+        var checkCity:string[] = [];
+      this.TourResponse = item;
+      this.CityResponse.forEach(element => {
+        var marker;
+        element.forEach(ele=>{
+          
+          this.TourResponse.forEach(tour=>{      
+          if(tour.cityDest==ele.cityName)
+          {            
+          var el = document.getElementById('marker');
+           var item =  el.cloneNode(true);  
+           item.addEventListener("click", ()=>this.NewPoint(ele.cityName))
+            marker = new this.mapboxgl.Marker(item)
+           .setLngLat([ele.lng,ele.lat])
+             .addTo(this.map);
+             this.ToCityMarker.push(marker);
+             checkCity.push(tour.cityDest);
+          }
+          })  
+      })
+    })})
      }
-     addMarkerTrip(){
-
+     TRIP:Observable<TripDTO[]>
+     AddTrip(filter:TripFilters){
+      let body = filter;
+      let options = {
+       body:body
+      };
+      this.TRIP= this.http.post<TripDTO[]>(this.URL + "/dto",body)
+      this.TRIP.forEach(item=>{
+    
+        item.forEach(i=>{
+          
+          
+          this.TripChoise.push(i);
+        })
+      
+      })
      }
-    ngOnInit() {
-     
+
+    ngOnInit() { 
     this.mapboxgl.accessToken = 'pk.eyJ1IjoiY2h1cGVycyIsImEiOiJjazNqcjJ4YnQwM3l5M2xwOXppNmtkMWF4In0.MqIEuzBBpryI6_dps113lw';
     this.map = new this.mapboxgl.Map({
     container: 'map',
@@ -91,12 +149,6 @@ export class TourSearchResComponent implements OnInit {
       accessToken:this.mapboxgl.accessToken,
       mapboxgl: this.mapboxgl
       });
+      
   }
-  fn(){
-  
-  
-  
- 
-  }
-
 }
