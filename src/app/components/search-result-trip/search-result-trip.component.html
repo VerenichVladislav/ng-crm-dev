@@ -24,11 +24,9 @@
                 </div>
             </mat-card>
     </div>
-    <h1>{{length}}</h1>
-   
     <mat-grid-list cols="6">
             <mat-grid-tile  *ngFor="let post of Hotels | async|  slice:0:6">
-                    <mat-card class="example-card">
+                    <mat-card class="example-card" (click)="findbyCity(post)">
                             <mat-card-header>
                               {{post.hotelName}}
                              

@@ -13,6 +13,7 @@ import { Hotel } from 'src/app/entity/hotel';
 import {FormControl} from '@angular/forms';
 import { GapiSession } from 'src/app/google-service/GapiSession';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {map, startWith} from 'rxjs/operators';
 
 @Component({
   selector: 'app-hotelindex',
@@ -69,11 +70,26 @@ export class HotelindexComponent implements OnInit {
   cityCollection:Observable<City>
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
-  
+  filteredOptions: Observable<City[]>;
+  options : City[];
   ngOnInit() {
     this.firstFormGroup = this._formBuilder.group({
       firstCtrl: new FormControl((new Date()).toISOString()),
     });
+    this.cityCollection.forEach(element=>{
+      this.options.push(element);
+    })
+    this.filteredOptions = this.firstFormGroup.valueChanges
+      .pipe(
+        startWith(''),
+        map(value => typeof value === 'string' ? value : value.name),
+        map(name => name ? this._filter(name) : this.options.slice())
+      );
+  }
+  private _filter(name: string): City[] {
+    const filterValue = name.toLowerCase();
+
+    return this.options.filter(option => option.cityName.toLowerCase().indexOf(filterValue) === 0);
   }
 
 }
