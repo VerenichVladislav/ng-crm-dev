@@ -1,9 +1,15 @@
     <div class="center" *ngFor="let post of posts">
-            <mat-card>From: {{post.cityFrom}}; To: {{post.cityDest}}; Date: {{post.dateFrom | date: 'yyyy-MM-dd'}};
-                <button (click)="Buy(post)" routerLink="/trips/{{post.tripId}}/buy" [queryParams]="{count: post.count }" class="btn btn-outline-success">Buy</button>
-                <div class="input-group bs-number-incrementer">
+            <mat-card><div>From: {{post.cityFrom}} 
+                <button (click)="Buy(post)" routerLink="/trips/{{post.tripId}}/buy" [queryParams]="{count: post.count }" class="btn btn-outline-success pull-right">Buy</button>
+            </div> <div>
+                 To: {{post.cityDest}}
+                </div>
+                <div>
+                  Date: {{post.dateFrom | date: 'yyyy-MM-dd hh:mm' }} -- {{ post.dateDest| date: 'yyyy-MM-dd hh:mm'}}
+                </div>
+                <div class="input-group">
                     <span class="input-group-btn">
-                        <button *ngIf="post.count>1" type="button" class="btn btn-default" (click)="post.count = post.count - 1">
+                        <button *ngIf="post.count>1" type="button" class="btn btn-default btn-number" (click)="post.count = post.count - 1">
                             <span class="glyphicon glyphicon-minus"></span>
                         </button>
                     </span>
@@ -11,7 +17,7 @@
                     <input type="text" class="form-control input-number" value="{{post.count}}" >
                 
                     <span class="input-group-btn">
-                        <button type="button" class="btn btn-default" (click)="post.count = post.count + 1">
+                        <button type="button" class="btn btn-default btn-number" (click)="post.count = post.count + 1">
                             <span class="glyphicon glyphicon-plus"></span>
                         </button>
                     </span>

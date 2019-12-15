@@ -69,7 +69,6 @@ import { TourIndexComponent } from './components/tour-index/tour-index.component
 import { TourSearchResComponent } from './components/tour-search-res/tour-search-res.component';
 import { TourDetailsComponent } from './components/tour-details/tour-details.component';
 import { MapFindHotelComponent } from './map-find-hotel/map-find-hotel.component';
-// import { ChatDialogComponent } from './components/chat-dialog/chat-dialog.component';
 import {SearchResultTripComponent} from './components/search-result-trip/search-result-trip.component';
 import {FlightsindexComponent} from './components/flightsindex/flightsindex.component';
 //import { SideFiltersComponent } from './components/side-filters/side-filters.component';
@@ -87,6 +86,7 @@ import { SuccesfulReplenishingComponent } from './core/succesful-replenishing/su
 import { MarkerComponent } from './marker/marker.component';
 
 import {RegisterComponent} from "./core/auth/components/register/register.component";
+import { ChatComponentComponent } from './components/chat-component/chat-component.component';
 
 export function initGapi(gapiSession: GapiSession) {
   return () => gapiSession.initClient();
@@ -138,6 +138,7 @@ export function createTranslateLoader(http: HttpClient) {
     ConfirmationDialog,
     SuccesfulReplenishingComponent,
     MarkerComponent,
+    ChatComponentComponent,
     //SideFiltersComponent,
   ],
   entryComponents: [
@@ -223,6 +224,7 @@ export function createTranslateLoader(http: HttpClient) {
         component: DetailshotelComponentComponent,
         canActivate: [LoginGuard]
       },
+      {path: 'chat', component:ChatComponentComponent},
       {path: 'trips/:tripid/buy', component: BuyTicketComponent},
       {path:'tourResult',component:TourSearchResComponent},
       {path:'tourResult/:id', component:TourDetailsComponent},
