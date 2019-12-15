@@ -3,7 +3,6 @@
   <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark" role="navigation" id="header">
     <img routerLink="/" src="https://inta.pro/small/area/ru/icon-24-samoletostroenie-1.png" class="logo"/>
     <a class="navbar-brand" routerLink="/" role="banner">
-
       Aviasales 2.0
     </a>
 
@@ -15,26 +14,22 @@
 
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="#">Главная <span class="sr-only">(current)</span></a>
+          <a class="nav-link" routerLink="/">Главная <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">О сайте</a>
+          <a class="nav-link" routerLink="/">О сайте</a>
         </li>
       </ul>
 
-      <div class="row">
         <button *ngIf="!isActiveUser" routerLink="/register" class="btn" >{{'signup' | translate}}</button>
         <button *ngIf="!isActiveUser" routerLink="/login" class="btn">{{'login' | translate}}</button>
 
         <button *ngIf="isActiveUser" routerLink="/profile" class="btn">{{'profile' | translate}}</button>
         <app-logout *ngIf="isActiveUser"></app-logout>
-        <button *ngIf="isActiveUser" routerLink="/admin" class="btn-danger admin">{{'admin' | translate}}</button>
+        <button *ngIf="isActiveAdmin" routerLink="/admin" class="btn admin">{{'admin' | translate}}</button>
 
-        <div class="lang row">
-          <button (click)="en()" class="eng"></button>
-          <button (click)="ru()" class="rus"></button>
-        </div>
-      </div>
+        <button (click)="en()" class="eng pull-right"></button>
+        <button (click)="ru()" class="rus pull-right"></button>
     </div>
   </nav>
 </header>

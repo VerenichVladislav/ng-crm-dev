@@ -37,10 +37,10 @@ export class TransportsComponent implements OnInit {
     console.log(data);
 
     this.transportService.saveTransport(data).subscribe(
-      () => {
+      (transport) => {
         this.companySelect = true;
 
-        this.transports.push(new Transport(data));
+        this.transports.push(new Transport(transport));
         this.localeStorageService.update('transports', this.transports);
 
         if(this.transports === null) {

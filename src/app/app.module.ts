@@ -83,8 +83,8 @@ import { NewsComponent } from './news/news.component';
 import { TicketMapComponent } from './ticket-map/ticket-map.component';
 import { ConfirmationDialog } from './components/confirmation-dialog/confirmation-dialog.component';
 import { SuccesfulReplenishingComponent } from './core/succesful-replenishing/succesful-replenishing.component';
-import { MarkerComponent } from './marker/marker.component';
 
+import { MarkerComponent } from './marker/marker.component';
 import {RegisterComponent} from "./core/auth/components/register/register.component";
 import { ChatComponentComponent } from './components/chat-component/chat-component.component';
 

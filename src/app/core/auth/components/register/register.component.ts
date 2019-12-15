@@ -1,14 +1,14 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {AbstractControl, FormControl, FormGroup, ValidatorFn, Validators} from '@angular/forms';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {User} from '../../../../entity/user';
 import {RegisterService} from '../../shared/register.service';
-import {Subscription} from 'rxjs';
 import {Response} from 'selenium-webdriver/http';
 import {LoginService} from '../../shared/login.service';
 import {ConfirmEmailService} from '../../shared/confirm-email.service';
 import {identityPasswordValidator} from '../../shared/identity-password.directive';
 import {SnackBarComponent} from '../../../../components/snack-bar/snack-bar.component';
+import {DataTransferService} from "../../../../shared/data-transfer.service";
 
 @Component({
   selector: 'app-register',
@@ -18,12 +18,27 @@ import {SnackBarComponent} from '../../../../components/snack-bar/snack-bar.comp
 export class RegisterComponent implements OnInit {
   private registerForm;
   private errorLogin = false;
-  private subscriptions: Subscription[] = [];
+  private errorLoginLength = false;
+  private errorLoginNull = false;
+  private errorLoginUnique = false;
+  private errorEmail = false;
+  private errorEmailNull = false;
+  private errorEmailUnique = false;
+  private errorLastName = false;
+  private errorLastNameLength = false;
+  private errorLastNameNull = false;
+  private errorFirstName = false;
+  private errorFirstNameLength = false;
+  private errorFirstNameNull = false;
+  private errorPassword = false;
+  private errorPasswordLength = false;
+  private errorPasswordNull = false;
 
   constructor(private registerService: RegisterService,
               private loginService: LoginService,
               private confirmService: ConfirmEmailService,
               private errorConnection: SnackBarComponent,
+              private transfer: DataTransferService,
               private router: Router) {
     this.registerForm = new FormGroup({
       userName: new FormControl('', Validators.required),
@@ -37,18 +52,23 @@ export class RegisterComponent implements OnInit {
   }
 
   submit(userData) {
-    this.subscriptions.push(this.registerService
+    this.reset();
+
+    this.registerService
       .registerUser(new User(userData), userData.hashPass)
       .subscribe(
         (resp: Response) => {
           this.errorLogin = false;
 
-          this.subscriptions.push(this.loginService
+          this.loginService
             .loginUser(userData.userName, userData.hashPass)
             .subscribe(
               (loginResp: Response) => {
+                this.transfer.setRole('USER');
+
                 localStorage.setItem("auth_token", loginResp.headers.get('Authorization'));
                 localStorage.setItem("user", JSON.stringify(new User(resp.body)));
+
                 this.confirmService.confirmEmail(userData.userName).subscribe(
                   ()=> {},
                   error1 => {
@@ -57,36 +77,114 @@ export class RegisterComponent implements OnInit {
                 );
 
                 this.router.navigate(['profile']);
-                this.hideRegisterForm();
               },
               error => {
                 console.log(error);
-                if(error.status === 0) {
-                  this.errorConnection.openSnackBar();
-                } else if (error.error.message === 'NonUnique userName') {
+                if (error.error.message === 'NonUnique userName') {
                   this.errorLogin = true;
                 }
-              }));
+              });
         },
         error => {
           console.log(error);
-          if(error.status === 0) {
-            this.errorConnection.openSnackBar();
+          this.handleErrors(error);
+        });
+  }
+
+  handleErrors(error) {
+    error.error.errors.forEach(
+      (message: string) => {
+        switch (message) {
+          case 'Bad user name length': {
+            this.errorLoginLength = true;
+            break;
           }
-        }));
+          case 'Bad user name': {
+            this.errorLogin = true;
+            break;
+          }
+          case 'User name should be not null': {
+            this.errorLoginNull = true;
+            break;
+          }
+          case 'Not unique user name': {
+            this.errorLoginUnique = true;
+            break;
+          }
+          case 'Bad email': {
+            this.errorEmail = true;
+            break;
+          }
+          case 'Email should be not null': {
+            this.errorEmailNull = true;
+            break;
+          }
+          case 'Not unique email': {
+            this.errorEmailUnique = true;
+            break;
+          }
+          case 'Bad first name': {
+            this.errorFirstName = true;
+            break;
+          }
+          case 'Bad first name length': {
+            this.errorFirstNameLength = true;
+            break;
+          }
+          case 'First name should be not null': {
+            this.errorFirstNameNull = true;
+            break;
+          }
+          case 'Bad last name': {
+            this.errorLastName = true;
+            break;
+          }
+          case 'Bad last name length': {
+            this.errorLastNameLength = true;
+            break;
+          }
+          case 'Last name should be not null': {
+            this.errorLastNameNull = true;
+            break;
+          }
+          case 'Bad password': {
+            this.errorPassword = true;
+            break;
+          }
+          case 'Bad password length': {
+            this.errorPasswordLength = true;
+            break;
+          }
+          case 'Password should be not null': {
+            this.errorPasswordNull = true;
+            break;
+          }
+        }
+
+      }
+    );
+    if(error.status === 0) {
+      this.errorConnection.openSnackBar();
+    }
   }
 
-  showRegisterForm() {
-    document.getElementById('register-form').style.display='block';
-  }
-
-  hideRegisterForm() {
-    document.getElementById('register-form').style.display='none';
-  }
-
-  go(){
-    console.log('wow');
-    this.router.navigate(['']);
+  reset() {
+    this.errorLogin = false;
+    this.errorLoginLength = false;
+    this.errorLoginNull = false;
+    this.errorLoginUnique = false;
+    this.errorEmail = false;
+    this.errorEmailNull = false;
+    this.errorEmailUnique = false;
+    this.errorLastName = false;
+    this.errorLastNameLength = false;
+    this.errorLastNameNull = false;
+    this.errorFirstName = false;
+    this.errorFirstNameLength = false;
+    this.errorFirstNameNull = false;
+    this.errorPassword = false;
+    this.errorPasswordLength = false;
+    this.errorPasswordNull = false;
   }
 
   ngOnInit() {
