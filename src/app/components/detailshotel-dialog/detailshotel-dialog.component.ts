@@ -8,6 +8,7 @@ import { DatePipe } from '@angular/common';
 import { DialogData } from '../detailshotel/detailshotel.component';
 import {GlobalRootURL} from '../../GlobalRootURL';
 import {SnackBarComponent} from '../snack-bar/snack-bar.component';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 
 @Component({
@@ -34,11 +35,13 @@ export class DetailshotelDialogComponent implements OnInit {
               private _formBuilder: FormBuilder,
               private errorConnection: SnackBarComponent,
               public dialogRef: MatDialogRef<DetailshotelDialogComponent>,
+              private _snackBar: MatSnackBar,
     @Inject(MAT_DIALOG_DATA) public data: DialogData
     ) {
       this.roomId = data.roomId;
       this.hotelId = data.hotelId;
     }
+    mindate = new Date();
 
 
   Reservetion(){
@@ -67,7 +70,11 @@ export class DetailshotelDialogComponent implements OnInit {
     this.dialogRef.close();
   }
 
-
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 2000,
+    });
+  }
   ngOnInit() {
     this.firstFormGroup = this._formBuilder.group({
       firstCtrl: ['', Validators.required]
