@@ -1,7 +1,6 @@
 mat-form-field{
     margin: 10px;
 }
-mat-card{
-    width: 70%;
-    margin-left: 20%;
+mat-button-toggle{
+    width: 30%;
 }
