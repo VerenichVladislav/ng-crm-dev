@@ -24,6 +24,9 @@
          <mat-card-header> From: {{post.cityFrom}} ----> To:{{post.cityDest}}</mat-card-header>
          <mat-card-subtitle>Price: {{post.price}}</mat-card-subtitle>
         </mat-card>
+        <mat-card *ngIf="currentCity">
+        <button  mat-button (click)="Buy()">Buy</button>
+      </mat-card>
 </div>
 <button id="marker"></button>
 

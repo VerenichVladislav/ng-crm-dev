@@ -9,7 +9,7 @@
 </div> -->
 
 <div class="hotels-card-menu">
-    <div class="hotels-card-menu-picker">
+    <!-- <div class="hotels-card-menu-picker">
         <mat-list>
             <mat-form-field appearance="outline">
                 <input matInput placeholder="City">
@@ -25,7 +25,7 @@
                 <mat-datepicker #picker2></mat-datepicker>
               </mat-form-field>
         </mat-list>
-    </div>
+    </div> -->
     <div class="hotels-card-container"><div class="hotels-card" *ngFor='let post of posts | async'>
             <div class="hotels-card-hotel-img">
                 <img src="{{post.image ?' https://drive.google.com/uc?export=view&id='+post.image :'https://drive.google.com/uc?export=view&id=1jC7zuqnV23XH-AEVlrA9BrQ9RXt_ft_8'}}" alt="">
