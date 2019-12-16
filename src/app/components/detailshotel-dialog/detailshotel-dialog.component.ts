@@ -64,6 +64,7 @@ export class DetailshotelDialogComponent implements OnInit {
         }
       }
     )
+    this.dialogRef.close();
   }
 
 

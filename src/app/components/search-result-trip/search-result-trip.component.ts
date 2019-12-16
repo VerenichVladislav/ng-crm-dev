@@ -14,6 +14,7 @@ import { City } from 'src/app/entity/city';
 import { CityService } from 'src/app/shared/city.service';
 import {map} from "rxjs/operators";
 import { TripDTO } from 'src/app/entity/TripDTO';
+import {PageEvent} from '@angular/material/paginator';
 
 ``
 
@@ -42,7 +43,6 @@ export class SearchResultTripComponent implements OnInit {
     this.getPosts();
     this.getHotelByCity();
   }
-  
   getPosts(){
     let body = this.service.tripFilter;
 

@@ -20,7 +20,7 @@ import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 })
 @Injectable()
 export class SearchResultComponent implements OnInit {
-  readonly ROOT_URL = GlobalRootURL.BASE_API_URL + 'hotels';
+  readonly ROOT_URL = GlobalRootURL.BASE_API_URL + 'hotels/normal';
   posts: Observable<Hotel[]>;
   rooms: Observable<room[]>;
   ratingFilter: number;

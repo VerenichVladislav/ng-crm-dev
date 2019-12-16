@@ -1,3 +1,5 @@
+
+
     <div class="center" *ngFor="let post of posts">
             <mat-card><div>From: {{post.cityFrom}} 
                 <button (click)="Buy(post)" routerLink="/trips/{{post.tripId}}/buy" [queryParams]="{count: post.count }" class="btn btn-outline-success pull-right">Buy</button>
