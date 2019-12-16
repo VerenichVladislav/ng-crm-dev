@@ -6,6 +6,9 @@
     display: flex;
     flex-wrap: wrap;
 }
+.hotels-card-container{
+    margin-left: 35%;
+}
 
   /*Flex-Card*/
 .hotels-card-menu{

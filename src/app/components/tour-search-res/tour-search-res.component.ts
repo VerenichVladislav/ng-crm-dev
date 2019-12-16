@@ -138,7 +138,9 @@ export class TourSearchResComponent implements OnInit {
       
       })
      }
-
+     Buy(){
+       
+     }
     ngOnInit() { 
     this.mapboxgl.accessToken = 'pk.eyJ1IjoiY2h1cGVycyIsImEiOiJjazNqcjJ4YnQwM3l5M2xwOXppNmtkMWF4In0.MqIEuzBBpryI6_dps113lw';
     this.map = new this.mapboxgl.Map({
