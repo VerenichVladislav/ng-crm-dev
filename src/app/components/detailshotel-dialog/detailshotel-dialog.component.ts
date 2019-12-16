@@ -9,6 +9,7 @@ import { DialogData } from '../detailshotel/detailshotel.component';
 import {GlobalRootURL} from '../../GlobalRootURL';
 import {SnackBarComponent} from '../snack-bar/snack-bar.component';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {LocaleStorageService} from "../../shared/locale-storage.service";
 
 
 @Component({
@@ -36,6 +37,7 @@ export class DetailshotelDialogComponent implements OnInit {
               private errorConnection: SnackBarComponent,
               public dialogRef: MatDialogRef<DetailshotelDialogComponent>,
               private _snackBar: MatSnackBar,
+              private localStorageService: LocaleStorageService,
     @Inject(MAT_DIALOG_DATA) public data: DialogData
     ) {
       this.roomId = data.roomId;
@@ -58,7 +60,7 @@ export class DetailshotelDialogComponent implements OnInit {
     console.log(Url);
      this.http.post(Url,{},{headers: headers}).subscribe(
       (data: any) => {
-
+        this.localStorageService.addTo('user','reservations', data);
       },
       error => {
         console.log(error);

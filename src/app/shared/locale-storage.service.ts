@@ -11,4 +11,11 @@ export class LocaleStorageService {
     localStorage.removeItem(fieldName);
     localStorage.setItem(fieldName, JSON.stringify(value));
   }
+
+  addTo(fieldName: string, listName: string, value: any) {
+    let user = JSON.parse(localStorage.getItem(fieldName));
+    user[listName].push(value);
+    localStorage.removeItem(fieldName);
+    localStorage.setItem(fieldName, JSON.stringify(user));
+  }
 }
