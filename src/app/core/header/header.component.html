@@ -26,10 +26,10 @@
 
         <button *ngIf="isActiveUser" routerLink="/profile" class="btn">{{'profile' | translate}}</button>
 
-        <button *ngIf="isActiveUser" class="btn" routerLink="/chat">chat</button>
+        <button *ngIf="isActiveUser" class="btn" routerLink="/chat">{{'chat' | translate}}</button>
         <app-logout *ngIf="isActiveUser"></app-logout>
         <button *ngIf="isActiveAdmin" routerLink="/admin" class="btn admin">{{'admin' | translate}}</button>
-        
+
 
 
         <button (click)="en()" class="eng pull-right"></button>

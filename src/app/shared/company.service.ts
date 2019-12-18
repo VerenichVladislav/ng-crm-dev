@@ -24,7 +24,6 @@ export class CompanyService {
 
   saveCompany(company): Observable<Company>{
     let headers = new HttpHeaders(
-
       {'Content-Type': 'application/json'});
     let options = {
       headers: headers ,

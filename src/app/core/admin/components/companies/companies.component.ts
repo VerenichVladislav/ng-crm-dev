@@ -59,10 +59,9 @@ export class CompaniesComponent implements OnInit {
 
       },
       error => {
-        console.log();
+        console.log(error);
       }
     );
-
 
   }
 

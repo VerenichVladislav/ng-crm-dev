@@ -24,8 +24,13 @@ export class UsersComponent implements OnInit {
       } else {
         this.userService.getAllUsers().subscribe(
           (u: User[]) => {
-            this.users = u;
-            localStorage.setItem('users', JSON.stringify(u));
+            u.forEach(
+              (user: User) => {
+                this.users = [];
+                this.users.push(user);
+              }
+            );
+            localStorage.setItem('users', JSON.stringify(this.users));
           },
           error => {
             console.log(error);
@@ -38,7 +43,7 @@ export class UsersComponent implements OnInit {
     console.log(user.userId);
     this.adminService.lockUser(user.userId).subscribe(
       () => {
-        user.isLocked = true;
+        user.locked = true;
         this.localeStorageService.update('users', this.users);
       },
       error1 => {
@@ -50,7 +55,7 @@ export class UsersComponent implements OnInit {
   unlockUser(user: User) {
     this.adminService.unlockUser(user.userId).subscribe(
       () => {
-        user.isLocked = false;
+        user.locked = false;
       },
       error1 => {
         console.log(error1);

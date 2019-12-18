@@ -18,16 +18,20 @@ export class WalletService {
   constructor(private http: HttpClient){ }
 
   getWalletById(id: number): Observable<Wallet>{
-    let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    let headers = new HttpHeaders(
+      { 'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem('auth_token')});
     let options = { headers: headers };
 
     return this.http.get<Wallet>(this.URL + id, options);
   }
 
   replenishWallet(sum:any, userId:number): Observable<any> {
-    let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    headers.set('Authorization', localStorage.getItem('auth_token'));
-    let options = { headers: headers, responseType:'text' as 'json'};
+    let headers = new HttpHeaders(
+      { 'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem('auth_token')});
+    let options = { headers: headers };
+
     console.log(JSON.stringify(this.URL+userId+'/sendConfirm?sum='+sum.value));
     return this.http.get<any>(this.URL+userId+'/sendConfirm?sum='+sum.value, options);
     }

@@ -50,4 +50,13 @@ export class UserService {
 
     return this.http.get<any>(this.URL + 'isAuthenticated' , options);
   }
+
+  isLogin(): Observable<any> {
+    let headers = new HttpHeaders(
+      { 'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem('auth_token')});
+    let options = { headers: headers };
+
+    return this.http.get<any>(this.URL + 'isLogin' , options);
+  }
 }

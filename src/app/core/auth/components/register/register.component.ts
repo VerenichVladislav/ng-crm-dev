@@ -9,6 +9,7 @@ import {ConfirmEmailService} from '../../shared/confirm-email.service';
 import {identityPasswordValidator} from '../../shared/identity-password.directive';
 import {SnackBarComponent} from '../../../../components/snack-bar/snack-bar.component';
 import {DataTransferService} from "../../../../shared/data-transfer.service";
+import {Ng4LoadingSpinnerService} from "ng4-loading-spinner";
 
 @Component({
   selector: 'app-register',
@@ -39,7 +40,8 @@ export class RegisterComponent implements OnInit {
               private confirmService: ConfirmEmailService,
               private errorConnection: SnackBarComponent,
               private transfer: DataTransferService,
-              private router: Router) {
+              private router: Router,
+              private spinnerService: Ng4LoadingSpinnerService,) {
     this.registerForm = new FormGroup({
       userName: new FormControl('', Validators.required),
       email: new FormControl(''),
@@ -53,7 +55,7 @@ export class RegisterComponent implements OnInit {
 
   submit(userData) {
     this.reset();
-
+    this.spinnerService.show();
     this.registerService
       .registerUser(new User(userData), userData.hashPass)
       .subscribe(
@@ -64,6 +66,7 @@ export class RegisterComponent implements OnInit {
             .loginUser(userData.userName, userData.hashPass)
             .subscribe(
               (loginResp: Response) => {
+                this.spinnerService.hide();
                 this.transfer.setRole('USER');
 
                 localStorage.setItem("auth_token", loginResp.headers.get('Authorization'));

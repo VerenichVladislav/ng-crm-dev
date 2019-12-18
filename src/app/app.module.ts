@@ -224,8 +224,15 @@ export function createTranslateLoader(http: HttpClient) {
         component: DetailshotelComponentComponent,
         canActivate: [LoginGuard]
       },
-      {path: 'chat', component:ChatComponentComponent},
+      { path: 'chat',
+        component:ChatComponentComponent,
+        canActivate: [LoginGuard]
+      },
       {path: 'trips/:tripid/buy', component: BuyTicketComponent},
+      { path: 'trips/:tripid/buy',
+        component: BuyTicketComponent,
+        canActivate: [LoginGuard]
+      },
       {path:'tourResult',component:TourSearchResComponent},
       {path:'tourResult/:id', component:TourDetailsComponent},
       {path:'Mapfind',component:MapFindHotelComponent},
