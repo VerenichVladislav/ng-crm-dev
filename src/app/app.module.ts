@@ -228,7 +228,10 @@ export function createTranslateLoader(http: HttpClient) {
         component:ChatComponentComponent,
         canActivate: [LoginGuard]
       },
-      {path: 'trips/:tripid/buy', component: BuyTicketComponent},
+      {path: 'trips/:tripid/buy',
+        component: BuyTicketComponent,
+        canActivate: [LoginGuard]
+      },
       { path: 'trips/:tripid/buy',
         component: BuyTicketComponent,
         canActivate: [LoginGuard]

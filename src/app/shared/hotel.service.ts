@@ -18,13 +18,15 @@ export  class HotelService {
   public setHotelFilter(hotelFilter:HotelFilters){
     console.log(hotelFilter.city);
     this.hotelFilter = hotelFilter;
-  
-    
+
+
   }
   getById(id: number): Observable<Hotel>{
-    let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    //headers.set('Authorization', localStorage.getItem('auth_token'));
+    let headers = new HttpHeaders(
+      { 'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem('auth_token')});
     let options = { headers: headers };
+
     return this.http.get<Hotel>(this.URL + id, options);
   }
 }

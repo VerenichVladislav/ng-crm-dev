@@ -22,9 +22,11 @@ export class TicketService {
 
   submitForm(data: any, count: number, tripid: number, userid: number): Observable<any> {
     console.log(data);
-    let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    headers.set('Authorization', localStorage.getItem('auth_token'));
-    let options = { headers: headers, responseType:'text' as 'json'};
+    let headers = new HttpHeaders(
+      { 'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem('auth_token')});
+    let options = { headers: headers };
+
     return this.http.post<any>(GlobalRootURL.BASE_API_URL + 'trips/'+userid +'/'+tripid+'/buy?count='+count, data, options);
   }
 }

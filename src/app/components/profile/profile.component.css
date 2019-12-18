@@ -1,5 +1,6 @@
 #profile{
   margin-top: 10vh;
+
 }
 #main {
   background-color: #f2f2f2;
@@ -28,6 +29,7 @@
 }
 .confirmed{
   color: #4CAF50;
+
 }
 .unconfirmed{
   color: #f44336;
@@ -52,4 +54,8 @@
 }
 .btn-reservation{
   margin-top: 30%;
+}
+
+.slider {
+  color: #fff;
 }

@@ -27,9 +27,11 @@ export class TripService {
     return this.http.get(this.ROOT_URL + id);
   }
   getCityName(id:any):any {
-    let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    headers.set('Authorization', localStorage.getItem('auth_token'));
-    let options = { headers: headers, responseType:'text' as 'json'};
+    let headers = new HttpHeaders(
+      { 'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem('auth_token')});
+    let options = { headers: headers };
+
     return this.http.get<any>(GlobalRootURL.BASE_API_URL + 'cities/name/' + id, options)
     }
     getTransportName(id:any):any {
