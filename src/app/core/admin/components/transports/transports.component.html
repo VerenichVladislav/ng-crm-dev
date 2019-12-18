@@ -54,7 +54,7 @@
   <div *ngFor="let transport of transports" class="container transport-container col-lg-4">
 
     <h3 class="card-text">{{'transport' | translate}}: {{transport.name}}
-      <button class="btn btn-warning pull-right" >{{'edit' | translate}}</button>
+      <!--<button class="btn btn-warning pull-right" >{{'edit' | translate}}</button>-->
     </h3>
     <h3 class="card-text">{{'passengers' | translate}}: {{transport.passengerCapacity}}
       <button (click)="delete(transport.transportId)" class="btn btn-danger pull-right" >{{'delete' | translate}}</button>

@@ -24,10 +24,10 @@ export class UsersComponent implements OnInit {
       } else {
         this.userService.getAllUsers().subscribe(
           (u: User[]) => {
+            this.users = [];
             u.forEach(
               (user: User) => {
-                this.users = [];
-                this.users.push(user);
+                this.users.push(new User(user));
               }
             );
             localStorage.setItem('users', JSON.stringify(this.users));
