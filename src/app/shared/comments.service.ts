@@ -19,15 +19,27 @@ export class CommentsService {
   constructor(private http: HttpClient) {}
 
   getHotelComments(id): any {
-    return this.http.get(this.URL + 'hotel/' + id);
+    let headers = new HttpHeaders(
+      { 'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem('auth_token')});
+    let options = { headers: headers };
+    return this.http.get(this.URL + 'hotel/' + id, options);
   }
 
   getCompanyComments(id): any {
-    return this.http.get(this.URL + 'company/' + id);
+    let headers = new HttpHeaders(
+      { 'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem('auth_token')});
+    let options = { headers: headers };
+    return this.http.get(this.URL + 'company/' + id, options);
   }
 
   getTourComments(id): any {
-    return this.http.get(this.URL + 'tour/' + id);
+    let headers = new HttpHeaders(
+      { 'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem('auth_token')});
+    let options = { headers: headers };
+    return this.http.get(this.URL + 'tour/' + id, options);
   }
 
 
@@ -40,8 +52,8 @@ export class CommentsService {
     return this.http.delete<any>(this.URL+commentId, options);
   }
 
-  submitForm(text: any, rating:number, entityId: number, userId:number, type: number): Observable<any> {   
-    //console.log(rating); 
+  submitForm(text: any, rating:number, entityId: number, userId:number, type: number): Observable<any> {
+    //console.log(rating);
     if(type=1){
       this.newComment = new FormGroup({
         commentId: new FormControl(9999999),
@@ -58,7 +70,7 @@ export class CommentsService {
           user: new FormControl({'userId' : userId }),
           tour: new FormControl({'tourId' : entityId })
         });
-       } 
+       }
        else if(type=3){
         this.newComment = new FormGroup({
           text,
