@@ -19,7 +19,7 @@
                     <input type="text" class="form-control input-number" value="{{post.count}}" >
                 
                     <span class="input-group-btn">
-                        <button type="button" class="btn btn-default btn-number" (click)="post.count = post.count + 1">
+                        <button *ngIf="post.count<post.fullCountSeats" type="button" class="btn btn-default btn-number" (click)="post.count = post.count + 1">
                             <span class="glyphicon glyphicon-plus"></span>
                         </button>
                     </span>

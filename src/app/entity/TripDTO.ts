@@ -3,7 +3,7 @@ export class TripDTO {
     cityFrom: string;
     cityDest: string;
     price: string;
-    fullCountSeats: string;
+    fullCountSeats: number;
     transport: string;
     dateFrom: string;
     dateDest: string;
