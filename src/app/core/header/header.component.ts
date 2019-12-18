@@ -4,6 +4,7 @@ import {TranslateService} from '@ngx-translate/core';
 import {UserService} from "../../shared/user.service";
 import {AdminService} from "../admin/shared/admin.service";
 import {DataTransferService} from "../../shared/data-transfer.service";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -17,7 +18,8 @@ export class HeaderComponent implements OnInit, DoCheck {
               private translate: TranslateService,
               private transfer: DataTransferService,
               private userService: UserService,
-              private adminService: AdminService) {}
+              private adminService: AdminService,
+              private router: Router) {}
 
   ngOnInit() {
     this.adminService.isAuthenticated().subscribe(
@@ -52,6 +54,9 @@ export class HeaderComponent implements OnInit, DoCheck {
       });
     }
   }
+  chat(){
+    this.router.navigate(['/chat']);
+    }
 
   ru() {
     this.translate.use('ru');

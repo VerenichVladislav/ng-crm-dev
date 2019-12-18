@@ -13,14 +13,18 @@ export class AdminService {
   constructor(private http: HttpClient) { }
 
   lockUser(userId): Observable<void>{
-    let headers = new HttpHeaders({ 'Content-Type': 'application/json'});
+    let headers = new HttpHeaders(
+      { 'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem('auth_token')});
     let options = { headers: headers };
 
     return this.http.get<void>(this.URL + 'lockUser/?userId=' + userId, options);
   }
 
   unlockUser(userId): Observable<void> {
-    let headers = new HttpHeaders({ 'Content-Type': 'application/json'});
+    let headers = new HttpHeaders(
+      { 'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem('auth_token')});
     let options = { headers: headers };
 
     return this.http.get<void>(this.URL + 'unlockUser/?userId=' + userId, options);

@@ -11,10 +11,11 @@ export class LogoutComponent implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit() {
+    console.log('out');
   }
   logout() {
+    localStorage.clear();
     this.router.navigate(['']);
     window.location.reload();
-    localStorage.clear();
   }
 }

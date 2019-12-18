@@ -8,10 +8,10 @@
                 </div>
                 <div class="modal-body">  
                     <form [formGroup]="replenishing" (ngSubmit)="submit()">
-                        <input type="text" class="form-control" formControlName="sum" placeholder="Введите сумму, которую желаете пополнить">
+                        <input type="number" class="form-control" oninput="this.value = Math.abs(this.value)" formControlName="sum" placeholder="Введите сумму, которую желаете пополнить">
                         <div class="modal-footer" >
                             <button class="btn btn-default" type="button" data-dismiss="modal">Закрыть</button>
-                            <button type="submit" class="btn btn-success" data-toggle="modal" data-target="#myModal2">Подтвердтить</button>
+                            <button type="submit" [disabled] ="!replenishing.valid" class="btn btn-success" data-toggle="modal" data-target="#myModal2">Подтвердтить</button>
                         </div>
                     </form>
                 </div>

@@ -48,3 +48,7 @@
 .rating > label:hover ~ input:checked ~ label {
     color: #ea0;
 }
+.col { 
+    width: auto; /* Ширина блока */
+    word-wrap: break-word; /* Перенос слов */ 
+   }

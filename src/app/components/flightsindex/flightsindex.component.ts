@@ -38,8 +38,4 @@ export class FlightsindexComponent implements OnInit {
 
   ngOnInit() {
   }
-  chat(){
-  this.router.navigate(['/chat']);
-  }
-
 }

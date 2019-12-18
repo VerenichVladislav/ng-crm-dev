@@ -9,7 +9,7 @@ export class User {
   lastName: string;
   email: string;
   state: string;
-  isLocked: boolean;
+  locked: boolean;
   wallet?: Wallet;
   tickets?: Ticket[] = [];
   reservations?: Reservation[] = [];
@@ -24,7 +24,7 @@ export class User {
     this.userName = user.userName;
     this.firstName = user.firstName;
     this.lastName = user.lastName;
-    this.isLocked = user.isLocked;
+    this.locked = user.locked;
     this.email = user.email;
     this.state = user.state;
     this.wallet = user.wallet;

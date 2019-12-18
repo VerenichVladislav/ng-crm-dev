@@ -135,6 +135,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    localStorage.clear();
   }
 
   ngOnDestroy(){

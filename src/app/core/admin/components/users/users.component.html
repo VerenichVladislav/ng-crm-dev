@@ -10,7 +10,7 @@
   <div *ngFor="let user of users" class="m-auto user-container col-lg-6">
     <h3 class="card-text">{{'login' | translate}}: {{user.userName}}</h3>
     <button type="button" (click)="lockUser(user)" class="btn btn-lg btn-danger pull-right"
-      *ngIf="!user.isLocked; else unban">{{'Ban' | translate}}
+      *ngIf="!user.locked; else unban">{{'Ban' | translate}}
     </button>
     <ng-template #unban>
       <button type="button" (click)="unlockUser(user)" class="btn btn-lg btn-warning pull-right">

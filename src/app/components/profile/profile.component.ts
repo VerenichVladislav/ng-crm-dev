@@ -25,18 +25,20 @@ export class ProfileComponent implements OnInit, OnDestroy{
       .pipe(filter(e => e instanceof NavigationEnd))
       .subscribe((e: NavigationEnd) => {
 
-        this.user = JSON.parse(localStorage.getItem('user'));
-
-        if (this.transfer.user$.getValue() !== undefined) {
-          this.transfer.user$.subscribe( value => {
-            this.user = value;
-            if (!!this.user) {
-              localStorage.setItem('user', JSON.stringify(this.user));
-            }
-          });
-        } else {
+        //if (!this.user) {
           this.user = JSON.parse(localStorage.getItem('user'));
-        }
+
+          if (this.transfer.user$.getValue() !== undefined) {
+            this.transfer.user$.subscribe(value => {
+              this.user = value;
+              if (!!this.user) {
+                localStorage.setItem('user', JSON.stringify(this.user));
+              }
+            });
+          } else {
+            this.user = JSON.parse(localStorage.getItem('user'));
+          }
+        //}
         this.reservations = this.user.reservations;
         this.tickets = this.user.tickets;
 
