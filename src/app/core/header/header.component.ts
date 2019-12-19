@@ -5,6 +5,7 @@ import {UserService} from "../../shared/user.service";
 import {AdminService} from "../admin/shared/admin.service";
 import {DataTransferService} from "../../shared/data-transfer.service";
 import { Router } from '@angular/router';
+import {User} from "../../entity/user";
 
 @Component({
   selector: 'app-header',
@@ -22,36 +23,35 @@ export class HeaderComponent implements OnInit, DoCheck {
               private router: Router) {}
 
   ngOnInit() {
-    this.adminService.isAuthenticated().subscribe(
-      () => {
-        this.isActiveAdmin = true;
-        this.isActiveUser = true;
-      }
-    );
-
-    this.userService.isAuthenticated().subscribe(
-      () => {
-        this.isActiveAdmin = false;
-        this.isActiveUser = true;
-      }
-    );
+    // this.adminService.isAuthenticated().subscribe(
+    //   () => {
+    //     this.isActiveAdmin = true;
+    //     this.isActiveUser = true;
+    //   }
+    // );
+    //
+    // this.userService.isAuthenticated().subscribe(
+    //   () => {
+    //     this.isActiveAdmin = false;
+    //     this.isActiveUser = true;
+    //   }
+    // );
   }
 
   ngDoCheck() {
-    if (this.transfer.role$.getValue() !== undefined) {
-      this.transfer.role$.subscribe(value => {
-        if (value == 'ADMIN') {
-          this.isActiveAdmin = true;
-          this.isActiveUser = true;
+    const user: User = JSON.parse(localStorage.getItem('user'));
+    if(!user) {
+      this.isActiveUser = false;
+      this.isActiveAdmin = false;
+    } else {
+      if (user.role == 'ADMIN') {
+        this.isActiveAdmin = true;
+        this.isActiveUser = true;
 
-        } else if (value == 'USER') {
-          this.isActiveUser = true;
-          this.isActiveAdmin = false;
-        } else {
-          this.isActiveUser = false;
-          this.isActiveAdmin = false;
-        }
-      });
+      } else if (user.role == 'USER') {
+        this.isActiveUser = true;
+        this.isActiveAdmin = false;
+      }
     }
   }
   chat(){

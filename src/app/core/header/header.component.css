@@ -99,9 +99,7 @@ hr {
   from {transform: scale(0)}
   to {transform: scale(1)}
 }
-.lang{
-  margin-left: 15%;
-}
+
 .eng, .rus {
   outline: 0;
   height: 5vh;
@@ -110,10 +108,13 @@ hr {
   padding: 0;
   background-size: contain;
 }
+.eng:visited,.rus:visited{
+  border: 3px solid #00B4CC;
+}
 .admin{
   background-color: #ff4334;
   color: #f8fff7;
-  margin-left: 50%;
+  margin-left: 35%;
   width: 5vw;
 }
 .eng {

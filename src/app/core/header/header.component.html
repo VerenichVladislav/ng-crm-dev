@@ -30,8 +30,6 @@
         <app-logout *ngIf="isActiveUser"></app-logout>
         <button *ngIf="isActiveAdmin" routerLink="/admin" class="btn admin">{{'admin' | translate}}</button>
 
-
-
         <button (click)="en()" class="eng pull-right"></button>
         <button (click)="ru()" class="rus pull-right"></button>
     </div>
