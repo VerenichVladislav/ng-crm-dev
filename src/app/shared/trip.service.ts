@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import {Injectable} from '@angular/core';
-import {GlobalRootURL} from '../GlobalRootURL';
-import {TripFilters} from '../entity/TripFilters'
+import { Injectable } from '@angular/core';
+import { GlobalRootURL } from '../GlobalRootURL';
+import { TripFilters } from '../entity/TripFilters'
 import { Trip } from '../entity/trip';
 
 @Injectable({
@@ -27,17 +27,16 @@ export class TripService {
     return this.http.get(this.ROOT_URL + id);
   }
   getCityName(id:any):any {
-    let headers = new HttpHeaders(
-      { 'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + localStorage.getItem('auth_token')});
-    let options = { headers: headers };
-
+    let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    headers.set('Authorization', localStorage.getItem('auth_token'));
+    let options = { headers: headers, responseType:'text' as 'json'};
     return this.http.get<any>(GlobalRootURL.BASE_API_URL + 'cities/name/' + id, options)
     }
-    getTransportName(id:any):any {
-      let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-      headers.set('Authorization', localStorage.getItem('auth_token'));
-      let options = { headers: headers, responseType:'text' as 'json'};
-      return this.http.get<any>(GlobalRootURL.BASE_API_URL + 'transports/name/' + id, options)
-      }
+
+  getTransportName(id:any):any {
+    let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    headers.set('Authorization', localStorage.getItem('auth_token'));
+    let options = { headers: headers, responseType:'text' as 'json'};
+    return this.http.get<any>(GlobalRootURL.BASE_API_URL + 'transports/name/' + id, options)
+    }
   }

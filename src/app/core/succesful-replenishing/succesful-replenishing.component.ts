@@ -56,6 +56,7 @@ export class SuccesfulReplenishingComponent implements OnInit {
       map((wallet: Wallet) => {
           return new Wallet(wallet);
         }
+        
       )
     );
       }
