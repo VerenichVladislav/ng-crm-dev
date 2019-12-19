@@ -15,6 +15,7 @@ import { CityService } from 'src/app/shared/city.service';
 import {map} from "rxjs/operators";
 import { TripDTO } from 'src/app/entity/TripDTO';
 import {PageEvent} from '@angular/material/paginator';
+import {Location} from "@angular/common";
 
 ``
 
@@ -36,13 +37,19 @@ export class SearchResultTripComponent implements OnInit {
   constructor(public service: TripService,
     private http: HttpClient,
     private cityService:CityService,
-    private router: Router) 
+    private router: Router,
+    private location: Location)
     {}
 
   ngOnInit() {
     this.getPosts();
     this.getHotelByCity();
   }
+
+  goBack() {
+    this.location.back();
+  }
+
   getPosts(){
     let body = this.service.tripFilter;
 
@@ -54,10 +61,10 @@ export class SearchResultTripComponent implements OnInit {
         this.posts = post;
       }
     );
-    
-    
+
+
   }
-  
+
   loadCity(trip : Trip): Observable<City> {
     return this.cityService.getById(trip.cityFrom).pipe(
       map((city: City) => {
@@ -77,13 +84,13 @@ export class SearchResultTripComponent implements OnInit {
   }
   filterHotel:HotelFilters;
   getHotelByCity(){
-      this.filterHotel 
+      this.filterHotel
        =  {
       city: this.service.tripFilter.cityDest,
       CheckIn: this.service.tripFilter.dateFrom,
       CheckOut: null
      }
-    
+
     let body = this.filterHotel;
     this.Hotels = this.http.post<Hotel[]>(this.URLHOTEL,body);
   }

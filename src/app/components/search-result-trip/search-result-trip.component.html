@@ -1,7 +1,7 @@
+<button (click)="goBack()" class="btn btn-info back">{{'go back' | translate}}</button>
 
-
-    <div class="center" *ngFor="let post of posts">
-            <mat-card><div>From: {{post.cityFrom}} 
+<div class="center" *ngFor="let post of posts">
+            <mat-card><div>From: {{post.cityFrom}}
                 <button (click)="Buy(post)" routerLink="/trips/{{post.tripId}}/buy" [queryParams]="{count: post.count }" class="btn btn-outline-success pull-right">Buy</button>
             </div> <div>
                  To: {{post.cityDest}}
@@ -15,9 +15,9 @@
                             <span class="glyphicon glyphicon-minus"></span>
                         </button>
                     </span>
-                
+
                     <input type="text" class="form-control input-number" value="{{post.count}}" >
-                
+
                     <span class="input-group-btn">
                         <button *ngIf="post.count<post.fullCountSeats" type="button" class="btn btn-default btn-number" (click)="post.count = post.count + 1">
                             <span class="glyphicon glyphicon-plus"></span>
@@ -31,12 +31,12 @@
                     <mat-card class="example-card" (click)="findbyCity(post)">
                             <mat-card-header>
                               {{post.hotelName}}
-                             
+
                             </mat-card-header>
                             <img src="{{post.image ?' https://drive.google.com/uc?export=view&id='+post.image :'https://drive.google.com/uc?export=view&id=1jC7zuqnV23XH-AEVlrA9BrQ9RXt_ft_8'}}" alt="">
-                            
-                            
+
+
                           </mat-card>
             </mat-grid-tile>
-            
+
           </mat-grid-list>

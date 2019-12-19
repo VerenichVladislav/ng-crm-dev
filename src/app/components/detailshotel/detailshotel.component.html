@@ -6,6 +6,7 @@
         {{item.roomId}}
     </ng-container>
 </div> -->
+<button (click)="goBack()" class="btn btn-info back">{{'go back' | translate}}</button>
 <div *ngIf="realHOtel">
 <mat-grid-list cols="5" rowHeight = "150px">
     <mat-grid-tile [colspan]=1></mat-grid-tile>
@@ -56,7 +57,7 @@
               <button  mat-raised-button (click)="openDialog(item)">Reservation</button>
             </mat-card-actions>
           </mat-card >          <div mat-card-avatar class="example-header-image"></div>
-    
+
         </mat-grid-tile>
 </mat-grid-list>
 <app-comments [type]="1" [EntityId]="hotelId" [commentRating]="realHOtel.commentRating"></app-comments>
