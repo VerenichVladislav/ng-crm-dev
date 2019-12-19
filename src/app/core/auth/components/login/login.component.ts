@@ -1,5 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
+import {Location} from '@angular/common';
 import {Subscription} from 'rxjs';
 import {User} from '../../../../entity/user';
 import {FormControl, FormGroup} from '@angular/forms';
@@ -42,7 +43,7 @@ export class LoginComponent implements OnInit, OnDestroy {
               private transfer: DataTransferService,
               private errorConnection: SnackBarComponent,
               private spinnerService: Ng4LoadingSpinnerService,
-              private router: Router) {
+              private location: Location) {
 
     this.loginForm = new FormGroup({
       username: new FormControl(''),
@@ -89,8 +90,9 @@ export class LoginComponent implements OnInit, OnDestroy {
                   );
 
                 });
+                localStorage.setItem('user', JSON.stringify(user));
                 this.transfer.setUser(user);
-                this.router.navigate(['profile']);
+                this.location.back();
               },
               error => {
                 console.log(error);
