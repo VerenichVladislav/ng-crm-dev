@@ -91,7 +91,7 @@
          class="tickets card col-lg-4 bg-dark text-light">
       <div class="row no-gutters ml-2">
         <div class="col-md-4">
-          <img src="assets/img/pexels-photo-373893.jpeg" alt="" class="img-fluid"/>
+          <img class="img-fluid" src="{{reservation.hotel.image ?' https://drive.google.com/uc?export=view&id=' + reservation.hotel.image :'https://drive.google.com/uc?export=view&id=1jC7zuqnV23XH-AEVlrA9BrQ9RXt_ft_8'}}" />
           <button type="button" class="btn btn-success btn-reservation" routerLink="/SearchResult/{{reservation.hotel.hotelId}}">Ещё раз!</button>
         </div>
         <div class="col-md-8">
