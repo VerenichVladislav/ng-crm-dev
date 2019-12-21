@@ -55,6 +55,7 @@ export class DetailshotelComponentComponent implements OnInit {
        this.realHOtel = data;
        },
      error => {
+       this.spinnerService.hide();
        console.log(error)
      }
    )

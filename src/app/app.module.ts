@@ -87,6 +87,8 @@ import { SuccesfulReplenishingComponent } from './core/succesful-replenishing/su
 import { MarkerComponent } from './marker/marker.component';
 import {RegisterComponent} from "./core/auth/components/register/register.component";
 import { ChatComponentComponent } from './components/chat-component/chat-component.component';
+import { UnconfirmedEmailDialogComponent } from './components/profile/unconfirmed-email-dialog/unconfirmed-email-dialog.component';
+import {EmailGuard} from "./shared/email.guard";
 
 export function initGapi(gapiSession: GapiSession) {
   return () => gapiSession.initClient();
@@ -113,7 +115,7 @@ export function createTranslateLoader(http: HttpClient) {
     BuyTicketComponent,
     ScrollUpBtnComponent,
     CommentsComponent,
-
+    UnconfirmedEmailDialogComponent,
     ConnectionErrorComponent,
     SnackBarComponent,
 
@@ -139,11 +141,13 @@ export function createTranslateLoader(http: HttpClient) {
     SuccesfulReplenishingComponent,
     MarkerComponent,
     ChatComponentComponent,
+    UnconfirmedEmailDialogComponent,
     //SideFiltersComponent,
   ],
   entryComponents: [
     DetailshotelDialogComponent,
     ConnectionErrorComponent,
+    UnconfirmedEmailDialogComponent,
     ConfirmationDialog
   ],
   imports: [
@@ -222,7 +226,7 @@ export function createTranslateLoader(http: HttpClient) {
       { path: 'SearchResultTrip', component: SearchResultTripComponent},
       { path: 'SearchResult/:id',
         component: DetailshotelComponentComponent,
-        canActivate: [LoginGuard]
+        canActivate: [LoginGuard, EmailGuard]
       },
       { path: 'chat',
         component:ChatComponentComponent,
@@ -230,7 +234,7 @@ export function createTranslateLoader(http: HttpClient) {
       },
       { path: 'trips/:tripid/buy',
         component: BuyTicketComponent,
-        canActivate: [LoginGuard]
+        canActivate: [LoginGuard, EmailGuard]
       },
       {path:'tourResult',component:TourSearchResComponent},
       {path:'tourResult/:id', component:TourDetailsComponent},
