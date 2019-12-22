@@ -38,7 +38,7 @@
                   <tr><td class="active">Текущая сумма:</td>
                     <td *ngIf="user.wallet.sum == null; else has">0.00 $</td>
                     <ng-template #has>
-                      <td>{{user.wallet.sum}}</td>
+                      <td>{{user.wallet.sum}} $</td>
                     </ng-template>
                     <app-replenish-wallet></app-replenish-wallet>
                   </tr>

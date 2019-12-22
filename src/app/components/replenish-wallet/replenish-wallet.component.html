@@ -10,7 +10,7 @@
                         <input type="number" class="form-control" oninput="this.value = Math.abs(this.value)" formControlName="sum" placeholder="Введите сумму, которую желаете пополнить">
                         <div class="modal-footer" >
                             <button class="btn btn-default" type="button" data-dismiss="modal">Закрыть</button>
-                            <button type="submit" [disabled] ="!replenishing.valid" class="btn btn-success" data-toggle="modal" data-target="#myModal2">Подтвердтить</button>
+                            <button type="submit" class="btn btn-success" data-toggle="modal">Подтвердтить</button>
                         </div>
                     </form>
                 </div>
@@ -23,8 +23,23 @@
                 <div class="modal-header">
                     <h3 class="modal-title">Вы просто супер!</h3>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body" align="center">
                     <h4>Поздравляем! Вы на половине пути! Остался 1 маленький шаг... Проверьте пожалуйста ваш E-mail!</h4>
+                        <div class="modal-footer" >
+                            <button class="btn btn-default" type="button" data-dismiss="modal">Закрыть</button>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="myModal3" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">Странно</h3>
+                </div>
+                <div class="modal-body" align="center">
+                    <h4>Поздравляем! Вы пополнили Ваш баланс на 0$ :)</h4>
                         <div class="modal-footer" >
                             <button class="btn btn-default" type="button" data-dismiss="modal">Закрыть</button>
                         </div>
