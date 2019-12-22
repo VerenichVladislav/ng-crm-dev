@@ -1,14 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { WalletService } from '../../shared/wallet.service';
-import { HttpErrorResponse } from '@angular/common/http';
-import { Subscription, Observable } from 'rxjs';
 import { UserService } from 'src/app/shared/user.service';
 import { DataTransferService } from 'src/app/shared/data-transfer.service';
 import { Router } from '@angular/router';
-import { User } from 'src/app/entity/user';
-import { Wallet } from 'src/app/entity/wallet';
-import { map } from 'rxjs/operators';
+import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
+
 declare var $ :any;
 @Component({
   selector: 'app-replenish-wallet',
@@ -24,7 +21,8 @@ export class ReplenishWalletComponent implements OnInit {
   constructor(private walletService: WalletService,
               private userService: UserService,
               private transfer: DataTransferService,
-              private router: Router) { }
+              private router: Router,
+              private spinnerService: Ng4LoadingSpinnerService) { }
 
   ngOnInit() {
     this.replenishing = new FormGroup({
@@ -34,20 +32,18 @@ export class ReplenishWalletComponent implements OnInit {
     this.replenishing.controls.sum.valueChanges.subscribe((value)=>console.log(JSON.stringify(value)));
   }
   
-  submit(){
-    this.walletService.replenishWallet(this.replenishing.controls.sum, this.userId)
-                .subscribe(
-                    (log: HttpErrorResponse) => {
-                        this.message = log;
-                        console.log(this.message);
-                    },
-                    (error) => {
-                      this.message = error.error;
-                      console.log(this.message);
-                    }
-                );
-    $('#myModal').modal('hide');
-
+  async submit(){
+    this.spinnerService.show();
+    if(this.replenishing.controls.sum.value==0){
+      $('#myModal').modal('hide');
+      $('#myModal3').modal('show');
+    }
+    else {
+      await this.walletService.replenishWallet(this.replenishing.controls.sum, this.userId).toPromise();
+      $('#myModal').modal('hide');
+      this.spinnerService.hide();
+      $('#myModal2').modal('show');
+    }
     }
 }
 

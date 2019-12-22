@@ -8,7 +8,7 @@ import {of} from "rxjs/internal/observable/of";
   providedIn: 'root'
 })
 export class LoginGuard implements CanActivate {
-  constructor(public auth: UserService, protected router: Router) { }
+  constructor(private auth: UserService, private router: Router) { }
 
   canActivate() {
     return this.auth.isLogin().pipe(

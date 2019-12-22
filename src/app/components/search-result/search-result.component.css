@@ -32,7 +32,7 @@
 }
 .hotels-card-hotel-img{
     max-width: 260px;
-    
+
     border-radius: 5px;
     margin-top: 2rem;
     margin-left: 2rem;
@@ -89,4 +89,18 @@
       color: #fff;
       background: #17bed2;
     }
+}
+
+.back{
+  outline: 0;
+  border: 0;
+  font-size: 24px;
+  margin-left: 1vh;
+  min-width: 7vh;
+  min-height: 7vh;
+  border-radius: 50% 50%;
+}
+.back,
+.back:active {
+  outline: none;
 }

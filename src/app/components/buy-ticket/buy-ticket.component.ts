@@ -48,7 +48,6 @@ export class BuyTicketComponent implements OnInit {
     this.idT = parseInt(tripid);
     this.http.get<Trip>(this.ROOT_URL+ this.idT).subscribe((data: Trip) => {
       this.trip = new Trip(data);
-
       this.tripService.getCityName(data.cityFrom).subscribe(
         (log: HttpErrorResponse) => {
           this.cityFrom = log;
@@ -78,7 +77,7 @@ export class BuyTicketComponent implements OnInit {
       ])
     })
     this.addFormControl();
-    this.usersForm.valueChanges.subscribe((value)=>console.log(value));
+    //this.usersForm.valueChanges.subscribe((value)=>console.log(value));
   }
 
   removeFormControl(i) {
@@ -102,10 +101,16 @@ export class BuyTicketComponent implements OnInit {
     this.ticketService.submitForm(this.usersForm.controls.users.value, this.count, this.idT, this.userId)
                 .subscribe(
                     (log: HttpErrorResponse) => {
-                        this.message = log;
                     },
                     (error) => {
-                      this.message = error.error;
+                      console.log(error);
+                      if(error.status === 200) {
+                        this.message = error.error.text;
+                      }
+                      if(error.status === 400) {
+                        this.message = error.error;
+                      }
+                      //this.message = error.error;
                       if(error.status === 0) {
                         this.errorConnection.openSnackBar();
                       }

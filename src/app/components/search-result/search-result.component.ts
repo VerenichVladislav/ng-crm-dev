@@ -11,6 +11,7 @@ import {GlobalRootURL} from '../../GlobalRootURL';
 import { HotelFilters } from 'src/app/entity/HotelFilters';
 import { HotelService } from 'src/app/shared/hotel.service';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
+import {Location} from "@angular/common";
 
 
 @Component({
@@ -28,7 +29,8 @@ export class SearchResultComponent implements OnInit {
   constructor(private http: HttpClient, private router: Router,
               private address :ActivatedRoute,
               private service:HotelService,
-              private spinnerService: Ng4LoadingSpinnerService) {
+              private spinnerService: Ng4LoadingSpinnerService,
+              private location: Location) {
     this.city = service.hotelFilter.city;
     console.log(this.city);
 
@@ -52,6 +54,11 @@ export class SearchResultComponent implements OnInit {
     console.log(hotel.hotelId);
 
   }
+
+  goBack() {
+    this.location.back();
+  }
+
   ngOnInit() {
   }
 }

@@ -5,6 +5,7 @@ import {Reservation} from "./reservation";
 export class User {
   userId: number;
   userName: string;
+  role: string;
   firstName: string;
   lastName: string;
   email: string;
@@ -22,6 +23,7 @@ export class User {
 
     this.userId = user.userId;
     this.userName = user.userName;
+    this.role = user.role;
     this.firstName = user.firstName;
     this.lastName = user.lastName;
     this.locked = user.locked;

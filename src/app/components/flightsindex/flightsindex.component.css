@@ -148,8 +148,8 @@ left: -5px;
 
 cursor: pointer;
 
-opacity: 0; 
-z-index: 2; 
+opacity: 0;
+z-index: 2;
 
 -webkit-touch-callout: none;
 }
@@ -239,7 +239,7 @@ transform: none;
   height:400px;
   background-position: center;
   background-position-y: -300px;
-  
+
 }
 .form-mat-child{
   margin: 10px ;
@@ -297,11 +297,11 @@ transform: none;
   height:80px;
   justify-content: center;
   border-radius: 28px;
-  
+  background-color: #ffffff;
 border: 1px solid
 #dadce0;
   box-shadow: 0 1px 2px 0 rgba(60,64,67,.30),0 2px 6px 2px rgba(60,64,67,.15);
-  
+
   margin-top: 0;
 }
 .search-input input{
@@ -310,7 +310,7 @@ border: 1px solid
 }
 /*Recomend*/
 .recomends-center{
-  text-align: center;   
+  text-align: center;
 }
 .recomends{
   margin-left: 10%;
@@ -328,13 +328,13 @@ border: 1px solid
 .recomend-hotels-image {
 
 position: relative;
-  width: 95%; 
+  width: 95%;
   height: 160px;
   display: inline-block; /* Строчно-блочный элемент */
   overflow: hidden;
 }
 .recomend-hotels-image img{
-  width: 100%; 
+  width: 100%;
   transition: 1s; /* Время эффекта */
 display: block;
 }

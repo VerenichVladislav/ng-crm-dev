@@ -117,7 +117,7 @@ a
 {
   text-decoration: none;
   color: #232323;
-  
+
   transition: color 0.3s ease;
 }
 
@@ -130,9 +130,9 @@ a:hover
 {
   display: block;
   position: relative;
-  
+
   z-index: 1;
-  
+
   -webkit-user-select: none;
   user-select: none;
 }
@@ -145,12 +145,12 @@ a:hover
   position: absolute;
   top: -7px;
   left: -5px;
-  
+
   cursor: pointer;
-  
-  opacity: 0; 
-  z-index: 2; 
-  
+
+  opacity: 0;
+  z-index: 2;
+
   -webkit-touch-callout: none;
 }
 
@@ -164,9 +164,9 @@ a:hover
     background:#5f6368;
     border-radius: 3px;
     z-index: 1;
-  
+
   transform-origin: 4px 0px;
-  
+
   transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
               background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
               opacity 0.55s ease;
@@ -211,10 +211,10 @@ a:hover
   background: #fff;
   list-style-type: none;
   -webkit-font-smoothing: antialiased;
-  
+
   transform-origin: 0% 0%;
   transform: translate(-100%, 0);
-  
+
   transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
 }
 
@@ -239,7 +239,7 @@ a:hover
     height:400px;
     background-position: center;
     background-position-y: -300px;
-    
+
 }
 .form-mat-child{
     margin: 10px ;
@@ -297,11 +297,11 @@ a:hover
     height:80px;
     justify-content: center;
     border-radius: 28px;
-    
-border: 1px solid
-#dadce0;
+    background-color: #ffffff;
+
+
+    border: 1px solid #dadce0;
     box-shadow: 0 1px 2px 0 rgba(60,64,67,.30),0 2px 6px 2px rgba(60,64,67,.15);
-    
     margin-top: 0;
 }
 .search-input input{
@@ -310,7 +310,7 @@ border: 1px solid
 }
 /*Recomend*/
 .recomends-center{
-    text-align: center;   
+    text-align: center;
 }
 .recomends{
     margin-left: 10%;
@@ -328,13 +328,13 @@ border: 1px solid
 .recomend-hotels-image {
 
 	position: relative;
-    width: 95%; 
+    width: 95%;
     height: 160px;
     display: inline-block; /* Строчно-блочный элемент */
     overflow: hidden;
 }
 .recomend-hotels-image img{
-    width: 100%; 
+    width: 100%;
     transition: 1s; /* Время эффекта */
 display: block;
 }

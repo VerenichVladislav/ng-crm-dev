@@ -87,6 +87,9 @@ import { SuccesfulReplenishingComponent } from './core/succesful-replenishing/su
 import { MarkerComponent } from './marker/marker.component';
 import {RegisterComponent} from "./core/auth/components/register/register.component";
 import { ChatComponentComponent } from './components/chat-component/chat-component.component';
+import { UnconfirmedEmailDialogComponent } from './components/profile/unconfirmed-email-dialog/unconfirmed-email-dialog.component';
+import {EmailGuard} from "./shared/email.guard";
+import { AboutComponent } from './core/about/about.component';
 
 export function initGapi(gapiSession: GapiSession) {
   return () => gapiSession.initClient();
@@ -113,7 +116,7 @@ export function createTranslateLoader(http: HttpClient) {
     BuyTicketComponent,
     ScrollUpBtnComponent,
     CommentsComponent,
-
+    UnconfirmedEmailDialogComponent,
     ConnectionErrorComponent,
     SnackBarComponent,
 
@@ -139,11 +142,14 @@ export function createTranslateLoader(http: HttpClient) {
     SuccesfulReplenishingComponent,
     MarkerComponent,
     ChatComponentComponent,
+    UnconfirmedEmailDialogComponent,
+    AboutComponent,
     //SideFiltersComponent,
   ],
   entryComponents: [
     DetailshotelDialogComponent,
     ConnectionErrorComponent,
+    UnconfirmedEmailDialogComponent,
     ConfirmationDialog
   ],
   imports: [
@@ -218,20 +224,20 @@ export function createTranslateLoader(http: HttpClient) {
       { path: 'HotelIndex', component: HotelindexComponent},
       {path:'News',component:NewsComponent},
       { path: 'Index', component: IndexComponent},
+      { path: 'about', component: AboutComponent},
       { path: 'SearchResult', component: SearchResultComponent},
       { path: 'SearchResultTrip', component: SearchResultTripComponent},
-      { path: 'SearchResult/:id',
+        { path: 'SearchResult/:id',
         component: DetailshotelComponentComponent,
-        canActivate: [LoginGuard]
+        canActivate: [LoginGuard, EmailGuard]
       },
       { path: 'chat',
         component:ChatComponentComponent,
         canActivate: [LoginGuard]
       },
-      {path: 'trips/:tripid/buy', component: BuyTicketComponent},
       { path: 'trips/:tripid/buy',
         component: BuyTicketComponent,
-        canActivate: [LoginGuard]
+        canActivate: [LoginGuard, EmailGuard]
       },
       {path:'tourResult',component:TourSearchResComponent},
       {path:'tourResult/:id', component:TourDetailsComponent},

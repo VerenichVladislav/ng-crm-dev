@@ -11,6 +11,7 @@ import { room } from 'src/app/entity/room';
 import { DetailshotelDialogComponent } from 'src/app/components/detailshotel-dialog/detailshotel-dialog.component';
 import {GlobalRootURL} from '../../GlobalRootURL';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
+import {Location} from "@angular/common";
 
 
 export interface DialogData {
@@ -34,7 +35,8 @@ export class DetailshotelComponentComponent implements OnInit {
   constructor(private route:ActivatedRoute,
               private http:HttpClient,
               public dialog: MatDialog,
-              private spinnerService: Ng4LoadingSpinnerService) { }
+              private spinnerService: Ng4LoadingSpinnerService,
+              private location: Location) { }
 
 
   openDialog(room:room): void {
@@ -53,8 +55,13 @@ export class DetailshotelComponentComponent implements OnInit {
        this.realHOtel = data;
        },
      error => {
+       this.spinnerService.hide();
        console.log(error)
      }
    )
-    }
+  }
+
+  goBack() {
+    this.location.back();
+  }
 }
