@@ -85,20 +85,23 @@ export class LoginComponent implements OnInit, OnDestroy {
                 user.reservations.forEach(reserv => {
                   this.loadHotel(reserv.hotel.hotelId).subscribe( hotel => {
                       reserv.setHotel(hotel);
-                      this.spinnerService.hide();
                     }
                   );
 
                 });
+                this.spinnerService.hide();
+
                 localStorage.setItem('user', JSON.stringify(user));
                 this.transfer.setUser(user);
                 this.location.back();
               },
               error => {
+                this.spinnerService.hide();
                 console.log(error);
               }));
         },
         error => {
+          this.spinnerService.hide();
           console.log(error);
           this.handleErrors(error);
         }));

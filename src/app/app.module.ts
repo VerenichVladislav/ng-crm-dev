@@ -89,6 +89,7 @@ import {RegisterComponent} from "./core/auth/components/register/register.compon
 import { ChatComponentComponent } from './components/chat-component/chat-component.component';
 import { UnconfirmedEmailDialogComponent } from './components/profile/unconfirmed-email-dialog/unconfirmed-email-dialog.component';
 import {EmailGuard} from "./shared/email.guard";
+import { AboutComponent } from './core/about/about.component';
 
 export function initGapi(gapiSession: GapiSession) {
   return () => gapiSession.initClient();
@@ -142,6 +143,7 @@ export function createTranslateLoader(http: HttpClient) {
     MarkerComponent,
     ChatComponentComponent,
     UnconfirmedEmailDialogComponent,
+    AboutComponent,
     //SideFiltersComponent,
   ],
   entryComponents: [
@@ -222,9 +224,10 @@ export function createTranslateLoader(http: HttpClient) {
       { path: 'HotelIndex', component: HotelindexComponent},
       {path:'News',component:NewsComponent},
       { path: 'Index', component: IndexComponent},
+      { path: 'about', component: AboutComponent},
       { path: 'SearchResult', component: SearchResultComponent},
       { path: 'SearchResultTrip', component: SearchResultTripComponent},
-      { path: 'SearchResult/:id',
+        { path: 'SearchResult/:id',
         component: DetailshotelComponentComponent,
         canActivate: [LoginGuard, EmailGuard]
       },
