@@ -20,14 +20,16 @@ export class EmailGuard implements CanActivate {
       return false;
     }
     return this.auth.isConfirmEmail(user.userId).pipe(
-      map(() => {
-        return true;
+      map((data: boolean) => {
+        if(data == false) {
+          this.dialog.open(UnconfirmedEmailDialogComponent, {
+            width: '30%',
+            data: JSON.parse(localStorage.getItem('user')).email,
+          });
+        }
+        return data;
       }),
       catchError(() => {
-        this.dialog.open(UnconfirmedEmailDialogComponent, {
-          width: '30%',
-          data: JSON.parse(localStorage.getItem('user')).email,
-        });
         return of(false);
         }
       ))
