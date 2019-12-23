@@ -25,6 +25,10 @@
       <label>
         <input type="checkbox" checked="checked" name="remember"> Запомнить меня
       </label>
+      <div>
+        <span class="restorePassword" (click)="restorePassword(loginForm.value)">Восстановить пароль</span>
+      </div>
+
       <div class="row">
         <button class="signupbtn" type="submit">{{ 'login' | translate }}</button>
         <button type="button" routerLink="/" class="cancelbtn">Cancel</button>

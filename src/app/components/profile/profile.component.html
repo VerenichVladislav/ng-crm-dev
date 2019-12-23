@@ -31,12 +31,13 @@
                     <td>{{user.email}}
                       <p class="confirmed" *ngIf="user.state === 'Confirmed'; else unconfirmed">Подтверждён</p>
                       <ng-template #unconfirmed>
-                        <p class="unconfirmed">Не подтверждён</p>
+                        <p class="unconfirmed">Не подтверждён<button class="btn btn-outline-info" (click)="sendConfirmEmail(user.userName)">Отправить ещё раз</button></p>
+
                       </ng-template>
                     </td>
                   </tr>
                   <tr><td class="active">Текущая сумма:</td>
-                    <td *ngIf="user.wallet.sum == null; else has">0.00 $</td>
+                    <td *ngIf="user.wallet.sum == null; else has">0.00</td>
                     <ng-template #has>
                       <td>{{user.wallet.sum}} $</td>
                     </ng-template>

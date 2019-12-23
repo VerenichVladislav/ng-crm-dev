@@ -6,6 +6,7 @@ import {Reservation} from '../../entity/reservation';
 import {NavigationEnd, Router} from '@angular/router';
 import {filter} from 'rxjs/operators';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
+import {ConfirmEmailService} from "../../core/auth/shared/confirm-email.service";
 
 @Component({
   selector: 'app-profile',
@@ -18,7 +19,8 @@ export class ProfileComponent implements OnInit, OnDestroy{
   private tickets: Ticket[] = [];
   constructor(private transfer: DataTransferService,
               private router: Router,
-              private spinnerService: Ng4LoadingSpinnerService) {
+              private spinnerService: Ng4LoadingSpinnerService,
+              private confirmService: ConfirmEmailService) {
     this.spinnerService.show();
 
     this.router.events
@@ -44,6 +46,15 @@ export class ProfileComponent implements OnInit, OnDestroy{
 
         this.spinnerService.hide();
       });
+  }
+
+  sendConfirmEmail(userName: string) {
+    this.confirmService.confirmEmail(userName).subscribe(
+      ()=> {},
+      error1 => {
+        console.log(error1);
+      }
+    );
   }
 
   ngOnInit() {}
