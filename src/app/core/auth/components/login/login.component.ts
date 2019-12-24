@@ -51,7 +51,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     });
   }
 
-  submit(userData) {
+  submit(userData: any) {
     this.spinnerService.show();
     this.subscriptions.push(this.loginService
       .loginUser(userData.username, userData.password)

@@ -21,6 +21,10 @@
   border: 5px solid #ecf0f1;
   margin-bottom: 10px;
 }
+.buttons{
+  color: #ffffff;
+  background-color: #337ab7;
+}
 .panel-default .panel-heading {
   background-color: #fff;
 }

@@ -7,6 +7,8 @@ import {NavigationEnd, Router} from '@angular/router';
 import {filter} from 'rxjs/operators';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import {ConfirmEmailService} from "../../core/auth/shared/confirm-email.service";
+import {FormControl, FormGroup} from "@angular/forms";
+import {UserService} from "../../shared/user.service";
 
 @Component({
   selector: 'app-profile',
@@ -17,16 +19,25 @@ export class ProfileComponent implements OnInit, OnDestroy{
   private user: User;
   private reservations: Reservation[] = [];
   private tickets: Ticket[] = [];
+  private changeForm;
+
   constructor(private transfer: DataTransferService,
               private router: Router,
+              private userService: UserService,
               private spinnerService: Ng4LoadingSpinnerService,
               private confirmService: ConfirmEmailService) {
+
+    this.changeForm = new FormGroup({
+      newPassword: new FormControl(''),
+      repeatPassword: new FormControl('')
+    });
+
     this.spinnerService.show();
 
     this.router.events
       .pipe(filter(e => e instanceof NavigationEnd))
       .subscribe((e: NavigationEnd) => {
-
+        this.spinnerService.hide();
         //if (!this.user) {
           this.user = JSON.parse(localStorage.getItem('user'));
 
@@ -43,8 +54,6 @@ export class ProfileComponent implements OnInit, OnDestroy{
         //}
         this.reservations = this.user.reservations;
         this.tickets = this.user.tickets;
-
-        this.spinnerService.hide();
       });
   }
 
@@ -53,6 +62,18 @@ export class ProfileComponent implements OnInit, OnDestroy{
       ()=> {},
       error1 => {
         console.log(error1);
+      }
+    );
+  }
+
+  submit(data: any) {
+    const userName = JSON.parse(localStorage.getItem('user')).userName;
+    this.userService.updatePassword(userName, data.newPassword).subscribe(
+      () => {
+
+      },
+      error1 => {
+
       }
     );
   }

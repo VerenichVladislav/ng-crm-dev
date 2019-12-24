@@ -16,7 +16,8 @@
         <div class="panel">
           <div class="panel-body">
             <ul id="myTab" class="nav nav-pills">
-              <li class="active bg-dark"><a class="bg-dark" href="#detail" data-toggle="tab">О пользователе</a></li>
+              <li class="active "><a href="#detail" data-toggle="tab">О пользователе</a></li>
+              <li><a href="#contact" data-toggle="tab">{{'change'| translate}} {{'password'| translate}}</a></li>
             </ul>
             <div id="myTabContent" class="tab-content">
               <hr>
@@ -32,7 +33,6 @@
                       <p class="confirmed" *ngIf="user.state === 'Confirmed'; else unconfirmed">Подтверждён</p>
                       <ng-template #unconfirmed>
                         <p class="unconfirmed">Не подтверждён<button class="btn btn-outline-info" (click)="sendConfirmEmail(user.userName)">Отправить ещё раз</button></p>
-
                       </ng-template>
                     </td>
                   </tr>
@@ -46,6 +46,18 @@
 
                   </tbody>
                 </table>
+              </div>
+
+              <div class="tab-pane fade" id="contact">
+                <form (ngSubmit)="submit(changeForm.value)" [formGroup]="changeForm"  class="change-password">
+                  <mat-form-field>
+                    <input type="password" formControlName="newPassword" matInput placeholder="{{'new' | translate}} {{'password' | translate}}" >
+                  </mat-form-field>
+                  <mat-form-field>
+                    <input type="password" formControlName="repeatPassword" matInput placeholder="{{'repeat' | translate}} {{'password' | translate}}" >
+                  </mat-form-field>
+                  <button mat-flat-button class="buttons">{{'change'| translate}}</button>
+                </form>
               </div>
             </div>
 

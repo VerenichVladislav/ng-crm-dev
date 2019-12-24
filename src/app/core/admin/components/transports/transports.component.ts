@@ -105,16 +105,21 @@ export class TransportsComponent implements OnInit {
           (transp: any) => {
             this.transports = transp;
             localStorage.setItem('transports', JSON.stringify(transp));
+
+            this.dataSource = new MatTableDataSource<Transport>(this.transports);
+            this.dataSource.paginator = this.paginator;
+            this.dataSource.sort = this.sort;
           },
           error1 => {
             console.log(error1);
           }
         )
       }
+    } else{
+      this.dataSource = new MatTableDataSource<Transport>(this.transports);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
     }
-    this.dataSource = new MatTableDataSource<Transport>(this.transports);
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
   }
 
   show(page: any) {
