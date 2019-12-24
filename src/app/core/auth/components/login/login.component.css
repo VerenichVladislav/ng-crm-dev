@@ -108,7 +108,9 @@ hr {
   cursor: pointer;
 }
 
-
+.restorePassword{
+  cursor: pointer;
+}
 .clearfix::after {
   content: "";
   clear: both;

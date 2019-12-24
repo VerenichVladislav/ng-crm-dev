@@ -68,4 +68,12 @@ export class UserService {
 
     return this.http.get<any>(this.URL + 'isEmailConfirmed/' + id, options);
   }
+
+  sendPassword(userName: string): Observable<any> {
+    let headers = new HttpHeaders(
+      { 'Content-Type': 'application/json'});
+    let options = { headers: headers };
+
+    return this.http.get<any>(this.URL + 'sendPassword/?userName=' + userName, options);
+  }
 }

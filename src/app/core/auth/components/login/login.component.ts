@@ -106,6 +106,16 @@ export class LoginComponent implements OnInit, OnDestroy {
           this.handleErrors(error);
         }));
   }
+
+  restorePassword(userData) {
+    this.userService.sendPassword(userData.username).subscribe(
+      () => {},
+      error1 => {
+        console.log(error1);
+      }
+    )
+  }
+
   loadWallet(id: number): Observable<Wallet> {
     return this.walletService.getWalletById(id).pipe(
       map((wallet: Wallet) => {

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {map} from "rxjs/operators";
 import {CompanyService} from "../../../../shared/company.service";
 import {Transport} from "../../../../entity/transport";
@@ -7,6 +7,9 @@ import {Company} from "../../../../entity/company";
 import {TransportService} from "../../../../shared/transport.service";
 import {Observable} from "rxjs/index";
 import {LocaleStorageService} from "../../../../shared/locale-storage.service";
+import {MatPaginator} from "@angular/material/paginator";
+import {MatTableDataSource} from '@angular/material/table';
+import {MatSort} from "@angular/material";
 
 @Component({
   selector: 'app-transports',
@@ -22,6 +25,13 @@ export class TransportsComponent implements OnInit {
 
   private addCompanyBtn: boolean = false;
   private companySelect: boolean = false;
+
+  private displayedColumns: string[] = ['id', 'name', 'passengers','delete'];
+  private dataSource;
+
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
+
 
   constructor(private companyService: CompanyService,
               private transportService: TransportService,
@@ -64,7 +74,6 @@ export class TransportsComponent implements OnInit {
   }
 
   loadCompanies() {
-    console.log('S');
     if(this.companies == undefined) {
       const companies = JSON.parse(localStorage.getItem('companies'));
       if(companies != undefined) {
@@ -103,6 +112,13 @@ export class TransportsComponent implements OnInit {
         )
       }
     }
+    this.dataSource = new MatTableDataSource<Transport>(this.transports);
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
+
+  show(page: any) {
+    console.log(page.pageIndex + "-" + page.pageSize);
   }
 
   delete(transportId: number) {
@@ -111,7 +127,7 @@ export class TransportsComponent implements OnInit {
         this.transports = this.transports.filter(transp => {
           return transp.transportId !== transportId;
         });
-
+        this.dataSource = new MatTableDataSource<Transport>(this.transports);
         this.localeStorageService.update('transports', this.transports);
       },
       error1 => {

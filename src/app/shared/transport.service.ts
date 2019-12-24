@@ -11,13 +11,16 @@ export class TransportService {
 
   constructor(private http: HttpClient) { }
 
-  getAllTransport(): Observable<Transport[]>{
+  getAllTransport(filter: any={}, pageNo: number=0,
+                  pageSize: number=10, sortBy: string='name'): Observable<Transport[]>{
     let headers = new HttpHeaders(
       { 'Content-Type': 'application/json',
         'Authorization': 'Bearer ' + localStorage.getItem('auth_token')});
     let options = { headers: headers };
+    let request = this.URL + '/filter?pageNo=' + pageNo +
+      '&pageSize=' + pageSize + '&sortBy=' + sortBy;
 
-    return this.http.get<Transport[]>(this.URL, options);
+    return this.http.post<Transport[]>(request, filter, options);
   }
 
   saveTransport(transport): Observable<any>{

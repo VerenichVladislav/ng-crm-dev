@@ -1,0 +1,130 @@
+.nice {
+  padding: 50px 20px;
+  width: 50%;
+  background: white;
+  border: 5px solid;
+  margin-left: 25%;
+  text-align: center;
+  border-radius: 20%;
+}
+.nice h1 {
+  font-weight: normal;
+  font-family: 'Merriweather', serif;
+  position: relative;
+  display: inline-block;
+  margin: 0;
+  line-height: 1;
+  color: #4c2016;
+  font-size: 40px;
+  padding: .4em 1em .55em;
+}
+.nice h1:before,
+.nice h1:after {
+  content: "";
+  position: absolute;
+  width: 60%;
+  height: .1em;
+  background: #294200;
+}
+.nice h1:before {
+  left: 0;
+  top: 0;
+}
+.nice h1:after {
+  right: 0;
+  bottom: 0;
+}
+.nice h1 span:before,
+.nice h1 span:after {
+  content: "";
+  position: absolute;
+  width: .65em;
+  height: .65em;
+  border: .1em solid #294200;
+  border-radius: 50%;
+  box-sizing: border-box;
+}
+.nice h1 span:before {
+  top: -.55em;
+  left: -.325em;
+}
+.nice h1 span:after {
+  bottom: -.55em;
+  right: -.325em;
+}
+@media (max-width: 600px) {
+  .nice h1 {font-size: 2em;}
+}
+@media (max-width: 450px) {
+  .nice h1 {font-size: 1.5em;}
+}
+#drag-container, #spin-container {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-left: 0.5%;
+  width: 42%;
+  height: 70%;
+  transform-style: preserve-3d;
+  transform: rotateX(-10deg);
+}
+
+#drag-container img, #drag-container video {
+  transform-style: preserve-3d;
+  width: 100%;
+  height: 100%;
+  margin: 10vh 5vh 20vh auto;
+  line-height: 200px;
+  font-size: 50px;
+  text-align: center;
+  box-shadow: 0 0 8px #fff;
+}
+
+#drag-container img:hover, #drag-container video:hover {
+  -webkit-box-shadow: 0 0 15px #fffd;
+  box-shadow: 0 0 15px #fffd;
+  -webkit-box-reflect: below 10px linear-gradient(transparent, transparent, #0007);
+}
+
+#drag-container p {
+  font-family: Serif;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  -webkit-transform: translate(-50%,-50%) rotateX(90deg);
+  transform: translate(-50%,-50%) rotateX(90deg);
+  color: #fff;
+}
+
+#ground {
+  width: 900px;
+  height: 900px;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  -webkit-transform: translate(-50%,-50%) rotateX(90deg);
+  transform: translate(-50%,-50%) rotateX(90deg);
+  background: -webkit-radial-gradient(center center, farthest-side , #9993, transparent);
+}
+
+
+@keyframes spin {
+  from{
+    -webkit-transform: rotateY(0deg);
+    transform: rotateY(0deg);
+  } to{
+      -webkit-transform: rotateY(360deg);
+      transform: rotateY(360deg);
+    }
+}
+
+@keyframes spinRevert {
+  from{
+    -webkit-transform: rotateY(360deg);
+    transform: rotateY(360deg);
+  } to{
+      -webkit-transform: rotateY(0deg);
+      transform: rotateY(0deg);
+    }
+}

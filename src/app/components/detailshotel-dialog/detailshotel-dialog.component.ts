@@ -10,6 +10,7 @@ import {GlobalRootURL} from '../../GlobalRootURL';
 import {SnackBarComponent} from '../snack-bar/snack-bar.component';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {LocaleStorageService} from "../../shared/locale-storage.service";
+import {Ng4LoadingSpinnerService} from "ng4-loading-spinner";
 
 
 @Component({
@@ -37,6 +38,7 @@ export class DetailshotelDialogComponent implements OnInit {
               private errorConnection: SnackBarComponent,
               public dialogRef: MatDialogRef<DetailshotelDialogComponent>,
               private _snackBar: MatSnackBar,
+              private spinnerService: Ng4LoadingSpinnerService,
               private localStorageService: LocaleStorageService,
     @Inject(MAT_DIALOG_DATA) public data: DialogData
     ) {
@@ -47,7 +49,7 @@ export class DetailshotelDialogComponent implements OnInit {
 
 
   Reservetion(){
-
+    this.spinnerService.show();
     let headers = new HttpHeaders(
       { 'Content-Type': 'application/json'});
 
@@ -58,17 +60,20 @@ export class DetailshotelDialogComponent implements OnInit {
     this.userId = JSON.parse(localStorage.getItem('user')).userId;
     let Url = GlobalRootURL.BASE_API_URL + "hotels/"+this.userId+"/"+this.hotelId+"/"+CkDate+"/"+CoDate+"/"+this.roomId;
     console.log(Url);
-     this.http.post(Url,{},{headers: headers}).subscribe(
+
+    this.http.post(Url,{},{headers: headers}).subscribe(
       (data: any) => {
         this.localStorageService.addTo('user','reservations', data);
+        this.spinnerService.hide();
       },
       error => {
         console.log(error);
         if(error.status === 0) {
           this.errorConnection.openSnackBar();
         }
+        this.spinnerService.hide();
       }
-    )
+    );
     this.dialogRef.close();
   }
 

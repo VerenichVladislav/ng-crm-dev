@@ -12,11 +12,14 @@ export class DataTransferService {
   private reservations: Reservation[];
   private user: User;
   private role: string;
+  private sum: number;
 
   tickets$ = new BehaviorSubject<Ticket[]>(this.tickets);
   reservations$ = new BehaviorSubject<Reservation[]>(this.reservations);
   user$ = new BehaviorSubject<User>(this.user);
   role$ = new BehaviorSubject<string>(this.role);
+  sum$ = new BehaviorSubject<number>(this.sum);
+
   constructor() { }
 
   setTickets(data: Ticket[]) {
@@ -33,5 +36,9 @@ export class DataTransferService {
 
   setRole(data: string) {
     this.role$.next(data);
+  }
+
+  setSum(data: number) {
+    this.sum$.next(data);
   }
 }
