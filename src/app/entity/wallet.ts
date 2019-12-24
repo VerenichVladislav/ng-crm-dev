@@ -1,5 +1,5 @@
 export class Wallet {
-  readonly sum: number;
+  sum: number;
   userId: number;
   walletId: number;
 

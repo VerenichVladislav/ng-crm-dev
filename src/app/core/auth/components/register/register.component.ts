@@ -66,7 +66,7 @@ export class RegisterComponent implements OnInit {
             .loginUser(userData.userName, userData.hashPass)
             .subscribe(
               (loginResp: Response) => {
-                this.spinnerService.hide();
+
                 this.transfer.setRole('USER');
 
                 localStorage.setItem("auth_token", loginResp.headers.get('Authorization'));
@@ -75,10 +75,12 @@ export class RegisterComponent implements OnInit {
                 this.confirmService.confirmEmail(userData.userName).subscribe(
                   ()=> {},
                   error1 => {
+
                     console.log(error1);
                   }
                 );
 
+                this.spinnerService.hide();
                 this.router.navigate(['profile']);
               },
               error => {
@@ -86,11 +88,15 @@ export class RegisterComponent implements OnInit {
                 if (error.error.message === 'NonUnique userName') {
                   this.errorLogin = true;
                 }
+
+                this.spinnerService.hide();
               });
         },
         error => {
           console.log(error);
           this.handleErrors(error);
+
+          this.spinnerService.hide();
         });
   }
 

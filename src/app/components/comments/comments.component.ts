@@ -4,6 +4,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { FormGroup, FormControl } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material';
 import { ConfirmationDialog } from '../confirmation-dialog/confirmation-dialog.component'
+import {Ng4LoadingSpinnerService} from "ng4-loading-spinner";
 
 @Injectable({
   providedIn: 'root'
@@ -35,6 +36,7 @@ export class CommentsComponent implements OnInit {
 
   constructor(
     private commentsService: CommentsService,
+    private spinnerService: Ng4LoadingSpinnerService,
     public dialog: MatDialog){}
 
   ngOnInit() {
@@ -69,8 +71,12 @@ export class CommentsComponent implements OnInit {
     });
   }
   deleteComment(commentId:number){
+    this.spinnerService.show();
+
     this.commentsService.delete(commentId, this.EntityId, this.type).subscribe(
-      data => this.comments = data
+      data => {
+        this.comments = data;
+      }
     );
     setTimeout(() => {
       if(this.type=1){
@@ -93,6 +99,7 @@ export class CommentsComponent implements OnInit {
          }
         },
         500);
+    this.spinnerService.hide();
   }
 
   onClick(rating: number): void {

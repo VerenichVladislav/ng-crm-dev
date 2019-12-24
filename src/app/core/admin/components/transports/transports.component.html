@@ -7,57 +7,99 @@
 <button type="button" class="btn btn-lg btn-info">{{'search' | translate}}</button>
 </div>
 
-<div class="container">
-  <mat-accordion>
-    <mat-expansion-panel class="add-transport">
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          {{'add' | translate}} {{'transport' | translate}}
-        </mat-panel-title>
-        <mat-panel-description>
-          ...
-        </mat-panel-description>
-      </mat-expansion-panel-header>
+<!--<div class="container">-->
+  <!--<mat-accordion>-->
+    <!--<mat-expansion-panel class="add-transport">-->
+      <!--<mat-expansion-panel-header>-->
+        <!--<mat-panel-title>-->
+          <!--{{'add' | translate}} {{'transport' | translate}}-->
+        <!--</mat-panel-title>-->
+        <!--<mat-panel-description>-->
+          <!--...-->
+        <!--</mat-panel-description>-->
+      <!--</mat-expansion-panel-header>-->
 
-      <form [formGroup]="addTransportForm" (ngSubmit)="addTransport(addTransportForm.value)"
-            class="form">
-        <mat-form-field>
-          <mat-label>{{'transport-name' | translate}}</mat-label>
-          <input matInput placeholder="{{'add' | translate}} {{'transport-name' | translate}}" formControlName="name" required>
-          <mat-error *ngIf="!addTransportForm.controls['name'].valid
-         && addTransportForm.controls['name'].touched">
-          </mat-error>
-        </mat-form-field>
-        <mat-form-field>
-          <mat-label>{{'count of' | translate}}</mat-label>
-          <input matInput placeholder="{{'add' | translate}} {{'count of' | translate}} {{'passengers' | translate}}" formControlName="passengerCapacity" required>
-        </mat-form-field>
-        <mat-error *ngIf="!addTransportForm.controls['passengerCapacity'].valid
-         && addTransportForm.controls['passengerCapacity'].touched">
-        </mat-error>
+      <!--<form [formGroup]="addTransportForm" (ngSubmit)="addTransport(addTransportForm.value)"-->
+            <!--class="form">-->
+        <!--<mat-form-field>-->
+          <!--<mat-label>{{'transport-name' | translate}}</mat-label>-->
+          <!--<input matInput placeholder="{{'add' | translate}} {{'transport-name' | translate}}" formControlName="name" required>-->
+          <!--<mat-error *ngIf="!addTransportForm.controls['name'].valid-->
+         <!--&& addTransportForm.controls['name'].touched">-->
+          <!--</mat-error>-->
+        <!--</mat-form-field>-->
+        <!--<mat-form-field>-->
+          <!--<mat-label>{{'count of' | translate}}</mat-label>-->
+          <!--<input matInput placeholder="{{'add' | translate}} {{'count of' | translate}} {{'passengers' | translate}}" formControlName="passengerCapacity" required>-->
+        <!--</mat-form-field>-->
+        <!--<mat-error *ngIf="!addTransportForm.controls['passengerCapacity'].valid-->
+         <!--&& addTransportForm.controls['passengerCapacity'].touched">-->
+        <!--</mat-error>-->
 
-        <mat-form-field (click)="loadCompanies()">
-          <mat-label>Company</mat-label>
-          <mat-select formControlName="company">
-            <mat-option *ngFor="let company of companies"  [value]="company.companyId">{{company.companyName}}</mat-option>
-          </mat-select>
-        </mat-form-field>
-        <button mat-button type="submit" [disabled]="!addTransportForm.valid">{{ 'add' | translate }}</button>
-      </form>
-    </mat-expansion-panel>
-  </mat-accordion>
+        <!--<mat-form-field (click)="loadCompanies()">-->
+          <!--<mat-label>Company</mat-label>-->
+          <!--<mat-select formControlName="company">-->
+            <!--<mat-option *ngFor="let company of companies"  [value]="company.companyId">{{company.companyName}}</mat-option>-->
+          <!--</mat-select>-->
+        <!--</mat-form-field>-->
+        <!--<button mat-button type="submit" [disabled]="!addTransportForm.valid">{{ 'add' | translate }}</button>-->
+      <!--</form>-->
+    <!--</mat-expansion-panel>-->
+  <!--</mat-accordion>-->
 
 
-</div>
+<!--</div>-->
 
-<div class="container" *ngIf="transports">
-  <div *ngFor="let transport of transports" class="container transport-container col-lg-4">
+<!--<div class="container" *ngIf="transports">-->
+  <!--<div *ngFor="let transport of transports" class="container transport-container col-lg-4">-->
 
-    <h3 class="card-text">{{'transport' | translate}}: {{transport.name}}
-      <!--<button class="btn btn-warning pull-right" >{{'edit' | translate}}</button>-->
-    </h3>
-    <h3 class="card-text">{{'passengers' | translate}}: {{transport.passengerCapacity}}
-      <button (click)="delete(transport.transportId)" class="btn btn-danger pull-right" >{{'delete' | translate}}</button>
-    </h3>
-  </div>
+    <!--<h3 class="card-text">{{'transport' | translate}}: {{transport.name}}-->
+      <!--&lt;!&ndash;<button class="btn btn-warning pull-right" >{{'edit' | translate}}</button>&ndash;&gt;-->
+    <!--</h3>-->
+    <!--<h3 class="card-text">{{'passengers' | translate}}: {{transport.passengerCapacity}}-->
+      <!--<button (click)="delete(transport.transportId)" class="btn btn-danger pull-right" >{{'delete' | translate}}</button>-->
+    <!--</h3>-->
+  <!--</div>-->
+<!--</div>-->
+
+
+<div class="transports mat-elevation-z8">
+  <table mat-table matSort [dataSource]="dataSource"  >
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Id </th>
+      <td mat-cell *matCellDef="let transport"> {{transport.transportId}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+      <td mat-cell *matCellDef="let transport"> {{transport.name}} </td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="passengers">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Passengers </th>
+      <td mat-cell *matCellDef="let transport"> {{transport.passengerCapacity}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="delete">
+      <th mat-header-cell *matHeaderCellDef> Delete </th>
+      <td mat-cell *matCellDef="let transport">
+        <button mat-icon-button color="warn" (click)="delete(transport.transportId)">
+          <mat-icon class="mat-18">delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <mat-paginator
+    [pageSizeOptions]="[5, 10, 20]"
+    (page)="show($event)"
+    showFirstLastButtons>
+  </mat-paginator>
+
 </div>

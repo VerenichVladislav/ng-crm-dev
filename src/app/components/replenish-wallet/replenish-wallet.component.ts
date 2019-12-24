@@ -31,7 +31,7 @@ export class ReplenishWalletComponent implements OnInit {
     console.log(this.userId);
     this.replenishing.controls.sum.valueChanges.subscribe((value)=>console.log(JSON.stringify(value)));
   }
-  
+
   async submit(){
     this.spinnerService.show();
     if(this.replenishing.controls.sum.value==0){
@@ -39,6 +39,7 @@ export class ReplenishWalletComponent implements OnInit {
       $('#myModal3').modal('show');
     }
     else {
+      this.transfer.setSum(this.replenishing.controls.sum.value);
       await this.walletService.replenishWallet(this.replenishing.controls.sum, this.userId).toPromise();
       $('#myModal').modal('hide');
       this.spinnerService.hide();
