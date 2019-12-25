@@ -30,6 +30,7 @@ export class SearchResultTripComponent implements OnInit {
   cityDest: any;
   object:Trip;
   page: number = 0;
+  len: number;
   constructor(public service: TripService,
     private http: HttpClient,
     private cityService:CityService,
@@ -83,6 +84,8 @@ export class SearchResultTripComponent implements OnInit {
   NextPage(){
     let body = this.service.tripFilter;
     this.page = this.page + 1;
+    console.log(this.posts.length);
+    this.len=this.posts.length;
 
     let options = {
      body:body
@@ -98,6 +101,7 @@ export class SearchResultTripComponent implements OnInit {
   PreviousPage(){  
     let body = this.service.tripFilter;
     this.page = this.page - 1;
+    this.len=10;
 
     let options = {
      body:body
