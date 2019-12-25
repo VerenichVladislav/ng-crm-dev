@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-.listimg{
-    border-radius: 5%;
-}
-=======
 .back{
   outline: 0;
   border: 0;
@@ -16,4 +11,3 @@
 .back:active {
   outline: none;
 }
->>>>>>> abfdd4f32f93f34749aecb472f60c2d7245f8d6e

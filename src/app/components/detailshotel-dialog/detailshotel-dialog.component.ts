@@ -47,6 +47,7 @@ export class DetailshotelDialogComponent implements OnInit {
     ) {
       this.roomId = data.roomId;
       this.hotelId = data.hotelId;
+     
     }
     mindate = new Date();
 
@@ -91,7 +92,16 @@ export class DetailshotelDialogComponent implements OnInit {
       duration: 2000,
     });
   }
+  myFilter = (d: Date): boolean => {
+    let Detas:string = this.datePipe.transform(d,'yyyy-MM-dd');
+
+   return !this.filterDate.includes(Detas) ;
+  }
+  filterDate:String[];
   ngOnInit() {
+     this.http.get<any>(GlobalRootURL.BASE_API_URL+"reservations/rooms/"+this.roomId).subscribe(item=>{
+      this.filterDate = item;
+    });
     this.firstFormGroup = this._formBuilder.group({
       firstCtrl: ['', Validators.required]
     });
