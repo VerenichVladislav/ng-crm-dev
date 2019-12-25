@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { WalletService } from '../../shared/wallet.service';
-import { UserService } from 'src/app/shared/user.service';
 import { DataTransferService } from 'src/app/shared/data-transfer.service';
-import { Router } from '@angular/router';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 
 declare var $ :any;
@@ -19,8 +17,7 @@ export class ReplenishWalletComponent implements OnInit {
   userId:number = JSON.parse(localStorage.getItem('user')).userId;
   message:any;
   constructor(private walletService: WalletService,
-              private userService: UserService,
-              private router: Router,
+              private transfer: DataTransferService,
               private spinnerService: Ng4LoadingSpinnerService) { }
 
   ngOnInit() {
@@ -32,18 +29,18 @@ export class ReplenishWalletComponent implements OnInit {
   }
 
   async submit(){
-    this.spinnerService.show();
     if(this.replenishing.controls.sum.value==0){
       $('#myModal').modal('hide');
       $('#myModal3').modal('show');
-    }
+      }
     else {
-      localStorage.setItem('sum', JSON.stringify(this.replenishing.controls.sum.value));
+      this.spinnerService.show();
+      this.transfer.setSum(this.replenishing.controls.sum.value);
       await this.walletService.replenishWallet(this.replenishing.controls.sum, this.userId).toPromise();
       $('#myModal').modal('hide');
       this.spinnerService.hide();
       $('#myModal2').modal('show');
-    }
+      }
     }
 }
 

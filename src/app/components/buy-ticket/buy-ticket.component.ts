@@ -1,17 +1,19 @@
-
-import {Component, Injectable, Input, OnInit} from '@angular/core';
+import {Component, Injectable, OnInit} from '@angular/core';
 import {TripService} from '../../shared/trip.service';
 import {Trip} from '../../entity/trip';
-import { Router, ActivatedRoute } from '@angular/router';
-import { FormGroup, FormControl, Validators, FormArray, FormBuilder} from '@angular/forms';
+import {ActivatedRoute } from '@angular/router';
+import {FormGroup, Validators, FormArray, FormBuilder} from '@angular/forms';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {TicketService} from '../../shared/ticket.service';
-import { parseHttpResponse } from 'selenium-webdriver/http';
 import {SnackBarComponent} from '../snack-bar/snack-bar.component';
-import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
-import { GlobalRootURL } from 'src/app/GlobalRootURL';
+import {Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
+import {GlobalRootURL } from 'src/app/GlobalRootURL';
+import { User } from 'src/app/entity/user';
+import { WalletService } from 'src/app/shared/wallet.service';
+import { UserService } from 'src/app/shared/user.service';
+import { DataTransferService } from 'src/app/shared/data-transfer.service';
 
-
+declare var $ :any;
 @Component({
   selector: 'app-buy-ticket',
   templateUrl: './buy-ticket.component.html',
@@ -40,7 +42,10 @@ export class BuyTicketComponent implements OnInit {
               private ticketService: TicketService,
               private errorConnection: SnackBarComponent,
               private spinnerService: Ng4LoadingSpinnerService,
-              private http: HttpClient){}
+              private http: HttpClient,
+              private walletService: WalletService,
+              private userService: UserService,
+              private transfer: DataTransferService){}
 
     ngOnInit() {
     this.spinnerService.show();
@@ -98,6 +103,7 @@ export class BuyTicketComponent implements OnInit {
   }
 
   submit(){
+    this.spinnerService.show();
     this.ticketService.submitForm(this.usersForm.controls.users.value, this.count, this.idT, this.userId)
                 .subscribe(
                     (log: HttpErrorResponse) => {
@@ -106,6 +112,7 @@ export class BuyTicketComponent implements OnInit {
                       console.log(error);
                       if(error.status === 200) {
                         this.message = error.error.text;
+                         
                       }
                       if(error.status === 400) {
                         this.message = error.error;
@@ -116,5 +123,21 @@ export class BuyTicketComponent implements OnInit {
                       }
                     }
                 );
-  }
+      setTimeout(() => {
+        this.spinnerService.hide();
+        $('#myModal').modal('show');
+        this.userService.getUserById(this.userId).subscribe(
+          (data: any)=>{
+              let user = new User(data);
+              this.ticketService.loadWallet(data.wallet).subscribe( wallet => {
+                  user.setWallet(wallet);
+                }
+              );
+            this.transfer.setUser(user);
+            localStorage.setItem('user', JSON.stringify(user));
+          }
+        );
+        },
+        7000);
+    }
  }
