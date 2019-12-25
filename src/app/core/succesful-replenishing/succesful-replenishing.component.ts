@@ -36,46 +36,15 @@ export class SuccesfulReplenishingComponent implements OnInit {
 
 
     this.http.get<any>(GlobalRootURL.BASE_API_URL + 'wallets/' + userId + '/confirm/' + confirmCache, options).subscribe(
-      (log: HttpErrorResponse) => {
-        this.message = log;
-        console.log(this.message);
-        console.log('before');
-        if(this.transfer.sum$.getValue() !== undefined) {
-          console.log('no undefined');
-          this.transfer.sum$.subscribe((sum: number) => {
-            console.log('$sum');
-            let user: User = JSON.parse(localStorage.getItem('user'));
-            user.wallet.sum = sum;
+      () => {
+        const sum: number = JSON.parse(localStorage.getItem('sum'));
 
-            this.transfer.setUser(user);
-            localStorage.setItem('user', JSON.stringify(user));
-          })
-        }
-       }
-     );
-    this.userService.getUserById(parseInt(userId)).subscribe(
-      (data: any)=>{
-          let user = new User(data);
-          this.loadWallet(data.wallet).subscribe( wallet => {
-              user.setWallet(wallet);
-              console.log(wallet.sum);
-            }
-          );
-        console.log(user.wallet.sum);
-        console.log(data);
-        this.transfer.setUser(user);
+        let user: User = JSON.parse(localStorage.getItem('user'));
+        user.wallet.sum += sum;
         localStorage.setItem('user', JSON.stringify(user));
-      }
-    );
-     this.router.navigate(['profile']);
+        localStorage.removeItem('sum');
+        this.router.navigate(['profile']);
+      });
      console.log(Number(userId));
-    }
-    loadWallet(id: number): Observable<Wallet> {
-      return this.walletService.getWalletById(id).pipe(
-        map((wallet: Wallet) => {
-            return new Wallet(wallet);
-          }
-        )
-      );
     }
 }

@@ -35,7 +35,8 @@ export class ReplenishWalletComponent implements OnInit {
       }
     else {
       this.spinnerService.show();
-      this.transfer.setSum(this.replenishing.controls.sum.value);
+      localStorage.setItem('sum', JSON.stringify(this.replenishing.controls.sum.value));
+      
       await this.walletService.replenishWallet(this.replenishing.controls.sum, this.userId).toPromise();
       $('#myModal').modal('hide');
       this.spinnerService.hide();
