@@ -26,6 +26,19 @@
                 </div>
             </mat-card>
     </div>
+
+    
+    <div class="center">
+        <mat-card>
+        <button *ngIf="page>0" class="btn btn-default" id="pagin1" (click)="PreviousPage()">Previous</button>
+        <button class="btn btn-default" id="pagin2" (click)="NextPage()">Next</button> 
+        <div id="pageNo">Page: {{page}}</div>
+    </mat-card>
+    </div>
+    
+    
+
+
     <mat-grid-list cols="6">
             <mat-grid-tile  *ngFor="let post of Hotels | async|  slice:0:6">
                     <mat-card class="example-card" (click)="findbyCity(post)">
