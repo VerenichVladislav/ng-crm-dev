@@ -11,7 +11,7 @@
                 </div>
                 <div class="input-group">
                     <span class="input-group-btn">
-                        <button *ngIf="post.count>1" type="button" class="btn btn-default btn-number" (click)="post.count = post.count - 1">
+                        <button type="button" [disabled]="post.count<2" class="btn btn-default btn-number" (click)="post.count = post.count - 1">
                             <span class="glyphicon glyphicon-minus"></span>
                         </button>
                     </span>
@@ -19,13 +19,26 @@
                     <input type="text" class="form-control input-number" value="{{post.count}}" >
 
                     <span class="input-group-btn">
-                        <button *ngIf="post.count<post.fullCountSeats" type="button" class="btn btn-default btn-number" (click)="post.count = post.count + 1">
+                        <button  type="button" [disabled]="post.count>post.fullCountSeats" class="btn btn-default btn-number" (click)="post.count = post.count + 1">
                             <span class="glyphicon glyphicon-plus"></span>
                         </button>
                     </span>
                 </div>
             </mat-card>
     </div>
+
+    
+    <div class="center">
+        <mat-card>
+        <button class="btn btn-default" [disabled]="page<1" id="pagin1" (click)="PreviousPage()">Previous</button>
+        <button class="btn btn-default" [disabled]="len<10" id="pagin2" (click)="NextPage()">Next</button> 
+        <div id="pageNo">Page: {{page + 1}}</div>
+    </mat-card>
+    </div>
+    
+    
+
+
     <mat-grid-list cols="6">
             <mat-grid-tile  *ngFor="let post of Hotels | async|  slice:0:6">
                     <mat-card class="example-card" (click)="findbyCity(post)">
