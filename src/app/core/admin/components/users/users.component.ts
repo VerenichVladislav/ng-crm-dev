@@ -1,9 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {User} from "../../../../entity/user";
 import {UserService} from "../../../../shared/user.service";
 import {AdminService} from "../../shared/admin.service";
 import {CompanyService} from "../../../../shared/company.service";
 import {LocaleStorageService} from "../../../../shared/locale-storage.service";
+import {MatPaginator} from "@angular/material/paginator";
+import {MatSort} from "@angular/material";
+import {Transport} from "../../../../entity/transport";
+import {MatTableDataSource} from "@angular/material/table";
 
 @Component({
   selector: 'app-users',
@@ -12,6 +16,13 @@ import {LocaleStorageService} from "../../../../shared/locale-storage.service";
 })
 export class UsersComponent implements OnInit {
   private users: User[];
+
+  private displayedColumns: string[] = ['first-name', 'last-name', 'email','state','ban'];
+  private dataSource;
+
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
+
   constructor(private userService: UserService,
               private adminService: AdminService,
               private localeStorageService: LocaleStorageService) { }
@@ -30,6 +41,10 @@ export class UsersComponent implements OnInit {
                 this.users.push(new User(user));
               }
             );
+
+            this.dataSource = new MatTableDataSource<User>(this.users);
+            this.dataSource.paginator = this.paginator;
+            this.dataSource.sort = this.sort;
             localStorage.setItem('users', JSON.stringify(this.users));
           },
           error => {
@@ -37,6 +52,9 @@ export class UsersComponent implements OnInit {
           });
       }
     }
+    this.dataSource = new MatTableDataSource<User>(this.users);
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
   lockUser(user: User) {

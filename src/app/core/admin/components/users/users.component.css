@@ -7,3 +7,10 @@
 .navigation{
   margin-left: 20%;
 }
+table{
+  width: 100%
+}
+.users {
+  width: 70%;
+  margin-left: 15%;
+}

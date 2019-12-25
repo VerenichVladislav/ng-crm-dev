@@ -17,7 +17,7 @@
           <div class="panel-body">
             <ul id="myTab" class="nav nav-pills">
               <li class="active "><a href="#detail" data-toggle="tab">О пользователе</a></li>
-              <li><a href="#contact" data-toggle="tab">{{'change'| translate}} {{'password'| translate}}</a></li>
+              <li><a href="#change" data-toggle="tab">{{'change'| translate}} {{'password'| translate}}</a></li>
             </ul>
             <div id="myTabContent" class="tab-content">
               <hr>
@@ -48,7 +48,7 @@
                 </table>
               </div>
 
-              <div class="tab-pane fade" id="contact">
+              <div class="tab-pane fade" id="change">
                 <form (ngSubmit)="submit(changeForm.value)" [formGroup]="changeForm"  class="change-password">
                   <mat-form-field>
                     <input type="password" formControlName="newPassword" matInput placeholder="{{'new' | translate}} {{'password' | translate}}" >
@@ -128,14 +128,6 @@
       <h3 class="text-center text-monospace">У вас пока нет истории отелей. Закажем?)</h3>
       <div class="col text-center">
         <button type="button" routerLink="/Index" class="btn btn-lg btn-info">На страницу Отелей</button>
-      </div>
-    </div>
-  </mat-tab>
-  <mat-tab label="Туры">
-    <div *ngIf="!tours || tour.length == 0" class="redirect container mx-auto ">
-      <h3 class="text-center text-monospace">У вас пока нет истории туров. Отдохнём?)</h3>
-      <div class="col text-center">
-        <button type="button" routerLink="/Index" class="btn btn-lg btn-info">На страницу Туров</button>
       </div>
     </div>
   </mat-tab>
