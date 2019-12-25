@@ -21,39 +21,34 @@
     <div class="mt-5">
       <div class="col-xs-4" align="center">
         <div class="form-group">
-            <form [formGroup]="usersForm" (ngSubmit)="submit()">
-                <ng-container *ngFor="let userFormGroup of usersForm.controls.users.controls; let i = index">
-                  <div [formGroup]="userFormGroup">
-                    <label>
-                      <input type="text" class="form-control" placeholder="Name" formControlName="firstName">
-                    </label>
-                    <label>
-                        <input type="text" class="form-control" placeholder="Last Name" formControlName="lastName">
-                    </label>
-                  </div>
-                </ng-container>
-                  <button type="submit" [disabled] ="!usersForm.valid" class="btn btn-success" data-toggle="modal" data-target="#myModal"> Buy({{trip?.price * count}}$) </button>
-                      <div id="myModal" class="modal fade">
-                        <div class="modal-dialog">
-                          <div class="modal-content">
-                            <div class="modal-header">
-                            <h4 class="modal-title">Notification</h4>
-                          </div>
-                        <div class="modal-body">{{message}}</div>
-                      <div class="modal-footer"><button class="btn btn-default" type="button" data-dismiss="modal">Close</button></div>
-                  </div>
+          <form [formGroup]="usersForm" (ngSubmit)="submit()">
+              <ng-container *ngFor="let userFormGroup of usersForm.controls.users.controls; let i = index">
+                <div [formGroup]="userFormGroup">
+                  <label>
+                    <input type="text" class="form-control" placeholder="Name" formControlName="firstName">
+                  </label>
+                  <label>
+                      <input type="text" class="form-control" placeholder="Last Name" formControlName="lastName">
+                  </label>
                 </div>
-              </div>
+              </ng-container>
+              <button type="submit" [disabled] ="!usersForm.valid" class="btn btn-success"> Buy({{trip?.price * count}}$) </button>
             </form>
-            <div>
-
-            </div>
+          <div>
         </div>
-
       </div>
-
     </div>
-
+    <div id="myModal" class="modal fade">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+          <h4 class="modal-title">Notification</h4>
+        </div>
+      <div class="modal-body">{{message}}</div>
+    <div class="modal-footer"><button class="btn btn-default" type="button" data-dismiss="modal">Close</button></div>
+</div>
+</div>
+</div>
   </div>
-
+</div>
 </div>
