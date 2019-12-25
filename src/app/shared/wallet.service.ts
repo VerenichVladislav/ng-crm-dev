@@ -35,4 +35,13 @@ export class WalletService {
     console.log(JSON.stringify(this.URL+userId+'/sendConfirm?sum='+sum.value));
     return this.http.get<any>(this.URL+userId+'/sendConfirm?sum='+sum.value, options);
     }
+
+  loadWallet(id: number): Observable<Wallet> {
+    return this.getWalletById(id).pipe(
+      map((wallet: Wallet) => {
+          return new Wallet(wallet);
+        }
+      )
+    );
+  }
 }

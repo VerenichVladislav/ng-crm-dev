@@ -10,7 +10,9 @@ import {GlobalRootURL} from '../../GlobalRootURL';
 import {SnackBarComponent} from '../snack-bar/snack-bar.component';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {LocaleStorageService} from "../../shared/locale-storage.service";
+import {HotelService} from "../../shared/hotel.service";
 import {Ng4LoadingSpinnerService} from "ng4-loading-spinner";
+import {Reservation} from "../../entity/reservation";
 
 
 @Component({
@@ -40,6 +42,7 @@ export class DetailshotelDialogComponent implements OnInit {
               private _snackBar: MatSnackBar,
               private spinnerService: Ng4LoadingSpinnerService,
               private localStorageService: LocaleStorageService,
+              private hotelService: HotelService,
     @Inject(MAT_DIALOG_DATA) public data: DialogData
     ) {
       this.roomId = data.roomId;
@@ -63,7 +66,13 @@ export class DetailshotelDialogComponent implements OnInit {
 
     this.http.post(Url,{},{headers: headers}).subscribe(
       (data: any) => {
-        this.localStorageService.addTo('user','reservations', data);
+        let reserv: Reservation = new Reservation(data);
+        this.hotelService.loadHotel(data.hotel).subscribe( hotel => {
+            reserv.setHotel(hotel);
+            this.localStorageService.addTo('user','reservations', reserv);
+          }
+        );
+
         this.spinnerService.hide();
       },
       error => {

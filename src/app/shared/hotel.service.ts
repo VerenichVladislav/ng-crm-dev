@@ -6,6 +6,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Hotel} from '../entity/hotel';
 import { HotelFilters } from '../entity/HotelFilters';
 import { isObject } from 'util';
+import {map} from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
@@ -28,5 +29,14 @@ export  class HotelService {
     let options = { headers: headers };
 
     return this.http.get<Hotel>(this.URL + id, options);
+  }
+
+  loadHotel(id: number): Observable<Hotel> {
+    return this.getById(id).pipe(
+      map((hotel: Hotel) => {
+          return new Hotel(hotel);
+        }
+      )
+    );
   }
 }

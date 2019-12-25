@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import { User } from 'src/app/entity/user';
 import {DataTransferService} from '../../shared/data-transfer.service';
 import {Ticket} from '../../entity/ticket';
@@ -9,6 +9,9 @@ import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import {ConfirmEmailService} from "../../core/auth/shared/confirm-email.service";
 import {FormControl, FormGroup} from "@angular/forms";
 import {UserService} from "../../shared/user.service";
+import {MatPaginator} from "@angular/material/paginator";
+import {Transport} from "../../entity/transport";
+import {MatTableDataSource} from "@angular/material/table";
 
 @Component({
   selector: 'app-profile',
@@ -20,6 +23,9 @@ export class ProfileComponent implements OnInit, OnDestroy{
   private reservations: Reservation[] = [];
   private tickets: Ticket[] = [];
   private changeForm;
+  private dataSourceReservations;
+
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   constructor(private transfer: DataTransferService,
               private router: Router,
@@ -38,23 +44,27 @@ export class ProfileComponent implements OnInit, OnDestroy{
       .pipe(filter(e => e instanceof NavigationEnd))
       .subscribe((e: NavigationEnd) => {
         this.spinnerService.hide();
-        //if (!this.user) {
-          this.user = JSON.parse(localStorage.getItem('user'));
 
-          if (this.transfer.user$.getValue() !== undefined) {
-            this.transfer.user$.subscribe(value => {
-              this.user = value;
-              if (!!this.user) {
-                localStorage.setItem('user', JSON.stringify(this.user));
-              }
-            });
-          } else {
-            this.user = JSON.parse(localStorage.getItem('user'));
-          }
-        //}
-        this.reservations = this.user.reservations;
-        this.tickets = this.user.tickets;
+        this.user = JSON.parse(localStorage.getItem('user'));
+
+        if (this.transfer.user$.getValue() !== undefined) {
+          this.transfer.user$.subscribe(value => {
+            this.user = value;
+            if (!!this.user) {
+              localStorage.setItem('user', JSON.stringify(this.user));
+            }
+          });
+        } else {
+          this.user = JSON.parse(localStorage.getItem('user'));
+        }
+        if(!!this.user) {
+          this.reservations = this.user.reservations;
+          this.tickets = this.user.tickets;
+        }
       });
+
+    this.dataSourceReservations = this.reservations;
+    this.dataSourceReservations.paginator = this.paginator;
   }
 
   sendConfirmEmail(userName: string) {

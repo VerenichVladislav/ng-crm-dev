@@ -4,6 +4,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Ticket} from '../entity/ticket';
 import {Observable} from 'rxjs';
 import {City} from '../entity/city';
+import {map} from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
@@ -22,5 +23,14 @@ export class CityService {
 
 
     return this.http.get<City>(this.URL + id, options);
+  }
+
+  loadCity(id: number): Observable<City> {
+    return this.getById(id).pipe(
+      map((city: City) => {
+          return new City(city);
+        }
+      )
+    );
   }
 }
