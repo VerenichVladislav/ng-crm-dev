@@ -76,4 +76,17 @@ export class UserService {
 
     return this.http.get<any>(this.URL + 'sendPassword/?userName=' + userName, options);
   }
+
+  updatePassword(userName: string, password: string) {
+    let headers = new HttpHeaders(
+      { 'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem('auth_token')});
+    let options = { headers: headers };
+    let body: any = {
+      userName: userName,
+      hashPass: password
+    };
+
+    return this.http.put<any>(this.URL, body, options);
+  }
 }

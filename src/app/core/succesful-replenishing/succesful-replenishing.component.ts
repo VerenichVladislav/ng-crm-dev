@@ -23,7 +23,6 @@ export class SuccesfulReplenishingComponent implements OnInit {
               private http: HttpClient,
               private walletService: WalletService,
               private userService: UserService,
-              private transfer: DataTransferService,
               private router: Router) { }
 
   ngOnInit() {
@@ -35,23 +34,15 @@ export class SuccesfulReplenishingComponent implements OnInit {
     let options = { headers: headers };
 
     this.http.get<any>(GlobalRootURL.BASE_API_URL + 'wallets/' + userId + '/confirm/' + confirmCache, options).subscribe(
-      (log: HttpErrorResponse) => {
-        this.message = log;
-        console.log(this.message);
-        console.log('before');
-        if(this.transfer.sum$.getValue() !== undefined) {
-          console.log('no undefined');
-          this.transfer.sum$.subscribe((sum: number) => {
-            console.log('$sum');
-            let user: User = JSON.parse(localStorage.getItem('user'));
-            user.wallet.sum = sum;
+      () => {
+        const sum: number = JSON.parse(localStorage.getItem('sum'));
 
-            this.transfer.setUser(user);
-            localStorage.setItem('user', JSON.stringify(user));
-          })
-        }
-       }
-     );
+        let user: User = JSON.parse(localStorage.getItem('user'));
+        user.wallet.sum += sum;
+        localStorage.setItem('user', JSON.stringify(user));
+        localStorage.removeItem('sum');
+      });
+
      this.router.navigate(['profile']);
      console.log(Number(userId));
     }

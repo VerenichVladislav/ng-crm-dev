@@ -20,7 +20,6 @@ export class ReplenishWalletComponent implements OnInit {
   message:any;
   constructor(private walletService: WalletService,
               private userService: UserService,
-              private transfer: DataTransferService,
               private router: Router,
               private spinnerService: Ng4LoadingSpinnerService) { }
 
@@ -39,7 +38,7 @@ export class ReplenishWalletComponent implements OnInit {
       $('#myModal3').modal('show');
     }
     else {
-      this.transfer.setSum(this.replenishing.controls.sum.value);
+      localStorage.setItem('sum', JSON.stringify(this.replenishing.controls.sum.value));
       await this.walletService.replenishWallet(this.replenishing.controls.sum, this.userId).toPromise();
       $('#myModal').modal('hide');
       this.spinnerService.hide();

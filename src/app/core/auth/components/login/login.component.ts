@@ -1,5 +1,4 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
 import {Location} from '@angular/common';
 import {Subscription} from 'rxjs';
 import {User} from '../../../../entity/user';
@@ -8,18 +7,13 @@ import {Response} from 'selenium-webdriver/http';
 import {LoginService} from '../../shared/login.service';
 import {UserService} from '../../../../shared/user.service';
 import {WalletService} from '../../../../shared/wallet.service';
-import {Wallet} from '../../../../entity/wallet';
 import {DataTransferService} from '../../../../shared/data-transfer.service';
 import {TicketService} from '../../../../shared/ticket.service';
 import {CityService} from '../../../../shared/city.service';
-import {City} from '../../../../entity/city';
-import {Hotel} from '../../../../entity/hotel';
 import {ReservationService} from '../../../../shared/reservation.service';
 import {HotelService} from '../../../../shared/hotel.service';
 import {SnackBarComponent} from '../../../../components/snack-bar/snack-bar.component';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
-import {map} from "rxjs/operators";
-import {Observable} from "rxjs/internal/Observable";
 
 @Component({
   selector: 'app-login',
@@ -51,7 +45,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     });
   }
 
-  submit(userData) {
+  submit(userData: any) {
     this.spinnerService.show();
     this.subscriptions.push(this.loginService
       .loginUser(userData.username, userData.password)
@@ -65,25 +59,25 @@ export class LoginComponent implements OnInit, OnDestroy {
                 let user = new User(data);
                 this.transfer.setRole(data.role);
 
-                this.loadWallet(data.wallet).subscribe( wallet => {
+                this.walletService.loadWallet(data.wallet).subscribe( wallet => {
                     user.setWallet(wallet);
                   }
                 );
                 user.tickets.forEach(ticket => {
 
-                  this.loadCity(ticket.cityFrom.cityId).subscribe( city => {
+                  this.cityService.loadCity(ticket.cityFrom.cityId).subscribe( city => {
                       ticket.setCityFrom(city);
                     }
                   );
 
-                  this.loadCity(ticket.cityDest.cityId).subscribe( city => {
+                  this.cityService.loadCity(ticket.cityDest.cityId).subscribe( city => {
                     ticket.setCityDest(city);
                     }
                   );
                 });
 
                 user.reservations.forEach(reserv => {
-                  this.loadHotel(reserv.hotel.hotelId).subscribe( hotel => {
+                  this.hotelService.loadHotel(reserv.hotel.hotelId).subscribe( hotel => {
                       reserv.setHotel(hotel);
                     }
                   );
@@ -116,32 +110,6 @@ export class LoginComponent implements OnInit, OnDestroy {
     )
   }
 
-  loadWallet(id: number): Observable<Wallet> {
-    return this.walletService.getWalletById(id).pipe(
-      map((wallet: Wallet) => {
-          return new Wallet(wallet);
-        }
-      )
-    );
-  }
-
-  loadCity(id: number): Observable<City> {
-    return this.cityService.getById(id).pipe(
-      map((city: City) => {
-          return new City(city);
-        }
-      )
-    );
-  }
-
-  loadHotel(id: number): Observable<Hotel> {
-    return this.hotelService.getById(id).pipe(
-      map((hotel: Hotel) => {
-          return new Hotel(hotel);
-        }
-      )
-    );
-  }
 
   reset() {
     this.errorLogin = false;
