@@ -11,7 +11,7 @@
 <mat-grid-list cols="5" rowHeight = "150px">
     <mat-grid-tile [colspan]=1></mat-grid-tile>
     <mat-grid-tile [colspan]=3 [rowspan]=3>
-<img class="listimg" height=100% width=100% src="assets/img/otel.jpg">
+<img class="listimg" height=100% width=100% src="{{realHOtel.image ?' https://drive.google.com/uc?export=view&id='+realHOtel.image :'https://drive.google.com/uc?export=view&id=1jC7zuqnV23XH-AEVlrA9BrQ9RXt_ft_8'}}">
     </mat-grid-tile>
     <mat-grid-tile [colspan]=1 [rowspan]=3>
     <mat-list role="list">

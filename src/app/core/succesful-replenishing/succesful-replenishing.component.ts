@@ -34,6 +34,7 @@ export class SuccesfulReplenishingComponent implements OnInit {
         'Authorization': 'Bearer ' + localStorage.getItem('auth_token')});
     let options = { headers: headers };
 
+
     this.http.get<any>(GlobalRootURL.BASE_API_URL + 'wallets/' + userId + '/confirm/' + confirmCache, options).subscribe(
       (log: HttpErrorResponse) => {
         this.message = log;
@@ -52,7 +53,29 @@ export class SuccesfulReplenishingComponent implements OnInit {
         }
        }
      );
+    this.userService.getUserById(parseInt(userId)).subscribe(
+      (data: any)=>{
+          let user = new User(data);
+          this.loadWallet(data.wallet).subscribe( wallet => {
+              user.setWallet(wallet);
+              console.log(wallet.sum);
+            }
+          );
+        console.log(user.wallet.sum);
+        console.log(data);
+        this.transfer.setUser(user);
+        localStorage.setItem('user', JSON.stringify(user));
+      }
+    );
      this.router.navigate(['profile']);
      console.log(Number(userId));
+    }
+    loadWallet(id: number): Observable<Wallet> {
+      return this.walletService.getWalletById(id).pipe(
+        map((wallet: Wallet) => {
+            return new Wallet(wallet);
+          }
+        )
+      );
     }
 }

@@ -10,7 +10,9 @@ import {GlobalRootURL} from '../../GlobalRootURL';
 import {SnackBarComponent} from '../snack-bar/snack-bar.component';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {LocaleStorageService} from "../../shared/locale-storage.service";
+import {HotelService} from "../../shared/hotel.service";
 import {Ng4LoadingSpinnerService} from "ng4-loading-spinner";
+import {Reservation} from "../../entity/reservation";
 
 
 @Component({
@@ -40,10 +42,12 @@ export class DetailshotelDialogComponent implements OnInit {
               private _snackBar: MatSnackBar,
               private spinnerService: Ng4LoadingSpinnerService,
               private localStorageService: LocaleStorageService,
+              private hotelService: HotelService,
     @Inject(MAT_DIALOG_DATA) public data: DialogData
     ) {
       this.roomId = data.roomId;
       this.hotelId = data.hotelId;
+     
     }
     mindate = new Date();
 
@@ -63,7 +67,13 @@ export class DetailshotelDialogComponent implements OnInit {
 
     this.http.post(Url,{},{headers: headers}).subscribe(
       (data: any) => {
-        this.localStorageService.addTo('user','reservations', data);
+        let reserv: Reservation = new Reservation(data);
+        this.hotelService.loadHotel(data.hotel).subscribe( hotel => {
+            reserv.setHotel(hotel);
+            this.localStorageService.addTo('user','reservations', reserv);
+          }
+        );
+
         this.spinnerService.hide();
       },
       error => {
@@ -82,7 +92,16 @@ export class DetailshotelDialogComponent implements OnInit {
       duration: 2000,
     });
   }
+  myFilter = (d: Date): boolean => {
+    let Detas:string = this.datePipe.transform(d,'yyyy-MM-dd');
+
+   return !this.filterDate.includes(Detas) ;
+  }
+  filterDate:String[];
   ngOnInit() {
+     this.http.get<any>(GlobalRootURL.BASE_API_URL+"reservations/rooms/"+this.roomId).subscribe(item=>{
+      this.filterDate = item;
+    });
     this.firstFormGroup = this._formBuilder.group({
       firstCtrl: ['', Validators.required]
     });

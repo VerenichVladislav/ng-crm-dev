@@ -4,12 +4,12 @@
               <form [formGroup]="firstFormGroup">
                 <ng-template matStepLabel>Fill out your name</ng-template>
                 <mat-form-field>
-                  <input matInput matInput [matDatepicker]="picker1"   [min]="mindate" placeholder="CheckIn Date"formControlName="firstCtrl" required [(ngModel)]="checkIn">
+                  <input matInput matInput [matDatepickerFilter]="myFilter" [matDatepicker]="picker1"   [min]="mindate" placeholder="CheckIn Date"formControlName="firstCtrl" required [(ngModel)]="checkIn">
                   <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                   <mat-datepicker #picker1></mat-datepicker>
                 </mat-form-field>
                 <mat-form-field>
-                        <input matInput matInput [matDatepicker]="picker2"  [min]="checkIn ? checkIn : mindate" [(ngModel)]="checkOut"  placeholder="CheckOut Date"formControlName="firstCtrl" required>
+                        <input matInput matInput [matDatepickerFilter]="myFilter" [matDatepicker]="picker2"  [min]="checkIn ? checkIn : mindate" [(ngModel)]="checkOut"  placeholder="CheckOut Date"formControlName="firstCtrl" required>
                         <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
                         <mat-datepicker #picker2></mat-datepicker>
                       </mat-form-field>
