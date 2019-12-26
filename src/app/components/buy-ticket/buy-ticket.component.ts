@@ -12,6 +12,7 @@ import { User } from 'src/app/entity/user';
 import { WalletService } from 'src/app/shared/wallet.service';
 import { UserService } from 'src/app/shared/user.service';
 import { DataTransferService } from 'src/app/shared/data-transfer.service';
+import {CityService} from "../../shared/city.service";
 
 declare var $ :any;
 @Component({
@@ -45,7 +46,8 @@ export class BuyTicketComponent implements OnInit {
               private http: HttpClient,
               private walletService: WalletService,
               private userService: UserService,
-              private transfer: DataTransferService){}
+              private transfer: DataTransferService,
+              private cityService: CityService){}
 
     ngOnInit() {
     this.spinnerService.show();
@@ -104,14 +106,13 @@ export class BuyTicketComponent implements OnInit {
   }
 
   submit(){
-    this.spinnerService.show();
     this.ticketService.submitForm(this.usersForm.controls.users.value, this.count, this.idT, this.userId)
                 .subscribe(
                     () => {
-                      this.spinnerService.hide();
+                      this.spinnerService.show();
                     },
                     (error) => {
-                      this.spinnerService.hide();
+                      this.spinnerService.show();
                       console.log(error);
                       if(error.status === 200) {
                         this.message = error.error.text;
@@ -131,12 +132,25 @@ export class BuyTicketComponent implements OnInit {
         $('#myModal').modal('show');
         this.userService.getUserById(this.userId).subscribe(
           (data: any)=>{
-            this.spinnerService.show();
+            this.spinnerService.hide();
               let user = new User(data);
               this.ticketService.loadWallet(data.wallet).subscribe( wallet => {
                   user.setWallet(wallet);
                 }
               );
+
+            user.tickets.forEach(ticket => {
+
+              this.cityService.loadCity(ticket.cityFrom.cityId).subscribe( city => {
+                  ticket.setCityFrom(city);
+                }
+              );
+
+              this.cityService.loadCity(ticket.cityDest.cityId).subscribe( city => {
+                  ticket.setCityDest(city);
+                }
+              );
+            });
             this.transfer.setUser(user);
             localStorage.setItem('user', JSON.stringify(user));
           }
