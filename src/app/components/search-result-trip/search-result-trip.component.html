@@ -1,13 +1,13 @@
-<button (click)="goBack()" class="btn btn-info back">{{'go back' | translate}}</button>
+<button (click)="goBack()" class="btn btn-info back">{{'Go back' | translate}}</button>
 
 <div class="center" *ngFor="let post of posts | paginate: config">
-            <mat-card><div>From: {{post.cityFrom}}
-                <button (click)="Buy(post)" routerLink="/trips/{{post.tripId}}/buy" [queryParams]="{count: post.count }" class="btn btn-outline-success pull-right">Buy</button>
+            <mat-card><div>{{'From'|translate}}: {{post.cityFrom}}
+                <button (click)="Buy(post)" routerLink="/trips/{{post.tripId}}/buy" [queryParams]="{count: post.count }" class="btn btn-outline-success pull-right">{{'Buy'|translate}}</button>
             </div> <div>
-                 To: {{post.cityDest}}
+                 {{'To'|translate}}: {{post.cityDest}}
                 </div>
                 <div>
-                  Date: {{post.dateFrom | date: 'yyyy-MM-dd hh:mm' }} -- {{ post.dateDest| date: 'yyyy-MM-dd hh:mm'}}
+                  {{'Date'|translate}}: {{post.dateFrom | date: 'yyyy-MM-dd hh:mm' }} -- {{ post.dateDest| date: 'yyyy-MM-dd hh:mm'}}
                 </div>
                 <div class="input-group">
                     <span class="input-group-btn">
