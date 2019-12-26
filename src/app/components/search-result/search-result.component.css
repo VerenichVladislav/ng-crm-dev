@@ -21,6 +21,8 @@
     background: #dfdfdf;
 }
 .hotels-card{
+    opacity: 90%;
+    background-color: white;
     display: flex;
     justify-content: space-between;
     width: 710px;
