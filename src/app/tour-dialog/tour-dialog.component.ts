@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject, Input } from '@angular/core';
-import { MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
+import { MAT_DIALOG_DATA, MatSnackBar, MatDialogRef } from '@angular/material';
 import { DialogData } from '../components/detailshotel/detailshotel.component';
 import { TripDTO } from '../entity/TripDTO';
 import { BuyTicketComponent } from '../components/buy-ticket/buy-ticket.component';
@@ -16,7 +16,8 @@ export class TourDialogComponent implements OnInit {
 
   constructor(@Inject(MAT_DIALOG_DATA) public data:TourData
   ,private _snackBar: MatSnackBar,
-  private http: HttpClient) { }
+  private http: HttpClient,
+  public dialogRef: MatDialogRef<TourDialogComponent>) { }
   TripChoise:TripDTO[];
   @Input() firstName:string;
   @Input() secondName:string;
@@ -47,15 +48,15 @@ export class TourDialogComponent implements OnInit {
       
       let body = {userId:this.userId,firstName:this.firstName,lastName:this.secondName,tripIdList:this.TourId};
 
-      this.http.post<any>(this.ROOT_URL +"/byTour",body).subscribe(
-        (log: HttpErrorResponse) => {
-          console.log(log);
-          
-          this.openSnackBar(log+"","!")
-          }
-        )
-     
+      this.http.post<any>(this.ROOT_URL +"/byTour",body).subscribe(response => {
+        console.log(response);
+        return response;
+    }, err => {
+        console.log(err.message);
+    });
+    this.openSnackBar("You Buy Tour!","Ok")
     };
+    this.dialogRef.close();
      
     }
   
