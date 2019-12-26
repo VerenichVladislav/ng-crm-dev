@@ -91,6 +91,7 @@ import { UnconfirmedEmailDialogComponent } from './components/profile/unconfirme
 import {EmailGuard} from "./shared/email.guard";
 import { AboutComponent } from './core/about/about.component';
 import { TourDialogComponent } from './tour-dialog/tour-dialog.component';
+import { SuccessfulChangingPasswordComponent } from './components/snack-bar/successful-changing-password/successful-changing-password.component';
 
 export function initGapi(gapiSession: GapiSession) {
   return () => gapiSession.initClient();
@@ -146,6 +147,7 @@ export function createTranslateLoader(http: HttpClient) {
     UnconfirmedEmailDialogComponent,
     AboutComponent,
     TourDialogComponent,
+    SuccessfulChangingPasswordComponent,
     //SideFiltersComponent,
   ],
   entryComponents: [
@@ -153,6 +155,7 @@ export function createTranslateLoader(http: HttpClient) {
     DetailshotelDialogComponent,
     ConnectionErrorComponent,
     UnconfirmedEmailDialogComponent,
+    SuccessfulChangingPasswordComponent,
     ConfirmationDialog
   ],
   imports: [

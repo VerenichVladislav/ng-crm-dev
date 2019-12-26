@@ -47,7 +47,7 @@ export class DetailshotelDialogComponent implements OnInit {
     ) {
       this.roomId = data.roomId;
       this.hotelId = data.hotelId;
-     
+
     }
     mindate = new Date();
 
@@ -79,7 +79,7 @@ export class DetailshotelDialogComponent implements OnInit {
       error => {
         console.log(error);
         if(error.status === 0) {
-          this.errorConnection.openSnackBar();
+          this.errorConnection.openErrorConnection();
         }
         this.spinnerService.hide();
       }

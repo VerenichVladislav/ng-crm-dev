@@ -51,11 +51,19 @@
               <div class="tab-pane fade" id="change">
                 <form (ngSubmit)="submit(changeForm.value)" [formGroup]="changeForm"  class="change-password">
                   <mat-form-field>
-                    <input type="password" formControlName="newPassword" matInput placeholder="{{'new' | translate}} {{'password' | translate}}" >
+                    <input type="password" formControlName="hashPass" matInput placeholder="{{'new' | translate}} {{'password' | translate}}" >
                   </mat-form-field>
                   <mat-form-field>
-                    <input type="password" formControlName="repeatPassword" matInput placeholder="{{'repeat' | translate}} {{'password' | translate}}" >
+                    <input type="password" formControlName="repeatPass" matInput placeholder="{{'repeat' | translate}} {{'password' | translate}}" >
                   </mat-form-field>
+                  <div *ngIf="errorPassword"
+                       class="animate error cross-validation-error-message alert alert-danger">
+                    {{'bad password' | translate}}
+                  </div>
+                  <div *ngIf="changeForm.errors?.nonIdenticalPassword"
+                       class="animate error cross-validation-error-message alert alert-danger">
+                    Пароли не совпадают
+                  </div>
                   <button mat-flat-button class="buttons">{{'change'| translate}}</button>
                 </form>
               </div>
