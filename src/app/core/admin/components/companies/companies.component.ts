@@ -7,6 +7,9 @@ import {TransportService} from "../../../../shared/transport.service";
 import { Observable } from 'rxjs';
 import {Company} from "../../../../entity/company";
 import {LocaleStorageService} from "../../../../shared/locale-storage.service";
+import {MatPaginator} from "@angular/material/paginator";
+import {MatSort} from "@angular/material";
+import {MatTableDataSource} from "@angular/material/table";
 
 @Component({
   selector: 'app-companies',
@@ -19,6 +22,12 @@ export class CompaniesComponent implements OnInit {
 
   private transports: Transport[];
   private companies: Company[];
+
+  private displayedColumns: string[] = ['id', 'name', 'rating','transportCount','delete'];
+  private dataSource;
+
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
 
   private addTransportBtn: boolean = false;
   private transportSelect: boolean = false;
@@ -45,6 +54,7 @@ export class CompaniesComponent implements OnInit {
 
         this.companies.push(new Company(company));
         this.localeStorageService.update('companies', this.companies);
+        this.dataSource.data = this.companies;
 
         if(this.transports === null) {
           this.loadTransport().subscribe(
@@ -86,6 +96,10 @@ export class CompaniesComponent implements OnInit {
         this.companyService.getAllCompanies().subscribe(
           (comp: Company[]) => {
             this.companies = comp;
+
+            this.dataSource = new MatTableDataSource<Company>(this.companies);
+            this.dataSource.paginator = this.paginator;
+            this.dataSource.sort = this.sort;
             localStorage.setItem('companies', JSON.stringify(comp));
           },
           error1 => {
@@ -94,15 +108,13 @@ export class CompaniesComponent implements OnInit {
         )
       }
     }
+    this.dataSource = new MatTableDataSource<Company>(this.companies);
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
   showEdit() {
     this.editField = true;
-  }
-
-  save() {
-    console.log('Отправить');
-    this.editField = false;
   }
 
   delete(companyName: string) {
@@ -112,6 +124,7 @@ export class CompaniesComponent implements OnInit {
           return comp.companyName !== companyName;
         });
 
+        this.dataSource.data = this.companies;
         this.localeStorageService.update('companies', this.companies);
       },
       error1 => {
@@ -119,6 +132,7 @@ export class CompaniesComponent implements OnInit {
       }
     );
   }
+
 
 
   ngOnInit() {

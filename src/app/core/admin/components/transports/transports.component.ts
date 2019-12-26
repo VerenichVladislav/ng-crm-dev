@@ -52,18 +52,7 @@ export class TransportsComponent implements OnInit {
 
         this.transports.push(new Transport(transport));
         this.localeStorageService.update('transports', this.transports);
-
-        if(this.transports === null) {
-          // this.loadTransport().subscribe(
-          //   transports => {
-          //     this.transports = transports;
-          //   },
-          //   error1 => {
-          //     console.log(error1);
-          //   }
-          // );
-        }
-
+        this.dataSource.data = this.transports;
       },
       error => {
         console.log();
@@ -115,11 +104,10 @@ export class TransportsComponent implements OnInit {
           }
         )
       }
-    } else{
-      this.dataSource = new MatTableDataSource<Transport>(this.transports);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
     }
+    this.dataSource = new MatTableDataSource<Transport>(this.transports);
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
   delete(transportId: number) {

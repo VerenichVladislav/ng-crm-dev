@@ -64,6 +64,7 @@ export class HotelsComponent implements OnInit {
         this.hotels = this.hotels.filter(hotel => {
           return hotel.hotelId !== hotelId;
         });
+
         this.dataSource = new MatTableDataSource<Hotel>(this.hotels);
         this.localeStorageService.update('hotels', this.hotels);
       },
