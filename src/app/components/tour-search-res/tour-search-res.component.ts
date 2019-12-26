@@ -14,6 +14,8 @@ import { TripFilters } from 'src/app/entity/TripFilters';
 import { TripDTO } from 'src/app/entity/TripDTO';
 import { element } from 'protractor';
 import { Timestamp } from 'rxjs/internal/operators/timestamp';
+import { TourDialogComponent } from 'src/app/tour-dialog/tour-dialog.component';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-tour-search-res',
@@ -27,7 +29,8 @@ export class TourSearchResComponent implements OnInit {
      private http: HttpClient,
      private router:Router,
      private address :ActivatedRoute,
-     private service:TourService)
+     private service:TourService,
+     public dialog: MatDialog)
       {
         this.CityResponse= this.http.get<City[]>(GlobalRootURL.BASE_API_URL+"cities")
 
@@ -139,7 +142,10 @@ export class TourSearchResComponent implements OnInit {
       })
      }
      Buy(){
-       
+        this.dialog.open(TourDialogComponent, {
+         data:{TripChoise:this.TripChoise}
+       });
+     
      }
     ngOnInit() { 
     this.mapboxgl.accessToken = 'pk.eyJ1IjoiY2h1cGVycyIsImEiOiJjazNqcjJ4YnQwM3l5M2xwOXppNmtkMWF4In0.MqIEuzBBpryI6_dps113lw';

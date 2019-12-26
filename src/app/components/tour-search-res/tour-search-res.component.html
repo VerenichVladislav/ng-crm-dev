@@ -1,22 +1,9 @@
 <div class="map" id="map">    
 </div>
 <div class="search">
-        <mat-form-field class="form-mat-child">
-                <input type="text" [matAutocomplete]="auto"   matInput placeholder="{{'city' | translate}}" [(ngModel)]="city" >
-                <mat-autocomplete #auto="matAutocomplete">
-                    <div *ngFor="let option of CityResponse | async" >
-                        <mat-option [value]="option.cityName">
-                          {{option.cityName}}
-                        </mat-option>
-                        </div>
-                      </mat-autocomplete>
-        </mat-form-field>
-        <mat-form-field color="accent" class="form-mat-child">
-          <input matInput [matDatepicker]="picker4" [min]="mindate" placeholder="{{'dateFrom' | translate}}" [(ngModel)]="dateFrom">
-          <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
-          <mat-datepicker #picker4></mat-datepicker>
-        </mat-form-field>
-        <button mat-button (click)="createTout()">Start</button>
+  <mat-card>
+        <button  mat-button (click)="createTout()">reset Tour</button>
+  </mat-card>
         <mat-card *ngIf="currentCity">
           Tour start in {{StartCity}}
         </mat-card>

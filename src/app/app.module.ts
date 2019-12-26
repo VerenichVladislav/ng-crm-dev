@@ -90,6 +90,7 @@ import { ChatComponentComponent } from './components/chat-component/chat-compone
 import { UnconfirmedEmailDialogComponent } from './components/profile/unconfirmed-email-dialog/unconfirmed-email-dialog.component';
 import {EmailGuard} from "./shared/email.guard";
 import { AboutComponent } from './core/about/about.component';
+import { TourDialogComponent } from './tour-dialog/tour-dialog.component';
 
 export function initGapi(gapiSession: GapiSession) {
   return () => gapiSession.initClient();
@@ -144,9 +145,11 @@ export function createTranslateLoader(http: HttpClient) {
     ChatComponentComponent,
     UnconfirmedEmailDialogComponent,
     AboutComponent,
+    TourDialogComponent,
     //SideFiltersComponent,
   ],
   entryComponents: [
+    TourDialogComponent,
     DetailshotelDialogComponent,
     ConnectionErrorComponent,
     UnconfirmedEmailDialogComponent,

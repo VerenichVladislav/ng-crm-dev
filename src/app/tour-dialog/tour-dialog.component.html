@@ -1,0 +1,19 @@
+<mat-dialog-content>
+    <mat-card>
+        <mat-list>
+            <mat-list-item>
+                <input type="text" matInput   placeholder="Fist name" [(ngModel)]="firstName" >
+            </mat-list-item>
+            <mat-list-item>
+                <input type="text" matInput  placeholder="Second name" [(ngModel)]="secondName" >
+            </mat-list-item>
+        </mat-list>
+    </mat-card>
+    <mat-card *ngFor="let post of TripChoise">
+        <mat-card-header> From: {{post.cityFrom}} ----> To:{{post.cityDest}}</mat-card-header>
+        <mat-card-subtitle>Price: {{post.price}}</mat-card-subtitle>
+       </mat-card>
+       <mat-card>
+           <button mat-button (click)="Buy()">Buy:{{TotalCost}}</button>
+       </mat-card>
+</mat-dialog-content>
