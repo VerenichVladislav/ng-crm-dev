@@ -91,6 +91,7 @@ import { UnconfirmedEmailDialogComponent } from './components/profile/unconfirme
 import {EmailGuard} from "./shared/email.guard";
 import { AboutComponent } from './core/about/about.component';
 import { TourDialogComponent } from './tour-dialog/tour-dialog.component';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 export function initGapi(gapiSession: GapiSession) {
   return () => gapiSession.initClient();
@@ -156,6 +157,7 @@ export function createTranslateLoader(http: HttpClient) {
     ConfirmationDialog
   ],
   imports: [
+    NgxPaginationModule,
     CdkTreeModule,
     MatAutocompleteModule,
     MatBadgeModule,
