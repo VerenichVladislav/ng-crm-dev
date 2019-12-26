@@ -110,6 +110,13 @@ hr {
 
 .restorePassword{
   cursor: pointer;
+  text-decoration: underline;
+  color: #1D1A8A;
+  font-size: 20px;
+
+}
+.restore-container{
+  margin-bottom: 1vh;
 }
 .clearfix::after {
   content: "";

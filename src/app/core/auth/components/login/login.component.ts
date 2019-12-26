@@ -14,6 +14,9 @@ import {ReservationService} from '../../../../shared/reservation.service';
 import {HotelService} from '../../../../shared/hotel.service';
 import {SnackBarComponent} from '../../../../components/snack-bar/snack-bar.component';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
+import {UnconfirmedEmailDialogComponent} from "../../../../components/profile/unconfirmed-email-dialog/unconfirmed-email-dialog.component";
+import {MatDialog} from "@angular/material";
+import {RestorePasswordDialogComponent} from "./restore-password-dialog/restore-password-dialog.component";
 
 @Component({
   selector: 'app-login',
@@ -37,7 +40,8 @@ export class LoginComponent implements OnInit, OnDestroy {
               private transfer: DataTransferService,
               private errorConnection: SnackBarComponent,
               private spinnerService: Ng4LoadingSpinnerService,
-              private location: Location) {
+              private location: Location,
+              private dialog: MatDialog) {
 
     this.loginForm = new FormGroup({
       username: new FormControl(''),
@@ -103,9 +107,13 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   restorePassword(userData) {
     this.userService.sendPassword(userData.username).subscribe(
-      () => {},
-      error1 => {
-        console.log(error1);
+      () => {
+        this.dialog.open(RestorePasswordDialogComponent, {
+            width: '30%',
+        });
+        },
+      () => {
+        this.errorLogin = true;
       }
     )
   }
