@@ -101,30 +101,9 @@ export class SearchResultTripComponent implements OnInit {
     let body = this.filterHotel;
     this.Hotels = this.http.post<Hotel[]>(this.URLHOTEL,body);
   }
-<<<<<<< HEAD
     pageChanged(event){
     this.par=event-1;
     this.config.currentPage = event;
-=======
-  NextPage(){
-    let body = this.service.tripFilter;
-    this.page = this.page + 1;
-    console.log(this.posts.length);
-    this.len=this.posts.length;
-
-    let options = {
-     body:body
-    };
-    this.http.post<TripDTO[]>(this.URLTRIP + "/dto",body,{params:{
-      pageNo: this.page.toString()
-    }}).subscribe(
-      post=>{
-        this.posts = post;
-      }
-    );
-  }
-  PreviousPage(){
->>>>>>> fc7cfd8ff9deebff795ca4e0b70d317192c7d79c
     let body = this.service.tripFilter;
     this.page = this.page - 1;
     this.len=10;
