@@ -23,12 +23,16 @@ export class SearchResultTripComponent implements OnInit {
   readonly URLTRIP = GlobalRootURL.BASE_API_URL + 'trips';
   readonly URLHOTEL = GlobalRootURL.BASE_API_URL + 'hotels';
   posts:TripDTO[] = [];
+  cnt:TripDTO[] = [];
   Hotels:Observable<Hotel[]>;
   cityFrom: any;
   cityDest: any;
   object:Trip;
   page: number = 0;
   len: number;
+  config: any;
+  par:any;
+
   constructor(public service: TripService,
     private http: HttpClient,
     private cityService:CityService,
@@ -40,7 +44,25 @@ export class SearchResultTripComponent implements OnInit {
   ngOnInit() {
     this.getPosts();
     this.getHotelByCity();
-    console.log(this.posts);
+    this.checkCnt();
+  }
+
+  checkCnt(){
+    let body = this.service.tripFilter;
+
+    let options = {
+     body:body
+    };
+    this.http.post<TripDTO[]>(this.URLTRIP + "/cnt",body).subscribe(
+      cn=>{
+        this.cnt = cn;
+        this.config = {
+          itemsPerPage: 10,
+          currentPage: 1,
+          totalItems: this.cnt.length
+        };
+      }
+    );
   }
 
   goBack() {
@@ -79,6 +101,11 @@ export class SearchResultTripComponent implements OnInit {
     let body = this.filterHotel;
     this.Hotels = this.http.post<Hotel[]>(this.URLHOTEL,body);
   }
+<<<<<<< HEAD
+    pageChanged(event){
+    this.par=event-1;
+    this.config.currentPage = event;
+=======
   NextPage(){
     let body = this.service.tripFilter;
     this.page = this.page + 1;
@@ -97,6 +124,7 @@ export class SearchResultTripComponent implements OnInit {
     );
   }
   PreviousPage(){
+>>>>>>> fc7cfd8ff9deebff795ca4e0b70d317192c7d79c
     let body = this.service.tripFilter;
     this.page = this.page - 1;
     this.len=10;
@@ -105,11 +133,12 @@ export class SearchResultTripComponent implements OnInit {
      body:body
     };
     this.http.post<TripDTO[]>(this.URLTRIP + "/dto",body,{params:{
-      pageNo: this.page.toString()
+      pageNo: this.par
     }}).subscribe(
       post=>{
         this.posts = post;
       }
-    );}
+    );
+    }
 
 }

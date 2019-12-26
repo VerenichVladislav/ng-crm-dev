@@ -1,6 +1,6 @@
 <button (click)="goBack()" class="btn btn-info back">{{'go back' | translate}}</button>
 
-<div class="center" *ngFor="let post of posts">
+<div class="center" *ngFor="let post of posts | paginate: config">
             <mat-card><div>From: {{post.cityFrom}}
                 <button (click)="Buy(post)" routerLink="/trips/{{post.tripId}}/buy" [queryParams]="{count: post.count }" class="btn btn-outline-success pull-right">Buy</button>
             </div> <div>
@@ -27,16 +27,10 @@
             </mat-card>
     </div>
 
-    
-    <div class="center">
-        <mat-card>
-        <button class="btn btn-default" [disabled]="page<1" id="pagin1" (click)="PreviousPage()">Previous</button>
-        <button class="btn btn-default" [disabled]="len<10" id="pagin2" (click)="NextPage()">Next</button> 
-        <div id="pageNo">Page: {{page + 1}}</div>
-    </mat-card>
-    </div>
-    
-    
+<div id="margin">
+    <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+</div>
+  
 
 
     <mat-grid-list cols="6">
