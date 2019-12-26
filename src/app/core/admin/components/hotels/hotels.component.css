@@ -7,3 +7,13 @@
 .hotel-container{
   border: 2px dashed #474e5d;
 }
+table{
+  width: 100%
+}
+.hotels {
+  width: 70%;
+  margin-left: 15%;
+}
+th.mat-sort-header-sorted {
+  color: black;
+}

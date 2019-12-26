@@ -1,8 +1,61 @@
 <div class="container navigation">
-  <button type="button" class="btn btn-lg btn-primary">{{'all' | translate}} {{'hotels' | translate}}</button>
+  <button (click)="showAll()" type="button" class="btn btn-lg btn-primary">{{'all' | translate}} {{'hotels' | translate}}</button>
   <mat-form-field appearance="outline">
     <mat-label>{{'search' | translate}}</mat-label>
     <input matInput placeholder="{{'type the login' | translate}}">
   </mat-form-field>
   <button type="button" class="btn btn-lg btn-info">{{'search' | translate}}</button>
+</div>
+<div class="hotels mat-elevation-z8">
+  <table mat-table matSort [dataSource]="dataSource"  >
+
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Id </th>
+      <td mat-cell *matCellDef="let hotel"> {{hotel.hotelId}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="hotelName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'hotelName' | translate}} </th>
+      <td mat-cell *matCellDef="let hotel"> {{hotel.hotelName}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="phoneNumber">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'phoneNumber' | translate}} </th>
+      <td mat-cell *matCellDef="let hotel"> {{hotel.phoneNumber}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="address">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'address' | translate}} </th>
+      <td mat-cell *matCellDef="let hotel"> {{hotel.address}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="country">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'country' | translate}} </th>
+      <td mat-cell *matCellDef="let hotel"> {{hotel.country}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="rating">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'rating' | translate}} </th>
+      <td mat-cell *matCellDef="let hotel"> {{hotel.rating}} </td>
+    </ng-container>
+
+
+
+    <ng-container matColumnDef="delete">
+      <th mat-header-cell *matHeaderCellDef> Delete </th>
+      <td mat-cell *matCellDef="let hotel">
+        <button mat-icon-button color="warn" (click)="delete(hotel.hotelId)">
+          <mat-icon class="mat-18">delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <mat-paginator
+    [pageSizeOptions]="[5, 10, 20]"
+    showFirstLastButtons>
+  </mat-paginator>
+
 </div>

@@ -8,22 +8,25 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import { LogoutComponent } from './components/logout/logout.component';
 import {IdentityPasswordDirective} from './shared/identity-password.directive';
-import {translate_v2} from 'googleapis';
 import {TranslateModule} from '@ngx-translate/core';
 import {Ng4LoadingSpinnerModule} from "ng4-loading-spinner";
 import {RouterModule} from "@angular/router";
+import { RestorePasswordDialogComponent } from './components/login/restore-password-dialog/restore-password-dialog.component';
+import {MatDialogModule} from "@angular/material";
 
 @NgModule({
   declarations: [
     RegisterComponent,
     LoginComponent,
     LogoutComponent,
-    IdentityPasswordDirective
+    IdentityPasswordDirective,
+    RestorePasswordDialogComponent
   ],
   exports: [
     RegisterComponent,
     LoginComponent,
     LogoutComponent,
+    RestorePasswordDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -33,6 +36,10 @@ import {RouterModule} from "@angular/router";
     HttpClientModule,
     ReactiveFormsModule,
     RouterModule,
+    MatDialogModule,
+  ],
+  entryComponents: [
+    RestorePasswordDialogComponent
   ],
   providers: [
     RegisterService,

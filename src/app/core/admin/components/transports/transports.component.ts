@@ -122,10 +122,6 @@ export class TransportsComponent implements OnInit {
     }
   }
 
-  show(page: any) {
-    console.log(page.pageIndex + "-" + page.pageSize);
-  }
-
   delete(transportId: number) {
     this.transportService.deleteById(transportId).subscribe(
       () => {

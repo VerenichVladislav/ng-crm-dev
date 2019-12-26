@@ -4,18 +4,6 @@
 .navigation{
   margin-left: 20%;
 }
-.transport-container{
-  min-height: 20vh;
-  margin: 2vh 10vw 2vh auto;
-  background: #091D5B;
-  background: -webkit-linear-gradient(top left, #091D5B, #74D7A8);
-  background: -moz-linear-gradient(top left, #091D5B, #74D7A8);
-  background: linear-gradient(to bottom right, #091D5B, #74D7A8);
-  box-shadow: 9px 2px 3px 5px #1b1866;
-  color: rgba(255,255,255,1);
-  font-size: 20px;
-  font-family: "Trebuchet MS", serif;
-}
 .add-transport {
   margin-left: 13%;
   width: 30%;
