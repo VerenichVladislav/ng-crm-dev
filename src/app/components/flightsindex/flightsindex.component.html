@@ -2,10 +2,24 @@
   <div class="content">
       <div class="search">
               <mat-form-field class="form-mat-child">
-                      <input matInput placeholder="{{'From?' | translate}}" [(ngModel)]="cityFrom" >
+                      <input matInput [matAutocomplete]="auto" placeholder="{{'From?' | translate}}" [(ngModel)]="cityFrom" >
+                      <mat-autocomplete #auto="matAutocomplete">
+                        <div *ngFor="let option of cityCollection | async" >
+                            <mat-option [value]="option.cityName">
+                              {{option.cityName}}
+                            </mat-option>
+                            </div>
+                          </mat-autocomplete>
                 </mat-form-field>
               <mat-form-field class="form-mat-child">
-                <input matInput placeholder="{{'To?' | translate}}" [(ngModel)]="cityDest" >
+                <input matInput [matAutocomplete]="auto" placeholder="{{'To?' | translate}}" [(ngModel)]="cityDest" >
+                <mat-autocomplete #auto="matAutocomplete">
+                  <div *ngFor="let option of cityCollection | async" >
+                      <mat-option [value]="option.cityName">
+                        {{option.cityName}}
+                      </mat-option>
+                      </div>
+                    </mat-autocomplete>
                 </mat-form-field>
                 <mat-form-field color="accent" class="form-mat-child">
                     <input matInput [matDatepicker]="picker4" [min]="mindate" placeholder="{{'dateFrom' | translate}}" [(ngModel)]="dateFrom">

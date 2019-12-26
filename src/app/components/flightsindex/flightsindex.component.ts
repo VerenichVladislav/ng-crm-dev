@@ -2,8 +2,12 @@ import { Component, OnInit, Input, Injectable } from '@angular/core';
 import { TripFilters } from 'src/app/entity/TripFilters';
 import { TripService } from 'src/app/shared/trip.service';
 import {Router} from '@angular/router'
+import {GlobalRootURL} from '../../GlobalRootURL';
+import { HttpClient } from '@angular/common/http';
 import { Timestamp } from 'rxjs/internal/operators/timestamp';
 import { DatePipe } from '@angular/common';
+import { Observable } from 'rxjs';
+import { City } from 'src/app/entity/city';
 
 @Component({
   selector: 'app-flightsindex',
@@ -13,10 +17,13 @@ import { DatePipe } from '@angular/common';
 })
 @Injectable()
 export class FlightsindexComponent implements OnInit {
-
+  cityCollection:Observable<City>;
   constructor(private router: Router,
     public service: TripService,
-    public datePipe: DatePipe) { }
+    private http: HttpClient,
+    public datePipe: DatePipe) {
+      this.cityCollection = this.http.get<City>(GlobalRootURL.BASE_API_URL+"cities"); 
+    }
   @Input() status:boolean;
   @Input() cityFrom:string;
   @Input() cityDest:string;
