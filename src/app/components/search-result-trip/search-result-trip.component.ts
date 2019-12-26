@@ -3,13 +3,11 @@ import { TripService } from 'src/app/shared/trip.service';
 import {GlobalRootURL} from '../../GlobalRootURL';
 import { Observable } from 'rxjs';
 import { Trip } from 'src/app/entity/trip';
-import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Hotel } from 'src/app/entity/hotel';
 import { HotelFilters } from 'src/app/entity/HotelFilters';
-import { City } from 'src/app/entity/city';
 import { CityService } from 'src/app/shared/city.service';
-import {map} from "rxjs/operators";
 import { TripDTO } from 'src/app/entity/TripDTO';
 import {Location} from "@angular/common";
 
@@ -98,7 +96,7 @@ export class SearchResultTripComponent implements OnInit {
       }
     );
   }
-  PreviousPage(){  
+  PreviousPage(){
     let body = this.service.tripFilter;
     this.page = this.page - 1;
     this.len=10;

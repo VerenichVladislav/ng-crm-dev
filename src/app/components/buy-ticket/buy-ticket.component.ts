@@ -68,6 +68,7 @@ export class BuyTicketComponent implements OnInit {
             this.transport = log;
            }
          );
+      this.spinnerService.hide();
     });
     this.route.queryParams.subscribe(params => {
         this.count = parseInt(params.count);
@@ -80,7 +81,7 @@ export class BuyTicketComponent implements OnInit {
           lastName: ['', Validators.required]
         })
       ])
-    })
+    });
     this.addFormControl();
     //this.usersForm.valueChanges.subscribe((value)=>console.log(value));
   }
@@ -106,13 +107,15 @@ export class BuyTicketComponent implements OnInit {
     this.spinnerService.show();
     this.ticketService.submitForm(this.usersForm.controls.users.value, this.count, this.idT, this.userId)
                 .subscribe(
-                    (log: HttpErrorResponse) => {
+                    () => {
+                      this.spinnerService.hide();
                     },
                     (error) => {
+                      this.spinnerService.hide();
                       console.log(error);
                       if(error.status === 200) {
                         this.message = error.error.text;
-                         
+
                       }
                       if(error.status === 400) {
                         this.message = error.error;
@@ -124,10 +127,11 @@ export class BuyTicketComponent implements OnInit {
                     }
                 );
       setTimeout(() => {
-        this.spinnerService.hide();
+
         $('#myModal').modal('show');
         this.userService.getUserById(this.userId).subscribe(
           (data: any)=>{
+            this.spinnerService.show();
               let user = new User(data);
               this.ticketService.loadWallet(data.wallet).subscribe( wallet => {
                   user.setWallet(wallet);
@@ -139,5 +143,6 @@ export class BuyTicketComponent implements OnInit {
         );
         },
         7000);
-    }
+    this.spinnerService.hide();
+  }
  }

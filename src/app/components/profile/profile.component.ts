@@ -10,8 +10,6 @@ import {ConfirmEmailService} from "../../core/auth/shared/confirm-email.service"
 import {FormControl, FormGroup} from "@angular/forms";
 import {UserService} from "../../shared/user.service";
 import {MatPaginator} from "@angular/material/paginator";
-import {Transport} from "../../entity/transport";
-import {MatTableDataSource} from "@angular/material/table";
 
 @Component({
   selector: 'app-profile',
@@ -23,9 +21,7 @@ export class ProfileComponent implements OnInit, OnDestroy{
   private reservations: Reservation[] = [];
   private tickets: Ticket[] = [];
   private changeForm;
-  private dataSourceReservations;
 
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   constructor(private transfer: DataTransferService,
               private router: Router,
@@ -62,9 +58,6 @@ export class ProfileComponent implements OnInit, OnDestroy{
           this.tickets = this.user.tickets;
         }
       });
-
-    this.dataSourceReservations = this.reservations;
-    this.dataSourceReservations.paginator = this.paginator;
   }
 
   sendConfirmEmail(userName: string) {
