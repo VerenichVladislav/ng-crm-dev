@@ -1,10 +1,12 @@
 <div class="container navigation">
-<button type="button" (click)="showAll()" class="btn btn-lg btn-primary">{{'all' | translate}} {{'transport' | translate}}</button>
-<mat-form-field appearance="outline">
-  <mat-label>{{'search' | translate}}</mat-label>
-  <input matInput placeholder="{{'type the login' | translate}}">
-</mat-form-field>
-<button type="button" class="btn btn-lg btn-info">{{'search' | translate}}</button>
+  <form [formGroup]="transportSearchForm" (ngSubmit)="search(transportSearchForm.value)">
+    <button type="button" (click)="showAll()" class="btn btn-lg btn-primary">{{'all' | translate}} {{'transport' | translate}}</button>
+    <mat-form-field appearance="outline">
+      <mat-label>{{'search' | translate}}</mat-label>
+      <input matInput placeholder="{{'type the login' | translate}}">
+    </mat-form-field>
+    <button type="submit" class="btn btn-lg btn-info">{{'search' | translate}}</button>
+  </form>
 </div>
 
 <div class="container">

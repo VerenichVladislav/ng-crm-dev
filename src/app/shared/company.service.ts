@@ -40,4 +40,13 @@ export class CompanyService {
 
     return this.http.post<Company[]>(this.URL + '/filter', filter, options);
   }
+
+  getByCompanyName(name: string) {
+    let headers = new HttpHeaders(
+      { 'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem('auth_token')});
+    let options = { headers: headers };
+
+    return this.http.get<Company>(this.URL + '/?name=' + name, options);
+  }
 }

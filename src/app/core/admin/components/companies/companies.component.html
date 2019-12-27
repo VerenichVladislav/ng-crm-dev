@@ -1,10 +1,12 @@
 <div class="container navigation">
-  <button (click)="showAll()" type="button" class="btn btn-lg btn-primary">{{'all' | translate}} {{'companies' | translate}}</button>
-  <mat-form-field appearance="outline">
-    <mat-label>{{'search' | translate}}</mat-label>
-    <input matInput placeholder="{{'type the login' | translate}}">
-  </mat-form-field>
-  <button type="button" class="btn btn-lg btn-info">{{'search' | translate}}</button>
+  <form [formGroup]="companySearchForm" (ngSubmit)="search(companySearchForm.value)">
+    <button (click)="showAll()" type="button" class="btn btn-lg btn-primary">{{'all' | translate}} {{'companies' | translate}}</button>
+    <mat-form-field appearance="outline">
+      <mat-label>{{'search' | translate}}</mat-label>
+      <input formControlName="name" matInput placeholder="{{'type the login' | translate}}">
+    </mat-form-field>
+    <button type="submit" class="btn btn-lg btn-info">{{'search' | translate}}</button>
+  </form>
 </div>
 <div class="container">
   <mat-accordion>
@@ -40,25 +42,6 @@
   </mat-accordion>
 
 </div>
-
-<!--<div class="container" *ngIf="companies" >-->
-  <!--<div *ngFor="let company of companies" class="container company-container col-lg-4">-->
-    <!--<form *ngIf="editField" #edit>-->
-      <!--<input  matInput type="text" placeholder="Input {{'company' | translate}}">-->
-      <!--<button (click)="save()" class="btn btn-success pull-right" >{{'save' | translate}}</button>-->
-      <!--<input  matInput type="text" placeholder="Input {{'count of ' | translate}}">-->
-    <!--</form>-->
-    <!--<h3 *ngIf="!editField" class="card-text">{{'company' | translate}}: {{company.companyName}}-->
-      <!--&lt;!&ndash;<button (click)="showEdit()" class="btn btn-warning pull-right" >{{'edit' | translate}}</button>&ndash;&gt;-->
-    <!--</h3>-->
-
-    <!--<h3 class="card-text">{{'rating' | translate}}: {{company.rating}}-->
-      <!--<button (click)="delete(company.companyName)" class="btn btn-danger pull-right" >{{'delete' | translate}}</button>-->
-    <!--</h3>-->
-
-    <!--<h3 *ngIf="!editField" class="card-text">{{'count of ' | translate}} {{'transport' | translate}}: {{company.transportCount}}</h3>-->
-  <!--</div>-->
-<!--</div>-->
 
 <div class="companies mat-elevation-z8">
   <table mat-table matSort [dataSource]="dataSource"  >

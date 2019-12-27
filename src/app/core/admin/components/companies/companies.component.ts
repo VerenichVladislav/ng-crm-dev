@@ -10,6 +10,8 @@ import {LocaleStorageService} from "../../../../shared/locale-storage.service";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material";
 import {MatTableDataSource} from "@angular/material/table";
+import {User} from "../../../../entity/user";
+import {SnackBarComponent} from "../../../../components/snack-bar/snack-bar.component";
 
 @Component({
   selector: 'app-companies',
@@ -18,6 +20,7 @@ import {MatTableDataSource} from "@angular/material/table";
 })
 export class CompaniesComponent implements OnInit {
   private addCompanyForm;
+  private companySearchForm;
   private addTransport;
 
   private transports: Transport[];
@@ -33,10 +36,10 @@ export class CompaniesComponent implements OnInit {
   private transportSelect: boolean = false;
 
   @ViewChild("edit", {static: false}) input1ElementRef;
-  private editField: boolean = false;
 
   constructor(private companyService: CompanyService,
               private transportService: TransportService,
+              private notFoundSnackBar: SnackBarComponent,
               private localeStorageService: LocaleStorageService) {
     this.addCompanyForm = new FormGroup({
       companyName: new FormControl(''),
@@ -44,6 +47,10 @@ export class CompaniesComponent implements OnInit {
     });
 
     this.addTransport = new FormControl();
+
+    this.companySearchForm = new FormGroup({
+      name: new FormControl(''),
+    });
   }
 
   addCompany(data) {
@@ -113,8 +120,22 @@ export class CompaniesComponent implements OnInit {
     this.dataSource.sort = this.sort;
   }
 
-  showEdit() {
-    this.editField = true;
+
+  search(data: any) {
+    this.companyService.getByCompanyName(data.name).subscribe(
+      (comp: Company) => {
+        let companies: Company[] = [];
+        companies.push(comp);
+        if(!this.dataSource) {
+          this.dataSource = new MatTableDataSource<Company>(companies);
+        } else {
+          this.dataSource.data = companies;
+        }
+      },
+      () => {
+        this.notFoundSnackBar.openNotFound();
+      }
+    );
   }
 
   delete(companyName: string) {

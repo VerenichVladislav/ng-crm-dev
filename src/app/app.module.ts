@@ -70,7 +70,6 @@ import { TourDetailsComponent } from './components/tour-details/tour-details.com
 import { MapFindHotelComponent } from './map-find-hotel/map-find-hotel.component';
 import {SearchResultTripComponent} from './components/search-result-trip/search-result-trip.component';
 import {FlightsindexComponent} from './components/flightsindex/flightsindex.component';
-//import { SideFiltersComponent } from './components/side-filters/side-filters.component';
 import { Page404Component } from './core/page404/page404.component';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {GlobalRootURL} from './GlobalRootURL';
@@ -92,6 +91,7 @@ import { AboutComponent } from './core/about/about.component';
 import { TourDialogComponent } from './tour-dialog/tour-dialog.component';
 import { SuccessfulChangingPasswordComponent } from './components/snack-bar/successful-changing-password/successful-changing-password.component';
 import {NgxPaginationModule} from 'ngx-pagination';
+import { NotFoundComponent } from './components/snack-bar/not-found/not-found.component';
 
 
 export function initGapi(gapiSession: GapiSession) {
@@ -129,14 +129,11 @@ export function createTranslateLoader(http: HttpClient) {
 
     TourIndexComponent,
 
-    // ChatDialogComponent,
     TourSearchResComponent,
     TourDetailsComponent,
     TourSearchResComponent,
-    // ChatDialogComponent,
     MapFindHotelComponent,
     NewsComponent,
-    // SideFiltersComponent,
     MapFindHotelComponent,
     ReplenishWalletComponent,
     SearchResultTripComponent,
@@ -149,6 +146,7 @@ export function createTranslateLoader(http: HttpClient) {
     AboutComponent,
     TourDialogComponent,
     SuccessfulChangingPasswordComponent,
+    NotFoundComponent,
     //SideFiltersComponent,
   ],
   entryComponents: [
@@ -157,6 +155,7 @@ export function createTranslateLoader(http: HttpClient) {
     ConnectionErrorComponent,
     UnconfirmedEmailDialogComponent,
     SuccessfulChangingPasswordComponent,
+    NotFoundComponent,
     ConfirmationDialog
   ],
   imports: [
@@ -262,7 +261,6 @@ export function createTranslateLoader(http: HttpClient) {
     DataTransferService,
     SnackBarComponent,
     TranslateService
-    // StompService
   ],
 
   bootstrap: [AppComponent]
