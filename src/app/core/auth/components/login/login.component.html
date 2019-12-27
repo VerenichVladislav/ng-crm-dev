@@ -3,16 +3,16 @@
         class="modal-content animate" method="post">
     <div class="container-form">
       <h1>{{'login' | translate}}</h1>
-      <p>Пожалуйста, введите данные для входа в учётную запись</p>
-      <label for="login-username"><b>Username</b></label>
-      <input id="login-username" type="text" placeholder="Введите Имя Пользователя" formControlName="username" name="username" required>
+      <p>{{'Please enter your account information'|translate}}</p>
+      <label for="login-username"><b>{{'Username'|translate}}</b></label>
+      <input id="login-username" type="text" placeholder="{{'Enter username'|translate}}" formControlName="username" name="username" required>
       <div *ngIf="errorLogin"
            class="animate error cross-validation-error-message alert alert-danger">
         {{'bad login' | translate}}
       </div>
 
-      <label for="login-password"><b>Password</b></label>
-      <input id="login-password" type="password" placeholder="Введите пароль" formControlName="password" name="password" required>
+    <label for="login-password"><b>{{'Password'|translate}}</b></label>
+      <input id="login-password" type="password" placeholder="{{'Enter password'|translate}}" formControlName="password" name="password" required>
       <div *ngIf="errorPassword"
            class="animate error cross-validation-error-message alert alert-danger">
         {{'bad password' | translate}}
@@ -23,12 +23,12 @@
       </div>
 
       <div class="restore-container">
-        <span class="restorePassword" (click)="restorePassword(loginForm.value)">Восстановить пароль</span>
+        <span class="restorePassword" (click)="restorePassword(loginForm.value)">{{'Restore password'|translate}}</span>
       </div>
 
       <div class="row">
         <button class="signupbtn" type="submit">{{ 'login' | translate }}</button>
-        <button type="button" routerLink="/" class="cancelbtn">Cancel</button>
+        <button type="button" routerLink="/" class="cancelbtn">{{'Cancel'|translate}}</button>
       </div>
     </div>
   </form>
