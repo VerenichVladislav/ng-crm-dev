@@ -3,6 +3,7 @@ import {MatSnackBar} from '@angular/material';
 import {ConnectionErrorComponent} from './connection-error/connection-error.component';
 import {SuccessfulChangingPasswordComponent} from "./successful-changing-password/successful-changing-password.component";
 import {NotFoundComponent} from "./not-found/not-found.component";
+import {NoMoneyComponent} from "./no-money/no-money.component";
 
 @Component({
   selector: 'app-snack-bar',
@@ -29,6 +30,11 @@ export class SnackBarComponent {
 
   openNotFound() {
     this.snackBar.openFromComponent(NotFoundComponent, {
+      duration: this.durationInSeconds * 1000,
+    });
+  }
+  openNoMoney() {
+    this.snackBar.openFromComponent(NoMoneyComponent, {
       duration: this.durationInSeconds * 1000,
     });
   }

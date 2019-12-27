@@ -1,11 +1,9 @@
 import { Component, OnInit, Inject, Input } from '@angular/core';
 import { MAT_DIALOG_DATA, MatSnackBar, MatDialogRef } from '@angular/material';
-import { DialogData } from '../components/detailshotel/detailshotel.component';
 import { TripDTO } from '../entity/TripDTO';
-import { BuyTicketComponent } from '../components/buy-ticket/buy-ticket.component';
-import { isNull } from 'util';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient} from '@angular/common/http';
 import { GlobalRootURL } from '../GlobalRootURL';
+import {SnackBarComponent} from "../components/snack-bar/snack-bar.component";
 
 @Component({
   selector: 'app-tour-dialog',
@@ -17,6 +15,7 @@ export class TourDialogComponent implements OnInit {
   constructor(@Inject(MAT_DIALOG_DATA) public data:TourData
   ,private _snackBar: MatSnackBar,
   private http: HttpClient,
+  private notMoneySnackBar: SnackBarComponent,
   public dialogRef: MatDialogRef<TourDialogComponent>) { }
   TripChoise:TripDTO[];
   @Input() firstName:string;
@@ -45,21 +44,22 @@ export class TourDialogComponent implements OnInit {
     }
     else{
       console.log(this.userId);
-      
+
       let body = {userId:this.userId,firstName:this.firstName,lastName:this.secondName,tripIdList:this.TourId};
 
       this.http.post<any>(this.ROOT_URL +"/byTour",body).subscribe(response => {
         console.log(response);
         return response;
     }, err => {
+        this.notMoneySnackBar.openNoMoney();
         console.log(err.message);
     });
     this.openSnackBar("You Buy Tour!","Ok")
     };
     this.dialogRef.close();
-     
+
     }
-  
+
   openSnackBar(message: string, action: string) {
     this._snackBar.open(message, action, {
       duration: 2000,

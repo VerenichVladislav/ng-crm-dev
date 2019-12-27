@@ -92,6 +92,7 @@ import { TourDialogComponent } from './tour-dialog/tour-dialog.component';
 import { SuccessfulChangingPasswordComponent } from './components/snack-bar/successful-changing-password/successful-changing-password.component';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { NotFoundComponent } from './components/snack-bar/not-found/not-found.component';
+import { NoMoneyComponent } from './components/snack-bar/no-money/no-money.component';
 
 
 export function initGapi(gapiSession: GapiSession) {
@@ -147,7 +148,7 @@ export function createTranslateLoader(http: HttpClient) {
     TourDialogComponent,
     SuccessfulChangingPasswordComponent,
     NotFoundComponent,
-    //SideFiltersComponent,
+    NoMoneyComponent,
   ],
   entryComponents: [
     TourDialogComponent,
@@ -156,6 +157,7 @@ export function createTranslateLoader(http: HttpClient) {
     UnconfirmedEmailDialogComponent,
     SuccessfulChangingPasswordComponent,
     NotFoundComponent,
+    NoMoneyComponent,
     ConfirmationDialog
   ],
   imports: [
