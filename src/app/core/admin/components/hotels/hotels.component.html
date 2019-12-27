@@ -1,10 +1,12 @@
 <div class="container navigation">
-  <button (click)="showAll()" type="button" class="btn btn-lg btn-primary">{{'all' | translate}} {{'hotels' | translate}}</button>
-  <mat-form-field appearance="outline">
-    <mat-label>{{'search' | translate}}</mat-label>
-    <input matInput placeholder="{{'type the login' | translate}}">
-  </mat-form-field>
-  <button type="button" class="btn btn-lg btn-info">{{'search' | translate}}</button>
+  <form [formGroup]="holelSearchForm" (ngSubmit)="search(holelSearchForm.value)">
+    <button (click)="showAll()" type="button" class="btn btn-lg btn-primary">{{'all' | translate}} {{'hotels' | translate}}</button>
+    <mat-form-field appearance="outline">
+      <mat-label>{{'search' | translate}}</mat-label>
+      <input formControlName="name" matInput placeholder="{{'type the login' | translate}}">
+    </mat-form-field>
+    <button type="submit" class="btn btn-lg btn-info">{{'search' | translate}}</button>
+  </form>
 </div>
 <div class="hotels mat-elevation-z8">
   <table mat-table matSort [dataSource]="dataSource"  >

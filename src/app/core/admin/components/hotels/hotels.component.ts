@@ -8,6 +8,10 @@ import {MatTableDataSource} from "@angular/material/table";
 import {MatSort} from "@angular/material";
 import {Hotel} from "../../../../entity/hotel";
 import {HotelService} from "../../../../shared/hotel.service";
+import {FormControl, FormGroup} from "@angular/forms";
+import {Company} from "../../../../entity/company";
+import {HttpHeaders} from "@angular/common/http";
+import {SnackBarComponent} from "../../../../components/snack-bar/snack-bar.component";
 
 @Component({
   selector: 'app-hotels',
@@ -15,6 +19,7 @@ import {HotelService} from "../../../../shared/hotel.service";
   styleUrls: ['./hotels.component.css']
 })
 export class HotelsComponent implements OnInit {
+  private holelSearchForm;
 
   private hotels: Hotel[];
   private displayedColumns: string[] = ['id', 'hotelName', 'country','address',
@@ -27,8 +32,11 @@ export class HotelsComponent implements OnInit {
 
   constructor(private companyService: CompanyService,
               private hotelService: HotelService,
+              private notFoundSnackBar: SnackBarComponent,
               private localeStorageService: LocaleStorageService) {
-
+    this.holelSearchForm = new FormGroup({
+      name: new FormControl(''),
+    });
   }
 
   showAll() {
@@ -51,13 +59,11 @@ export class HotelsComponent implements OnInit {
           }
         )
       }
-    } else{
-      this.dataSource = new MatTableDataSource<Hotel>(this.hotels);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
     }
+    this.dataSource = new MatTableDataSource<Hotel>(this.hotels);
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
-
 
 
   delete(hotelId: number) {
@@ -67,11 +73,28 @@ export class HotelsComponent implements OnInit {
           return hotel.hotelId !== hotelId;
         });
 
-        this.dataSource = new MatTableDataSource<Hotel>(this.hotels);
+        this.dataSource.data = this.hotels;
         this.localeStorageService.update('hotels', this.hotels);
       },
       error1 => {
         console.log(error1);
+      }
+    );
+  }
+
+  search(data: any) {
+    this.hotelService.getByHotelName(data.name).subscribe(
+      (hotel: Hotel) => {
+        let hotels: Hotel[] = [];
+        hotels.push(hotel);
+        if(!this.dataSource) {
+          this.dataSource = new MatTableDataSource<Hotel>(hotels);
+        } else {
+          this.dataSource.data = hotels;
+        }
+      },
+      () => {
+        this.notFoundSnackBar.openNotFound();
       }
     );
   }
