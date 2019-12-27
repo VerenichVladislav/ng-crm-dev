@@ -33,11 +33,9 @@ export class TransportsComponent implements OnInit {
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
-
   constructor(private companyService: CompanyService,
               private transportService: TransportService,
-              private localeStorageService: LocaleStorageService,
-              private notFoundSnackBar: SnackBarComponent) {
+              private localeStorageService: LocaleStorageService) {
     this.addTransportForm = new FormGroup({
       name: new FormControl(''),
       passengerCapacity: new FormControl(''),
@@ -136,23 +134,6 @@ export class TransportsComponent implements OnInit {
         console.log(error1);
       }
     );
-  }
-
-  search(data: any) {
-    // this.transportService.getByTransportName(data.name).subscribe(
-    //   (transp: Transport) => {
-    //     let transports: Transport[] = [];
-    //     transports.push(transp);
-    //     if(!this.dataSource) {
-    //       this.dataSource = new MatTableDataSource<Transport>(transports);
-    //     } else {
-    //       this.dataSource.data = transports;
-    //     }
-    //   },
-    //   () => {
-    //     this.notFoundSnackBar.openNotFound();
-    //   }
-    // );
   }
 
   ngOnInit() {

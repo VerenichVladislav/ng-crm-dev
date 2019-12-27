@@ -58,6 +58,8 @@ export class HotelsComponent implements OnInit {
     }
   }
 
+
+
   delete(hotelId: number) {
     this.hotelService.deleteById(hotelId).subscribe(
       () => {

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {GlobalRootURL} from "../GlobalRootURL";
+import {Company} from "../entity/company";
 
 @Injectable({
   providedIn: 'root'
@@ -32,6 +33,15 @@ export class TransportService {
     };
 
     return this.http.post<any>(this.URL, transport, options);
+  }
+
+  getByTransportName(name: string): Observable<any> {
+    let headers = new HttpHeaders(
+      { 'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem('auth_token')});
+    let options = { headers: headers };
+
+    return this.http.get<Transport>(this.URL + '/?name=' + name, options);
   }
 
   deleteById(id: number): Observable<any>{

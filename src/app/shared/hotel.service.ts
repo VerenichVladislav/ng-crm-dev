@@ -37,7 +37,7 @@ export  class HotelService {
       { 'Content-Type': 'application/json',
         'Authorization': 'Bearer ' + localStorage.getItem('auth_token')});
     let options = { headers: headers };
-    let request = this.URL + 'filter?page=' + page +
+    let request = this.URL + '?page=' + page +
       '&pageSize=' + pageSize;
 
     return this.http.post<Hotel[]>(request, filter, options);
