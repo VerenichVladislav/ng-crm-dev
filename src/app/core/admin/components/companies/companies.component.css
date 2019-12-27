@@ -4,29 +4,18 @@
 .navigation{
   margin-left: 20%;
 }
-.company-container{
-  min-height: 20vh;
-  margin: 2vh 10vw 2vh auto;
-  background: -webkit-linear-gradient(top left, #95B2C6, #1D1A8A);
-  background: -moz-linear-gradient(top left, #95B2C6, #1D1A8A);
-  background: linear-gradient(to bottom right, #95B2C6, #1D1A8A);
-  box-shadow: 9px 2px 3px 5px #1b1866;
+table{
+  width: 100%;
+  margin-top: 5%;
 }
-.company-container h3, .company-container button{
-  color: rgba(255,255,255,1);
-  font-size: 18px;
-  font-family: "Trebuchet MS", serif;
+.companies {
+  width: 70%;
+  margin-left: 15%;
 }
-input[type=text] {
-  width: 50%;
-  padding: 10px;
-  margin: 1vh 0 1vh 0;
-  border: 2px solid black;
-  border-radius: 2px;
-  background: #f1f1f1;
-  display: flex;
+th.mat-sort-header-sorted {
+  color: black;
 }
 .add-company {
-  margin-left: 13%;
+  margin-left: 9%;
   width: 30%;
 }

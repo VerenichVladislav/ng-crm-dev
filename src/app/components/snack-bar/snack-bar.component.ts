@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import {MatSnackBar} from '@angular/material';
 import {ConnectionErrorComponent} from './connection-error/connection-error.component';
+import {SuccessfulChangingPasswordComponent} from "./successful-changing-password/successful-changing-password.component";
+import {NotFoundComponent} from "./not-found/not-found.component";
 
 @Component({
   selector: 'app-snack-bar',
@@ -11,12 +13,23 @@ export class SnackBarComponent {
 
   durationInSeconds = 5;
 
-  constructor(private _snackBar: MatSnackBar) {}
+  constructor(private snackBar: MatSnackBar) {}
 
-  openSnackBar() {
-    this._snackBar.openFromComponent(ConnectionErrorComponent, {
+  openErrorConnection() {
+    this.snackBar.openFromComponent(ConnectionErrorComponent, {
       duration: this.durationInSeconds * 1000,
     });
   }
 
+  openSuccessfulChangingPassword() {
+    this.snackBar.openFromComponent(SuccessfulChangingPasswordComponent, {
+      duration: this.durationInSeconds * 1000,
+    });
+  }
+
+  openNotFound() {
+    this.snackBar.openFromComponent(NotFoundComponent, {
+      duration: this.durationInSeconds * 1000,
+    });
+  }
 }

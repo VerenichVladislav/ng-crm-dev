@@ -44,11 +44,11 @@ export class RegisterComponent implements OnInit {
               private spinnerService: Ng4LoadingSpinnerService,) {
     this.registerForm = new FormGroup({
       userName: new FormControl('', Validators.required),
-      email: new FormControl(''),
-      firstName: new FormControl(''),
-      lastName: new FormControl(''),
-      hashPass: new FormControl(''),
-      repeatPass: new FormControl(''),
+      email: new FormControl('', Validators.required),
+      firstName: new FormControl('', Validators.required),
+      lastName: new FormControl('', Validators.required),
+      hashPass: new FormControl('', Validators.required),
+      repeatPass: new FormControl('', Validators.required),
     }, {validators: identityPasswordValidator}
     );
   }
@@ -173,7 +173,7 @@ export class RegisterComponent implements OnInit {
       }
     );
     if(error.status === 0) {
-      this.errorConnection.openSnackBar();
+      this.errorConnection.openErrorConnection();
     }
   }
 

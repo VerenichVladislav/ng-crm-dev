@@ -123,7 +123,7 @@ export class BuyTicketComponent implements OnInit {
                       }
                       //this.message = error.error;
                       if(error.status === 0) {
-                        this.errorConnection.openSnackBar();
+                        this.errorConnection.openErrorConnection();
                       }
                     }
                 );

@@ -151,7 +151,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       }
     }
     if(error.status === 0) {
-      this.errorConnection.openSnackBar();
+      this.errorConnection.openErrorConnection();
     }
   }
 }

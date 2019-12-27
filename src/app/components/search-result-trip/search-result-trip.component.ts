@@ -11,7 +11,6 @@ import { CityService } from 'src/app/shared/city.service';
 import { TripDTO } from 'src/app/entity/TripDTO';
 import {Location} from "@angular/common";
 
-``
 
 @Component({
   selector: 'app-search-result-trip-component',

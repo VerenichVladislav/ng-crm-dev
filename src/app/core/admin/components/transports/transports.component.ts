@@ -5,11 +5,11 @@ import {Transport} from "../../../../entity/transport";
 import {FormControl, FormGroup} from "@angular/forms";
 import {Company} from "../../../../entity/company";
 import {TransportService} from "../../../../shared/transport.service";
-import {Observable} from "rxjs/index";
 import {LocaleStorageService} from "../../../../shared/locale-storage.service";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatTableDataSource} from '@angular/material/table';
 import {MatSort} from "@angular/material";
+import {SnackBarComponent} from "../../../../components/snack-bar/snack-bar.component";
 
 @Component({
   selector: 'app-transports',
@@ -19,6 +19,7 @@ import {MatSort} from "@angular/material";
 export class TransportsComponent implements OnInit {
 
   private addTransportForm;
+  private transportSearchForm;
 
   private transports: Transport[];
   private companies: Company[];
@@ -35,11 +36,16 @@ export class TransportsComponent implements OnInit {
 
   constructor(private companyService: CompanyService,
               private transportService: TransportService,
-              private localeStorageService: LocaleStorageService) {
+              private localeStorageService: LocaleStorageService,
+              private notFoundSnackBar: SnackBarComponent) {
     this.addTransportForm = new FormGroup({
       name: new FormControl(''),
       passengerCapacity: new FormControl(''),
       company: new FormControl('')
+    });
+
+    this.transportSearchForm = new FormGroup({
+      name: new FormControl(''),
     });
   }
 
@@ -50,23 +56,19 @@ export class TransportsComponent implements OnInit {
       (transport) => {
         this.companySelect = true;
 
+        if(!this.transports) {
+          this.transports = [];
+        }
         this.transports.push(new Transport(transport));
         this.localeStorageService.update('transports', this.transports);
-
-        if(this.transports === null) {
-          // this.loadTransport().subscribe(
-          //   transports => {
-          //     this.transports = transports;
-          //   },
-          //   error1 => {
-          //     console.log(error1);
-          //   }
-          // );
+        if(!this.dataSource) {
+          this.dataSource = new MatTableDataSource<Transport>(this.transports);
+        } else {
+          this.dataSource.data = this.transports;
         }
-
       },
       error => {
-        console.log();
+        console.log(error);
       }
     );
 
@@ -115,11 +117,10 @@ export class TransportsComponent implements OnInit {
           }
         )
       }
-    } else{
-      this.dataSource = new MatTableDataSource<Transport>(this.transports);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
     }
+    this.dataSource = new MatTableDataSource<Transport>(this.transports);
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
   delete(transportId: number) {
@@ -135,6 +136,23 @@ export class TransportsComponent implements OnInit {
         console.log(error1);
       }
     );
+  }
+
+  search(data: any) {
+    // this.transportService.getByTransportName(data.name).subscribe(
+    //   (transp: Transport) => {
+    //     let transports: Transport[] = [];
+    //     transports.push(transp);
+    //     if(!this.dataSource) {
+    //       this.dataSource = new MatTableDataSource<Transport>(transports);
+    //     } else {
+    //       this.dataSource.data = transports;
+    //     }
+    //   },
+    //   () => {
+    //     this.notFoundSnackBar.openNotFound();
+    //   }
+    // );
   }
 
   ngOnInit() {

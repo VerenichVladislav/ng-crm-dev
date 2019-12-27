@@ -9,7 +9,8 @@ import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import {ConfirmEmailService} from "../../core/auth/shared/confirm-email.service";
 import {FormControl, FormGroup} from "@angular/forms";
 import {UserService} from "../../shared/user.service";
-import {MatPaginator} from "@angular/material/paginator";
+import {identityPasswordValidator} from "../../core/auth/shared/identity-password.directive";
+import {SnackBarComponent} from "../snack-bar/snack-bar.component";
 
 @Component({
   selector: 'app-profile',
@@ -21,18 +22,20 @@ export class ProfileComponent implements OnInit, OnDestroy{
   private reservations: Reservation[] = [];
   private tickets: Ticket[] = [];
   private changeForm;
+  private errorPassword;
 
 
   constructor(private transfer: DataTransferService,
               private router: Router,
+              private successfulChanging: SnackBarComponent,
               private userService: UserService,
               private spinnerService: Ng4LoadingSpinnerService,
               private confirmService: ConfirmEmailService) {
 
     this.changeForm = new FormGroup({
-      newPassword: new FormControl(''),
-      repeatPassword: new FormControl('')
-    });
+      hashPass: new FormControl('', ),
+      repeatPass: new FormControl('')
+    }, {validators: identityPasswordValidator});
 
     this.spinnerService.show();
 
@@ -70,18 +73,21 @@ export class ProfileComponent implements OnInit, OnDestroy{
   }
 
   submit(data: any) {
+    this.errorPassword = false;
     const userName = JSON.parse(localStorage.getItem('user')).userName;
-    this.userService.updatePassword(userName, data.newPassword).subscribe(
+    this.userService.updatePassword(userName, data.hashPass).subscribe(
       () => {
-
+        this.successfulChanging.openSuccessfulChangingPassword();
       },
-      error1 => {
-
+      () => {
+        this.errorPassword = true;
       }
     );
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.errorPassword = false;
+  }
 
   ngOnDestroy() {}
 

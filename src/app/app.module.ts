@@ -7,9 +7,8 @@ import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { HeaderComponent } from './core/header/header.component';
-// import { StompService } from 'ng2-stomp-service';
 import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
-import {RouterModule, Routes} from '@angular/router';
+import {RouterModule} from '@angular/router';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import { ProfileComponent } from './components/profile/profile.component';
 import {AuthModule} from './core/auth/auth.module';
@@ -71,11 +70,10 @@ import { TourDetailsComponent } from './components/tour-details/tour-details.com
 import { MapFindHotelComponent } from './map-find-hotel/map-find-hotel.component';
 import {SearchResultTripComponent} from './components/search-result-trip/search-result-trip.component';
 import {FlightsindexComponent} from './components/flightsindex/flightsindex.component';
-//import { SideFiltersComponent } from './components/side-filters/side-filters.component';
 import { Page404Component } from './core/page404/page404.component';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {GlobalRootURL} from './GlobalRootURL';
-import {Ng4LoadingSpinnerModule} from "ng4-loading-spinner";
+import {Ng4LoadingSpinnerModule} from 'ng4-loading-spinner';
 import {LoginGuard} from "./shared/login-guard.service";
 import {AdminModule} from "./core/admin/admin.module";
 import { ReplenishWalletComponent } from './components/replenish-wallet/replenish-wallet.component';
@@ -91,7 +89,10 @@ import { UnconfirmedEmailDialogComponent } from './components/profile/unconfirme
 import {EmailGuard} from "./shared/email.guard";
 import { AboutComponent } from './core/about/about.component';
 import { TourDialogComponent } from './tour-dialog/tour-dialog.component';
+import { SuccessfulChangingPasswordComponent } from './components/snack-bar/successful-changing-password/successful-changing-password.component';
 import {NgxPaginationModule} from 'ngx-pagination';
+import { NotFoundComponent } from './components/snack-bar/not-found/not-found.component';
+
 
 export function initGapi(gapiSession: GapiSession) {
   return () => gapiSession.initClient();
@@ -128,14 +129,11 @@ export function createTranslateLoader(http: HttpClient) {
 
     TourIndexComponent,
 
-    // ChatDialogComponent,
     TourSearchResComponent,
     TourDetailsComponent,
     TourSearchResComponent,
-    // ChatDialogComponent,
     MapFindHotelComponent,
     NewsComponent,
-    // SideFiltersComponent,
     MapFindHotelComponent,
     ReplenishWalletComponent,
     SearchResultTripComponent,
@@ -147,6 +145,8 @@ export function createTranslateLoader(http: HttpClient) {
     UnconfirmedEmailDialogComponent,
     AboutComponent,
     TourDialogComponent,
+    SuccessfulChangingPasswordComponent,
+    NotFoundComponent,
     //SideFiltersComponent,
   ],
   entryComponents: [
@@ -154,6 +154,8 @@ export function createTranslateLoader(http: HttpClient) {
     DetailshotelDialogComponent,
     ConnectionErrorComponent,
     UnconfirmedEmailDialogComponent,
+    SuccessfulChangingPasswordComponent,
+    NotFoundComponent,
     ConfirmationDialog
   ],
   imports: [
@@ -259,7 +261,6 @@ export function createTranslateLoader(http: HttpClient) {
     DataTransferService,
     SnackBarComponent,
     TranslateService
-    // StompService
   ],
 
   bootstrap: [AppComponent]

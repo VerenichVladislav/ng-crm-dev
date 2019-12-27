@@ -31,13 +31,13 @@ export  class HotelService {
     return this.http.get<Hotel>(this.URL + id, options);
   }
 
-  getAllHotels(filter: any={}, pageNo: number=0,
+  getAllHotels(filter: any={}, page: number=0,
                   pageSize: number=10): Observable<Hotel[]>{
     let headers = new HttpHeaders(
       { 'Content-Type': 'application/json',
         'Authorization': 'Bearer ' + localStorage.getItem('auth_token')});
     let options = { headers: headers };
-    let request = this.URL + 'filter?pageNo=' + pageNo +
+    let request = this.URL + 'filter?page=' + page +
       '&pageSize=' + pageSize;
 
     return this.http.post<Hotel[]>(request, filter, options);

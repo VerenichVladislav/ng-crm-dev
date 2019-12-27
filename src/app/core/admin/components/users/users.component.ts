@@ -2,12 +2,12 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {User} from "../../../../entity/user";
 import {UserService} from "../../../../shared/user.service";
 import {AdminService} from "../../shared/admin.service";
-import {CompanyService} from "../../../../shared/company.service";
 import {LocaleStorageService} from "../../../../shared/locale-storage.service";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material";
-import {Transport} from "../../../../entity/transport";
 import {MatTableDataSource} from "@angular/material/table";
+import {FormControl, FormGroup} from "@angular/forms";
+import {SnackBarComponent} from "../../../../components/snack-bar/snack-bar.component";
 
 @Component({
   selector: 'app-users',
@@ -17,15 +17,23 @@ import {MatTableDataSource} from "@angular/material/table";
 export class UsersComponent implements OnInit {
   private users: User[];
 
-  private displayedColumns: string[] = ['first-name', 'last-name', 'email','state','ban'];
+  private displayedColumns: string[] = ['id','user-name', 'first-name', 'last-name', 'email','state','ban'];
   private dataSource;
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
+  private userSearchForm;
+
   constructor(private userService: UserService,
               private adminService: AdminService,
-              private localeStorageService: LocaleStorageService) { }
+              private localeStorageService: LocaleStorageService,
+              private notFoundSnackBar: SnackBarComponent) {
+
+    this.userSearchForm = new FormGroup({
+      username: new FormControl(''),
+    });
+  }
 
   showAll() {
     if (this.users == undefined) {
@@ -77,6 +85,23 @@ export class UsersComponent implements OnInit {
       },
       error1 => {
         console.log(error1);
+      }
+    );
+  }
+
+  search(data: any) {
+    this.userService.getByUserName(data.username).subscribe(
+      (user: User) => {
+        let users: User[] = [];
+        users.push(user);
+        if(!this.dataSource) {
+          this.dataSource = new MatTableDataSource<User>(users);
+        } else {
+          this.dataSource.data = users;
+        }
+      },
+      () => {
+        this.notFoundSnackBar.openNotFound();
       }
     );
   }

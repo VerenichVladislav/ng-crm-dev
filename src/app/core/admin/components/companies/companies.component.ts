@@ -7,6 +7,11 @@ import {TransportService} from "../../../../shared/transport.service";
 import { Observable } from 'rxjs';
 import {Company} from "../../../../entity/company";
 import {LocaleStorageService} from "../../../../shared/locale-storage.service";
+import {MatPaginator} from "@angular/material/paginator";
+import {MatSort} from "@angular/material";
+import {MatTableDataSource} from "@angular/material/table";
+import {User} from "../../../../entity/user";
+import {SnackBarComponent} from "../../../../components/snack-bar/snack-bar.component";
 
 @Component({
   selector: 'app-companies',
@@ -15,19 +20,26 @@ import {LocaleStorageService} from "../../../../shared/locale-storage.service";
 })
 export class CompaniesComponent implements OnInit {
   private addCompanyForm;
+  private companySearchForm;
   private addTransport;
 
   private transports: Transport[];
   private companies: Company[];
 
+  private displayedColumns: string[] = ['id', 'name', 'rating','transportCount','delete'];
+  private dataSource;
+
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
+
   private addTransportBtn: boolean = false;
   private transportSelect: boolean = false;
 
   @ViewChild("edit", {static: false}) input1ElementRef;
-  private editField: boolean = false;
 
   constructor(private companyService: CompanyService,
               private transportService: TransportService,
+              private notFoundSnackBar: SnackBarComponent,
               private localeStorageService: LocaleStorageService) {
     this.addCompanyForm = new FormGroup({
       companyName: new FormControl(''),
@@ -35,6 +47,10 @@ export class CompaniesComponent implements OnInit {
     });
 
     this.addTransport = new FormControl();
+
+    this.companySearchForm = new FormGroup({
+      name: new FormControl(''),
+    });
   }
 
   addCompany(data) {
@@ -45,6 +61,7 @@ export class CompaniesComponent implements OnInit {
 
         this.companies.push(new Company(company));
         this.localeStorageService.update('companies', this.companies);
+        this.dataSource.data = this.companies;
 
         if(this.transports === null) {
           this.loadTransport().subscribe(
@@ -86,6 +103,10 @@ export class CompaniesComponent implements OnInit {
         this.companyService.getAllCompanies().subscribe(
           (comp: Company[]) => {
             this.companies = comp;
+
+            this.dataSource = new MatTableDataSource<Company>(this.companies);
+            this.dataSource.paginator = this.paginator;
+            this.dataSource.sort = this.sort;
             localStorage.setItem('companies', JSON.stringify(comp));
           },
           error1 => {
@@ -94,15 +115,27 @@ export class CompaniesComponent implements OnInit {
         )
       }
     }
+    this.dataSource = new MatTableDataSource<Company>(this.companies);
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
-  showEdit() {
-    this.editField = true;
-  }
 
-  save() {
-    console.log('Отправить');
-    this.editField = false;
+  search(data: any) {
+    this.companyService.getByCompanyName(data.name).subscribe(
+      (comp: Company) => {
+        let companies: Company[] = [];
+        companies.push(comp);
+        if(!this.dataSource) {
+          this.dataSource = new MatTableDataSource<Company>(companies);
+        } else {
+          this.dataSource.data = companies;
+        }
+      },
+      () => {
+        this.notFoundSnackBar.openNotFound();
+      }
+    );
   }
 
   delete(companyName: string) {
@@ -112,6 +145,7 @@ export class CompaniesComponent implements OnInit {
           return comp.companyName !== companyName;
         });
 
+        this.dataSource.data = this.companies;
         this.localeStorageService.update('companies', this.companies);
       },
       error1 => {
@@ -119,6 +153,7 @@ export class CompaniesComponent implements OnInit {
       }
     );
   }
+
 
 
   ngOnInit() {

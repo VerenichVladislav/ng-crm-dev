@@ -44,10 +44,8 @@ import {MatTableModule} from "@angular/material/table";
 import {BrowserModule} from "@angular/platform-browser";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { HotelsComponent } from './components/hotels/hotels.component';
-import { TripsComponent } from './components/trips/trips.component';
 import { CompaniesComponent } from './components/companies/companies.component';
 import {TransportsComponent} from "./components/transports/transports.component";
-import {LoginGuard} from "../../shared/login-guard.service";
 import {AdminGuardService} from "../../shared/admin-guard.service";
 
 const adminRoutes: Routes = [
@@ -55,7 +53,6 @@ const adminRoutes: Routes = [
   { path: 'transports', component: TransportsComponent},
   { path: 'companies', component: CompaniesComponent},
   { path: 'hotels', component: HotelsComponent},
-  { path: 'trips', component: TripsComponent},
 ];
 
 @NgModule({
@@ -64,7 +61,6 @@ const adminRoutes: Routes = [
     MainComponent,
     HotelsComponent,
     TransportsComponent,
-    TripsComponent,
     CompaniesComponent
   ],
   exports: [
@@ -72,7 +68,6 @@ const adminRoutes: Routes = [
     MainComponent,
     TransportsComponent,
     HotelsComponent,
-    TripsComponent,
     CompaniesComponent
   ],
   imports: [
