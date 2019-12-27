@@ -23,6 +23,18 @@ export class SearchResultComponent implements OnInit {
   rooms: Observable<room[]>;
   ratingFilter: number;
   city:String;
+  max:number = 3000;
+  tickInterval:number = 100;
+  min:number = 10;
+  step:number = 100;
+  value:number;
+  parking:boolean = false;
+  WIFI:boolean= false;
+  SWIMMINGPOLL:boolean= false;
+  SPA:boolean= false;
+  BREAKFAST:boolean= false;
+  RESEPTION:boolean= false;
+  FITNESSCENTER:boolean= false;
   constructor(private http: HttpClient, private router: Router,
               private address :ActivatedRoute,
               private service:HotelService,
@@ -33,7 +45,29 @@ export class SearchResultComponent implements OnInit {
 
     this.getPosts();
   }
+  hotelconveniences:string[] = [];
+  rating:number;
   selectedHotel: Hotel;
+  find(){
+    if(this.WIFI){
+    this.hotelconveniences.push("FREE_WIFI,")}
+    if(this.parking){
+    this.hotelconveniences.push("PARKING,")}
+    if(this.SPA){
+      this.hotelconveniences.push("SPA,")
+    }
+    if(this.RESEPTION){
+      this.hotelconveniences.push("RECEPTION_24_HOUR,")
+    }
+    if(this.FITNESSCENTER){
+      this.hotelconveniences.push("FITNESS_CENTER,")
+    }
+    if(this.SWIMMINGPOLL){
+      this.hotelconveniences.push("SWIMMING_POOL,")
+    }
+    let body = {city:this.city,rating:this.rating,hotelConveniences:this.hotelconveniences}
+    this.posts = this.http.post<Hotel[]>(this.ROOT_URL,body);
+  }
   getPosts() {
     this.spinnerService.show();
 
